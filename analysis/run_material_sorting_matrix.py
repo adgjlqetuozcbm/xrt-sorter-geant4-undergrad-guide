@@ -195,6 +195,7 @@ def main() -> None:
                 "output_prefix": row["output_prefix"],
             }
         )
+        write_status_rows(status_path, existing_status_rows + status_rows)
         print(
             f"[{row.get('row_index', str(index))}] {row.get('run_role', 'material')} {row['material']} {row['source_id']} "
             f"{row['thickness_mm']}mm seed={row['random_seed']} rc={proc.returncode}"
