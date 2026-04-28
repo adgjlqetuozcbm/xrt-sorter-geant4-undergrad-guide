@@ -1,0 +1,9 @@
+split_role,random_seed,material,samples
+train,1201,Chalcopyrite,6
+train,1201,Hematite,6
+train,1201,Magnetite,6
+train,1201,Pyrite,6
+validation,1301,Chalcopyrite,6
+validation,1301,Hematite,6
+validation,1301,Magnetite,6
+validation,1301,Pyrite,6

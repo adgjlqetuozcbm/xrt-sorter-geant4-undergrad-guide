@@ -1,0 +1,14 @@
+method,samples,evaluated_materials,top1_accuracy,top3_accuracy,macro_f1,min_class_recall,hematite_recall,magnetite_recall,hm_min_recall,hm_expert_feature_count,hm_low_energy_feature_count,base_model_feature_count
+ExtraTrees,24,Pyrite;Hematite;Magnetite;Chalcopyrite,0.7083333333333334,0.9583333333333334,0.7041666666666666,0.5,0.5,0.6666666666666666,0.5,,,
+HistGradientBoosting,24,Pyrite;Hematite;Magnetite;Chalcopyrite,0.25,0.75,0.1,0.0,0.0,0.0,0.0,,,
+HierarchicalExtraTrees,24,Pyrite;Hematite;Magnetite;Chalcopyrite,0.7083333333333334,1.0,0.7044955044955045,0.5,0.5,0.6666666666666666,0.5,,,
+HMExpertHierarchicalExtraTrees,24,Pyrite;Hematite;Magnetite;Chalcopyrite,0.6666666666666666,1.0,0.652457264957265,0.3333333333333333,0.3333333333333333,0.6666666666666666,0.3333333333333333,201.0,,
+HematiteMagnetiteRecallExtraTrees,24,Pyrite;Hematite;Magnetite;Chalcopyrite,0.7083333333333334,1.0,0.7044955044955045,0.5,0.5,0.6666666666666666,0.5,,,
+HematitePriorityExtraTrees,24,Pyrite;Hematite;Magnetite;Chalcopyrite,0.6666666666666666,1.0,0.6571428571428571,0.3333333333333333,0.3333333333333333,0.6666666666666666,0.3333333333333333,,,
+HMStrongRecallExtraTrees,24,Pyrite;Hematite;Magnetite;Chalcopyrite,0.6666666666666666,1.0,0.6711538461538462,0.5,0.5,0.6666666666666666,0.5,,,
+HighGroupRecallExtraTrees,24,Pyrite;Hematite;Magnetite;Chalcopyrite,0.7083333333333334,1.0,0.7044955044955045,0.5,0.5,0.6666666666666666,0.5,,,
+HMAllEnergyExpertExtraTrees,24,Pyrite;Hematite;Magnetite;Chalcopyrite,0.6666666666666666,1.0,0.652457264957265,0.3333333333333333,0.3333333333333333,0.6666666666666666,0.3333333333333333,201.0,45.0,311.0
+HMLowEnergyExpertExtraTrees,24,Pyrite;Hematite;Magnetite;Chalcopyrite,0.2916666666666667,0.75,0.17094017094017094,0.0,0.0,0.0,0.0,201.0,45.0,45.0
+HMThicknessGroupedExpertExtraTrees,24,Pyrite;Hematite;Magnetite;Chalcopyrite,0.625,1.0,0.5470588235294118,0.0,0.0,0.8333333333333334,0.0,201.0,45.0,311.0
+HMPairwiseVotingExpertExtraTrees,24,Pyrite;Hematite;Magnetite;Chalcopyrite,0.6666666666666666,1.0,0.6291666666666667,0.16666666666666666,0.8333333333333334,0.16666666666666666,0.16666666666666666,201.0,45.0,311.0
+XGBoostGPU,24,Pyrite;Hematite;Magnetite;Chalcopyrite,0.8333333333333334,0.9583333333333334,0.8321678321678321,0.6666666666666666,0.6666666666666666,0.8333333333333334,0.6666666666666666,,,

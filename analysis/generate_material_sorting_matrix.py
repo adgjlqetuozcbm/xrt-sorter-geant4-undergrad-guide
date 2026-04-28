@@ -56,6 +56,16 @@ PROFILE_EVENTS = {
 }
 
 
+def energy_slug(energy_keV: float) -> str:
+    if float(energy_keV).is_integer():
+        return str(int(energy_keV))
+    return f"{energy_keV:g}".replace(".", "p")
+
+
+def mono_source(energy_keV: float) -> dict:
+    return {"source_id": f"mono_{energy_slug(energy_keV)}kev", "source_mode": "mono", "mono_energy_keV": float(energy_keV)}
+
+
 def source_lookup() -> dict[str, dict]:
     return {source["source_id"]: source for source in [*SOURCES, *ENERGY_SCAN_SOURCES, *ACCURACY_V3_LOW_ENERGY_SOURCES]}
 
@@ -76,7 +86,13 @@ def profile_seeds(profile: str) -> list[int]:
     return SEEDS
 
 
-def profile_sources(profile: str, selected_source_ids: list[str] | None = None) -> list[dict]:
+def profile_sources(
+    profile: str,
+    selected_source_ids: list[str] | None = None,
+    energy_list_keV: list[float] | None = None,
+) -> list[dict]:
+    if energy_list_keV:
+        return [mono_source(energy) for energy in energy_list_keV]
     if profile == "energy_scan":
         return ENERGY_SCAN_SOURCES
     if profile in {"selected_rebuild", "accuracy_v3_hm", "accuracy_v3"}:
@@ -215,6 +231,7 @@ def build_matrix(
     seed_list: list[int] | None = None,
     events_per_run: int | None = None,
     material_names: list[str] | None = None,
+    energy_list_keV: list[float] | None = None,
 ) -> list[MatrixRun]:
     materials = load_materials(project_root, profile_material_names(profile, material_names))
     profile_name = profile_alias or profile
@@ -222,7 +239,7 @@ def build_matrix(
     out_dir = OUTPUT_ROOT / profile_name
     raw_output_dir = f"material_sorting_runs/{profile_name}"
     runs: list[MatrixRun] = []
-    sources = profile_sources(profile, selected_source_ids)
+    sources = profile_sources(profile, selected_source_ids, energy_list_keV)
     thicknesses = profile_thicknesses(profile)
     seeds = seed_list or profile_seeds(profile)
     for source in sources:
@@ -280,6 +297,10 @@ def parse_int_list(value: str) -> list[int]:
     return [int(item.strip()) for item in value.split(",") if item.strip()]
 
 
+def parse_float_list(value: str) -> list[float]:
+    return [float(item.strip()) for item in value.split(",") if item.strip()]
+
+
 def write_matrix(
     project_root: Path,
     profile: str,
@@ -288,16 +309,26 @@ def write_matrix(
     seed_list: list[int] | None = None,
     events_per_run: int | None = None,
     material_names: list[str] | None = None,
+    energy_list_keV: list[float] | None = None,
 ) -> Path:
     profile_name = profile_alias or profile
-    runs = build_matrix(project_root, profile, selected_source_ids, profile_name, seed_list, events_per_run, material_names)
+    runs = build_matrix(
+        project_root,
+        profile,
+        selected_source_ids,
+        profile_name,
+        seed_list,
+        events_per_run,
+        material_names,
+        energy_list_keV,
+    )
     out_dir = project_root / OUTPUT_ROOT / profile_name
     out_dir.mkdir(parents=True, exist_ok=True)
 
     rows = []
     by_key = {
         (source["source_id"], source["source_mode"]): source
-        for source in profile_sources(profile, selected_source_ids)
+        for source in profile_sources(profile, selected_source_ids, energy_list_keV)
     }
     for run in runs:
         source = by_key[(run.source_id, run.source_mode)]
@@ -337,6 +368,11 @@ def main() -> None:
         help="Comma-separated source ids for selected_rebuild or accuracy_v3 profiles. Defaults are profile-specific.",
     )
     parser.add_argument(
+        "--energy-list-kev",
+        default="",
+        help="Comma-separated mono energies in keV. Overrides selected source ids and built-in profile source defaults.",
+    )
+    parser.add_argument(
         "--profile-alias",
         default="",
         help="Output profile name. Use this for locked reruns such as selected_rebuild_r2 without overwriting prior evidence.",
@@ -365,6 +401,7 @@ def main() -> None:
     seed_list = parse_int_list(args.seed_list) if args.seed_list.strip() else None
     events_per_run = args.events_per_run or None
     selected_source_ids = [item.strip() for item in str(args.selected_source_ids).split(",") if item.strip()] or None
+    energy_list_keV = parse_float_list(args.energy_list_kev) if args.energy_list_kev.strip() else None
     material_names = None
     if args.material_list.strip() and args.material_list.strip().lower() != "all":
         material_names = [item.strip() for item in args.material_list.split(",") if item.strip()]
@@ -376,11 +413,16 @@ def main() -> None:
         seed_list=seed_list,
         events_per_run=events_per_run,
         material_names=material_names,
+        energy_list_keV=energy_list_keV,
     )
     runs = list(csv.DictReader(matrix_path.open(encoding="utf-8")))
     profile_name = profile_alias or args.profile
     print(f"Wrote {len(runs)} {profile_name} configs to {matrix_path}")
-    sources = profile_sources(args.profile, selected_source_ids if args.profile in {"selected_rebuild", "accuracy_v3_hm", "accuracy_v3"} else None)
+    sources = profile_sources(
+        args.profile,
+        selected_source_ids if args.profile in {"selected_rebuild", "accuracy_v3_hm", "accuracy_v3"} else None,
+        energy_list_keV,
+    )
     thicknesses = profile_thicknesses(args.profile)
     seeds = seed_list or profile_seeds(args.profile)
     material_count = len(load_materials(project_root, profile_material_names(args.profile, material_names)))

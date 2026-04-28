@@ -177,7 +177,9 @@ def require_sklearn():
 def source_id_from_metadata(meta: dict) -> str:
     mode = str(meta.get("source_mode", "unknown"))
     if mode == "mono":
-        return f"mono_{int(float(meta.get('mono_energy_keV', 0)))}kev"
+        energy = float(meta.get("mono_energy_keV", 0))
+        energy_label = str(int(energy)) if energy.is_integer() else f"{energy:g}".replace(".", "p")
+        return f"mono_{energy_label}kev"
     if mode == "spectrum":
         return "spectrum_120kv"
     return mode

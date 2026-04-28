@@ -22,6 +22,10 @@ DEFAULT_METHODS = [
     "HematitePriorityExtraTrees",
     "HMStrongRecallExtraTrees",
     "HighGroupRecallExtraTrees",
+    "HMAllEnergyExpertExtraTrees",
+    "HMLowEnergyExpertExtraTrees",
+    "HMThicknessGroupedExpertExtraTrees",
+    "HMPairwiseVotingExpertExtraTrees",
     "XGBoostGPU",
 ]
 HM_PAIR = ["Hematite", "Magnetite"]
@@ -196,6 +200,166 @@ def add_hm_metrics(metrics: dict, eval_frame: pd.DataFrame, predictions: np.ndar
     hm_values = [metrics["hematite_recall"], metrics["magnetite_recall"]]
     metrics["hm_min_recall"] = float(np.nanmin(hm_values)) if not all(math.isnan(value) for value in hm_values) else math.nan
     return metrics
+
+
+def source_energy_from_feature(col: str) -> float | None:
+    if "__" not in col:
+        return None
+    source_id = col.split("__", 1)[0]
+    if not (source_id.startswith("mono_") and source_id.endswith("kev")):
+        return None
+    try:
+        return float(source_id.removeprefix("mono_").removesuffix("kev"))
+    except ValueError:
+        return None
+
+
+def low_energy_hm_feature_columns(feature_cols: list[str], max_energy_keV: float = 50.0) -> list[str]:
+    hm_cols = hm_expert_feature_columns(feature_cols)
+    cols = []
+    for col in hm_cols:
+        energy = source_energy_from_feature(col)
+        if energy is not None and energy <= max_energy_keV:
+            cols.append(col)
+        elif energy is None and col.startswith("dict_"):
+            cols.append(col)
+    return cols or hm_cols
+
+
+def fit_hm_pairwise_extra_trees(
+    train: pd.DataFrame,
+    feature_cols: list[str],
+    sk,
+    random_state: int,
+):
+    train_hm = train[train["material"].astype(str).isin(HM_PAIR)].copy()
+    if train_hm["material"].nunique() < 2:
+        return None
+    model = sk["ExtraTreesClassifier"](
+        n_estimators=1800,
+        random_state=random_state,
+        n_jobs=-1,
+        class_weight="balanced",
+        max_features="sqrt",
+        min_samples_leaf=1,
+    )
+    model.fit(train_hm[feature_cols], train_hm["material"])
+    return model
+
+
+def hm_probability_matrix(model, eval_frame: pd.DataFrame, feature_cols: list[str]) -> np.ndarray:
+    probs = np.full((len(eval_frame), len(HM_PAIR)), 0.5, dtype=float)
+    if model is None or eval_frame.empty:
+        return probs
+    raw = model.predict_proba(eval_frame[feature_cols])
+    probs = np.zeros((len(eval_frame), len(HM_PAIR)), dtype=float)
+    for local_index, material in enumerate(model.classes_):
+        if str(material) in HM_PAIR:
+            probs[:, HM_PAIR.index(str(material))] = raw[:, local_index]
+    sums = probs.sum(axis=1, keepdims=True)
+    return np.divide(probs, sums, out=np.full_like(probs, 0.5), where=sums > 0)
+
+
+def hm_pairwise_probabilities(
+    train: pd.DataFrame,
+    eval_frame: pd.DataFrame,
+    feature_cols: list[str],
+    sk,
+    random_state: int,
+) -> np.ndarray:
+    model = fit_hm_pairwise_extra_trees(train, feature_cols, sk, random_state)
+    return hm_probability_matrix(model, eval_frame, feature_cols)
+
+
+def thickness_group_hm_probabilities(
+    train: pd.DataFrame,
+    eval_frame: pd.DataFrame,
+    feature_cols: list[str],
+    sk,
+    random_state: int,
+) -> np.ndarray:
+    probs = hm_pairwise_probabilities(train, eval_frame, feature_cols, sk, random_state)
+    train_hm = train[train["material"].astype(str).isin(HM_PAIR)].copy()
+    if train_hm.empty or "thickness_mm" not in train_hm.columns:
+        return probs
+    for offset, thickness in enumerate(sorted(train_hm["thickness_mm"].astype(float).unique())):
+        part = train_hm[np.isclose(train_hm["thickness_mm"].astype(float), thickness)].copy()
+        if part["material"].nunique() < 2:
+            continue
+        mask = np.isclose(eval_frame["thickness_mm"].astype(float), thickness)
+        if not mask.any():
+            continue
+        model = fit_hm_pairwise_extra_trees(part, feature_cols, sk, random_state + offset + 1)
+        probs[mask, :] = hm_probability_matrix(model, eval_frame.loc[mask], feature_cols)
+    return probs
+
+
+def normalize_scores(scores: np.ndarray) -> np.ndarray:
+    sums = scores.sum(axis=1, keepdims=True)
+    return np.divide(scores, sums, out=np.zeros_like(scores), where=sums > 0)
+
+
+def redistribute_hm_mass(base_scores: np.ndarray, base_classes: np.ndarray, hm_probs: np.ndarray) -> np.ndarray:
+    if "Hematite" not in base_classes or "Magnetite" not in base_classes:
+        return normalize_scores(np.array(base_scores, copy=True))
+    scores = np.array(base_scores, copy=True)
+    h_index = int(np.where(base_classes == "Hematite")[0][0])
+    m_index = int(np.where(base_classes == "Magnetite")[0][0])
+    hm_mass = scores[:, h_index] + scores[:, m_index]
+    scores[:, h_index] = hm_mass * hm_probs[:, 0]
+    scores[:, m_index] = hm_mass * hm_probs[:, 1]
+    return normalize_scores(scores)
+
+
+def score_hm_pairwise_ensemble_extra_trees(
+    method: str,
+    train: pd.DataFrame,
+    eval_frame: pd.DataFrame,
+    feature_cols: list[str],
+    sk,
+) -> tuple[dict, np.ndarray, np.ndarray, np.ndarray]:
+    all_hm_cols = hm_expert_feature_columns(feature_cols)
+    low_hm_cols = low_energy_hm_feature_columns(feature_cols)
+    base_cols = low_hm_cols if method == "HMLowEnergyExpertExtraTrees" else feature_cols
+    random_state = {
+        "HMAllEnergyExpertExtraTrees": 353,
+        "HMLowEnergyExpertExtraTrees": 359,
+        "HMThicknessGroupedExpertExtraTrees": 367,
+        "HMPairwiseVotingExpertExtraTrees": 373,
+    }[method]
+    base_model = sk["ExtraTreesClassifier"](
+        n_estimators=2000,
+        random_state=random_state,
+        n_jobs=-1,
+        class_weight="balanced",
+        max_features="sqrt",
+        min_samples_leaf=1,
+    )
+    base_model.fit(train[base_cols], train["material"])
+    base_scores = base_model.predict_proba(eval_frame[base_cols])
+    classes = np.array(base_model.classes_)
+
+    if method == "HMAllEnergyExpertExtraTrees":
+        hm_probs = hm_pairwise_probabilities(train, eval_frame, all_hm_cols, sk, 383)
+    elif method == "HMLowEnergyExpertExtraTrees":
+        hm_probs = hm_pairwise_probabilities(train, eval_frame, low_hm_cols, sk, 389)
+    elif method == "HMThicknessGroupedExpertExtraTrees":
+        hm_probs = thickness_group_hm_probabilities(train, eval_frame, all_hm_cols, sk, 397)
+    else:
+        hm_votes = [
+            hm_pairwise_probabilities(train, eval_frame, all_hm_cols, sk, 401),
+            hm_pairwise_probabilities(train, eval_frame, low_hm_cols, sk, 409),
+            thickness_group_hm_probabilities(train, eval_frame, all_hm_cols, sk, 419),
+        ]
+        hm_probs = normalize_scores(np.mean(hm_votes, axis=0))
+
+    scores = redistribute_hm_mass(base_scores, classes, hm_probs)
+    predictions = classes[np.argmax(scores, axis=1)]
+    metrics = add_hm_metrics(evaluate_context_scores(method, eval_frame, predictions, scores, classes, sk), eval_frame, predictions, sk)
+    metrics["hm_expert_feature_count"] = int(len(all_hm_cols))
+    metrics["hm_low_energy_feature_count"] = int(len(low_hm_cols))
+    metrics["base_model_feature_count"] = int(len(base_cols))
+    return metrics, predictions, scores, classes
 
 
 def score_weighted_extra_trees(
@@ -382,6 +546,13 @@ def score_method(
         return score_high_group_recall_extra_trees(method, train, eval_frame, feature_cols, group_map, sk)
     if method == "HMExpertHierarchicalExtraTrees":
         return score_hm_expert_hierarchical_extra_trees(method, train, eval_frame, feature_cols, group_map, sk)
+    if method in {
+        "HMAllEnergyExpertExtraTrees",
+        "HMLowEnergyExpertExtraTrees",
+        "HMThicknessGroupedExpertExtraTrees",
+        "HMPairwiseVotingExpertExtraTrees",
+    }:
+        return score_hm_pairwise_ensemble_extra_trees(method, train, eval_frame, feature_cols, sk)
     _, predictions, scores, classes, _ = selected.score_method(method, train, eval_frame, feature_cols, group_map, sk)
     metrics = evaluate_context_scores(method, eval_frame, predictions, scores, classes, sk)
     return add_hm_metrics(metrics, eval_frame, predictions, sk), predictions, scores, classes
@@ -418,7 +589,7 @@ def score_methods(
 
 def choose_validation_method(validation_table: pd.DataFrame) -> dict:
     ranked = validation_table.dropna(subset=["top1_accuracy", "macro_f1", "min_class_recall"]).sort_values(
-        ["min_class_recall", "hm_min_recall", "top1_accuracy", "macro_f1"],
+        ["hm_min_recall", "min_class_recall", "macro_f1", "top1_accuracy"],
         ascending=[False, False, False, False],
     )
     if ranked.empty:
@@ -900,7 +1071,7 @@ def main() -> None:
             "burned_test_seeds": sorted(burned_test_seeds),
             "split_integrity": integrity,
             "methods": methods,
-            "model_selection_policy": "development-only validation: rank by min_class_recall, then hm_min_recall, then top1_accuracy, then macro_f1",
+            "model_selection_policy": "development-only validation: rank by hm_min_recall, then min_class_recall, then macro_f1, then top1_accuracy",
             "selected_method": selected_method,
             "selected_validation_metrics": choose_validation_method(validation_table),
             "status": status,
@@ -1013,7 +1184,7 @@ def main() -> None:
         "reused_test_seeds": reused_test,
         "split_integrity": integrity,
         "methods": methods,
-        "model_selection_policy": "validation-only: rank by min_class_recall, then hm_min_recall, then top1_accuracy, then macro_f1",
+        "model_selection_policy": "validation-only: rank by hm_min_recall, then min_class_recall, then macro_f1, then top1_accuracy",
         "selected_method": selected_method,
         "selected_validation_metrics": choose_validation_method(validation_table),
         "status": status,

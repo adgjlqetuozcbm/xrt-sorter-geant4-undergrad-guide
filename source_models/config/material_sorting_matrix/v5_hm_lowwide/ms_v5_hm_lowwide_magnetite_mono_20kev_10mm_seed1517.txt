@@ -1,0 +1,58 @@
+# Material sorting matrix config: material_sorting_v5_hm_lowwide_magnetite_mono_20kev_10mm_seed1517
+run_id = material_sorting_v5_hm_lowwide_magnetite_mono_20kev_10mm_seed1517
+experiment_label = material_sorting_v5_hm_lowwide_magnetite_mono_20kev_10mm_seed1517
+output_prefix = ms_v5_hm_lowwide_magnetite_mono_20kev_10mm_seed1517
+output_dir = material_sorting_runs/v5_hm_lowwide
+benchmark_suite = material_sorting_v1
+research_route = undergraduate_sorting_upgrade
+prediction_stage = material_level
+run_role = material
+prep_profile = clean_dry_single_piece
+feed_size_band = controlled_slab
+feed_condition = simulated_single_material
+sample_photons = 100
+random_seed = 1517
+
+source_mode = mono
+spectrum_file = ../../../spectra/w_target_120kV_1mmAl.csv
+phase_space_file = ../../../phase_space/source_phase_space.csv
+mono_energy_keV = 20.0
+source_x_cm = -30.0
+source_y_mm = 0.0
+source_z_mm = 0.0
+beam_half_y_mm = 5.0
+beam_half_z_mm = 5.0
+dir_x = 1.0
+dir_y = 0.0
+dir_z = 0.0
+
+ore_material_mode = single
+ore_primary_material = Magnetite
+ore_secondary_material = Magnetite
+ore_secondary_mass_fraction = 0.0
+
+ore_shape = slab
+ore_thickness_mm = 10.0
+ore_half_y_mm = 100.0
+ore_half_z_mm = 100.0
+
+heterogeneity_mode = none
+inclusion_material = Magnetite
+inclusion_shape = ellipsoid
+inclusion_thickness_mm = 4.0
+inclusion_radius_y_mm = 20.0
+inclusion_radius_z_mm = 20.0
+inclusion_offset_y_mm = 0.0
+inclusion_offset_z_mm = 0.0
+
+detector_thickness_mm = 5.0
+detector_half_y_mm = 100.0
+detector_half_z_mm = 100.0
+detector_x_cm = 25.0
+
+world_x_cm = 100.0
+world_y_cm = 50.0
+world_z_cm = 50.0
+envelope_x_cm = 80.0
+envelope_y_cm = 30.0
+envelope_z_cm = 30.0
