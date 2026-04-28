@@ -26,6 +26,10 @@ ENERGY_SCAN_SOURCES = [
     {"source_id": f"mono_{energy}kev", "source_mode": "mono", "mono_energy_keV": float(energy)}
     for energy in [30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 150, 200]
 ]
+ACCURACY_V3_LOW_ENERGY_SOURCES = [
+    {"source_id": f"mono_{energy}kev", "source_mode": "mono", "mono_energy_keV": float(energy)}
+    for energy in [15, 20, 25, 35]
+]
 SELECTED_REBUILD_SOURCE_IDS = ["mono_40kev", "mono_50kev", "mono_120kev"]
 ACCURACY_V3_SOURCE_IDS = [
     "mono_30kev",
@@ -53,7 +57,7 @@ PROFILE_EVENTS = {
 
 
 def source_lookup() -> dict[str, dict]:
-    return {source["source_id"]: source for source in [*SOURCES, *ENERGY_SCAN_SOURCES]}
+    return {source["source_id"]: source for source in [*SOURCES, *ENERGY_SCAN_SOURCES, *ACCURACY_V3_LOW_ENERGY_SOURCES]}
 
 
 def profile_thicknesses(profile: str) -> list[float]:

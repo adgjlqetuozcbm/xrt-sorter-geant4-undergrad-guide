@@ -1,0 +1,8 @@
+method,samples,evaluated_materials,top1_accuracy,top3_accuracy,macro_f1,min_class_recall,hematite_recall,magnetite_recall,hm_min_recall,hm_expert_feature_count
+ExtraTrees,24,Pyrite;Hematite;Magnetite;Chalcopyrite,0.7083333333333334,0.9583333333333334,0.7041666666666666,0.5,0.5,0.6666666666666666,0.5,
+HierarchicalExtraTrees,24,Pyrite;Hematite;Magnetite;Chalcopyrite,0.7083333333333334,1.0,0.7044955044955045,0.5,0.5,0.6666666666666666,0.5,
+HMExpertHierarchicalExtraTrees,24,Pyrite;Hematite;Magnetite;Chalcopyrite,0.6666666666666666,1.0,0.652457264957265,0.3333333333333333,0.3333333333333333,0.6666666666666666,0.3333333333333333,201.0
+HematiteMagnetiteRecallExtraTrees,24,Pyrite;Hematite;Magnetite;Chalcopyrite,0.7083333333333334,1.0,0.7044955044955045,0.5,0.5,0.6666666666666666,0.5,
+HematitePriorityExtraTrees,24,Pyrite;Hematite;Magnetite;Chalcopyrite,0.6666666666666666,1.0,0.6571428571428571,0.3333333333333333,0.3333333333333333,0.6666666666666666,0.3333333333333333,
+HMStrongRecallExtraTrees,24,Pyrite;Hematite;Magnetite;Chalcopyrite,0.6666666666666666,1.0,0.6711538461538462,0.5,0.5,0.6666666666666666,0.5,
+HighGroupRecallExtraTrees,24,Pyrite;Hematite;Magnetite;Chalcopyrite,0.7083333333333334,1.0,0.7044955044955045,0.5,0.5,0.6666666666666666,0.5,

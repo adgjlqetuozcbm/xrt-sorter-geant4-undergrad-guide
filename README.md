@@ -73,6 +73,8 @@ flowchart LR
 
 Accuracy Sprint v3 已加入分层分类、Hematite/Magnetite 专家候选、更细 hit/event 谱特征、detector-response smoothed counts，以及论文证据台账。首轮 v3 诊断输出在 `results/accuracy_v3/`，仍使用已烧掉的 `sr2` final seeds，因此不能作为新 claim；它的结论是 H/M 最低召回仍低于 `0.70`，下一步应生成新的 `accuracy_v3_hm` 小矩阵，而不是继续在 `sr2` 上调参。详见 `docs/ACCURACY_SPRINT_V3_LAB_NOTEBOOK_zh.md` 和 `docs/ACCURACY_V3_METHODS_NOTES_zh.md`。
 
+Accuracy Sprint v4 已完成 `v3_hm_smoke` 连通性验证：`104/104` 个 H/M-focused Geant4 run 成功，development-only validation 仍未达标，但 `hm_pairwise_audit.csv` 已能记录 H/M 二分类召回、AUC 和 top features。`v3_hm_dev1` 的 819-run 配置已生成，供下一阶段分批运行。
+
 ## 快速运行
 
 如果你的环境已经安装 Geant4、CMake、C++17 编译器、Python、pandas 和 scikit-learn，可以从仓库根目录运行：

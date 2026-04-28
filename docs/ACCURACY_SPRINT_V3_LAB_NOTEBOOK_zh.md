@@ -73,3 +73,25 @@
 2. 生成并运行 `accuracy_v3_hm` 小矩阵，先只覆盖 Hematite、Magnetite、Pyrite、Chalcopyrite，使用新 seeds 和 `30/40/50/70/90/110/120/150/200 keV`。
 3. 如果 H/M-focused validation 的 H/M recall 仍低于 `0.70`，继续只在 train/validation 上改特征、能量或模型。
 4. 只有多个 validation seeds 稳定达标后，才生成并运行新的 unseen final test。
+
+## 2026-04-28 v4 H/M smoke
+
+这轮是 `accuracy_v3_hm` 的第一阶段连通性检查。它不使用 final test，只评估 train seed `1201` 到 validation seed `1301`，目标是验证 H/M-focused 配置、runner、development-only 审计和 `hm_pairwise_audit.csv` 能完整运行。
+
+| 项 | 结果 |
+| --- | --- |
+| profile | `v3_hm_smoke` |
+| materials | Hematite、Magnetite、Pyrite、Chalcopyrite |
+| sources | `40/70/110/200 keV` |
+| thickness | `5/10/20 mm` |
+| seeds | train `1201`，validation `1301` |
+| matrix | 96 material runs + 8 calibration runs |
+| run status | `104/104` completed，`0` failed |
+| selected method | `HierarchicalExtraTrees` |
+| validation Top-1 / macro-F1 / min recall | `0.7083` / `0.7045` / `0.5000` |
+| validation Hematite / Magnetite recall | `0.5000` / `0.6667` |
+| H/M pairwise Top-1 / min recall / AUC | `0.5833` / `0.3333` / `0.6111` |
+
+结论：全链路已经打通，但 `v3_hm_smoke` 明显未达标。失败集中在 Hematite 被误判为 Magnetite，pairwise audit 的 top features 主要来自 `mono_200kev` 的 detector-response、attenuation 和 spectral-shape 特征。这说明新增数据路线是可运行的，但 2 seeds + 4 energies 不足以支持 H/M separability。
+
+下一步已生成 `v3_hm_dev1` 配置：4 materials x 3 thicknesses x 9 sources x 7 seeds = 756 material runs，加 63 calibration runs，总计 819 runs。`v3_hm_dev1` 应分批运行，先跑 calibration，再按材料 run；运行完成后用 development-only audit 评估 train seeds `1201-1205` 到 validation seeds `1301/1302`。

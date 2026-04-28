@@ -123,6 +123,53 @@ def check_split_integrity(train_seeds: list[int], validation_seeds: list[int], t
     }
 
 
+def evaluation_labels(frame: pd.DataFrame) -> np.ndarray:
+    observed = set(frame["material"].astype(str))
+    if observed == set(v2.TARGET_MATERIALS):
+        return np.array(v2.TARGET_MATERIALS)
+    return np.array([material for material in v2.TARGET_MATERIALS if material in observed])
+
+
+def evaluate_context_scores(
+    method: str,
+    frame: pd.DataFrame,
+    predictions: np.ndarray,
+    scores: np.ndarray,
+    classes: np.ndarray,
+    sk,
+) -> dict:
+    labels = evaluation_labels(frame)
+    y_true = frame["material"].astype(str).to_numpy()
+    recalls = sk["recall_score"](y_true, predictions, labels=labels, average=None, zero_division=0)
+    return {
+        "method": method,
+        "samples": int(len(frame)),
+        "evaluated_materials": ";".join(labels),
+        "top1_accuracy": float(np.mean(y_true == predictions)),
+        "top3_accuracy": v2.topk_accuracy(y_true, scores, classes, min(3, len(classes))),
+        "macro_f1": float(sk["f1_score"](y_true, predictions, labels=labels, average="macro", zero_division=0)),
+        "min_class_recall": float(np.min(recalls)) if len(recalls) else math.nan,
+    }
+
+
+def per_class_recall_context(frame: pd.DataFrame, predictions: np.ndarray, split: str, sk) -> pd.DataFrame:
+    labels = evaluation_labels(frame)
+    y_true = frame["material"].astype(str).to_numpy()
+    recalls = sk["recall_score"](y_true, predictions, labels=labels, average=None, zero_division=0)
+    support = frame["material"].value_counts().to_dict()
+    return pd.DataFrame(
+        [
+            {
+                "split": split,
+                "material": material,
+                "support": int(support.get(material, 0)),
+                "recall": float(recall),
+            }
+            for material, recall in zip(labels, recalls)
+        ]
+    )
+
+
 def hm_expert_feature_columns(feature_cols: list[str]) -> list[str]:
     preferred_families = {
         "attenuation",
@@ -188,7 +235,7 @@ def score_weighted_extra_trees(
     predictions = model.predict(eval_frame[feature_cols])
     scores = model.predict_proba(eval_frame[feature_cols])
     classes = np.array(model.classes_)
-    metrics = add_hm_metrics(v2.evaluate_scores(method, eval_frame, predictions, scores, classes, sk), eval_frame, predictions, sk)
+    metrics = add_hm_metrics(evaluate_context_scores(method, eval_frame, predictions, scores, classes, sk), eval_frame, predictions, sk)
     return metrics, predictions, scores, classes
 
 
@@ -239,7 +286,7 @@ def score_high_group_recall_extra_trees(
     scores_sum = scores.sum(axis=1, keepdims=True)
     scores = np.divide(scores, scores_sum, out=np.zeros_like(scores), where=scores_sum > 0)
     predictions = classes[np.argmax(scores, axis=1)]
-    metrics = add_hm_metrics(v2.evaluate_scores(method, eval_frame, predictions, scores, classes, sk), eval_frame, predictions, sk)
+    metrics = add_hm_metrics(evaluate_context_scores(method, eval_frame, predictions, scores, classes, sk), eval_frame, predictions, sk)
     return metrics, predictions, scores, classes
 
 
@@ -316,7 +363,7 @@ def score_hm_expert_hierarchical_extra_trees(
     scores_sum = scores.sum(axis=1, keepdims=True)
     scores = np.divide(scores, scores_sum, out=np.zeros_like(scores), where=scores_sum > 0)
     predictions = classes[np.argmax(scores, axis=1)]
-    metrics = add_hm_metrics(v2.evaluate_scores(method, eval_frame, predictions, scores, classes, sk), eval_frame, predictions, sk)
+    metrics = add_hm_metrics(evaluate_context_scores(method, eval_frame, predictions, scores, classes, sk), eval_frame, predictions, sk)
     metrics["hm_expert_feature_count"] = len(hm_expert_feature_columns(feature_cols))
     return metrics, predictions, scores, classes
 
@@ -335,7 +382,8 @@ def score_method(
         return score_high_group_recall_extra_trees(method, train, eval_frame, feature_cols, group_map, sk)
     if method == "HMExpertHierarchicalExtraTrees":
         return score_hm_expert_hierarchical_extra_trees(method, train, eval_frame, feature_cols, group_map, sk)
-    metrics, predictions, scores, classes, _ = selected.score_method(method, train, eval_frame, feature_cols, group_map, sk)
+    _, predictions, scores, classes, _ = selected.score_method(method, train, eval_frame, feature_cols, group_map, sk)
+    metrics = evaluate_context_scores(method, eval_frame, predictions, scores, classes, sk)
     return add_hm_metrics(metrics, eval_frame, predictions, sk), predictions, scores, classes
 
 
@@ -411,9 +459,154 @@ def evaluate_locked_split(
     )
     final_metrics["base_feature_count"] = int(len(base_cols))
     final_metrics["model_feature_count"] = int(len(final_feature_cols))
-    per_class = selected.per_class_recall(test_aug, predictions, sk)
+    per_class = per_class_recall_context(test_aug, predictions, "test", sk)
     decisions = v2.decision_frame(test_aug, predictions, scores, classes, probability_threshold=0.0, margin_threshold=0.0)
     return validation_table, final_metrics, per_class, decisions
+
+
+def pairwise_top_features(model, feature_cols: list[str], limit: int = 15) -> tuple[str, str, str]:
+    if not hasattr(model, "feature_importances_"):
+        return "", "", ""
+    importances = np.asarray(model.feature_importances_, dtype=float)
+    if importances.size != len(feature_cols):
+        return "", "", ""
+    order = np.argsort(importances)[::-1][:limit]
+    top = [(feature_cols[index], float(importances[index])) for index in order if importances[index] > 0]
+    top_features = ";".join(f"{name}:{value:.4f}" for name, value in top)
+    source_scores: dict[str, float] = {}
+    family_scores: dict[str, float] = {}
+    for name, value in top:
+        source = name.split("__", 1)[0] if "__" in name else "global"
+        source_scores[source] = source_scores.get(source, 0.0) + value
+        family = v2.feature_family(name)
+        family_scores[family] = family_scores.get(family, 0.0) + value
+    top_sources = ";".join(f"{name}:{value:.4f}" for name, value in sorted(source_scores.items(), key=lambda item: item[1], reverse=True))
+    top_families = ";".join(f"{name}:{value:.4f}" for name, value in sorted(family_scores.items(), key=lambda item: item[1], reverse=True))
+    return top_features, top_sources, top_families
+
+
+def hm_pairwise_audit_frame(
+    train: pd.DataFrame,
+    eval_frame: pd.DataFrame,
+    feature_cols: list[str],
+    sk,
+    split: str,
+) -> pd.DataFrame:
+    train_hm = train[train["material"].astype(str).isin(HM_PAIR)].copy()
+    eval_hm = eval_frame[eval_frame["material"].astype(str).isin(HM_PAIR)].copy()
+    if train_hm["material"].nunique() < 2 or eval_hm.empty:
+        return pd.DataFrame(
+            [
+                {
+                    "split": split,
+                    "method": "HMPairwiseExtraTrees",
+                    "samples": int(len(eval_hm)),
+                    "status": "insufficient_hm_classes",
+                }
+            ]
+        )
+    hm_cols = hm_expert_feature_columns(feature_cols)
+    model = sk["ExtraTreesClassifier"](
+        n_estimators=1600,
+        random_state=331,
+        n_jobs=-1,
+        class_weight="balanced",
+        max_features="sqrt",
+        min_samples_leaf=1,
+    )
+    model.fit(train_hm[hm_cols], train_hm["material"])
+    predictions = model.predict(eval_hm[hm_cols])
+    scores = model.predict_proba(eval_hm[hm_cols])
+    classes = np.array(model.classes_)
+    y_true = eval_hm["material"].astype(str).to_numpy()
+    recalls = sk["recall_score"](y_true, predictions, labels=np.array(HM_PAIR), average=None, zero_division=0)
+    roc_auc = math.nan
+    try:
+        from sklearn.metrics import roc_auc_score
+
+        magnetite_index = int(np.where(classes == "Magnetite")[0][0])
+        roc_auc = float(roc_auc_score((y_true == "Magnetite").astype(int), scores[:, magnetite_index]))
+    except Exception:
+        roc_auc = math.nan
+    decisions = v2.decision_frame(eval_hm, predictions, scores, classes, probability_threshold=0.0, margin_threshold=0.0)
+    confusion = decisions.loc[~decisions["is_correct"], "predicted_material"].value_counts().to_dict()
+    top_features, top_sources, top_families = pairwise_top_features(model, hm_cols)
+    return pd.DataFrame(
+        [
+            {
+                "split": split,
+                "method": "HMPairwiseExtraTrees",
+                "samples": int(len(eval_hm)),
+                "status": "ok",
+                "top1_accuracy": float(np.mean(y_true == predictions)),
+                "macro_f1": float(sk["f1_score"](y_true, predictions, labels=np.array(HM_PAIR), average="macro", zero_division=0)),
+                "hematite_recall": float(recalls[0]),
+                "magnetite_recall": float(recalls[1]),
+                "hm_min_recall": float(np.min(recalls)),
+                "roc_auc_magnetite": roc_auc,
+                "feature_count": int(len(hm_cols)),
+                "confusions": ";".join(f"{name}:{int(count)}" for name, count in confusion.items()),
+                "top_features": top_features,
+                "top_sources": top_sources,
+                "top_feature_families": top_families,
+            }
+        ]
+    )
+
+
+def build_augmented_splits(
+    frame: pd.DataFrame,
+    train_seeds: list[int],
+    validation_seeds: list[int],
+    test_seeds: list[int],
+) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, list[str], list[str]]:
+    seed_series = frame["random_seed"].astype(int)
+    train = frame[seed_series.isin(train_seeds)].copy()
+    validation = frame[seed_series.isin(validation_seeds)].copy()
+    test = frame[seed_series.isin(test_seeds)].copy() if test_seeds else pd.DataFrame()
+    base_cols = v2.numeric_feature_columns(frame)
+    train_aug, validation_aug, feature_cols, _ = selected.append_dictionary(train, validation, base_cols)
+    if not test.empty:
+        final_train = pd.concat([train, validation], ignore_index=True)
+        final_train_aug, test_aug, final_feature_cols, _ = selected.append_dictionary(final_train, test, base_cols)
+    else:
+        final_train_aug = pd.DataFrame()
+        test_aug = pd.DataFrame()
+        final_feature_cols = feature_cols
+    return train_aug, validation_aug, test_aug, feature_cols, final_feature_cols
+
+
+def evaluate_development_split(
+    frame: pd.DataFrame,
+    train_seeds: list[int],
+    validation_seeds: list[int],
+    methods: list[str],
+    group_map: dict[str, str],
+    sk,
+) -> tuple[pd.DataFrame, dict, pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+    seed_series = frame["random_seed"].astype(int)
+    train = frame[seed_series.isin(train_seeds)].copy()
+    validation = frame[seed_series.isin(validation_seeds)].copy()
+    if train.empty or validation.empty:
+        raise ValueError("Train and validation splits must be non-empty for development-only audit.")
+    base_cols = v2.numeric_feature_columns(frame)
+    train_aug, validation_aug, feature_cols, _ = selected.append_dictionary(train, validation, base_cols)
+    validation_table = score_methods(methods, train_aug, validation_aug, feature_cols, group_map, sk)
+    selected_method = str(choose_validation_method(validation_table)["method"])
+    validation_metrics, predictions, scores, classes = score_method(
+        selected_method,
+        train_aug,
+        validation_aug,
+        feature_cols,
+        group_map,
+        sk,
+    )
+    validation_metrics["base_feature_count"] = int(len(base_cols))
+    validation_metrics["model_feature_count"] = int(len(feature_cols))
+    per_class = per_class_recall_context(validation_aug, predictions, "validation", sk)
+    decisions = v2.decision_frame(validation_aug, predictions, scores, classes, probability_threshold=0.0, margin_threshold=0.0)
+    pairwise = hm_pairwise_audit_frame(train_aug, validation_aug, feature_cols, sk, "validation")
+    return validation_table, validation_metrics, per_class, decisions, pairwise
 
 
 def evaluate_rotating_splits(
@@ -538,11 +731,13 @@ def experiment_registry_frame(
     claim_safe: bool,
 ) -> pd.DataFrame:
     selected_validation = choose_validation_method(validation_table)
+    development_only = bool(getattr(args, "development_only", False))
     return pd.DataFrame(
         [
             {
                 "timestamp_utc": datetime.now(timezone.utc).isoformat(timespec="seconds"),
                 "protocol_name": args.protocol_name,
+                "evaluation_stage": "development_validation_only" if development_only else "locked_final_test",
                 "hypothesis": "layered_absorption_group_with_hm_expert_and_enriched_spectral_features",
                 "change_summary": "strict audit with validation-only model selection and paper ledger outputs",
                 "raw_dirs": args.raw_dirs or args.raw_dir,
@@ -559,16 +754,21 @@ def experiment_registry_frame(
                 "validation_min_class_recall": selected_validation.get("min_class_recall", math.nan),
                 "validation_hematite_recall": selected_validation.get("hematite_recall", math.nan),
                 "validation_magnetite_recall": selected_validation.get("magnetite_recall", math.nan),
-                "final_top1_accuracy": final_metrics.get("top1_accuracy", math.nan),
-                "final_macro_f1": final_metrics.get("macro_f1", math.nan),
-                "final_min_class_recall": final_metrics.get("min_class_recall", math.nan),
-                "final_hematite_recall": final_metrics.get("hematite_recall", math.nan),
-                "final_magnetite_recall": final_metrics.get("magnetite_recall", math.nan),
+                "development_top1_accuracy": final_metrics.get("top1_accuracy", math.nan) if development_only else math.nan,
+                "development_macro_f1": final_metrics.get("macro_f1", math.nan) if development_only else math.nan,
+                "development_min_class_recall": final_metrics.get("min_class_recall", math.nan) if development_only else math.nan,
+                "development_hematite_recall": final_metrics.get("hematite_recall", math.nan) if development_only else math.nan,
+                "development_magnetite_recall": final_metrics.get("magnetite_recall", math.nan) if development_only else math.nan,
+                "final_top1_accuracy": math.nan if development_only else final_metrics.get("top1_accuracy", math.nan),
+                "final_macro_f1": math.nan if development_only else final_metrics.get("macro_f1", math.nan),
+                "final_min_class_recall": math.nan if development_only else final_metrics.get("min_class_recall", math.nan),
+                "final_hematite_recall": math.nan if development_only else final_metrics.get("hematite_recall", math.nan),
+                "final_magnetite_recall": math.nan if development_only else final_metrics.get("magnetite_recall", math.nan),
                 "model_feature_count": final_metrics.get("model_feature_count", math.nan),
                 "min_class_support_observed": min_support,
                 "claim_safe": claim_safe,
                 "failure_reason": registry_failure_reason(final_metrics, min_support, reused_test, integrity),
-                "next_action": "freeze_and_report" if claim_safe else "continue_train_validation_iteration_without_reusing_this_final_test",
+                "next_action": "freeze_and_report" if claim_safe else "continue_train_validation_iteration_without_reusing_final_test",
             }
         ]
     )
@@ -592,6 +792,11 @@ def main() -> None:
     parser.add_argument("--methods", default=",".join(DEFAULT_METHODS))
     parser.add_argument("--min-class-support", type=int, default=30)
     parser.add_argument("--rotate-existing-seeds", action="store_true")
+    parser.add_argument(
+        "--development-only",
+        action="store_true",
+        help="Evaluate train/validation only and write a development ledger without opening or claiming a final test.",
+    )
     parser.add_argument("--protocol-name", default="strict_generalization_seed_holdout")
     args = parser.parse_args()
 
@@ -610,6 +815,92 @@ def main() -> None:
     raw_dirs = parse_raw_dirs(project_root, args.raw_dir, args.raw_dirs)
     frame, status = build_frame_from_raw_dirs(project_root, raw_dirs, args.photon_budget)
     integrity = check_split_integrity(train_seeds, validation_seeds, test_seeds)
+
+    if args.development_only:
+        validation_table, validation_metrics, per_class, decisions, pairwise = evaluate_development_split(
+            frame,
+            train_seeds,
+            validation_seeds,
+            methods,
+            group_map,
+            sk,
+        )
+        selected_method = str(choose_validation_method(validation_table)["method"])
+        split_audit = split_audit_frame(frame, train_seeds, validation_seeds, [])
+        min_support = int(per_class["support"].min()) if not per_class.empty else 0
+        passes_metrics = bool(
+            validation_metrics["top1_accuracy"] >= ACCEPTANCE_TARGETS["top1_accuracy"]
+            and validation_metrics["macro_f1"] >= ACCEPTANCE_TARGETS["macro_f1"]
+            and validation_metrics["min_class_recall"] >= ACCEPTANCE_TARGETS["min_class_recall"]
+        )
+        passes_support = bool(min_support >= args.min_class_support)
+        write_csv(validation_table, output_dir / "validation_model_selection.csv")
+        write_csv(pd.DataFrame([validation_metrics]), output_dir / "development_validation_summary.csv")
+        write_csv(per_class, output_dir / "per_class_recall_validation.csv")
+        write_csv(decisions, output_dir / "validation_decisions.csv")
+        write_csv(pairwise, output_dir / "hm_pairwise_audit.csv")
+        write_csv(split_audit, output_dir / "split_audit.csv")
+        write_csv(
+            experiment_registry_frame(
+                args,
+                status,
+                selected_method,
+                validation_table,
+                validation_metrics,
+                min_support,
+                [],
+                integrity,
+                False,
+            ),
+            output_dir / "experiment_registry.csv",
+        )
+        failure_analysis = failure_analysis_frame(per_class, decisions, group_map)
+        write_csv(failure_analysis, output_dir / "failure_analysis.csv")
+        manifest = {
+            "package": "xrt-sorter-geant4-undergrad-guide",
+            "generated_by": "analysis/strict_generalization_audit.py",
+            "generated_at_utc": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+            "protocol_name": args.protocol_name,
+            "development_only": True,
+            "raw_dir": args.raw_dir,
+            "raw_dirs": [path.relative_to(project_root).as_posix() if path.is_relative_to(project_root) else path.as_posix() for path in raw_dirs],
+            "output_dir": args.output_dir,
+            "photon_budget": args.photon_budget,
+            "train_seeds": train_seeds,
+            "validation_seeds": validation_seeds,
+            "test_seeds": [],
+            "burned_test_seeds": sorted(burned_test_seeds),
+            "split_integrity": integrity,
+            "methods": methods,
+            "model_selection_policy": "development-only validation: rank by min_class_recall, then hm_min_recall, then top1_accuracy, then macro_f1",
+            "selected_method": selected_method,
+            "selected_validation_metrics": choose_validation_method(validation_table),
+            "status": status,
+            "acceptance_targets": ACCEPTANCE_TARGETS,
+            "min_class_support_required": args.min_class_support,
+            "min_class_support_observed": min_support,
+            "development_validation_metrics": validation_metrics,
+            "passes_metric_targets": passes_metrics,
+            "passes_support_target": passes_support,
+            "claim_safe_automatic_ten_material_sorting": False,
+            "stage_conclusion": "development_validation_passed_not_final_claim" if passes_metrics and passes_support else "development_validation_failed_or_incomplete",
+            "paper_ledger_outputs": {
+                "experiment_registry": (output_dir / "experiment_registry.csv").relative_to(project_root).as_posix()
+                if (output_dir / "experiment_registry.csv").is_relative_to(project_root)
+                else (output_dir / "experiment_registry.csv").as_posix(),
+                "failure_analysis": (output_dir / "failure_analysis.csv").relative_to(project_root).as_posix()
+                if (output_dir / "failure_analysis.csv").is_relative_to(project_root)
+                else (output_dir / "failure_analysis.csv").as_posix(),
+                "hm_pairwise_audit": (output_dir / "hm_pairwise_audit.csv").relative_to(project_root).as_posix()
+                if (output_dir / "hm_pairwise_audit.csv").is_relative_to(project_root)
+                else (output_dir / "hm_pairwise_audit.csv").as_posix(),
+            },
+            "software": {"python": platform.python_version(), "pandas": pd.__version__},
+        }
+        v2.write_manifest(output_dir / "strict_generalization_manifest.json", manifest)
+        print(f"Wrote development-only strict audit to {output_dir}")
+        print(f"selected_method={selected_method} claim_safe=False")
+        return
 
     validation_table, final_metrics, per_class, decisions = evaluate_locked_split(
         frame,
@@ -638,6 +929,23 @@ def main() -> None:
     write_csv(per_class, output_dir / "per_class_recall_final_test.csv")
     write_csv(decisions, output_dir / "final_test_decisions.csv")
     write_csv(split_audit, output_dir / "split_audit.csv")
+    train_aug, validation_aug, test_aug, feature_cols, final_feature_cols = build_augmented_splits(
+        frame,
+        train_seeds,
+        validation_seeds,
+        test_seeds,
+    )
+    pairwise_frames = [
+        hm_pairwise_audit_frame(train_aug, validation_aug, feature_cols, sk, "validation"),
+        hm_pairwise_audit_frame(
+            pd.concat([train_aug, validation_aug], ignore_index=True),
+            test_aug,
+            final_feature_cols,
+            sk,
+            "test",
+        ),
+    ]
+    write_csv(pd.concat(pairwise_frames, ignore_index=True), output_dir / "hm_pairwise_audit.csv")
     write_csv(
         experiment_registry_frame(
             args,
@@ -695,6 +1003,9 @@ def main() -> None:
             "failure_analysis": (output_dir / "failure_analysis.csv").relative_to(project_root).as_posix()
             if (output_dir / "failure_analysis.csv").is_relative_to(project_root)
             else (output_dir / "failure_analysis.csv").as_posix(),
+            "hm_pairwise_audit": (output_dir / "hm_pairwise_audit.csv").relative_to(project_root).as_posix()
+            if (output_dir / "hm_pairwise_audit.csv").is_relative_to(project_root)
+            else (output_dir / "hm_pairwise_audit.csv").as_posix(),
         },
         "stage_conclusion": "accepted_claim_safe" if claim_safe else "diagnostic_or_failed_not_claim_safe",
         "rotation_summary_rows": int(len(rotation_summary)),

@@ -1,0 +1,122 @@
+{
+  "package": "xrt-sorter-geant4-undergrad-guide",
+  "generated_by": "analysis/strict_generalization_audit.py",
+  "generated_at_utc": "2026-04-28T13:46:10+00:00",
+  "protocol_name": "v3_hm_smoke_development_only",
+  "development_only": true,
+  "raw_dir": "build/material_sorting_runs/v3_hm_smoke",
+  "raw_dirs": [
+    "build/material_sorting_runs/v3_hm_smoke"
+  ],
+  "output_dir": "results/accuracy_v3/v3_hm_smoke",
+  "photon_budget": 5000,
+  "train_seeds": [
+    1201
+  ],
+  "validation_seeds": [
+    1301
+  ],
+  "test_seeds": [],
+  "burned_test_seeds": [
+    303,
+    505,
+    707,
+    808,
+    909,
+    1001,
+    1102
+  ],
+  "split_integrity": {
+    "train_validation_overlap": [],
+    "train_test_overlap": [],
+    "validation_test_overlap": [],
+    "split_is_disjoint": true
+  },
+  "methods": [
+    "ExtraTrees",
+    "HierarchicalExtraTrees",
+    "HMExpertHierarchicalExtraTrees",
+    "HematiteMagnetiteRecallExtraTrees",
+    "HematitePriorityExtraTrees",
+    "HMStrongRecallExtraTrees",
+    "HighGroupRecallExtraTrees"
+  ],
+  "model_selection_policy": "development-only validation: rank by min_class_recall, then hm_min_recall, then top1_accuracy, then macro_f1",
+  "selected_method": "HierarchicalExtraTrees",
+  "selected_validation_metrics": {
+    "method": "HierarchicalExtraTrees",
+    "samples": 24,
+    "evaluated_materials": "Pyrite;Hematite;Magnetite;Chalcopyrite",
+    "top1_accuracy": 0.7083333333333334,
+    "top3_accuracy": 1.0,
+    "macro_f1": 0.7044955044955045,
+    "min_class_recall": 0.5,
+    "hematite_recall": 0.5,
+    "magnetite_recall": 0.6666666666666666,
+    "hm_min_recall": 0.5,
+    "hm_expert_feature_count": null
+  },
+  "status": {
+    "material_metadata_found": 96,
+    "calibration_metadata_found": 8,
+    "materials_found": [
+      "Chalcopyrite",
+      "Hematite",
+      "Magnetite",
+      "Pyrite"
+    ],
+    "sources_found": [
+      "mono_110kev",
+      "mono_200kev",
+      "mono_40kev",
+      "mono_70kev"
+    ],
+    "thicknesses_found": [
+      5.0,
+      10.0,
+      20.0
+    ],
+    "seeds_found": [
+      1201,
+      1301
+    ],
+    "duplicate_material_keys": false,
+    "duplicate_calibration_keys": false,
+    "table_mode": "multi_source_fused",
+    "rows": 48
+  },
+  "acceptance_targets": {
+    "top1_accuracy": 0.85,
+    "macro_f1": 0.8,
+    "min_class_recall": 0.7
+  },
+  "min_class_support_required": 6,
+  "min_class_support_observed": 6,
+  "development_validation_metrics": {
+    "method": "HierarchicalExtraTrees",
+    "samples": 24,
+    "evaluated_materials": "Pyrite;Hematite;Magnetite;Chalcopyrite",
+    "top1_accuracy": 0.7083333333333334,
+    "top3_accuracy": 1.0,
+    "macro_f1": 0.7044955044955045,
+    "min_class_recall": 0.5,
+    "hematite_recall": 0.5,
+    "magnetite_recall": 0.6666666666666666,
+    "hm_min_recall": 0.5,
+    "base_feature_count": 324,
+    "model_feature_count": 311
+  },
+  "passes_metric_targets": false,
+  "passes_support_target": true,
+  "claim_safe_automatic_ten_material_sorting": false,
+  "stage_conclusion": "development_validation_failed_or_incomplete",
+  "paper_ledger_outputs": {
+    "experiment_registry": "results/accuracy_v3/v3_hm_smoke/experiment_registry.csv",
+    "failure_analysis": "results/accuracy_v3/v3_hm_smoke/failure_analysis.csv",
+    "hm_pairwise_audit": "results/accuracy_v3/v3_hm_smoke/hm_pairwise_audit.csv"
+  },
+  "software": {
+    "python": "3.12.13",
+    "pandas": "3.0.1"
+  }
+}

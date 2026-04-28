@@ -28,6 +28,8 @@ def infer_macro_profile(profile: str) -> str:
         return "selected_rebuild"
     if profile.startswith("energy_scan"):
         return "energy_scan"
+    if profile.startswith("accuracy_v3") or profile.startswith("v3_hm"):
+        return "selected_rebuild"
     return profile
 
 
