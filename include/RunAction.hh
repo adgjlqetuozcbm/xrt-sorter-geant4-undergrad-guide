@@ -28,9 +28,15 @@ class RunAction : public G4UserRunAction
     void WriteEventData(G4int eventID,
                         G4double detectorEdep_keV,
                         G4int detectorGammaEntries,
-                        G4int primaryGammaEntries);
+                        G4int primaryGammaEntries,
+                        G4int transmissionGammaEntries,
+                        G4int transmissionPrimaryGammaEntries,
+                        G4int sideScatterGammaEntries,
+                        G4int sideScatterPrimaryGammaEntries);
 
     void WriteHitData(G4int eventID,
+                      const std::string& detectorId,
+                      G4double x_mm,
                       G4double y_mm,
                       G4double z_mm,
                       G4double photonEnergy_keV,

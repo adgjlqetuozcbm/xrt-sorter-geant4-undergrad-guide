@@ -40,6 +40,8 @@ struct ExperimentConfig
   std::string researchRoute = "lab";
   std::string predictionStage = "fine";
   std::string runRole = "material";
+  std::string sourceVariant = "normal_narrow";
+  std::string detectorLayout = "transmission";
   std::string prepProfile = "medium_prep";
   std::string feedSizeBand = "standard_block";
   std::string feedCondition = "clean_dry_single_piece";
@@ -58,6 +60,7 @@ struct ExperimentConfig
   double dirX = 1.0;
   double dirY = 0.0;
   double dirZ = 0.0;
+  double incidenceAngleDeg = 0.0;
 
   OreMaterialMode oreMaterialMode = OreMaterialMode::Single;
   std::string orePrimaryMaterial = "Quartz";
@@ -81,6 +84,10 @@ struct ExperimentConfig
   double detectorHalfY_mm = 100.0;
   double detectorHalfZ_mm = 100.0;
   double detectorX_cm = 25.0;
+  double sideDetectorThickness_mm = 5.0;
+  double sideDetectorHalfX_mm = 120.0;
+  double sideDetectorHalfZ_mm = 100.0;
+  double sideDetectorY_cm = 12.0;
 
   double worldX_cm = 100.0;
   double worldY_cm = 50.0;

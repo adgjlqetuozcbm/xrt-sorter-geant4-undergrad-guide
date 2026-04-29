@@ -227,6 +227,10 @@ ExperimentConfig LoadConfig()
       GetString(values, "prediction_stage", config.predictionStage);
   config.runRole =
       GetString(values, "run_role", config.runRole);
+  config.sourceVariant =
+      GetString(values, "source_variant", config.sourceVariant);
+  config.detectorLayout =
+      GetString(values, "detector_layout", config.detectorLayout);
   config.prepProfile =
       GetString(values, "prep_profile", config.prepProfile);
   config.feedSizeBand =
@@ -254,6 +258,8 @@ ExperimentConfig LoadConfig()
   config.dirX = GetDouble(values, "dir_x", config.dirX);
   config.dirY = GetDouble(values, "dir_y", config.dirY);
   config.dirZ = GetDouble(values, "dir_z", config.dirZ);
+  config.incidenceAngleDeg =
+      GetDouble(values, "incidence_angle_deg", config.incidenceAngleDeg);
 
   config.oreMaterialMode = ParseOreMaterialMode(
       GetString(values, "ore_material_mode", "single"));
@@ -298,6 +304,17 @@ ExperimentConfig LoadConfig()
       GetDouble(values, "detector_half_z_mm", config.detectorHalfZ_mm);
   config.detectorX_cm =
       GetDouble(values, "detector_x_cm", config.detectorX_cm);
+  config.sideDetectorThickness_mm =
+      GetDouble(values, "side_detector_thickness_mm",
+                config.sideDetectorThickness_mm);
+  config.sideDetectorHalfX_mm =
+      GetDouble(values, "side_detector_half_x_mm",
+                config.sideDetectorHalfX_mm);
+  config.sideDetectorHalfZ_mm =
+      GetDouble(values, "side_detector_half_z_mm",
+                config.sideDetectorHalfZ_mm);
+  config.sideDetectorY_cm =
+      GetDouble(values, "side_detector_y_cm", config.sideDetectorY_cm);
 
   config.worldX_cm = GetDouble(values, "world_x_cm", config.worldX_cm);
   config.worldY_cm = GetDouble(values, "world_y_cm", config.worldY_cm);

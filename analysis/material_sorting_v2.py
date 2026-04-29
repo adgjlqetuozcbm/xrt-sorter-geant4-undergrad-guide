@@ -176,12 +176,14 @@ def require_sklearn():
 
 def source_id_from_metadata(meta: dict) -> str:
     mode = str(meta.get("source_mode", "unknown"))
+    variant = str(meta.get("source_variant", "")).strip()
     if mode == "mono":
         energy = float(meta.get("mono_energy_keV", 0))
         energy_label = str(int(energy)) if energy.is_integer() else f"{energy:g}".replace(".", "p")
-        return f"mono_{energy_label}kev"
+        base = f"mono_{energy_label}kev"
+        return f"{base}_{variant}" if variant else base
     if mode == "spectrum":
-        return "spectrum_120kv"
+        return f"spectrum_120kv_{variant}" if variant else "spectrum_120kv"
     return mode
 
 
@@ -301,6 +303,14 @@ def records_inventory(material_records: list[RunRecord], calibration_records: li
 
 def aggregate_run(record: RunRecord) -> pd.DataFrame:
     events = pd.read_csv(record.event_file).sort_values("event_id").reset_index(drop=True)
+    if "transmission_gamma_entries" not in events.columns:
+        events["transmission_gamma_entries"] = events["detector_gamma_entries"]
+    if "transmission_primary_gamma_entries" not in events.columns:
+        events["transmission_primary_gamma_entries"] = events["primary_gamma_entries"]
+    if "side_scatter_gamma_entries" not in events.columns:
+        events["side_scatter_gamma_entries"] = 0
+    if "side_scatter_primary_gamma_entries" not in events.columns:
+        events["side_scatter_primary_gamma_entries"] = 0
     complete = len(events) // PHOTONS_PER_SAMPLE
     events = events.iloc[: complete * PHOTONS_PER_SAMPLE].copy()
     if events.empty:
@@ -318,20 +328,32 @@ def aggregate_run(record: RunRecord) -> pd.DataFrame:
             detector_edep_q90=("detector_edep_keV", lambda value: float(value.quantile(0.90))),
             detector_edep_max=("detector_edep_keV", "max"),
             detector_edep_nonzero_fraction=("detector_edep_keV", lambda value: float((value > 0).mean())),
-            detector_gamma_sum=("detector_gamma_entries", "sum"),
-            detector_gamma_nonzero_fraction=("detector_gamma_entries", lambda value: float((value > 0).mean())),
-            primary_gamma_sum=("primary_gamma_entries", "sum"),
-            primary_gamma_zero_fraction=("primary_gamma_entries", lambda value: float((value <= 0).mean())),
+            detector_gamma_total_sum=("detector_gamma_entries", "sum"),
+            primary_gamma_total_sum=("primary_gamma_entries", "sum"),
+            detector_gamma_sum=("transmission_gamma_entries", "sum"),
+            detector_gamma_nonzero_fraction=("transmission_gamma_entries", lambda value: float((value > 0).mean())),
+            primary_gamma_sum=("transmission_primary_gamma_entries", "sum"),
+            primary_gamma_zero_fraction=("transmission_primary_gamma_entries", lambda value: float((value <= 0).mean())),
+            side_scatter_gamma_sum=("side_scatter_gamma_entries", "sum"),
+            side_scatter_primary_gamma_sum=("side_scatter_primary_gamma_entries", "sum"),
         )
         .reset_index()
     )
     grouped["detector_edep_std"] = grouped["detector_edep_std"].fillna(0.0)
     grouped["detector_gamma_rate"] = grouped["detector_gamma_sum"] / grouped["n_events"]
+    grouped["detector_gamma_total_rate"] = grouped["detector_gamma_total_sum"] / grouped["n_events"]
     grouped["primary_transmission_rate"] = grouped["primary_gamma_sum"] / grouped["n_events"]
+    grouped["primary_total_rate"] = grouped["primary_gamma_total_sum"] / grouped["n_events"]
+    grouped["side_scatter_gamma_rate"] = grouped["side_scatter_gamma_sum"] / grouped["n_events"]
+    grouped["side_scatter_primary_rate"] = grouped["side_scatter_primary_gamma_sum"] / grouped["n_events"]
+    grouped["scatter_to_transmission_gamma_ratio"] = grouped["side_scatter_gamma_sum"] / (
+        grouped["detector_gamma_sum"] + 1.0
+    )
 
     label_cols = bin_labels()
     for col in label_cols:
         grouped[f"I_{col}"] = 0.0
+        grouped[f"side_I_{col}"] = 0.0
     response_cols = [(sigma, response_bin_labels(sigma)) for sigma in DETECTOR_RESPONSE_SIGMA_KEV]
     for _, cols in response_cols:
         for col in cols:
@@ -347,6 +369,12 @@ def aggregate_run(record: RunRecord) -> pd.DataFrame:
     grouped["hit_energy_q90"] = 0.0
     grouped["hit_energy_iqr"] = 0.0
     grouped["hit_energy_entropy"] = 0.0
+    grouped["hit_y_mean"] = 0.0
+    grouped["hit_y_std"] = 0.0
+    grouped["hit_z_mean"] = 0.0
+    grouped["hit_z_std"] = 0.0
+    grouped["central_hit_fraction_r25"] = 0.0
+    grouped["quadrant_balance_abs"] = 0.0
     grouped["direct_hit_energy_mean"] = 0.0
     grouped["scattered_hit_energy_mean"] = 0.0
     grouped["theta_mean"] = 0.0
@@ -357,15 +385,32 @@ def aggregate_run(record: RunRecord) -> pd.DataFrame:
     grouped["r_std"] = 0.0
     grouped["r_q50"] = 0.0
     grouped["r_q90"] = 0.0
+    grouped["side_hit_count"] = 0.0
+    grouped["side_primary_count"] = 0.0
+    grouped["side_hit_energy_mean"] = 0.0
+    grouped["side_hit_energy_std"] = 0.0
+    grouped["side_hit_energy_entropy"] = 0.0
+    grouped["side_theta_mean"] = 0.0
+    grouped["side_theta_q50"] = 0.0
+    grouped["side_theta_q90"] = 0.0
+    grouped["side_r_mean"] = 0.0
+    grouped["side_r_std"] = 0.0
 
     if record.hit_file.exists() and record.hit_file.stat().st_size > 100:
         hits = pd.read_csv(record.hit_file)
+        if "detector_id" not in hits.columns:
+            hits["detector_id"] = "transmission"
+        if "x_mm" not in hits.columns:
+            hits["x_mm"] = 0.0
+        hits["detector_id"] = hits["detector_id"].fillna("transmission").astype(str)
         hits["sample_id"] = hits["event_id"] // PHOTONS_PER_SAMPLE
         hits["r_mm"] = np.sqrt(hits["y_mm"] ** 2 + hits["z_mm"] ** 2)
         by_sample = hits.groupby("sample_id")
         for sample_id, part in by_sample:
             mask = grouped["sample_id"] == sample_id
-            energies = part["photon_energy_keV"].to_numpy(dtype=float)
+            transmission = part[part["detector_id"].eq("transmission")]
+            side = part[part["detector_id"].eq("side_scatter")]
+            energies = transmission["photon_energy_keV"].to_numpy(dtype=float)
             counts, _ = np.histogram(energies, bins=np.array(ENERGY_EDGES, dtype=float))
             for col, count in zip(label_cols, counts):
                 grouped.loc[mask, f"I_{col}"] = float(count)
@@ -373,31 +418,60 @@ def aggregate_run(record: RunRecord) -> pd.DataFrame:
                 smoothed = gaussian_response_counts(energies, sigma)
                 for col, count in zip(cols, smoothed):
                     grouped.loc[mask, col] = float(count)
-            direct_mask = part["is_direct_primary"].astype(bool).to_numpy()
-            scattered_mask = part["is_scattered_primary"].astype(bool).to_numpy()
-            theta_values = part["theta_deg"].replace(-1.0, np.nan).dropna().to_numpy(dtype=float)
-            radii = part["r_mm"].to_numpy(dtype=float)
-            grouped.loc[mask, "hit_count"] = float(len(part))
-            grouped.loc[mask, "direct_primary_count"] = float(part["is_direct_primary"].sum())
-            grouped.loc[mask, "scattered_primary_count"] = float(part["is_scattered_primary"].sum())
-            grouped.loc[mask, "direct_hit_fraction"] = float(part["is_direct_primary"].mean())
-            grouped.loc[mask, "hit_energy_mean"] = float(part["photon_energy_keV"].mean())
-            grouped.loc[mask, "hit_energy_std"] = float(part["photon_energy_keV"].std(ddof=0))
+            direct_mask = transmission["is_direct_primary"].astype(bool).to_numpy()
+            scattered_mask = transmission["is_scattered_primary"].astype(bool).to_numpy()
+            theta_values = transmission["theta_deg"].replace(-1.0, np.nan).dropna().to_numpy(dtype=float)
+            radii = transmission["r_mm"].to_numpy(dtype=float)
+            y_values = transmission["y_mm"].to_numpy(dtype=float)
+            z_values = transmission["z_mm"].to_numpy(dtype=float)
+            grouped.loc[mask, "hit_count"] = float(len(transmission))
+            grouped.loc[mask, "direct_primary_count"] = float(transmission["is_direct_primary"].sum())
+            grouped.loc[mask, "scattered_primary_count"] = float(transmission["is_scattered_primary"].sum())
+            grouped.loc[mask, "direct_hit_fraction"] = float(transmission["is_direct_primary"].mean()) if len(transmission) else 0.0
+            grouped.loc[mask, "hit_energy_mean"] = float(transmission["photon_energy_keV"].mean()) if len(transmission) else 0.0
+            grouped.loc[mask, "hit_energy_std"] = float(transmission["photon_energy_keV"].std(ddof=0)) if len(transmission) else 0.0
             grouped.loc[mask, "hit_energy_q10"] = finite_quantile(energies, 0.10)
             grouped.loc[mask, "hit_energy_q50"] = finite_quantile(energies, 0.50)
             grouped.loc[mask, "hit_energy_q90"] = finite_quantile(energies, 0.90)
             grouped.loc[mask, "hit_energy_iqr"] = finite_quantile(energies, 0.75) - finite_quantile(energies, 0.25)
             grouped.loc[mask, "hit_energy_entropy"] = histogram_entropy(counts.astype(float))
+            grouped.loc[mask, "hit_y_mean"] = float(y_values.mean()) if y_values.size else 0.0
+            grouped.loc[mask, "hit_y_std"] = float(y_values.std(ddof=0)) if y_values.size else 0.0
+            grouped.loc[mask, "hit_z_mean"] = float(z_values.mean()) if z_values.size else 0.0
+            grouped.loc[mask, "hit_z_std"] = float(z_values.std(ddof=0)) if z_values.size else 0.0
+            grouped.loc[mask, "central_hit_fraction_r25"] = float((radii <= 25.0).mean()) if radii.size else 0.0
+            if y_values.size:
+                q1 = np.mean((y_values >= 0) & (z_values >= 0))
+                q2 = np.mean((y_values < 0) & (z_values >= 0))
+                q3 = np.mean((y_values < 0) & (z_values < 0))
+                q4 = np.mean((y_values >= 0) & (z_values < 0))
+                grouped.loc[mask, "quadrant_balance_abs"] = float(max(q1, q2, q3, q4) - min(q1, q2, q3, q4))
             grouped.loc[mask, "direct_hit_energy_mean"] = float(energies[direct_mask].mean()) if direct_mask.any() else 0.0
             grouped.loc[mask, "scattered_hit_energy_mean"] = float(energies[scattered_mask].mean()) if scattered_mask.any() else 0.0
-            grouped.loc[mask, "theta_mean"] = float(part["theta_deg"].replace(-1.0, np.nan).mean(skipna=True) or 0.0)
-            grouped.loc[mask, "theta_std"] = float(part["theta_deg"].replace(-1.0, np.nan).std(ddof=0) or 0.0)
+            grouped.loc[mask, "theta_mean"] = float(transmission["theta_deg"].replace(-1.0, np.nan).mean(skipna=True) or 0.0)
+            grouped.loc[mask, "theta_std"] = float(transmission["theta_deg"].replace(-1.0, np.nan).std(ddof=0) or 0.0)
             grouped.loc[mask, "theta_q50"] = finite_quantile(theta_values, 0.50)
             grouped.loc[mask, "theta_q90"] = finite_quantile(theta_values, 0.90)
-            grouped.loc[mask, "r_mean"] = float(part["r_mm"].mean())
-            grouped.loc[mask, "r_std"] = float(part["r_mm"].std(ddof=0))
+            grouped.loc[mask, "r_mean"] = float(transmission["r_mm"].mean()) if len(transmission) else 0.0
+            grouped.loc[mask, "r_std"] = float(transmission["r_mm"].std(ddof=0)) if len(transmission) else 0.0
             grouped.loc[mask, "r_q50"] = finite_quantile(radii, 0.50)
             grouped.loc[mask, "r_q90"] = finite_quantile(radii, 0.90)
+            side_energies = side["photon_energy_keV"].to_numpy(dtype=float)
+            side_counts, _ = np.histogram(side_energies, bins=np.array(ENERGY_EDGES, dtype=float))
+            for col, count in zip(label_cols, side_counts):
+                grouped.loc[mask, f"side_I_{col}"] = float(count)
+            side_theta = side["theta_deg"].replace(-1.0, np.nan).dropna().to_numpy(dtype=float)
+            side_radii = np.sqrt(side["x_mm"].to_numpy(dtype=float) ** 2 + side["z_mm"].to_numpy(dtype=float) ** 2)
+            grouped.loc[mask, "side_hit_count"] = float(len(side))
+            grouped.loc[mask, "side_primary_count"] = float(side["is_primary"].sum()) if len(side) else 0.0
+            grouped.loc[mask, "side_hit_energy_mean"] = float(side["photon_energy_keV"].mean()) if len(side) else 0.0
+            grouped.loc[mask, "side_hit_energy_std"] = float(side["photon_energy_keV"].std(ddof=0)) if len(side) else 0.0
+            grouped.loc[mask, "side_hit_energy_entropy"] = histogram_entropy(side_counts.astype(float))
+            grouped.loc[mask, "side_theta_mean"] = float(side["theta_deg"].replace(-1.0, np.nan).mean(skipna=True) or 0.0) if len(side) else 0.0
+            grouped.loc[mask, "side_theta_q50"] = finite_quantile(side_theta, 0.50)
+            grouped.loc[mask, "side_theta_q90"] = finite_quantile(side_theta, 0.90)
+            grouped.loc[mask, "side_r_mean"] = float(side_radii.mean()) if side_radii.size else 0.0
+            grouped.loc[mask, "side_r_std"] = float(side_radii.std(ddof=0)) if side_radii.size else 0.0
 
     grouped["hit_absence"] = (grouped["hit_count"] <= 0).astype(float)
     grouped["log_hit_count"] = np.log1p(grouped["hit_count"])
@@ -497,11 +571,11 @@ def feature_family(col: str) -> str:
     base = col.split("__", 1)[1] if "__" in col else col
     if col.startswith("dict_"):
         return "dictionary_distance"
-    if col.startswith("dual_source_"):
+    if col.startswith("dual_source_") or col.startswith("dual_energy__"):
         return "source_fusion"
     if base.startswith("Rsig"):
         return "detector_response"
-    if "direct_primary" in base or "scattered_primary" in base or "scatter" in base:
+    if "direct_primary" in base or "scattered_primary" in base or "scatter" in base or base.startswith("side_"):
         return "scatter_direct"
     if base.startswith("T_") or base.startswith("primary_transmission") or base.startswith("detector_gamma_rate"):
         return "calibrated_transmission"
@@ -511,7 +585,16 @@ def feature_family(col: str) -> str:
         return "attenuation"
     if base.startswith("I_") or base.endswith("_count") or base.endswith("_sum"):
         return "raw_counts"
-    if "spectrum_" in base or "hit_energy" in base or base.startswith("theta_") or base.startswith("r_"):
+    if (
+        "spectrum_" in base
+        or "hit_energy" in base
+        or base.startswith("theta_")
+        or base.startswith("r_")
+        or base.startswith("hit_y_")
+        or base.startswith("hit_z_")
+        or "central_hit_fraction" in base
+        or "quadrant_balance" in base
+    ):
         return "spectral_shape"
     return "other_numeric"
 
@@ -556,6 +639,64 @@ def legacy_physics_dictionary_columns(feature_cols: list[str]) -> list[str]:
     return cols or physics_feature_columns(feature_cols)
 
 
+def source_energy_variant(source_id: str) -> tuple[float | None, str]:
+    if not (source_id.startswith("mono_") and "kev" in source_id):
+        return None, "default"
+    raw = source_id.removeprefix("mono_")
+    energy_text, _, variant = raw.partition("kev")
+    if variant.startswith("_"):
+        variant = variant[1:]
+    try:
+        energy = float(energy_text.replace("p", "."))
+    except ValueError:
+        return None, variant or "default"
+    return energy, variant or "default"
+
+
+def add_dual_energy_features(frame: pd.DataFrame) -> None:
+    source_ids = sorted({col.split("__", 1)[0] for col in frame.columns if "__" in col})
+    by_variant: dict[str, list[tuple[float, str]]] = {}
+    for source_id in source_ids:
+        energy, variant = source_energy_variant(source_id)
+        if energy is None:
+            continue
+        by_variant.setdefault(variant, []).append((energy, source_id))
+
+    def has(source_id: str, feature: str) -> bool:
+        return f"{source_id}__{feature}" in frame.columns
+
+    def values(source_id: str, feature: str) -> pd.Series:
+        return frame[f"{source_id}__{feature}"].astype(float)
+
+    for _, source_items in by_variant.items():
+        source_items = sorted(source_items)
+        for low_index, (low_energy, low_source) in enumerate(source_items):
+            for high_energy, high_source in source_items[low_index + 1 :]:
+                label = f"{low_source}__{high_source}"
+                if has(low_source, "primary_transmission_rate") and has(high_source, "primary_transmission_rate"):
+                    low_a = -np.log(np.clip(values(low_source, "primary_transmission_rate"), 1e-6, 1e6))
+                    high_a = -np.log(np.clip(values(high_source, "primary_transmission_rate"), 1e-6, 1e6))
+                    frame[f"dual_energy__R_primary__{label}"] = low_a / (high_a + EPS)
+                    frame[f"dual_energy__I_primary__{label}"] = 0.5 * (
+                        values(low_source, "primary_transmission_rate")
+                        + values(high_source, "primary_transmission_rate")
+                    )
+                    frame[f"dual_energy__attenuation_slope_primary__{label}"] = (
+                        high_a - low_a
+                    ) / max(high_energy - low_energy, 1e-6)
+                if has(low_source, "detector_gamma_rate") and has(high_source, "detector_gamma_rate"):
+                    frame[f"dual_energy__log_gamma_ratio__{label}"] = (
+                        np.log1p(values(high_source, "detector_gamma_rate").clip(lower=0.0))
+                        - np.log1p(values(low_source, "detector_gamma_rate").clip(lower=0.0))
+                    )
+                for feature in ["Rsig050_e_120_inf", "Rsig020_e_120_inf", "side_scatter_gamma_rate"]:
+                    if has(low_source, feature) and has(high_source, feature):
+                        frame[f"dual_energy__tail_ratio__{feature}__{label}"] = (
+                            np.log1p(values(high_source, feature).clip(lower=0.0))
+                            - np.log1p(values(low_source, feature).clip(lower=0.0))
+                        )
+
+
 def fuse_sources(samples: pd.DataFrame) -> tuple[pd.DataFrame, str]:
     if samples["source_id"].nunique() < 2:
         return samples.copy(), "single_source"
@@ -572,6 +713,7 @@ def fuse_sources(samples: pd.DataFrame) -> tuple[pd.DataFrame, str]:
         fused = fused.merge(piece, on=keys, how="inner")
     if fused.empty:
         return samples.copy(), "single_source_unpaired"
+    add_dual_energy_features(fused)
     if {
         "mono_60kev__primary_transmission_rate",
         "mono_100kev__primary_transmission_rate",
@@ -823,6 +965,9 @@ def build_sklearn_models(sk) -> dict[str, object]:
         ),
         "SVM_RBF": sk["make_pipeline"](
             sk["StandardScaler"](), sk["SVC"](C=10.0, gamma="scale", probability=True, class_weight="balanced")
+        ),
+        "SVM_Linear": sk["make_pipeline"](
+            sk["StandardScaler"](), sk["SVC"](C=1.0, kernel="linear", probability=True, class_weight="balanced")
         ),
         "RandomForest": sk["RandomForestClassifier"](n_estimators=400, random_state=42, n_jobs=-1, class_weight="balanced"),
         "ExtraTrees": sk["ExtraTreesClassifier"](n_estimators=400, random_state=42, n_jobs=-1, class_weight="balanced"),

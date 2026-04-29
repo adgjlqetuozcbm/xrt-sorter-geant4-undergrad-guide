@@ -160,7 +160,7 @@ G4VSolid* BuildOreSolid(const std::string& name,
 }  // namespace
 
 DetectorConstruction::DetectorConstruction()
-    : G4VUserDetectorConstruction(), fScoringVolume(nullptr)
+    : G4VUserDetectorConstruction(), fScoringVolume(nullptr), fSideScoringVolume(nullptr)
 {}
 
 DetectorConstruction::~DetectorConstruction() = default;
@@ -189,6 +189,8 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   G4cout << "[OreConfig] heterogeneity = "
          << HeterogeneityModeToString(config.heterogeneityMode) << G4endl;
   G4cout << "[OutputConfig] prefix = " << config.outputPrefix << G4endl;
+  G4cout << "[DetectorConfig] layout = " << config.detectorLayout
+         << ", source_variant = " << config.sourceVariant << G4endl;
 
   constexpr G4bool checkOverlaps = true;
 
@@ -262,6 +264,25 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
                     logicDet, "TransmissionDetector", logicEnv, false, 0,
                     checkOverlaps);
 
+  G4LogicalVolume* logicSideDet = nullptr;
+  if (config.detectorLayout == "transmission_plus_side_scatter") {
+    auto* solidSideDet = new G4Box("SideScatterDetector",
+                                   config.sideDetectorHalfX_mm * mm,
+                                   config.sideDetectorThickness_mm * mm / 2.0,
+                                   config.sideDetectorHalfZ_mm * mm);
+    logicSideDet =
+        new G4LogicalVolume(solidSideDet, detMat, "SideScatterDetector");
+
+    new G4PVPlacement(nullptr,
+                      G4ThreeVector(0, config.sideDetectorY_cm * cm, 0),
+                      logicSideDet,
+                      "SideScatterDetector",
+                      logicEnv,
+                      false,
+                      0,
+                      checkOverlaps);
+  }
+
   logicWorld->SetVisAttributes(G4VisAttributes::GetInvisible());
 
   auto* envVis = new G4VisAttributes(G4Colour(0.2, 0.2, 1.0, 0.05));
@@ -276,6 +297,29 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   detVis->SetForceSolid(true);
   logicDet->SetVisAttributes(detVis);
 
+  if (logicSideDet) {
+    auto* sideVis = new G4VisAttributes(G4Colour(1.0, 0.7, 0.1, 0.65));
+    sideVis->SetForceSolid(true);
+    logicSideDet->SetVisAttributes(sideVis);
+  }
+
   fScoringVolume = logicDet;
+  fSideScoringVolume = logicSideDet;
   return physWorld;
+}
+
+bool DetectorConstruction::IsDetectorVolume(const G4LogicalVolume* volume) const
+{
+  return volume != nullptr && (volume == fScoringVolume || volume == fSideScoringVolume);
+}
+
+std::string DetectorConstruction::DetectorId(const G4LogicalVolume* volume) const
+{
+  if (volume == fSideScoringVolume) {
+    return "side_scatter";
+  }
+  if (volume == fScoringVolume) {
+    return "transmission";
+  }
+  return "unknown";
 }

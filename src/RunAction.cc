@@ -50,11 +50,13 @@ void RunAction::BeginOfRunAction(const G4Run*)
   if (IsMaster()) {
     {
       std::ofstream outFile(fEventCsvFileName, std::ios::out);
-      outFile << "event_id,detector_edep_keV,detector_gamma_entries,primary_gamma_entries\n";
+      outFile << "event_id,detector_edep_keV,detector_gamma_entries,primary_gamma_entries,"
+              << "transmission_gamma_entries,transmission_primary_gamma_entries,"
+              << "side_scatter_gamma_entries,side_scatter_primary_gamma_entries\n";
     }
     {
       std::ofstream outFile(fHitCsvFileName, std::ios::out);
-      outFile << "event_id,y_mm,z_mm,photon_energy_keV,is_primary,theta_deg,is_direct_primary,is_scattered_primary\n";
+      outFile << "event_id,detector_id,x_mm,y_mm,z_mm,photon_energy_keV,is_primary,theta_deg,is_direct_primary,is_scattered_primary\n";
     }
   }
 }
@@ -77,7 +79,11 @@ void RunAction::AddRunPrimaryGammaEntries(G4int n)
 void RunAction::WriteEventData(G4int eventID,
                                G4double detectorEdep_keV,
                                G4int detectorGammaEntries,
-                               G4int primaryGammaEntries)
+                               G4int primaryGammaEntries,
+                               G4int transmissionGammaEntries,
+                               G4int transmissionPrimaryGammaEntries,
+                               G4int sideScatterGammaEntries,
+                               G4int sideScatterPrimaryGammaEntries)
 {
   G4AutoLock lock(&csvMutex);
 
@@ -85,10 +91,16 @@ void RunAction::WriteEventData(G4int eventID,
   outFile << eventID << ","
           << std::fixed << std::setprecision(6) << detectorEdep_keV << ","
           << detectorGammaEntries << ","
-          << primaryGammaEntries << "\n";
+          << primaryGammaEntries << ","
+          << transmissionGammaEntries << ","
+          << transmissionPrimaryGammaEntries << ","
+          << sideScatterGammaEntries << ","
+          << sideScatterPrimaryGammaEntries << "\n";
 }
 
 void RunAction::WriteHitData(G4int eventID,
+                             const std::string& detectorId,
+                             G4double x_mm,
                              G4double y_mm,
                              G4double z_mm,
                              G4double photonEnergy_keV,
@@ -101,7 +113,9 @@ void RunAction::WriteHitData(G4int eventID,
 
   std::ofstream outFile(fHitCsvFileName, std::ios::app);
   outFile << eventID << ","
+          << detectorId << ","
           << std::fixed << std::setprecision(6)
+          << x_mm << ","
           << y_mm << ","
           << z_mm << ","
           << photonEnergy_keV << ","
@@ -128,6 +142,8 @@ void RunAction::WriteMetadataFile(G4int nofEvents,
   outFile << "  \"research_route\": \"" << config.researchRoute << "\",\n";
   outFile << "  \"prediction_stage\": \"" << config.predictionStage << "\",\n";
   outFile << "  \"run_role\": \"" << config.runRole << "\",\n";
+  outFile << "  \"source_variant\": \"" << config.sourceVariant << "\",\n";
+  outFile << "  \"detector_layout\": \"" << config.detectorLayout << "\",\n";
   outFile << "  \"prep_profile\": \"" << config.prepProfile << "\",\n";
   outFile << "  \"feed_size_band\": \"" << config.feedSizeBand << "\",\n";
   outFile << "  \"feed_condition\": \"" << config.feedCondition << "\",\n";
@@ -145,6 +161,7 @@ void RunAction::WriteMetadataFile(G4int nofEvents,
   outFile << "  \"dir_x\": " << config.dirX << ",\n";
   outFile << "  \"dir_y\": " << config.dirY << ",\n";
   outFile << "  \"dir_z\": " << config.dirZ << ",\n";
+  outFile << "  \"incidence_angle_deg\": " << config.incidenceAngleDeg << ",\n";
   outFile << "  \"ore_material_mode\": \""
           << OreMaterialModeToString(config.oreMaterialMode) << "\",\n";
   outFile << "  \"ore_primary_material\": \"" << config.orePrimaryMaterial
@@ -179,6 +196,13 @@ void RunAction::WriteMetadataFile(G4int nofEvents,
   outFile << "  \"detector_half_y_mm\": " << config.detectorHalfY_mm << ",\n";
   outFile << "  \"detector_half_z_mm\": " << config.detectorHalfZ_mm << ",\n";
   outFile << "  \"detector_x_cm\": " << config.detectorX_cm << ",\n";
+  outFile << "  \"side_detector_thickness_mm\": "
+          << config.sideDetectorThickness_mm << ",\n";
+  outFile << "  \"side_detector_half_x_mm\": "
+          << config.sideDetectorHalfX_mm << ",\n";
+  outFile << "  \"side_detector_half_z_mm\": "
+          << config.sideDetectorHalfZ_mm << ",\n";
+  outFile << "  \"side_detector_y_cm\": " << config.sideDetectorY_cm << ",\n";
   outFile << "  \"sample_photons\": " << config.samplePhotons << ",\n";
   outFile << "  \"random_seed\": " << config.randomSeed << ",\n";
   outFile << "  \"event_file\": \"" << fEventCsvFileName << "\",\n";

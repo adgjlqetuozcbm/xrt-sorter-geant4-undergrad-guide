@@ -2,6 +2,7 @@
 
 #include "DetectorConstruction.hh"
 #include "EventAction.hh"
+#include "ExperimentConfig.hh"
 
 #include "G4EventManager.hh"
 #include "G4Gamma.hh"
@@ -42,7 +43,7 @@ void SteppingAction::UserSteppingAction(const G4Step* step)
   auto postLV = postVolume ? postVolume->GetLogicalVolume() : nullptr;
 
   // 1) detector energy deposition
-  if (preLV == fScoringVolume) {
+  if (fDetConstruction->IsDetectorVolume(preLV)) {
     G4double edep = step->GetTotalEnergyDeposit();
     if (edep > 0.) {
       fEventAction->AddDetectorEdep(edep);
@@ -52,15 +53,17 @@ void SteppingAction::UserSteppingAction(const G4Step* step)
   // 2) detector hit record
   auto track = step->GetTrack();
   if (track->GetDefinition() == G4Gamma::GammaDefinition() &&
-      postLV == fScoringVolume &&
+      fDetConstruction->IsDetectorVolume(postLV) &&
       postPoint->GetStepStatus() == fGeomBoundary) {
 
-    fEventAction->AddDetectorGammaEntry();
+    const auto detectorId = fDetConstruction->DetectorId(postLV);
+    fEventAction->AddDetectorGammaEntry(detectorId);
 
     auto currentEvent = G4EventManager::GetEventManager()->GetConstCurrentEvent();
     G4int eventID = currentEvent ? currentEvent->GetEventID() : -1;
 
     auto pos = postPoint->GetPosition();
+    G4double x_mm = pos.x() / mm;
     G4double y_mm = pos.y() / mm;
     G4double z_mm = pos.z() / mm;
     G4double photonEnergy_keV = postPoint->GetKineticEnergy() / keV;
@@ -72,10 +75,11 @@ void SteppingAction::UserSteppingAction(const G4Step* step)
 
     if (track->GetTrackID() == 1 && track->GetParentID() == 0) {
       isPrimary = true;
-      fEventAction->AddPrimaryGammaEntry();
+      fEventAction->AddPrimaryGammaEntry(detectorId);
 
       auto dir = track->GetMomentumDirection().unit();
-      auto beamDir = G4ThreeVector(1., 0., 0.);
+      const auto& config = GetExperimentConfig();
+      auto beamDir = G4ThreeVector(config.dirX, config.dirY, config.dirZ).unit();
       G4double theta = dir.angle(beamDir);  // radians
       theta_deg = theta / deg;
 
@@ -91,6 +95,8 @@ void SteppingAction::UserSteppingAction(const G4Step* step)
 
     fEventAction->RecordDetectorHit(
       eventID,
+      detectorId,
+      x_mm,
       y_mm,
       z_mm,
       photonEnergy_keV,

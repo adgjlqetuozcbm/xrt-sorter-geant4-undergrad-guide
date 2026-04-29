@@ -13,7 +13,11 @@ EventAction::EventAction(RunAction* runAction)
   fRunAction(runAction),
   fDetectorEdep(0.),
   fDetectorGammaEntries(0),
-  fPrimaryGammaEntries(0)
+  fPrimaryGammaEntries(0),
+  fTransmissionGammaEntries(0),
+  fTransmissionPrimaryGammaEntries(0),
+  fSideScatterGammaEntries(0),
+  fSideScatterPrimaryGammaEntries(0)
 {}
 
 void EventAction::BeginOfEventAction(const G4Event*)
@@ -21,6 +25,10 @@ void EventAction::BeginOfEventAction(const G4Event*)
   fDetectorEdep = 0.;
   fDetectorGammaEntries = 0;
   fPrimaryGammaEntries = 0;
+  fTransmissionGammaEntries = 0;
+  fTransmissionPrimaryGammaEntries = 0;
+  fSideScatterGammaEntries = 0;
+  fSideScatterPrimaryGammaEntries = 0;
 }
 
 void EventAction::EndOfEventAction(const G4Event* event)
@@ -33,10 +41,36 @@ void EventAction::EndOfEventAction(const G4Event* event)
     event->GetEventID(),
     fDetectorEdep / keV,
     fDetectorGammaEntries,
-    fPrimaryGammaEntries);
+    fPrimaryGammaEntries,
+    fTransmissionGammaEntries,
+    fTransmissionPrimaryGammaEntries,
+    fSideScatterGammaEntries,
+    fSideScatterPrimaryGammaEntries);
+}
+
+void EventAction::AddDetectorGammaEntry(const std::string& detectorId)
+{
+  ++fDetectorGammaEntries;
+  if (detectorId == "side_scatter") {
+    ++fSideScatterGammaEntries;
+  } else {
+    ++fTransmissionGammaEntries;
+  }
+}
+
+void EventAction::AddPrimaryGammaEntry(const std::string& detectorId)
+{
+  ++fPrimaryGammaEntries;
+  if (detectorId == "side_scatter") {
+    ++fSideScatterPrimaryGammaEntries;
+  } else {
+    ++fTransmissionPrimaryGammaEntries;
+  }
 }
 
 void EventAction::RecordDetectorHit(G4int eventID,
+                                    const std::string& detectorId,
+                                    G4double x_mm,
                                     G4double y_mm,
                                     G4double z_mm,
                                     G4double photonEnergy_keV,
@@ -47,6 +81,8 @@ void EventAction::RecordDetectorHit(G4int eventID,
 {
   fRunAction->WriteHitData(
     eventID,
+    detectorId,
+    x_mm,
     y_mm,
     z_mm,
     photonEnergy_keV,

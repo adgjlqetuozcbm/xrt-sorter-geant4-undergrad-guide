@@ -1,0 +1,5 @@
+method,samples,top1_accuracy,top3_accuracy,macro_f1,hematite_recall,magnetite_recall,hm_min_recall,min_class_recall,feature_count,feature_mode,model_size_rank
+ExtraTrees,2,0.5,1.0,0.3333333333333333,0.0,1.0,0.0,0.0,148,thickness_aware,3
+HistGradientBoosting,2,0.5,1.0,0.3333333333333333,1.0,0.0,0.0,0.0,148,thickness_aware,2
+ExtraTrees,2,0.5,1.0,0.3333333333333333,0.0,1.0,0.0,0.0,148,thickness_blind,3
+HistGradientBoosting,2,0.5,1.0,0.3333333333333333,1.0,0.0,0.0,0.0,148,thickness_blind,2

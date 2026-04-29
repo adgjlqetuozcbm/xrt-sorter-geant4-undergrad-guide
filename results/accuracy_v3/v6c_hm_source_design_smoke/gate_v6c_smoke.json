@@ -1,0 +1,32 @@
+{
+  "generated_by": "analysis/accuracy_v6c_gate.py",
+  "generated_at_utc": "2026-04-29T09:03:48+00:00",
+  "audit_dir": "results/accuracy_v3/v6c_hm_source_design_smoke",
+  "thresholds": {
+    "thickness_aware_hm_min_recall": 0.8,
+    "thickness_blind_hm_min_recall": 0.75,
+    "pairwise_hm_min_recall": 0.75,
+    "min_class_support": 120
+  },
+  "observed": {
+    "method": "HistGradientBoosting",
+    "thickness_aware_hm_min_recall": 0.0,
+    "thickness_blind_hm_min_recall": 0.0,
+    "pairwise_hm_min_recall": 0.0,
+    "min_class_support": 1
+  },
+  "runner_status": {
+    "status_file_exists": true,
+    "rows_in_status_file": 12,
+    "completed": 12,
+    "failed": 0
+  },
+  "checks": {
+    "thickness_aware_hm_min_recall": false,
+    "thickness_blind_hm_min_recall": false,
+    "pairwise_hm_min_recall": false,
+    "min_class_support": false,
+    "runner_failed_zero": true
+  },
+  "gate_passed": false
+}

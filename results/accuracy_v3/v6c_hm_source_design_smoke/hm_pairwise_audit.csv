@@ -1,0 +1,3 @@
+split,method,feature_mode,samples,hm_min_recall,hematite_recall,magnetite_recall,macro_f1,top1_accuracy
+validation,HistGradientBoosting,thickness_aware,2,0.0,1.0,0.0,0.3333333333333333,0.5
+validation,HistGradientBoosting,thickness_blind,2,0.0,1.0,0.0,0.3333333333333333,0.5

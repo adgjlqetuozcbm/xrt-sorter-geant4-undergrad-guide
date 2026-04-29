@@ -1,0 +1,3 @@
+material,support,recall,miss_count,common_confusions,failure_status,next_action
+Hematite,1,1.0,0,,pass,monitor
+Magnetite,1,0.0,1,Hematite:1,fail,inspect_source_geometry_and_scatter_features

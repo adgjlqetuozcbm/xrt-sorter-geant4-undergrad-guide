@@ -1,0 +1,11 @@
+method,samples,top1_accuracy,top3_accuracy,macro_f1,hematite_recall,magnetite_recall,hm_min_recall,min_class_recall,feature_count,feature_mode,ablation_type,ablation_value
+ExtraTrees,2,0.5,1.0,0.3333333333333333,0.0,1.0,0.0,0.0,19,thickness_aware,feature_family_only,raw_counts
+ExtraTrees,2,0.5,1.0,0.3333333333333333,0.0,1.0,0.0,0.0,9,thickness_aware,feature_family_only,calibrated_transmission
+ExtraTrees,2,0.5,1.0,0.3333333333333333,0.0,1.0,0.0,0.0,7,thickness_aware,feature_family_only,attenuation
+ExtraTrees,2,0.5,1.0,0.3333333333333333,0.0,1.0,0.0,0.0,3,thickness_aware,feature_family_only,thickness_normalized_attenuation
+ExtraTrees,2,0.5,1.0,0.3333333333333333,1.0,0.0,0.0,0.0,34,thickness_aware,feature_family_only,spectral_shape
+ExtraTrees,2,0.5,1.0,0.3333333333333333,0.0,1.0,0.0,0.0,31,thickness_aware,feature_family_only,scatter_direct
+ExtraTrees,2,0.5,1.0,0.3333333333333333,0.0,1.0,0.0,0.0,22,thickness_aware,feature_family_only,detector_response
+ExtraTrees,2,0.5,1.0,0.3333333333333333,0.0,1.0,0.0,0.0,5,thickness_aware,feature_family_only,source_fusion
+ExtraTrees,2,0.5,1.0,0.3333333333333333,0.0,1.0,0.0,0.0,2,thickness_aware,feature_family_only,dictionary_distance
+ExtraTrees,2,0.5,1.0,0.3333333333333333,0.0,1.0,0.0,0.0,16,thickness_aware,feature_family_only,other_numeric

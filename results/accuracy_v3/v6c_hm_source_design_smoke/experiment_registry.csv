@@ -1,0 +1,2 @@
+timestamp_utc,protocol_name,evaluation_stage,selected_method,thickness_aware_hm_min_recall,thickness_blind_hm_min_recall,pairwise_hm_min_recall,min_class_support_observed,claim_safe,next_action
+2026-04-29T09:03:26+00:00,v6c_hm_source_design_development,development_validation_only,HistGradientBoosting,0.0,0.0,0.0,1,False,shadow_only_if_v6c_gate_passes

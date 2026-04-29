@@ -1,0 +1,83 @@
+{
+  "generated_by": "analysis/hm_v6c_development_audit.py",
+  "generated_at_utc": "2026-04-29T09:03:39+00:00",
+  "protocol_name": "v6c_hm_source_design_development",
+  "development_only": true,
+  "shadow_or_final_used": false,
+  "raw_dirs": [
+    "build/material_sorting_runs/v6c_hm_source_design_smoke"
+  ],
+  "output_dir": "results/accuracy_v3/v6c_hm_source_design_smoke",
+  "photon_budget": 2000,
+  "train_seeds": [
+    2101
+  ],
+  "validation_seeds": [
+    2201
+  ],
+  "methods": [
+    "ExtraTrees",
+    "HistGradientBoosting"
+  ],
+  "selected_method": "HistGradientBoosting",
+  "status": {
+    "material_metadata_found": 8,
+    "calibration_metadata_found": 4,
+    "materials_found": [
+      "Hematite",
+      "Magnetite"
+    ],
+    "sources_found": [
+      "mono_50kev_normal_narrow",
+      "mono_70kev_normal_narrow"
+    ],
+    "thicknesses_found": [
+      5.0
+    ],
+    "seeds_found": [
+      2101,
+      2201
+    ],
+    "table_mode": "multi_source_fused",
+    "rows": 4
+  },
+  "feature_counts": {
+    "base": 184,
+    "model": 148,
+    "thickness_blind": 148
+  },
+  "development_validation_metrics": {
+    "thickness_aware": {
+      "method": "HistGradientBoosting",
+      "samples": 2,
+      "top1_accuracy": 0.5,
+      "top3_accuracy": 1.0,
+      "macro_f1": 0.3333333333333333,
+      "hematite_recall": 1.0,
+      "magnetite_recall": 0.0,
+      "hm_min_recall": 0.0,
+      "min_class_recall": 0.0,
+      "feature_count": 148,
+      "feature_mode": "thickness_aware",
+      "base_feature_count": 184
+    },
+    "thickness_blind": {
+      "method": "HistGradientBoosting",
+      "samples": 2,
+      "top1_accuracy": 0.5,
+      "top3_accuracy": 1.0,
+      "macro_f1": 0.3333333333333333,
+      "hematite_recall": 1.0,
+      "magnetite_recall": 0.0,
+      "hm_min_recall": 0.0,
+      "min_class_recall": 0.0,
+      "feature_count": 148,
+      "feature_mode": "thickness_blind",
+      "base_feature_count": 184
+    }
+  },
+  "software": {
+    "python": "3.12.13",
+    "pandas": "3.0.1"
+  }
+}
