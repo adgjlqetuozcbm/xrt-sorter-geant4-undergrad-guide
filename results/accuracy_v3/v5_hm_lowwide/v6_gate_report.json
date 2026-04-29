@@ -1,0 +1,41 @@
+{
+  "generated_by": "analysis/accuracy_v6_gate.py",
+  "generated_at_utc": "2026-04-29T06:28:03+00:00",
+  "stage": "hm_development",
+  "audit_dir": "results/accuracy_v3/v5_hm_lowwide",
+  "thresholds": {
+    "summary_file": "development_validation_summary.csv",
+    "summary_split": "development",
+    "top1_accuracy": 0.88,
+    "macro_f1": 0.84,
+    "min_class_recall": 0.75,
+    "hm_min_recall": 0.8,
+    "pairwise_hm_min_recall": 0.75,
+    "min_class_support": 40
+  },
+  "observed": {
+    "method": "HistGradientBoosting",
+    "top1_accuracy": 0.8291666666666667,
+    "macro_f1": 0.8291548024168345,
+    "min_class_recall": 0.65,
+    "hm_min_recall": 0.65,
+    "pairwise_hm_min_recall": 0.5666666666666667,
+    "min_class_support": 60
+  },
+  "runner_status": {
+    "status_file_exists": true,
+    "rows_in_status_file": 6760,
+    "completed": 6760,
+    "failed": 0
+  },
+  "checks": {
+    "top1_accuracy": false,
+    "macro_f1": false,
+    "min_class_recall": false,
+    "hm_min_recall": false,
+    "pairwise_hm_min_recall": false,
+    "min_class_support": true,
+    "runner_failed_zero": true
+  },
+  "gate_passed": false
+}
