@@ -19,3 +19,6 @@ results/material_sorting_v2/material_fingerprint_samples_long.csv
 results/material_sorting_v2/material_model_table_v2.csv
 results/material_sorting_v2/material_samples_long_v2.csv
 results/material_sorting/failed_*.log
+results/accuracy_v3/*/measurement_cube.npz
+results/accuracy_v3/*/feature_table.csv
+results/accuracy_v3/*/feature_columns.txt

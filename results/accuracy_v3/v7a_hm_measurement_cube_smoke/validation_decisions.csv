@@ -1,0 +1,5 @@
+material,predicted_material,is_correct,top1_score,top2_score,score_margin,top2_candidates,thickness_mm,random_seed,sample_id,split
+Hematite,Magnetite,False,0.6142857142857143,0.38571428571428573,0.2285714285714286,Magnetite;Hematite,5.0,2201,0,validation
+Hematite,Magnetite,False,0.5014285714285714,0.49857142857142855,0.0028571428571428914,Magnetite;Hematite,5.0,2201,1,validation
+Magnetite,Magnetite,True,0.6185714285714285,0.38142857142857145,0.2371428571428571,Magnetite;Hematite,5.0,2201,0,validation
+Magnetite,Magnetite,True,0.5557142857142857,0.4442857142857143,0.11142857142857143,Magnetite;Hematite,5.0,2201,1,validation

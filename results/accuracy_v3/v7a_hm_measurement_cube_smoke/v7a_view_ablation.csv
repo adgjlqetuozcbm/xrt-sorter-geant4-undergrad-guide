@@ -1,0 +1,6 @@
+method,round_id,samples,top1_accuracy,top2_accuracy,macro_f1,hematite_recall,magnetite_recall,hm_min_recall,pairwise_hm_min_recall,model_size_rank,view_name,feature_count
+ExtraTrees,0,4,0.75,1.0,0.7333333333333334,0.5,1.0,0.5,0.5,0,all,1793
+ExtraTrees,0,4,0.5,1.0,0.3333333333333333,0.0,1.0,0.0,0.0,0,transmission_only,897
+ExtraTrees,0,4,0.5,1.0,0.5,0.5,0.5,0.5,0.5,0,side_scatter_only,897
+ExtraTrees,0,4,0.5,1.0,0.3333333333333333,1.0,0.0,0.0,0.0,0,high_energy_only,1
+ExtraTrees,0,4,0.5,1.0,0.3333333333333333,1.0,0.0,0.0,0.0,0,normal_wide_only,1

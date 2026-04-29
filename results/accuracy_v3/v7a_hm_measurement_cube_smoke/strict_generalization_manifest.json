@@ -1,0 +1,32 @@
+{
+  "generated_by": "analysis/train_hm_v7a.py",
+  "generated_at_utc": "2026-04-29T16:43:11+00:00",
+  "protocol_name": "v7a_hm_measurement_cube_training",
+  "development_only": true,
+  "shadow_or_final_used": false,
+  "cube_dir": "results/accuracy_v3/v7a_hm_measurement_cube_smoke",
+  "output_dir": "results/accuracy_v3/v7a_hm_measurement_cube_smoke",
+  "methods": [
+    "ExtraTrees"
+  ],
+  "repeat_rounds_requested": 1,
+  "repeat_rounds_observed": 1,
+  "hard_negative_weight": 4.0,
+  "tensor_shape": [
+    8,
+    2,
+    2,
+    8,
+    8,
+    7
+  ],
+  "feature_count": 1793,
+  "selected_method": "ExtraTrees",
+  "selected_round": 1,
+  "software": {
+    "python": "3.12.13",
+    "pandas": "3.0.1",
+    "numpy": "2.3.5",
+    "xgboost_available": true
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "generated_by": "analysis/train_hm_v7a.py",
+  "generated_at_utc": "2026-04-29T16:43:11+00:00",
+  "audit_dir": "//?/UNC/wsl.localhost/Ubuntu-22.04/home/dyd/geant4-projects/xrt_sorter/release/xrt_sorter_public_undergrad_repo_20260426/results/accuracy_v3/v7a_hm_measurement_cube_smoke",
+  "thresholds": {
+    "hm_min_recall": 0.75,
+    "pairwise_hm_min_recall": 0.72,
+    "hematite_recall": 0.72,
+    "magnetite_recall": 0.72,
+    "min_class_support": 60
+  },
+  "observed": {
+    "method": "ExtraTrees",
+    "round_id": 1,
+    "hm_min_recall": 0.0,
+    "pairwise_hm_min_recall": 0.0,
+    "hematite_recall": 0.0,
+    "magnetite_recall": 1.0,
+    "min_class_support": 2
+  },
+  "checks": {
+    "hm_min_recall": false,
+    "pairwise_hm_min_recall": false,
+    "hematite_recall": false,
+    "magnetite_recall": true,
+    "min_class_support": false,
+    "shadow_or_final_not_used": true
+  },
+  "gate_passed": false,
+  "repeat_rule": "If gate fails, repeat hard-negative training up to 3 rounds; after 3 failed rounds move to v7B."
+}

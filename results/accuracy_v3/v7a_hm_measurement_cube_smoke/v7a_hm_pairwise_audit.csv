@@ -1,0 +1,2 @@
+split,method,round_id,samples,hm_min_recall,pairwise_hm_min_recall,hematite_recall,magnetite_recall,macro_f1,top1_accuracy
+validation,ExtraTrees,1,4,0.0,0.0,0.0,1.0,0.3333333333333333,0.5

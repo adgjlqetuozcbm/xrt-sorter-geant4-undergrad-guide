@@ -1,0 +1,9 @@
+sample_index,material,thickness_mm,random_seed,sample_id,split
+0,Hematite,5.0,2101,0,train
+1,Hematite,5.0,2101,1,train
+2,Magnetite,5.0,2101,0,train
+3,Magnetite,5.0,2101,1,train
+4,Hematite,5.0,2201,0,validation
+5,Hematite,5.0,2201,1,validation
+6,Magnetite,5.0,2201,0,validation
+7,Magnetite,5.0,2201,1,validation
