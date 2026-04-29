@@ -1,0 +1,102 @@
+{
+  "generated_by": "analysis/export_measurement_cube_v7a.py",
+  "generated_at_utc": "2026-04-29T16:57:02+00:00",
+  "protocol_name": "v7a_hm_measurement_cube",
+  "development_only": true,
+  "shadow_or_final_used": false,
+  "shadow_seeds_excluded": true,
+  "project_root": "//?/UNC/wsl.localhost/Ubuntu-22.04/home/dyd/geant4-projects/xrt_sorter/release/xrt_sorter_public_undergrad_repo_20260426",
+  "raw_dirs": [
+    "build/material_sorting_runs/v6c_hm_source_design"
+  ],
+  "output_dir": "results/accuracy_v3/v7a_hm_measurement_cube",
+  "photon_budget": 5000,
+  "grid_bins": 8,
+  "materials": [
+    "Hematite",
+    "Magnetite"
+  ],
+  "train_seeds": [
+    2101,
+    2102,
+    2103,
+    2104,
+    2105,
+    2106,
+    2107,
+    2108,
+    2109,
+    2110,
+    2111,
+    2112
+  ],
+  "validation_seeds": [
+    2201,
+    2202,
+    2203,
+    2204,
+    2205,
+    2206
+  ],
+  "shadow_seeds": [
+    2301,
+    2302,
+    2303,
+    2304,
+    2305,
+    2306
+  ],
+  "source_ids": [
+    "mono_50kev_normal_narrow",
+    "mono_50kev_normal_wide",
+    "mono_50kev_oblique_10deg",
+    "mono_70kev_normal_narrow",
+    "mono_70kev_normal_wide",
+    "mono_70kev_oblique_10deg",
+    "mono_90kev_normal_narrow",
+    "mono_90kev_normal_wide",
+    "mono_90kev_oblique_10deg",
+    "mono_120kev_normal_narrow",
+    "mono_120kev_normal_wide",
+    "mono_120kev_oblique_10deg",
+    "mono_150kev_normal_narrow",
+    "mono_150kev_normal_wide",
+    "mono_150kev_oblique_10deg",
+    "mono_200kev_normal_narrow",
+    "mono_200kev_normal_wide",
+    "mono_200kev_oblique_10deg"
+  ],
+  "detectors": [
+    "transmission",
+    "side_scatter"
+  ],
+  "channels": [
+    "hit_rate",
+    "energy_mean_keV",
+    "tail120_rate",
+    "primary_rate",
+    "direct_primary_rate",
+    "scattered_primary_rate",
+    "theta_mean_deg"
+  ],
+  "records_used": 3240,
+  "samples": 360,
+  "tensor_shape": [
+    360,
+    18,
+    2,
+    8,
+    8,
+    7
+  ],
+  "feature_count": 16128,
+  "split_counts": {
+    "train": 240,
+    "validation": 120
+  },
+  "software": {
+    "python": "3.12.13",
+    "pandas": "3.0.1",
+    "numpy": "2.3.5"
+  }
+}

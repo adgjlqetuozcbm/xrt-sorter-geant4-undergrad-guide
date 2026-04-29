@@ -1,0 +1,2 @@
+timestamp_utc,protocol_name,evaluation_stage,selected_method,selected_round,hm_min_recall,pairwise_hm_min_recall,gate_passed,claim_safe,next_action
+2026-04-29T17:00:06+00:00,v7a_hm_measurement_cube_training,development_validation_only,HardNegativeXGBoost,2,0.5166666666666667,0.5166666666666667,False,False,v7B_if_v7A_repeat_fails

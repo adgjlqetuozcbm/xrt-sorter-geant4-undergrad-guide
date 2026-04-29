@@ -1,0 +1,2 @@
+split,method,round_id,samples,hm_min_recall,pairwise_hm_min_recall,hematite_recall,magnetite_recall,macro_f1,top1_accuracy
+validation,HardNegativeXGBoost,2,120,0.5166666666666667,0.5166666666666667,0.5666666666666667,0.5166666666666667,0.5413800291849072,0.5416666666666666
