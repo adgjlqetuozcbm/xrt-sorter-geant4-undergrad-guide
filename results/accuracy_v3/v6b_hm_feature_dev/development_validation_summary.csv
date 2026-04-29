@@ -1,0 +1,2 @@
+method,samples,evaluated_materials,top1_accuracy,top3_accuracy,macro_f1,min_class_recall,hematite_recall,magnetite_recall,hm_min_recall,base_feature_count,model_feature_count
+HematiteMagnetiteRecallExtraTrees,240,Pyrite;Hematite;Magnetite;Chalcopyrite,0.8291666666666667,1.0,0.829059829059829,0.6333333333333333,0.6833333333333333,0.6333333333333333,0.6333333333333333,885,886

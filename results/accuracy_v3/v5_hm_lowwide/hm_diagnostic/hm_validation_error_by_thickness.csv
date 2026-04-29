@@ -1,0 +1,13 @@
+material,thickness_mm,predicted_material,count
+Hematite,5.0,Hematite,15
+Hematite,5.0,Magnetite,5
+Hematite,10.0,Hematite,13
+Hematite,10.0,Magnetite,7
+Hematite,20.0,Hematite,12
+Hematite,20.0,Magnetite,8
+Magnetite,5.0,Hematite,6
+Magnetite,5.0,Magnetite,14
+Magnetite,10.0,Hematite,9
+Magnetite,10.0,Magnetite,11
+Magnetite,20.0,Hematite,6
+Magnetite,20.0,Magnetite,14

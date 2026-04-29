@@ -1,0 +1,113 @@
+{
+  "generated_by": "analysis/hm_energy_thickness_diagnostic_v6.py",
+  "generated_at_utc": "2026-04-29T06:51:55+00:00",
+  "development_only": true,
+  "shadow_or_final_used": false,
+  "raw_dirs": [
+    "//wsl.localhost/Ubuntu-22.04/home/dyd/geant4-projects/xrt_sorter/release/xrt_sorter_public_undergrad_repo_20260426/build/material_sorting_runs/v5_hm_lowwide"
+  ],
+  "output_dir": "results/accuracy_v3/v5_hm_lowwide/hm_diagnostic",
+  "photon_budget": 5000,
+  "train_seeds": [
+    1501,
+    1502,
+    1503,
+    1504,
+    1505,
+    1506,
+    1507,
+    1508,
+    1509,
+    1510,
+    1511,
+    1512,
+    1513,
+    1514,
+    1515,
+    1516,
+    1517,
+    1518,
+    1519,
+    1520
+  ],
+  "validation_seeds": [
+    1601,
+    1602,
+    1603,
+    1604,
+    1605,
+    1606,
+    1607,
+    1608,
+    1609,
+    1610
+  ],
+  "inventory": {
+    "material_records": 2340,
+    "calibration_records": 390,
+    "rows_after_sampling": 4680,
+    "materials": [
+      "Hematite",
+      "Magnetite"
+    ],
+    "sources": [
+      "mono_110kev",
+      "mono_120kev",
+      "mono_150kev",
+      "mono_15kev",
+      "mono_200kev",
+      "mono_20kev",
+      "mono_25kev",
+      "mono_30kev",
+      "mono_35kev",
+      "mono_40kev",
+      "mono_50kev",
+      "mono_70kev",
+      "mono_90kev"
+    ],
+    "thicknesses_mm": [
+      5.0,
+      10.0,
+      20.0
+    ],
+    "seeds": [
+      1501,
+      1502,
+      1503,
+      1504,
+      1505,
+      1506,
+      1507,
+      1508,
+      1509,
+      1510,
+      1511,
+      1512,
+      1513,
+      1514,
+      1515,
+      1516,
+      1517,
+      1518,
+      1519,
+      1520,
+      1601,
+      1602,
+      1603,
+      1604,
+      1605,
+      1606,
+      1607,
+      1608,
+      1609,
+      1610
+    ]
+  },
+  "outputs": {
+    "single_source": "hm_single_source_pairwise_models.csv",
+    "single_source_thickness": "hm_single_source_thickness_pairwise_models.csv",
+    "feature_separability": "hm_feature_separability.csv",
+    "fused_pairwise": "hm_fused_pairwise_by_thickness.csv",
+    "validation_error_by_thickness": "hm_validation_error_by_thickness.csv"
+  }
+}

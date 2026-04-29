@@ -1,0 +1,9 @@
+group_type,source_id,energy_keV,thickness_mm,model,feature_count,train_samples,validation_samples,top1_accuracy,macro_f1,hematite_recall,magnetite_recall,hm_min_recall,roc_auc_magnetite,table_mode
+all_sources_fused_fixed_thickness,multi_source_fused,,5.0,ExtraTrees,544,80,40,0.725,0.7234443746071653,0.8,0.65,0.65,0.7675000000000001,multi_source_fused
+all_sources_fused_fixed_thickness,multi_source_fused,,20.0,ExtraTrees,518,80,40,0.725,0.7234443746071653,0.8,0.65,0.65,0.7587499999999999,multi_source_fused
+all_sources_fused,multi_source_fused,,all,ExtraTrees,573,240,120,0.675,0.6731615336266499,0.75,0.6,0.6,0.7245833333333332,multi_source_fused
+all_sources_fused_fixed_thickness,multi_source_fused,,10.0,LogisticRegression,524,80,40,0.65,0.6491228070175439,0.7,0.6,0.6,0.71,multi_source_fused
+all_sources_fused_fixed_thickness,multi_source_fused,,10.0,ExtraTrees,524,80,40,0.625,0.6247654784240151,0.6,0.65,0.6,0.675,multi_source_fused
+all_sources_fused,multi_source_fused,,all,LogisticRegression,573,240,120,0.5833333333333334,0.5833333333333334,0.5833333333333334,0.5833333333333334,0.5833333333333334,0.6213888888888889,multi_source_fused
+all_sources_fused_fixed_thickness,multi_source_fused,,20.0,LogisticRegression,518,80,40,0.575,0.5747342088805503,0.55,0.6,0.55,0.6124999999999999,multi_source_fused
+all_sources_fused_fixed_thickness,multi_source_fused,,5.0,LogisticRegression,544,80,40,0.625,0.6190476190476191,0.75,0.5,0.5,0.7424999999999999,multi_source_fused

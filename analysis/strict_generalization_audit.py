@@ -34,6 +34,12 @@ ACCEPTANCE_TARGETS = {
     "macro_f1": 0.84,
     "min_class_recall": 0.75,
 }
+HM_DIFFERENTIAL_SOURCES = ["mono_120kev", "mono_150kev", "mono_200kev"]
+HM_DIFFERENTIAL_SOURCE_PAIRS = [
+    ("mono_200kev", "mono_150kev"),
+    ("mono_200kev", "mono_120kev"),
+    ("mono_150kev", "mono_120kev"),
+]
 
 
 def parse_int_list(value: str) -> list[int]:
@@ -184,8 +190,79 @@ def hm_expert_feature_columns(feature_cols: list[str]) -> list[str]:
         "source_fusion",
         "dictionary_distance",
     }
-    cols = [col for col in feature_cols if v2.feature_family(col) in preferred_families]
+    cols = [
+        col
+        for col in feature_cols
+        if v2.feature_family(col) in preferred_families or col.startswith("hmphys__")
+    ]
     return cols or feature_cols
+
+
+def log_positive(value: pd.Series) -> pd.Series:
+    return np.log(np.clip(value.astype(float), 1e-6, 1e6))
+
+
+def log1p_positive(value: pd.Series) -> pd.Series:
+    return np.log1p(value.astype(float).clip(lower=0.0))
+
+
+def add_hm_differential_features(frame: pd.DataFrame) -> tuple[pd.DataFrame, list[str]]:
+    """Add a small pre-registered set of H/M high-energy tail contrast features."""
+    result = frame.copy()
+    created: list[str] = []
+
+    def add_column(name: str, values: pd.Series) -> None:
+        result[name] = values.replace([np.inf, -np.inf], np.nan).fillna(0.0)
+        created.append(name)
+
+    def has_col(source: str, feature: str) -> bool:
+        return f"{source}__{feature}" in result.columns
+
+    def col(source: str, feature: str) -> str:
+        return f"{source}__{feature}"
+
+    for high_source, low_source in HM_DIFFERENTIAL_SOURCE_PAIRS:
+        for feature in ["T_e_120_inf", "primary_transmission_rate", "detector_gamma_rate"]:
+            if has_col(high_source, feature) and has_col(low_source, feature):
+                add_column(
+                    f"hmphys__log_ratio__{high_source}__over__{low_source}__{feature}",
+                    log_positive(result[col(high_source, feature)]) - log_positive(result[col(low_source, feature)]),
+                )
+        for feature in ["A_e_120_inf", "A_per_mm_e_120_inf"]:
+            if has_col(high_source, feature) and has_col(low_source, feature):
+                add_column(
+                    f"hmphys__delta__{high_source}__minus__{low_source}__{feature}",
+                    result[col(high_source, feature)].astype(float) - result[col(low_source, feature)].astype(float),
+                )
+        for feature in ["Rsig020_e_120_inf", "Rsig050_e_120_inf", "direct_primary_count"]:
+            if has_col(high_source, feature) and has_col(low_source, feature):
+                add_column(
+                    f"hmphys__log1p_ratio__{high_source}__over__{low_source}__{feature}",
+                    log1p_positive(result[col(high_source, feature)]) - log1p_positive(result[col(low_source, feature)]),
+                )
+
+    for source in HM_DIFFERENTIAL_SOURCES:
+        if has_col(source, "T_e_120_inf") and has_col(source, "T_low_0_80"):
+            add_column(
+                f"hmphys__tail_over_low__{source}__T_e_120_inf",
+                log_positive(result[col(source, "T_e_120_inf")]) - log_positive(result[col(source, "T_low_0_80")]),
+            )
+        for sigma in ["Rsig020", "Rsig050"]:
+            tail = f"{sigma}_e_120_inf"
+            shoulder = f"{sigma}_e_080_090"
+            if has_col(source, tail) and has_col(source, shoulder):
+                add_column(
+                    f"hmphys__tail_over_shoulder__{source}__{sigma}",
+                    log1p_positive(result[col(source, tail)]) - log1p_positive(result[col(source, shoulder)]),
+                )
+        if has_col(source, "direct_primary_count") and has_col(source, "scattered_primary_count"):
+            add_column(
+                f"hmphys__direct_minus_scatter__{source}",
+                log1p_positive(result[col(source, "direct_primary_count")])
+                - log1p_positive(result[col(source, "scattered_primary_count")]),
+            )
+
+    return result, created
 
 
 def add_hm_metrics(metrics: dict, eval_frame: pd.DataFrame, predictions: np.ndarray, sk) -> dict:
@@ -924,6 +1001,8 @@ def experiment_registry_frame(
                 "evaluation_stage": "development_validation_only" if development_only else "locked_final_test",
                 "hypothesis": "layered_absorption_group_with_hm_expert_and_enriched_spectral_features",
                 "change_summary": "strict audit with validation-only model selection and paper ledger outputs",
+                "feature_engineering": "hm_differential" if getattr(args, "enable_hm_differential_features", False) else "baseline",
+                "hm_differential_feature_count": status.get("hm_differential_feature_count", 0),
                 "raw_dirs": args.raw_dirs or args.raw_dir,
                 "photon_budget": int(args.photon_budget),
                 "train_seeds": args.train_seeds,
@@ -996,6 +1075,11 @@ def main() -> None:
         action="store_true",
         help="Evaluate train/validation only and write a development ledger without opening or claiming a final test.",
     )
+    parser.add_argument(
+        "--enable-hm-differential-features",
+        action="store_true",
+        help="Add pre-registered high-energy H/M differential features before model selection.",
+    )
     parser.add_argument("--protocol-name", default="strict_generalization_seed_holdout")
     args = parser.parse_args()
 
@@ -1013,6 +1097,11 @@ def main() -> None:
     group_map = selected.material_group_map(project_root)
     raw_dirs = parse_raw_dirs(project_root, args.raw_dir, args.raw_dirs)
     frame, status = build_frame_from_raw_dirs(project_root, raw_dirs, args.photon_budget)
+    hm_differential_features: list[str] = []
+    if args.enable_hm_differential_features:
+        frame, hm_differential_features = add_hm_differential_features(frame)
+    status["hm_differential_features_enabled"] = bool(args.enable_hm_differential_features)
+    status["hm_differential_feature_count"] = int(len(hm_differential_features))
     integrity = check_split_integrity(train_seeds, validation_seeds, test_seeds)
 
     if args.development_only:
@@ -1071,6 +1160,11 @@ def main() -> None:
             "burned_test_seeds": sorted(burned_test_seeds),
             "split_integrity": integrity,
             "methods": methods,
+            "feature_engineering": {
+                "hm_differential_features_enabled": bool(args.enable_hm_differential_features),
+                "hm_differential_feature_count": int(len(hm_differential_features)),
+                "hm_differential_features": hm_differential_features,
+            },
             "model_selection_policy": "development-only validation: rank by hm_min_recall, then min_class_recall, then macro_f1, then top1_accuracy",
             "selected_method": selected_method,
             "selected_validation_metrics": choose_validation_method(validation_table),
@@ -1184,6 +1278,11 @@ def main() -> None:
         "reused_test_seeds": reused_test,
         "split_integrity": integrity,
         "methods": methods,
+        "feature_engineering": {
+            "hm_differential_features_enabled": bool(args.enable_hm_differential_features),
+            "hm_differential_feature_count": int(len(hm_differential_features)),
+            "hm_differential_features": hm_differential_features,
+        },
         "model_selection_policy": "validation-only: rank by hm_min_recall, then min_class_recall, then macro_f1, then top1_accuracy",
         "selected_method": selected_method,
         "selected_validation_metrics": choose_validation_method(validation_table),

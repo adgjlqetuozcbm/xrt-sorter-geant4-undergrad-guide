@@ -146,7 +146,7 @@ def main() -> None:
     if args.output_json:
         output = (project_root / args.output_json).resolve()
         output.parent.mkdir(parents=True, exist_ok=True)
-        output.write_text(text + "\n", encoding="utf-8")
+        output.write_bytes((text + "\n").encode("utf-8"))
     print(text)
     if not report["gate_passed"]:
         raise SystemExit(2)
