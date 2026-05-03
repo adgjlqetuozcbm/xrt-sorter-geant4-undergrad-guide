@@ -30,6 +30,8 @@ def infer_macro_profile(profile: str) -> str:
         return "energy_scan"
     if profile.startswith("v6c_"):
         return "v6c"
+    if profile.startswith("v7b2_"):
+        return "v7b2"
     if profile.startswith("v7b_"):
         return "v7b"
     if profile.startswith("accuracy_v3") or profile.startswith("v3_hm") or profile.startswith("v5_"):

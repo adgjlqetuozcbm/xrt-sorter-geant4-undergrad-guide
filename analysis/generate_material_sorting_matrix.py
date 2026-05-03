@@ -54,6 +54,7 @@ PROFILE_EVENTS = {
     "accuracy_v3": 10000,
     "v6c_hm_source_design": 10000,
     "v7b_hard_negative_dev": 20000,
+    "v7b2_hm_physics_dev": 40000,
 }
 V6C_HM_MATERIALS = ["Hematite", "Magnetite"]
 V6C_HM_ENERGIES_KEV = [50, 70, 90, 120, 150, 200]
@@ -64,6 +65,11 @@ V7B_ENERGIES_KEV = [70, 90, 120, 150, 200]
 V7B_THICKNESS_MM = [5.0, 10.0, 15.0, 20.0, 30.0]
 V7B_SEEDS = [*range(4101, 4113), *range(4201, 4207)]
 V7B_SOURCE_VARIANTS = ["normal_narrow", "normal_wide", "oblique_10deg", "oblique_20deg"]
+V7B2_HM_MATERIALS = ["Hematite", "Magnetite"]
+V7B2_HM_ENERGIES_KEV = [50, 70, 90, 120, 150, 200]
+V7B2_HM_THICKNESS_MM = [3.0, 5.0, 8.0, 10.0, 15.0, 20.0, 30.0, 40.0]
+V7B2_HM_SEEDS = [*range(5101, 5105), *range(5201, 5203)]
+V7B2_HM_SOURCE_VARIANTS = ["normal_narrow", "normal_wide", "oblique_20deg", "oblique_30deg", "oblique_40deg"]
 
 
 def energy_slug(energy_keV: float) -> str:
@@ -103,8 +109,8 @@ def source_variant_config(variant: str) -> dict:
             "incidence_angle_deg": 0.0,
             "detector_layout": "transmission_plus_side_scatter",
         }
-    if variant in {"oblique_10deg", "oblique_20deg"}:
-        angle_deg = 10.0 if variant == "oblique_10deg" else 20.0
+    if variant in {"oblique_10deg", "oblique_20deg", "oblique_30deg", "oblique_40deg"}:
+        angle_deg = float(variant.removeprefix("oblique_").removesuffix("deg"))
         angle_rad = math.radians(angle_deg)
         source_x_mm = -300.0
         source_y_mm = -abs(source_x_mm) * math.tan(angle_rad)
@@ -143,6 +149,16 @@ def v6c_sources(
     return sources
 
 
+def select_sources_by_id(sources: list[dict], selected_source_ids: list[str] | None) -> list[dict]:
+    if not selected_source_ids:
+        return sources
+    lookup = {source["source_id"]: source for source in sources}
+    missing = [source_id for source_id in selected_source_ids if source_id not in lookup]
+    if missing:
+        raise ValueError(f"Unknown selected source ids for profile sources: {missing}")
+    return [lookup[source_id] for source_id in selected_source_ids]
+
+
 def source_lookup() -> dict[str, dict]:
     return {source["source_id"]: source for source in [*SOURCES, *ENERGY_SCAN_SOURCES, *ACCURACY_V3_LOW_ENERGY_SOURCES]}
 
@@ -154,6 +170,8 @@ def profile_thicknesses(profile: str) -> list[float]:
         return V6C_HM_THICKNESS_MM
     if profile == "v7b_hard_negative_dev":
         return V7B_THICKNESS_MM
+    if profile == "v7b2_hm_physics_dev":
+        return V7B2_HM_THICKNESS_MM
     return THICKNESS_MM
 
 
@@ -168,6 +186,8 @@ def profile_seeds(profile: str) -> list[int]:
         return V6C_HM_SEEDS
     if profile == "v7b_hard_negative_dev":
         return V7B_SEEDS
+    if profile == "v7b2_hm_physics_dev":
+        return V7B2_HM_SEEDS
     return SEEDS
 
 
@@ -178,11 +198,22 @@ def profile_sources(
     source_variants: list[str] | None = None,
 ) -> list[dict]:
     if profile == "v6c_hm_source_design":
-        return v6c_sources(energy_list_keV, source_variants)
+        return select_sources_by_id(v6c_sources(energy_list_keV, source_variants), selected_source_ids)
     if profile == "v7b_hard_negative_dev":
-        return v6c_sources(
-            energy_list_keV or [float(energy) for energy in V7B_ENERGIES_KEV],
-            source_variants or V7B_SOURCE_VARIANTS,
+        return select_sources_by_id(
+            v6c_sources(
+                energy_list_keV or [float(energy) for energy in V7B_ENERGIES_KEV],
+                source_variants or V7B_SOURCE_VARIANTS,
+            ),
+            selected_source_ids,
+        )
+    if profile == "v7b2_hm_physics_dev":
+        return select_sources_by_id(
+            v6c_sources(
+                energy_list_keV or [float(energy) for energy in V7B2_HM_ENERGIES_KEV],
+                source_variants or V7B2_HM_SOURCE_VARIANTS,
+            ),
+            selected_source_ids,
         )
     if energy_list_keV:
         return [mono_source(energy) for energy in energy_list_keV]
@@ -201,13 +232,21 @@ def profile_sources(
     return SOURCES
 
 
-def profile_material_names(profile: str, material_names: list[str] | None = None) -> list[str] | None:
-    if material_names:
+def profile_material_names(
+    profile: str,
+    material_names: list[str] | None = None,
+    use_profile_default: bool = True,
+) -> list[str] | None:
+    if material_names is not None:
         return material_names
+    if not use_profile_default:
+        return None
     if profile == "accuracy_v3_hm":
         return ACCURACY_V3_HM_MATERIALS
     if profile == "v6c_hm_source_design":
         return V6C_HM_MATERIALS
+    if profile == "v7b2_hm_physics_dev":
+        return V7B2_HM_MATERIALS
     return None
 
 
@@ -356,11 +395,12 @@ def build_matrix(
     seed_list: list[int] | None = None,
     events_per_run: int | None = None,
     material_names: list[str] | None = None,
+    use_profile_default_materials: bool = True,
     energy_list_keV: list[float] | None = None,
     thickness_list: list[float] | None = None,
     source_variants: list[str] | None = None,
 ) -> list[MatrixRun]:
-    materials = load_materials(project_root, profile_material_names(profile, material_names))
+    materials = load_materials(project_root, profile_material_names(profile, material_names, use_profile_default_materials))
     profile_name = profile_alias or profile
     expected_events = events_per_run or PROFILE_EVENTS[profile]
     out_dir = OUTPUT_ROOT / profile_name
@@ -456,6 +496,7 @@ def write_matrix(
     seed_list: list[int] | None = None,
     events_per_run: int | None = None,
     material_names: list[str] | None = None,
+    use_profile_default_materials: bool = True,
     energy_list_keV: list[float] | None = None,
     thickness_list: list[float] | None = None,
     source_variants: list[str] | None = None,
@@ -469,6 +510,7 @@ def write_matrix(
         seed_list,
         events_per_run,
         material_names,
+        use_profile_default_materials,
         energy_list_keV,
         thickness_list,
         source_variants,
@@ -571,16 +613,22 @@ def main() -> None:
     thickness_list = parse_float_list(args.thickness_list) if args.thickness_list.strip() else None
     source_variants = [item.strip() for item in args.source_variant_list.split(",") if item.strip()] or None
     material_names = None
+    use_profile_default_materials = True
     if args.material_list.strip() and args.material_list.strip().lower() != "all":
         material_names = [item.strip() for item in args.material_list.split(",") if item.strip()]
+    elif args.material_list.strip().lower() == "all":
+        use_profile_default_materials = False
     matrix_path = write_matrix(
         project_root,
         args.profile,
-        selected_source_ids if args.profile in {"selected_rebuild", "accuracy_v3_hm", "accuracy_v3"} else None,
+        selected_source_ids
+        if args.profile in {"selected_rebuild", "accuracy_v3_hm", "accuracy_v3", "v6c_hm_source_design", "v7b_hard_negative_dev", "v7b2_hm_physics_dev"}
+        else None,
         profile_alias=profile_alias,
         seed_list=seed_list,
         events_per_run=events_per_run,
         material_names=material_names,
+        use_profile_default_materials=use_profile_default_materials,
         energy_list_keV=energy_list_keV,
         thickness_list=thickness_list,
         source_variants=source_variants,
@@ -590,13 +638,15 @@ def main() -> None:
     print(f"Wrote {len(runs)} {profile_name} configs to {matrix_path}")
     sources = profile_sources(
         args.profile,
-        selected_source_ids if args.profile in {"selected_rebuild", "accuracy_v3_hm", "accuracy_v3"} else None,
+        selected_source_ids
+        if args.profile in {"selected_rebuild", "accuracy_v3_hm", "accuracy_v3", "v6c_hm_source_design", "v7b_hard_negative_dev", "v7b2_hm_physics_dev"}
+        else None,
         energy_list_keV,
         source_variants,
     )
     thicknesses = thickness_list or profile_thicknesses(args.profile)
     seeds = seed_list or profile_seeds(args.profile)
-    material_count = len(load_materials(project_root, profile_material_names(args.profile, material_names)))
+    material_count = len(load_materials(project_root, profile_material_names(args.profile, material_names, use_profile_default_materials)))
     print(
         "Expected material matrix: "
         f"{material_count} materials x {len(thicknesses)} thicknesses x {len(sources)} sources x {len(seeds)} seeds "

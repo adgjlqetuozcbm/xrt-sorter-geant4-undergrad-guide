@@ -33,7 +33,14 @@ CHANNELS = [
     "radius_mean_mm",
     "detector_total_rate",
 ]
-VARIANT_RANK = {"normal_narrow": 0, "normal_wide": 1, "oblique_10deg": 2, "oblique_20deg": 3}
+VARIANT_RANK = {
+    "normal_narrow": 0,
+    "normal_wide": 1,
+    "oblique_10deg": 2,
+    "oblique_20deg": 3,
+    "oblique_30deg": 4,
+    "oblique_40deg": 5,
+}
 EPS = 1e-6
 
 
@@ -58,7 +65,9 @@ def parse_str_list(value: str) -> list[str]:
 
 def parse_raw_dirs(project_root: Path, raw_dir: str, raw_dirs: str) -> list[Path]:
     values = parse_str_list(raw_dirs) if raw_dirs.strip() else [raw_dir]
-    return [(project_root / value).resolve() for value in values]
+    # Do not call resolve() here: on Windows it strips \\?\UNC prefixes and can
+    # reintroduce MAX_PATH failures for long WSL output filenames.
+    return [project_root / value for value in values]
 
 
 def rel_path(path: Path, project_root: Path) -> str:
