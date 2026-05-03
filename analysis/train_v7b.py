@@ -3,9 +3,11 @@ from __future__ import annotations
 import argparse
 import json
 import math
+import os
 import platform
 from datetime import datetime, timezone
 from pathlib import Path
+from time import perf_counter
 
 import numpy as np
 import pandas as pd
@@ -42,6 +44,13 @@ MODEL_RANK = {
     "HMPairwiseRerankExtraTrees": 6,
 }
 DEFAULT_SHADOW_SEEDS = set(range(4301, 4307))
+
+
+def log_progress(message: str, *, start_time: float | None = None) -> None:
+    elapsed = ""
+    if start_time is not None:
+        elapsed = f" elapsed={perf_counter() - start_time:.1f}s"
+    print(f"[v7b-train] {datetime.now().isoformat(timespec='seconds')} {message}{elapsed}", flush=True)
 
 
 def parse_str_list(value: str) -> list[str]:
@@ -160,11 +169,11 @@ def evaluate_predictions(
     }
 
 
-def make_extra_trees(sk, random_state: int, weighted: bool = False):
+def make_extra_trees(sk, random_state: int, weighted: bool = False, n_jobs: int = -1):
     return sk["ExtraTreesClassifier"](
         n_estimators=900 if weighted else 700,
         random_state=random_state,
-        n_jobs=-1,
+        n_jobs=n_jobs,
         class_weight="balanced",
         max_features="sqrt",
         min_samples_leaf=1,
@@ -214,6 +223,7 @@ def fit_predict_xgboost(
     classes: list[str],
     sample_weight: np.ndarray | None,
     random_state: int,
+    n_jobs: int,
 ) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
     y_train_int = labels_to_int(y_train, classes)
     model = XGBClassifier(
@@ -228,7 +238,7 @@ def fit_predict_xgboost(
         eval_metric="mlogloss",
         tree_method="hist",
         random_state=random_state,
-        n_jobs=-1,
+        n_jobs=n_jobs,
     )
     model.fit(x_train, y_train_int, sample_weight=sample_weight)
     scores = normalize_scores(np.asarray(model.predict_proba(x_eval), dtype=float))
@@ -245,9 +255,10 @@ def fit_predict_group_expert(
     x_eval: np.ndarray,
     classes: list[str],
     random_state: int,
+    n_jobs: int,
 ) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
     group_train = train_meta["group_label"].fillna(train_meta["category"]).astype(str).replace("", "unknown").to_numpy()
-    group_model = make_extra_trees(sk, random_state)
+    group_model = make_extra_trees(sk, random_state, n_jobs=n_jobs)
     group_model.fit(x_train, group_train)
     group_predictions = group_model.predict(x_eval).astype(str)
     experts = {}
@@ -258,7 +269,7 @@ def fit_predict_group_expert(
         if len(labels) == 1:
             constants[group] = labels[0]
         else:
-            model = make_extra_trees(sk, random_state + len(experts) + 1)
+            model = make_extra_trees(sk, random_state + len(experts) + 1, n_jobs=n_jobs)
             model.fit(x_train[mask], y_train[mask])
             experts[group] = model
 
@@ -288,8 +299,9 @@ def fit_predict_hm_rerank(
     classes: list[str],
     sample_weight: np.ndarray | None,
     random_state: int,
+    n_jobs: int,
 ) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
-    base = make_extra_trees(sk, random_state)
+    base = make_extra_trees(sk, random_state, n_jobs=n_jobs)
     base.fit(x_train, y_train, sample_weight=sample_weight)
     base_scores = align_scores(np.asarray(base.predict_proba(x_eval), dtype=float), np.asarray(base.classes_), classes)
     hm_mask = np.isin(y_train.astype(str), np.array(HM_PAIR))
@@ -297,7 +309,7 @@ def fit_predict_hm_rerank(
         class_array = np.array(classes)
         return class_array[np.argmax(base_scores, axis=1)], base_scores, class_array
 
-    pair_model = make_extra_trees(sk, random_state + 91, weighted=True)
+    pair_model = make_extra_trees(sk, random_state + 91, weighted=True, n_jobs=n_jobs)
     pair_weight = sample_weight[hm_mask] if sample_weight is not None else None
     pair_model.fit(x_train[hm_mask], y_train[hm_mask], sample_weight=pair_weight)
     pair_scores = align_scores(np.asarray(pair_model.predict_proba(x_eval), dtype=float), np.asarray(pair_model.classes_), classes)
@@ -329,14 +341,15 @@ def evaluate_method(
     sk,
     XGBClassifier,
     classes: list[str],
+    n_jobs: int,
 ) -> tuple[dict, np.ndarray, np.ndarray, np.ndarray]:
     if method in {"XGBoost", "HardNegativeXGBoost"} and XGBClassifier is None:
         raise RuntimeError("xgboost is not installed")
     if method == "ExtraTrees":
-        predictions, scores, class_array = fit_predict_sklearn(make_extra_trees(sk, 700 + round_id), x_train, y_train, x_eval, classes)
+        predictions, scores, class_array = fit_predict_sklearn(make_extra_trees(sk, 700 + round_id, n_jobs=n_jobs), x_train, y_train, x_eval, classes)
     elif method == "HardNegativeExtraTrees":
         predictions, scores, class_array = fit_predict_sklearn(
-            make_extra_trees(sk, 1700 + round_id, weighted=True),
+            make_extra_trees(sk, 1700 + round_id, weighted=True, n_jobs=n_jobs),
             x_train,
             y_train,
             x_eval,
@@ -352,7 +365,7 @@ def evaluate_method(
             classes,
         )
     elif method == "XGBoost":
-        predictions, scores, class_array = fit_predict_xgboost(XGBClassifier, x_train, y_train, x_eval, classes, None, 1100 + round_id)
+        predictions, scores, class_array = fit_predict_xgboost(XGBClassifier, x_train, y_train, x_eval, classes, None, 1100 + round_id, n_jobs)
     elif method == "HardNegativeXGBoost":
         predictions, scores, class_array = fit_predict_xgboost(
             XGBClassifier,
@@ -362,11 +375,12 @@ def evaluate_method(
             classes,
             sample_weight,
             2100 + round_id,
+            n_jobs,
         )
     elif method == "GroupExpertExtraTrees":
-        predictions, scores, class_array = fit_predict_group_expert(sk, x_train, y_train, train_meta, x_eval, classes, 2600 + round_id)
+        predictions, scores, class_array = fit_predict_group_expert(sk, x_train, y_train, train_meta, x_eval, classes, 2600 + round_id, n_jobs)
     elif method == "HMPairwiseRerankExtraTrees":
-        predictions, scores, class_array = fit_predict_hm_rerank(sk, x_train, y_train, x_eval, classes, sample_weight, 3000 + round_id)
+        predictions, scores, class_array = fit_predict_hm_rerank(sk, x_train, y_train, x_eval, classes, sample_weight, 3000 + round_id, n_jobs)
     else:
         raise ValueError(f"Unknown v7B method: {method}")
     metrics = evaluate_predictions(method, round_id, y_eval, predictions, scores, class_array, sk)
@@ -548,10 +562,11 @@ def evaluate_view_ablation(
     feature_names: list[str],
     sk,
     classes: list[str],
+    n_jobs: int,
 ) -> pd.DataFrame:
     rows = []
     for view_name, indices in view_feature_indices(feature_names).items():
-        model = make_extra_trees(sk, 4100 + len(rows))
+        model = make_extra_trees(sk, 4100 + len(rows), n_jobs=n_jobs)
         predictions, scores, class_array = fit_predict_sklearn(model, x_train[:, indices], y_train, x_eval[:, indices], classes)
         metrics = evaluate_predictions("ExtraTrees", 0, y_eval, predictions, scores, class_array, sk)
         metrics["view_name"] = view_name
@@ -655,17 +670,22 @@ def main() -> None:
     parser.add_argument("--hard-negative-weight", type=float, default=3.0)
     parser.add_argument("--include-thickness", action=argparse.BooleanOptionalAction, default=True)
     parser.add_argument("--status-csv", default="results/material_sorting/run_status_v7b_hard_negative_dev.csv")
+    parser.add_argument("--n-jobs", type=int, default=min(4, max(1, os.cpu_count() or 1)), help="Worker threads for tree/XGBoost models. Use a small value to avoid saturating the workstation.")
     args = parser.parse_args()
 
+    start_time = perf_counter()
     project_root = Path(args.project_root).resolve()
     cube_dir = project_root / args.cube_dir
     output_dir = project_root / (args.output_dir.strip() or args.cube_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
     methods = parse_str_list(args.methods)
+    n_jobs = max(1, int(args.n_jobs))
+    log_progress(f"start cube_dir={cube_dir} output_dir={output_dir} methods={methods} repeat_rounds={args.repeat_rounds} n_jobs={n_jobs}", start_time=start_time)
     sk = require_sklearn()
     XGBClassifier = require_xgboost()
 
     cube, metadata, feature_names, cube_manifest = load_cube(cube_dir)
+    log_progress(f"loaded cube_shape={cube.shape} metadata_rows={len(metadata)} feature_names={len(feature_names)}", start_time=start_time)
     if metadata["random_seed"].isin(DEFAULT_SHADOW_SEEDS).any() or bool(cube_manifest.get("shadow_or_final_used", False)):
         raise RuntimeError("Shadow/final seeds are present in v7B training metadata.")
     train_mask = metadata["split"].astype(str).eq("train").to_numpy()
@@ -686,13 +706,19 @@ def main() -> None:
     validation_meta = metadata.loc[validation_mask].reset_index(drop=True)
     y_train = labels[train_mask]
     y_validation = labels[validation_mask]
+    log_progress(
+        f"built features train={x_train.shape} validation={x_validation.shape} classes={len(classes)} include_thickness={args.include_thickness}",
+        start_time=start_time,
+    )
 
     rows = []
     payloads = {}
     sample_weight: np.ndarray | None = None
     rounds = max(1, int(args.repeat_rounds))
     for round_id in range(1, rounds + 1):
+        log_progress(f"round={round_id}/{rounds} start", start_time=start_time)
         for method in methods:
+            log_progress(f"round={round_id} method={method} start", start_time=start_time)
             try:
                 metrics, predictions, scores, class_array = evaluate_method(
                     method,
@@ -706,10 +732,16 @@ def main() -> None:
                     sk,
                     XGBClassifier,
                     classes,
+                    n_jobs,
                 )
                 metrics["feature_count"] = int(x_train.shape[1])
                 payloads[(method, round_id)] = (predictions, scores, class_array)
+                log_progress(
+                    f"round={round_id} method={method} done top1={metrics['top1_accuracy']:.4f} macro_f1={metrics['macro_f1']:.4f} hm_min={metrics['hm_min_recall']:.4f}",
+                    start_time=start_time,
+                )
             except Exception as exc:  # noqa: BLE001
+                log_progress(f"round={round_id} method={method} error={exc}", start_time=start_time)
                 metrics = {
                     "method": method,
                     "round_id": int(round_id),
@@ -727,6 +759,10 @@ def main() -> None:
                 }
             rows.append(metrics)
         selected_so_far = choose_model(pd.DataFrame(rows))
+        log_progress(
+            f"round={round_id} selected_so_far={selected_so_far['method']} hm_min={float(selected_so_far['hm_min_recall']):.4f} macro_f1={float(selected_so_far['macro_f1']):.4f} top1={float(selected_so_far['top1_accuracy']):.4f}",
+            start_time=start_time,
+        )
         if (
             float(selected_so_far["hm_min_recall"]) >= 0.80
             and float(selected_so_far["hm_pairwise_min_recall"]) >= 0.78
@@ -747,10 +783,11 @@ def main() -> None:
         raise RuntimeError(f"Selected v7B method has no prediction payload: {selected_key}")
     predictions, scores, class_array = payloads[selected_key]
 
+    log_progress(f"selected method={selected['method']} round={int(selected['round_id'])}; writing audit tables", start_time=start_time)
     per_class = per_class_table(validation_meta, predictions, sk)
     decisions = decision_frame(validation_meta, predictions, scores, class_array)
     pairwise = pairwise_audit(validation_meta, predictions)
-    view_ablation = evaluate_view_ablation(x_train, y_train, x_validation, y_validation, model_feature_names, sk, classes)
+    view_ablation = evaluate_view_ablation(x_train, y_train, x_validation, y_validation, model_feature_names, sk, classes, n_jobs)
     split_audit = (
         metadata.groupby(["split", "random_seed", "material"], as_index=False)
         .size()
@@ -817,8 +854,8 @@ def main() -> None:
         (json.dumps(manifest, ensure_ascii=False, indent=2, allow_nan=False) + "\n").encode("utf-8")
     )
     (output_dir / "v7b_gate.json").write_bytes((json.dumps(gate, ensure_ascii=False, indent=2, allow_nan=False) + "\n").encode("utf-8"))
-    print(f"Wrote v7B training audit to {output_dir}")
-    print(f"selected_method={selected['method']} round={int(selected['round_id'])} gate_passed={gate['gate_passed']}")
+    log_progress(f"Wrote v7B training audit to {output_dir}", start_time=start_time)
+    log_progress(f"selected_method={selected['method']} round={int(selected['round_id'])} gate_passed={gate['gate_passed']}", start_time=start_time)
 
 
 if __name__ == "__main__":
