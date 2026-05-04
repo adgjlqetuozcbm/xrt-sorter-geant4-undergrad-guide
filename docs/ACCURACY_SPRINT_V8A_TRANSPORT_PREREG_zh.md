@@ -136,7 +136,51 @@ Do not run:
 
 If smoke passes, the next step is a real integration design for custom diffraction/table sidecar plus Geant4 transport. If smoke is gray-zone, strengthen background, detector resolution, throughput, and overlap stress. If smoke stops, write v8A as a limitation and method discussion instead of implementing a larger matrix.
 
-## 6. Environment
+## 6. Integration smoke and small training gate
+
+After the transport-like smoke passes, the next package is still Python-only and development-only. It introduces an explicit custom diffraction/table source switch so we can prove the sidecar signal disappears when the diffraction source is off.
+
+Integration smoke commands:
+
+```bash
+/home/dyd/geant4-projects/xrt_sorter/.venv/bin/python \
+  analysis/v8a_custom_diffraction_integration_smoke.py \
+  --project-root /home/dyd/geant4-projects/xrt_sorter/release/xrt_sorter_public_undergrad_repo_20260426
+
+/home/dyd/geant4-projects/xrt_sorter/.venv/bin/python \
+  analysis/v8a_custom_diffraction_integration_smoke.py \
+  --project-root /home/dyd/geant4-projects/xrt_sorter/release/xrt_sorter_public_undergrad_repo_20260426 \
+  --output-dir results/accuracy_v3/v8a_custom_diffraction_integration_smoke_stress \
+  --detector-resolution-deg 0.22 \
+  --angular-bin-width-deg 0.30 \
+  --source-bandwidth-fraction 0.008 \
+  --intrinsic-q-sigma 0.055 \
+  --q-calibration-jitter 0.030 \
+  --orientation-sigma 0.95 \
+  --background-level 0.12 \
+  --background-slope-sigma 0.45 \
+  --counts-scale 600 \
+  --read-noise-sigma 0.009 \
+  --absorption-strength 0.025
+
+/home/dyd/geant4-projects/xrt_sorter/.venv/bin/python \
+  analysis/v8a_custom_diffraction_integration_smoke.py \
+  --project-root /home/dyd/geant4-projects/xrt_sorter/release/xrt_sorter_public_undergrad_repo_20260426 \
+  --output-dir results/accuracy_v3/v8a_custom_diffraction_integration_smoke_leakage_off \
+  --diffraction-source off
+```
+
+Small sidecar training gate:
+
+```bash
+/home/dyd/geant4-projects/xrt_sorter/.venv/bin/python \
+  analysis/train_v8a_sidecar_smoke.py \
+  --project-root /home/dyd/geant4-projects/xrt_sorter/release/xrt_sorter_public_undergrad_repo_20260426
+```
+
+The training script may run only after the source-on integration gate passes and the source-off leakage control passes. The leakage-off best H/M min recall must remain `<0.75` and at least `0.20` below the source-on main model.
+
+## 7. Environment
 
 Fixed Python:
 
