@@ -235,3 +235,19 @@ This gate only checks that source-on rows produce high-angle primary detector
 signal through the real Geant4 path, while source-off leakage rows do not. It is
 not H/M accuracy evidence, not hardware validation, and not a reason to open
 shadow/final.
+
+## 9. Schema/provenance review before any larger matrix
+
+The boundary-smoke decision is `proceed_to_geant4_diffraction_output_schema_review`.
+The next source-controlled review package is:
+
+- `docs/ACCURACY_SPRINT_V8A_SCHEMA_PROVENANCE_REVIEW_zh.md`
+- `analysis/configs/v8a_diffraction_output_schema_contract.json`
+- `source_models/config/diffraction_peak_tables/hm_powder_peaks_project_scan_v8a_manifest.json`
+
+This package freezes the expected Geant4 event/hit/source-to-sidecar field
+contract, records that the current H/M powder peaks are development-only
+anchors, and defines the controls required before a tiny H/M event-to-feature
+gate. A full v8A matrix remains blocked until schema traceability, peak-table
+provenance, source-on/off leakage, total-count-only, overlap-only,
+shuffled-label, and thickness/pose stress controls are all reviewed.

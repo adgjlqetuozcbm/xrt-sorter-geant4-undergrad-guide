@@ -1,0 +1,203 @@
+{
+  "schema_id": "v8a_diffraction_output_schema_contract",
+  "version": "2026-05-05",
+  "status": "development_preregistration",
+  "claim_scope": [
+    "Defines traceable Geant4-to-sidecar fields for diffraction-aware development gates.",
+    "Does not claim H/M accuracy, hardware validation, publishable powder XRD, or final sorter performance."
+  ],
+  "forbidden_claims": [
+    "ordinary_xrt_solves_hm",
+    "geant4_rayleigh_is_powder_xrd",
+    "g4xrayreflection_is_bulk_powder_xrd",
+    "smoke_hm_recall_is_product_accuracy"
+  ],
+  "canonical_axis": {
+    "allowed": [
+      "q_a_inv",
+      "d_a"
+    ],
+    "forbidden_as_cross_energy_axis": [
+      "two_theta_deg"
+    ],
+    "notes": "two_theta_deg may be retained as a per-source diagnostic, but q or d-spacing is mandatory for multi-energy feature alignment."
+  },
+  "source_config_fields": {
+    "required": [
+      "run_id",
+      "experiment_label",
+      "research_route",
+      "prediction_stage",
+      "run_role",
+      "source_variant",
+      "source_mode",
+      "phase_space_file",
+      "mono_energy_keV",
+      "ore_primary_material",
+      "ore_thickness_mm",
+      "detector_layout",
+      "sample_photons",
+      "random_seed"
+    ],
+    "recommended_next": [
+      "peak_table_id",
+      "bin_axis",
+      "source_energy_kev",
+      "source_wavelength_a",
+      "detector_resolution_deg",
+      "angular_bin_width_deg",
+      "background_model_id",
+      "throughput_model_id",
+      "absorption_model_id",
+      "development_only",
+      "shadow_or_final_used"
+    ]
+  },
+  "phase_space_input_fields": {
+    "current_required": [
+      "event_id",
+      "energy_keV",
+      "x_mm",
+      "y_mm",
+      "z_mm",
+      "dir_x",
+      "dir_y",
+      "dir_z"
+    ],
+    "recommended_next": [
+      "source_photon_id",
+      "source_mode",
+      "peak_table_id",
+      "peak_id",
+      "q_a_inv",
+      "d_a",
+      "two_theta_deg",
+      "is_diffraction_candidate"
+    ]
+  },
+  "geant4_event_csv_fields": {
+    "current_required": [
+      "event_id",
+      "detector_edep_keV",
+      "detector_gamma_entries",
+      "primary_gamma_entries",
+      "transmission_gamma_entries",
+      "transmission_primary_gamma_entries",
+      "side_scatter_gamma_entries",
+      "side_scatter_primary_gamma_entries"
+    ]
+  },
+  "geant4_hit_csv_fields": {
+    "current_required": [
+      "event_id",
+      "detector_id",
+      "x_mm",
+      "y_mm",
+      "z_mm",
+      "photon_energy_keV",
+      "is_primary",
+      "theta_deg",
+      "is_direct_primary",
+      "is_scattered_primary"
+    ],
+    "not_currently_available_do_not_use_without_cpp_change": [
+      "process_name",
+      "track_id",
+      "parent_id",
+      "source_photon_id",
+      "local_detector_u_mm",
+      "local_detector_v_mm",
+      "step_length_mm",
+      "creator_process"
+    ]
+  },
+  "sidecar_long_table_fields": {
+    "required": [
+      "sample_id",
+      "split",
+      "material",
+      "random_seed",
+      "thickness_mm",
+      "pose_index",
+      "source_id",
+      "source_mode",
+      "source_energy_kev",
+      "source_wavelength_a",
+      "peak_table_id",
+      "bin_axis",
+      "q_bin_center_a_inv",
+      "d_bin_center_a",
+      "detector_sector",
+      "detector_id_source",
+      "hit_count",
+      "primary_hit_count",
+      "sidecar_intensity_raw",
+      "sidecar_intensity_norm",
+      "background_level_effective",
+      "throughput",
+      "detector_resolution_deg",
+      "angular_bin_width_deg",
+      "absorption_factor"
+    ],
+    "lineage_rules": [
+      "sample_id must be stable and reproducible.",
+      "split must remain development-only until a preregistered branch passes.",
+      "source_mode must explicitly distinguish custom_diffraction_on and custom_diffraction_off.",
+      "peak_table_id must match a source-controlled manifest."
+    ]
+  },
+  "feature_table_groups": {
+    "main_diffraction_features": {
+      "prefixes": [
+        "diffraction_peak_",
+        "diffraction_ratio_",
+        "diffraction_window_"
+      ],
+      "allowed_inputs": [
+        "sidecar_intensity_norm",
+        "q_bin_center_a_inv",
+        "d_bin_center_a",
+        "detector_sector",
+        "peak_table_id"
+      ]
+    },
+    "controls": {
+      "required_groups": [
+        "control_total_count",
+        "control_overlap_only",
+        "control_shuffled_label",
+        "control_thickness_pose",
+        "control_source_off"
+      ]
+    },
+    "lineage": {
+      "required_fields": [
+        "sample_id",
+        "split",
+        "material",
+        "random_seed",
+        "source_id",
+        "source_mode",
+        "peak_table_id"
+      ]
+    }
+  },
+  "gates": {
+    "tiny_event_to_feature_gate": {
+      "hm_min_recall_min": 0.8,
+      "worst_thickness_hm_min_recall_min": 0.78,
+      "total_count_only_hm_min_recall_max": 0.75,
+      "overlap_only_hm_min_recall_max": 0.75,
+      "shuffled_label_hm_min_recall_max": 0.65,
+      "leakage_off_hm_min_recall_max": 0.75,
+      "main_minus_leakage_margin_min": 0.2
+    },
+    "promotion_to_larger_matrix": {
+      "requires_schema_contract": true,
+      "requires_peak_table_manifest": true,
+      "requires_source_on_off_controls": true,
+      "requires_no_shadow_or_final": true,
+      "requires_claim_scope_review": true
+    }
+  }
+}

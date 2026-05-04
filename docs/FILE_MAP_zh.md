@@ -104,3 +104,14 @@ Geant4 运行后会在 `build/` 下生成 `*_events.csv`、`*_hits.csv` 和 meta
 6. 同步更新 README、论文、队友指南和运行说明中的材料范围与结果数字。
 
 只有新的证据包生成并检查通过后，才能更新对该材料的结论。
+## 8. v8A diffraction schema/provenance review
+
+The v8A diffraction-aware branch has a pre-matrix review layer:
+
+- `docs/ACCURACY_SPRINT_V8A_SCHEMA_PROVENANCE_REVIEW_zh.md`
+- `analysis/configs/v8a_diffraction_output_schema_contract.json`
+- `source_models/config/diffraction_peak_tables/hm_powder_peaks_project_scan_v8a_manifest.json`
+
+These files define the Geant4 event/hit/source to `q/d` sidecar contract, the
+development-only H/M peak-table boundary, and the leakage/control/no-go checks
+that must pass before any larger v8A matrix.

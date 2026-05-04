@@ -1,0 +1,172 @@
+{
+  "peak_table_id": "hm_powder_peaks_project_scan_v8a",
+  "version": "2026-05-05",
+  "status": "development_only_needs_external_provenance_upgrade",
+  "source_files": [
+    "analysis/v8a_diffraction_observability.py",
+    "analysis/v8a_transport_sidecar_smoke.py",
+    "analysis/generate_v8a_diffraction_g4_smoke_matrix.py"
+  ],
+  "reference_type": "project_literature_scan_approximate_cu_k_alpha_anchors",
+  "reference_citation": "Internal project scan; replace with CIF-derived, Rietveld/literature, or measured reference table before full v8A matrix.",
+  "reference_url_or_doi": "pending",
+  "wavelength_a": 1.5406,
+  "intensity_normalization": "relative prototype weights, maximum approximate peak set to 1.0 per material",
+  "known_limitations": [
+    "Approximate peak anchors only.",
+    "Relative intensities are prototype weights, not quantitative Rietveld intensities.",
+    "No mixture, impurity, grain-size, preferred-orientation, fluorescence, or detector-response provenance.",
+    "Valid only for development smokes and schema tests.",
+    "Must not be used as manuscript-grade powder-XRD evidence."
+  ],
+  "materials": [
+    {
+      "material": "Hematite",
+      "phase_name": "hematite",
+      "chemical_formula": "Fe2O3",
+      "structure_note": "corundum/rhombohedral phase; provenance pending",
+      "peaks": [
+        {
+          "peak_id": "hematite_24p1",
+          "two_theta_deg": 24.1,
+          "q_a_inv": 1.702857,
+          "d_a": 3.689791,
+          "relative_intensity": 0.45
+        },
+        {
+          "peak_id": "hematite_33p2",
+          "two_theta_deg": 33.2,
+          "q_a_inv": 2.330304,
+          "d_a": 2.696295,
+          "relative_intensity": 1.0
+        },
+        {
+          "peak_id": "hematite_35p6",
+          "two_theta_deg": 35.6,
+          "q_a_inv": 2.493496,
+          "d_a": 2.519829,
+          "relative_intensity": 0.72
+        },
+        {
+          "peak_id": "hematite_40p9",
+          "two_theta_deg": 40.9,
+          "q_a_inv": 2.849904,
+          "d_a": 2.204701,
+          "relative_intensity": 0.24
+        },
+        {
+          "peak_id": "hematite_49p5",
+          "two_theta_deg": 49.5,
+          "q_a_inv": 3.414925,
+          "d_a": 1.839919,
+          "relative_intensity": 0.46
+        },
+        {
+          "peak_id": "hematite_54p1",
+          "two_theta_deg": 54.1,
+          "q_a_inv": 3.709452,
+          "d_a": 1.693831,
+          "relative_intensity": 0.55
+        },
+        {
+          "peak_id": "hematite_57p5",
+          "two_theta_deg": 57.5,
+          "q_a_inv": 3.923331,
+          "d_a": 1.601493,
+          "relative_intensity": 0.36
+        },
+        {
+          "peak_id": "hematite_62p5",
+          "two_theta_deg": 62.5,
+          "q_a_inv": 4.231531,
+          "d_a": 1.484849,
+          "relative_intensity": 0.42
+        },
+        {
+          "peak_id": "hematite_64p0",
+          "two_theta_deg": 64.0,
+          "q_a_inv": 4.322447,
+          "d_a": 1.453618,
+          "relative_intensity": 0.28
+        }
+      ]
+    },
+    {
+      "material": "Magnetite",
+      "phase_name": "magnetite",
+      "chemical_formula": "Fe3O4",
+      "structure_note": "inverse-spinel/cubic phase; provenance pending",
+      "peaks": [
+        {
+          "peak_id": "magnetite_18p3",
+          "two_theta_deg": 18.3,
+          "q_a_inv": 1.297092,
+          "d_a": 4.844054,
+          "relative_intensity": 0.18
+        },
+        {
+          "peak_id": "magnetite_30p1",
+          "two_theta_deg": 30.1,
+          "q_a_inv": 2.118011,
+          "d_a": 2.96655,
+          "relative_intensity": 0.55
+        },
+        {
+          "peak_id": "magnetite_35p5",
+          "two_theta_deg": 35.5,
+          "q_a_inv": 2.486718,
+          "d_a": 2.526698,
+          "relative_intensity": 1.0
+        },
+        {
+          "peak_id": "magnetite_37p0",
+          "two_theta_deg": 37.0,
+          "q_a_inv": 2.588192,
+          "d_a": 2.427635,
+          "relative_intensity": 0.22
+        },
+        {
+          "peak_id": "magnetite_43p1",
+          "two_theta_deg": 43.1,
+          "q_a_inv": 2.9961,
+          "d_a": 2.097121,
+          "relative_intensity": 0.68
+        },
+        {
+          "peak_id": "magnetite_53p4",
+          "two_theta_deg": 53.4,
+          "q_a_inv": 3.665007,
+          "d_a": 1.714372,
+          "relative_intensity": 0.48
+        },
+        {
+          "peak_id": "magnetite_57p0",
+          "two_theta_deg": 57.0,
+          "q_a_inv": 3.89209,
+          "d_a": 1.614347,
+          "relative_intensity": 0.5
+        },
+        {
+          "peak_id": "magnetite_62p6",
+          "two_theta_deg": 62.6,
+          "q_a_inv": 4.237615,
+          "d_a": 1.482717,
+          "relative_intensity": 0.38
+        },
+        {
+          "peak_id": "magnetite_74p0",
+          "two_theta_deg": 74.0,
+          "q_a_inv": 4.908887,
+          "d_a": 1.279961,
+          "relative_intensity": 0.16
+        }
+      ]
+    }
+  ],
+  "upgrade_required_before": [
+    "full_v8a_matrix",
+    "shadow_validation",
+    "final_validation",
+    "manuscript_grade_powder_xrd_claim"
+  ]
+}
