@@ -115,3 +115,12 @@ The v8A diffraction-aware branch has a pre-matrix review layer:
 These files define the Geant4 event/hit/source to `q/d` sidecar contract, the
 development-only H/M peak-table boundary, and the leakage/control/no-go checks
 that must pass before any larger v8A matrix.
+
+The tiny implementation that applies this contract to the completed boundary
+smoke is:
+
+- `analysis/v8a_event_to_feature_pipeline.py`
+
+Its generated output defaults to `results/accuracy_v3/v8a_event_to_feature_smoke/`
+and remains an untracked development evidence directory unless explicitly
+packaged later.

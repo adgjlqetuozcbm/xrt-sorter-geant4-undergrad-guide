@@ -202,3 +202,36 @@ Do not promote to C++ only to make the method sound more physical. The promotion
 3. Add the event-to-feature script only after the schema contract is stable.
 4. Run only a tiny development gate after source-on/off, control, and manifest checks are implemented.
 5. Keep all generated results untracked unless explicitly packaged.
+
+## 11. Tiny event-to-feature implementation
+
+The tiny event-to-feature implementation is:
+
+- `analysis/v8a_event_to_feature_pipeline.py`
+
+It reads only completed `v8a_custom_diffraction_g4_smoke` boundary-smoke rows and does not start Geant4. It converts recorded `*_events.csv`, `*_hits.csv`, and metadata into:
+
+- `v8a_event_sidecar_long.csv`
+- `v8a_event_sidecar_features.csv`
+- `v8a_event_feature_manifest.json`
+- `v8a_event_control_audit.csv`
+- `v8a_event_schema_gate.json`
+- `v8a_event_schema_gate_report.md`
+
+Default command:
+
+```bash
+python3 analysis/v8a_event_to_feature_pipeline.py \
+  --project-root . \
+  --profile v8a_custom_diffraction_g4_smoke \
+  --schema-contract analysis/configs/v8a_diffraction_output_schema_contract.json \
+  --peak-manifest source_models/config/diffraction_peak_tables/hm_powder_peaks_project_scan_v8a_manifest.json \
+  --output-dir results/accuracy_v3/v8a_event_to_feature_smoke \
+  --overwrite
+```
+
+Current tiny result interpretation:
+
+- The schema/control gate may pass if source-on signal is above source-off and lineage/contract checks are clean.
+- The training gate must remain blocked when only the original 12 boundary-smoke rows are available, because those rows are train-only and do not provide balanced source-on/off H/M validation support.
+- This is intentional. It prevents the boundary-smoke conversion from becoming an accuracy claim.
