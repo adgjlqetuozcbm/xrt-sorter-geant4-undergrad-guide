@@ -194,3 +194,44 @@ git diff --check
 ```
 
 Generated results are development artifacts and should stay untracked unless explicitly selected for evidence packaging.
+
+## 8. Minimal Geant4 boundary smoke
+
+After the Python-only integration/training smoke, the next step is a minimal
+Geant4 boundary smoke, not a full matrix. The purpose is to check that a
+custom/table diffraction source can enter the real Geant4 source, geometry, and
+detector-output path while preserving a source-on/source-off leakage control.
+
+Source generation:
+
+```bash
+/home/dyd/geant4-projects/xrt_sorter/.venv/bin/python \
+  analysis/generate_v8a_diffraction_g4_smoke_matrix.py \
+  --project-root /home/dyd/geant4-projects/xrt_sorter/release/xrt_sorter_public_undergrad_repo_20260426
+```
+
+Minimal runner:
+
+```bash
+cmake --build build -j2
+LD_LIBRARY_PATH=/home/dyd/geant4-install/lib:${LD_LIBRARY_PATH} \
+  /home/dyd/geant4-projects/xrt_sorter/.venv/bin/python \
+  analysis/run_material_sorting_matrix.py \
+  --profile v8a_custom_diffraction_g4_smoke \
+  --limit 12 \
+  --rerun-existing
+```
+
+Boundary audit:
+
+```bash
+/home/dyd/geant4-projects/xrt_sorter/.venv/bin/python \
+  analysis/audit_v8a_diffraction_g4_smoke.py \
+  --project-root /home/dyd/geant4-projects/xrt_sorter/release/xrt_sorter_public_undergrad_repo_20260426 \
+  --min-completed-rows 12
+```
+
+This gate only checks that source-on rows produce high-angle primary detector
+signal through the real Geant4 path, while source-off leakage rows do not. It is
+not H/M accuracy evidence, not hardware validation, and not a reason to open
+shadow/final.

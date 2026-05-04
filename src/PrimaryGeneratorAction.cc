@@ -12,9 +12,11 @@
 #include "Randomize.hh"
 
 #include <algorithm>
+#include <cctype>
 #include <fstream>
 #include <sstream>
 #include <string>
+#include <vector>
 
 PrimaryGeneratorAction::PrimaryGeneratorAction()
 : G4VUserPrimaryGeneratorAction(),
@@ -138,7 +140,17 @@ void PrimaryGeneratorAction::LoadPhaseSpaceFile(const G4String& fileName)
   }
 
   std::string line;
-  std::getline(fin, line); // skip CSV header
+  std::getline(fin, line); // CSV header
+  std::vector<std::string> columns;
+  {
+    std::stringstream header(line);
+    std::string token;
+    while (std::getline(header, token, ',')) {
+      token.erase(std::remove_if(token.begin(), token.end(), ::isspace), token.end());
+      columns.push_back(token);
+    }
+  }
+  const auto hasXmm = std::find(columns.begin(), columns.end(), "x_mm") != columns.end();
 
   while (std::getline(fin, line)) {
     if (line.empty()) continue;
@@ -146,11 +158,17 @@ void PrimaryGeneratorAction::LoadPhaseSpaceFile(const G4String& fileName)
     std::stringstream ss(line);
     std::string token;
     SourcePhotonSample sample{};
+    sample.x_mm = 0.0;
 
     std::getline(ss, token, ','); // event_id skip
 
     std::getline(ss, token, ',');
     sample.energy_keV = std::stod(token);
+
+    if (hasXmm) {
+      std::getline(ss, token, ',');
+      sample.x_mm = std::stod(token);
+    }
 
     std::getline(ss, token, ',');
     sample.y_mm = std::stod(token);
@@ -208,7 +226,7 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
     const auto& s = fSamples[idx];
 
     fParticleGun->SetParticlePosition(
-      G4ThreeVector(fSourcePos.x(), s.y_mm * mm, s.z_mm * mm));
+      G4ThreeVector(fSourcePos.x() + s.x_mm * mm, s.y_mm * mm, s.z_mm * mm));
 
     fParticleGun->SetParticleMomentumDirection(
       G4ThreeVector(s.dir_x, s.dir_y, s.dir_z).unit());

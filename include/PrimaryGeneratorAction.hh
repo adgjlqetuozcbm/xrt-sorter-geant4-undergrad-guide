@@ -14,6 +14,7 @@ class G4Event;
 struct SourcePhotonSample
 {
   G4double energy_keV;
+  G4double x_mm;
   G4double y_mm;
   G4double z_mm;
   G4double dir_x;
