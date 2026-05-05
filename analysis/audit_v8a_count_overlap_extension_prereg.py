@@ -60,6 +60,21 @@ def main() -> None:
     matrix_manifest = load_json(manifest_path)
 
     stop_reasons: list[str] = []
+    hard_guards = config.get("hard_guards", {})
+    expected_guards = {
+        "development_only": True,
+        "shadow_or_final_used": False,
+        "full_ten_material_matrix": False,
+        "source_on_extension_only": True,
+        "requires_peak_provenance_gate_passed": True,
+        "requires_medium_stress_gate_passed": True,
+        "requires_count_balance_sensitivity_stop": True,
+        "requires_successor_source_peak_table": True,
+        "requires_no_lineage_leakage": True,
+    }
+    for key, expected in expected_guards.items():
+        if hard_guards.get(key) is not expected:
+            stop_reasons.append(f"Config hard guard {key} is {hard_guards.get(key)!r}; expected {expected!r}.")
     expected_total = int(config["expected_rows"]["total"])
     if len(rows) != expected_total:
         stop_reasons.append(f"Matrix row count mismatch: {len(rows)} != expected {expected_total}.")
@@ -115,6 +130,7 @@ def main() -> None:
         "profile": profile,
         "base_profile": config["base_profile"],
         "peak_table_id": peak_table_id,
+        "hard_guards": hard_guards,
         "row_count": len(rows),
         "split_counts": split_counts,
         "material_counts": material_counts,

@@ -195,7 +195,12 @@ The count-overlap extension preregistration package is:
 - `analysis/configs/v8a_count_overlap_extension_config.json`
 - `analysis/generate_v8a_count_overlap_extension_matrix.py`
 - `analysis/audit_v8a_count_overlap_extension_prereg.py`
+- `analysis/combine_v8a_medium_count_overlap_features.py`
+- `analysis/configs/v8a_medium_plus_count_overlap_stress_gate_config.json`
 
 Its generated profile is
 `source_models/config/material_sorting_matrix/v8a_hm_count_overlap_extension_cif_literature/`.
 It is development-only, source-on only, and does not unlock training by itself.
+After the extension rows are run, the combiner creates a controlled
+medium-plus-extension feature directory that keeps the existing medium
+source-off rows as leakage controls before any renewed stress/count gates run.
