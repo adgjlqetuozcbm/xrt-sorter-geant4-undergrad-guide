@@ -216,3 +216,19 @@ The current count-overlap/count-balanced stage report is:
 It records the accepted development-only positive result, the ordinary Phase 4
 total-count blocker, the no-go boundary for shadow/final and full v8A matrix,
 and the next feature-rework plan.
+
+The follow-up count-robust v1 rework and development-matrix admission report is:
+
+- `docs/ACCURACY_SPRINT_V8A_COUNT_ROBUST_REWORK_REPORT_zh.md`
+
+Its source-controlled scripts/config are:
+
+- `analysis/diagnose_v8a_total_count_anatomy.py`
+- `analysis/build_v8a_count_robust_features.py`
+- `analysis/audit_v8a_count_robust_stability.py`
+- `analysis/audit_v8a_development_matrix_admission.py`
+- `analysis/configs/v8a_count_robust_v1_stress_gate_config.json`
+
+The v1 result keeps the H/M sidecar signal visible but does not unlock large
+development matrix preregistration because the ordinary Phase 4 total-count
+control and count-balanced shuffled-label sanity checks still block promotion.

@@ -1,0 +1,83 @@
+{
+  "config_id": "v8a_count_robust_v1_stress_gate_config",
+  "version": "2026-05-06",
+  "status": "development_preregistration",
+  "claim_scope": "development-only fixed-train/stressed-validation robustness gate over count-robust v8A H/M features; not product accuracy, hardware validation, shadow/final validation, or manuscript-grade powder XRD",
+  "input_feature_dir": "results/accuracy_v3/v8a_medium_plus_count_overlap_count_robust_v1_event_to_feature",
+  "baseline_training_dir": "results/accuracy_v3/v8a_medium_plus_count_overlap_count_robust_v1_event_training",
+  "peak_manifest": "source_models/config/diffraction_peak_tables/hm_powder_peaks_cif_or_literature_v8a_manifest.json",
+  "peak_provenance_audit_dir": "results/accuracy_v3/v8a_peak_provenance_audit",
+  "output_dir": "results/accuracy_v3/v8a_medium_plus_count_overlap_count_robust_v1_event_feature_stress_gate",
+  "thresholds": {
+    "main_hm_min_recall_min": 0.95,
+    "worst_thickness_hm_min_recall_min": 0.9,
+    "total_count_only_hm_min_recall_max": 0.6,
+    "overlap_only_hm_min_recall_max": 0.6,
+    "shuffled_label_hm_min_recall_max": 0.55,
+    "source_off_hm_min_recall_max": 0.6,
+    "main_minus_source_off_hm_margin_min": 0.35,
+    "leave_one_thickness_hm_min_recall_min": 0.9,
+    "validation_seed_group_hm_min_recall_min": 0.9
+  },
+  "stress_scenarios": [
+    {
+      "name": "baseline_identity",
+      "kind": "identity"
+    },
+    {
+      "name": "feature_proxy_peak_q_jitter_small",
+      "kind": "multiplicative_and_additive_noise",
+      "multiplicative_sigma": 0.05,
+      "additive_fraction_of_feature_iqr": 0.01
+    },
+    {
+      "name": "feature_proxy_peak_q_jitter_medium",
+      "kind": "multiplicative_and_additive_noise",
+      "multiplicative_sigma": 0.1,
+      "additive_fraction_of_feature_iqr": 0.03
+    },
+    {
+      "name": "feature_proxy_peak_q_jitter_strong",
+      "kind": "multiplicative_and_additive_noise",
+      "multiplicative_sigma": 0.18,
+      "additive_fraction_of_feature_iqr": 0.06
+    },
+    {
+      "name": "relative_intensity_perturbation_low",
+      "kind": "column_scale_noise",
+      "column_scale_sigma": 0.08
+    },
+    {
+      "name": "relative_intensity_perturbation_high",
+      "kind": "column_scale_noise",
+      "column_scale_sigma": 0.18
+    },
+    {
+      "name": "detector_resolution_broadening",
+      "kind": "feature_smoothing",
+      "mix_fraction": 0.18
+    },
+    {
+      "name": "background_noise_injection",
+      "kind": "background_noise",
+      "background_fraction_of_feature_median": 0.08,
+      "multiplicative_sigma": 0.06
+    },
+    {
+      "name": "overlap_window_suppression",
+      "kind": "suppress_overlap_features",
+      "suppression_factor": 0.1
+    }
+  ],
+  "forbidden_main_feature_name_tokens": [
+    "material",
+    "source_id",
+    "sample_id",
+    "path",
+    "seed",
+    "thickness",
+    "pose",
+    "split",
+    "row_index"
+  ]
+}
