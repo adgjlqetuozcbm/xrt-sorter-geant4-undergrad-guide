@@ -170,3 +170,67 @@ Current preregistration result:
 - training unlocked: `false`
 
 The next executable step is to run the medium development matrix only. Development model training may start only after the medium matrix completes and then passes event-to-feature schema, stress, and leakage audits on its own outputs.
+
+## 10. Medium execution and Phase 4 status
+
+The medium development matrix was executed as development-only evidence:
+
+- profile: `v8a_hm_medium_development_cif_literature`
+- completed rows: `864/864`
+- failed rows: `0`
+- H/M balance: `432/432`
+- splits: train `432`, validation `216`, stress-holdout `216`
+- source modes: source-on `576`, source-off `288`
+- thickness levels: `3`, `10`, `30`, `60` mm
+- pose levels: `0`, `1`, `2`
+
+The medium event-to-feature rerun passed:
+
+- output: `results/accuracy_v3/v8a_medium_event_to_feature/`
+- samples: `864`
+- sidecar rows: `119575`
+- decision: `schema_control_gate_passed_ready_for_tiny_training_gate`
+
+The medium fixed-train/stressed-validation stress gate passed:
+
+- output: `results/accuracy_v3/v8a_medium_event_feature_stress_gate/`
+- decision: `proceed_to_medium_development_matrix_preregistration`
+- worst main H/M min recall: `1.0`
+- worst overlap-only H/M min recall: `0.4722`
+- worst shuffled-label H/M min recall: `0.4444`
+- worst source-off H/M min recall: `0.4722`
+- source peak table matches analysis peak table: `true`
+
+The Phase 4 development-only model training/calibration gate was then run:
+
+- script: `analysis/train_v8a_medium_development_model.py`
+- output: `results/accuracy_v3/v8a_medium_development_model/`
+- selected main model: `LogisticEventMain`
+- selected validation threshold: `0.50`
+- validation H/M min recall: `1.0`
+- stress-holdout H/M min recall: `1.0`
+- worst by thickness/pose/stress-label H/M min recall: `1.0`
+- validation expected calibration error: `0.0028`
+- stress-holdout expected calibration error: `0.0025`
+
+However, Phase 4 did not pass because the total-count-only control exceeded the
+pre-registered ceiling:
+
+- decision: `stop_or_rework_medium_development_model_training`
+- stop reason: `total_count_only_below_ceiling`
+- total-count-only H/M min recall: `0.7778`
+- ceiling: `<0.60`
+
+The follow-up diagnostic is:
+
+- script: `analysis/diagnose_v8a_total_count_control.py`
+- output: `results/accuracy_v3/v8a_medium_total_count_control_diagnostic/`
+- decision: `rework_total_count_confounding_before_any_shadow_final_or_product_claim`
+- max standardized material gap among total-count controls: `2.2239`
+
+Interpretation: the diffraction-aware main model is strong under the medium
+development matrix, but the current evidence is not clean enough for promotion
+because a total-count-only shortcut still carries H/M information. The next
+phase must rework total-count confounding, for example by adding count-residual
+or count-normalized main-feature variants and keeping the total-count-only
+negative-control ceiling active. Shadow/final remain sealed.

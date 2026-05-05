@@ -156,3 +156,21 @@ Its source-controlled audit/gate files are:
 - `analysis/audit_v8a_medium_development_prereg.py`
 
 The stress gate uses fixed baseline training with stressed validation features.
+
+After the medium development matrix is executed, the Phase 4 development-only
+model training/calibration gate is:
+
+- `analysis/train_v8a_medium_development_model.py`
+
+Its generated output defaults to
+`results/accuracy_v3/v8a_medium_development_model/`. It performs Logistic and
+ExtraTrees main-model checks, threshold sweeps, calibration bins, and
+by-thickness/by-pose/by-stress-label recall summaries while keeping shadow/final
+sealed.
+
+The total-count confounder diagnostic for a stopped Phase 4 gate is:
+
+- `analysis/diagnose_v8a_total_count_control.py`
+
+Its generated output defaults to
+`results/accuracy_v3/v8a_medium_total_count_control_diagnostic/`.
