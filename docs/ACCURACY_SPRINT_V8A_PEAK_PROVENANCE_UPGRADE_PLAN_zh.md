@@ -91,3 +91,32 @@ Even with an upgraded peak manifest, a tiny v8A event-feature gate remains devel
 - hardware validation;
 - shadow/final claims;
 - manuscript-grade powder-XRD validation without separate review.
+
+## 7. Current candidate audit
+
+The first successor manifest is:
+
+- `source_models/config/diffraction_peak_tables/hm_powder_peaks_cif_or_literature_v8a_manifest.json`
+
+Audit command:
+
+```bash
+/home/dyd/geant4-projects/xrt_sorter/.venv/bin/python \
+  analysis/audit_v8a_peak_provenance.py \
+  --project-root . \
+  --manifest source_models/config/diffraction_peak_tables/hm_powder_peaks_cif_or_literature_v8a_manifest.json \
+  --output-dir results/accuracy_v3/v8a_peak_provenance_audit \
+  --overwrite
+```
+
+Current audit result:
+
+- decision: `proceed_to_v8a_event_feature_stress_gate`
+- gate passed: `true`
+- peak count: `16`
+- external reference count: `2`
+- status: `development_reference_candidate`
+
+This remains a development reference candidate, not a manuscript-grade reference table.
+
+The audit now requires peak-level `hkl`, citation, and external URL/DOI fields. Material-level references alone are not sufficient for a passing successor manifest.

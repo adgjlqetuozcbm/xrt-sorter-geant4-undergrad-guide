@@ -281,3 +281,21 @@ The parallel H/M peak provenance plan is:
 - `docs/ACCURACY_SPRINT_V8A_PEAK_PROVENANCE_UPGRADE_PLAN_zh.md`
 
 This is a planning and review artifact. It does not by itself upgrade the current peak table. The current `hm_powder_peaks_project_scan_v8a` manifest remains development-only until a CIF-derived, literature/Rietveld, or measured-reference successor manifest is created and reviewed.
+
+## 14. Balanced development design review
+
+The next stricter review package is:
+
+- `docs/ACCURACY_SPRINT_V8A_BALANCED_DEV_DESIGN_REVIEW_zh.md`
+
+It introduces:
+
+- `source_models/config/diffraction_peak_tables/hm_powder_peaks_cif_or_literature_v8a_manifest.json`
+- `analysis/audit_v8a_peak_provenance.py`
+- `analysis/configs/v8a_event_feature_stress_gate_config.json`
+- `analysis/v8a_event_feature_stress_gate.py`
+- `analysis/configs/v8a_medium_development_matrix_config.json`
+- `analysis/generate_v8a_medium_development_matrix.py`
+- `analysis/audit_v8a_medium_development_prereg.py`
+
+The stress gate raises the development threshold and uses a fixed-train/stressed-validation protocol, so it may stop the branch even though the earlier 90-row tiny gate passed. Medium development matrix preregistration is allowed only if the peak provenance audit and the stricter stress gate both pass. Medium model training remains locked until a successor-manifest medium matrix has actually run and passed its own schema/stress/leakage audits.

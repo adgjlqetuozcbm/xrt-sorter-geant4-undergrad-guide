@@ -1,0 +1,208 @@
+{
+  "peak_table_id": "hm_powder_peaks_cif_or_literature_v8a",
+  "version": "2026-05-05",
+  "status": "development_reference_candidate",
+  "reference_type": "literature_jcpds_indexed_reference_pattern_candidate",
+  "reference_citation": "Hematite peak positions indexed to JCPDS No. 33-0664; Magnetite peak positions indexed to JCPDS No. 19-0629. Candidate relative intensities remain normalized development values and require CIF/Rietveld or measured-reference refinement before manuscript-grade claims.",
+  "reference_url_or_doi": [
+    "https://www.mdpi.com/2073-4441/15/23/4070",
+    "https://www.mdpi.com/1996-1944/13/9/2162"
+  ],
+  "wavelength_a": 1.5406,
+  "intensity_normalization": "relative intensities normalized to 1.0 per material; values are development-reference candidates, not Rietveld-refined quantitative intensities",
+  "known_limitations": [
+    "Peak positions are literature/JCPDS-indexed Cu K-alpha reference candidates, not a project-specific measured reference scan.",
+    "Relative intensities remain development-reference candidates and may vary with texture, grain size, impurities, preferred orientation, and instrument response.",
+    "No mixture, impurity, fluorescence, detector-response, or throughput provenance is encoded in this manifest.",
+    "Valid for v8A development stress gates only.",
+    "Must not be used as manuscript-grade powder-XRD validation without a separate CIF/Rietveld or measured-reference review."
+  ],
+  "upgrade_required_before": [
+    "full_v8a_matrix",
+    "shadow_validation",
+    "final_validation",
+    "manuscript_grade_powder_xrd_claim"
+  ],
+  "materials": [
+    {
+      "material": "Hematite",
+      "phase_name": "hematite",
+      "chemical_formula": "Fe2O3",
+      "structure_note": "alpha-Fe2O3 corundum/rhombohedral phase; peak positions indexed to JCPDS No. 33-0664",
+      "reference_citation": "Water 2023, 15(23), 4070 reports hematite peaks at 24.1, 33.1, 35.6, 40.8, 49.4, 54.0, 62.4, and 63.9 degrees for JCPDS No. 33-0664.",
+      "reference_url_or_doi": "https://www.mdpi.com/2073-4441/15/23/4070",
+      "peaks": [
+        {
+          "peak_id": "hematite_24p1",
+          "hkl": "012",
+          "two_theta_deg": 24.1,
+          "q_a_inv": 1.702857,
+          "d_a": 3.689791,
+          "relative_intensity": 0.45,
+          "reference_citation": "Water 2023, 15(23), 4070 / JCPDS No. 33-0664 hematite indexed peak list.",
+          "reference_url_or_doi": "https://www.mdpi.com/2073-4441/15/23/4070"
+        },
+        {
+          "peak_id": "hematite_33p1",
+          "hkl": "104",
+          "two_theta_deg": 33.1,
+          "q_a_inv": 2.323484,
+          "d_a": 2.704208,
+          "relative_intensity": 1.0,
+          "reference_citation": "Water 2023, 15(23), 4070 / JCPDS No. 33-0664 hematite indexed peak list.",
+          "reference_url_or_doi": "https://www.mdpi.com/2073-4441/15/23/4070"
+        },
+        {
+          "peak_id": "hematite_35p6",
+          "hkl": "110",
+          "two_theta_deg": 35.6,
+          "q_a_inv": 2.493496,
+          "d_a": 2.519829,
+          "relative_intensity": 0.72,
+          "reference_citation": "Water 2023, 15(23), 4070 / JCPDS No. 33-0664 hematite indexed peak list.",
+          "reference_url_or_doi": "https://www.mdpi.com/2073-4441/15/23/4070"
+        },
+        {
+          "peak_id": "hematite_40p8",
+          "hkl": "113",
+          "two_theta_deg": 40.8,
+          "q_a_inv": 2.84323,
+          "d_a": 2.209875,
+          "relative_intensity": 0.24,
+          "reference_citation": "Water 2023, 15(23), 4070 / JCPDS No. 33-0664 hematite indexed peak list.",
+          "reference_url_or_doi": "https://www.mdpi.com/2073-4441/15/23/4070"
+        },
+        {
+          "peak_id": "hematite_49p4",
+          "hkl": "024",
+          "two_theta_deg": 49.4,
+          "q_a_inv": 3.408439,
+          "d_a": 1.84342,
+          "relative_intensity": 0.46,
+          "reference_citation": "Water 2023, 15(23), 4070 / JCPDS No. 33-0664 hematite indexed peak list.",
+          "reference_url_or_doi": "https://www.mdpi.com/2073-4441/15/23/4070"
+        },
+        {
+          "peak_id": "hematite_54p0",
+          "hkl": "116",
+          "two_theta_deg": 54.0,
+          "q_a_inv": 3.703098,
+          "d_a": 1.696737,
+          "relative_intensity": 0.55,
+          "reference_citation": "Water 2023, 15(23), 4070 / JCPDS No. 33-0664 hematite indexed peak list.",
+          "reference_url_or_doi": "https://www.mdpi.com/2073-4441/15/23/4070"
+        },
+        {
+          "peak_id": "hematite_62p4",
+          "hkl": "214",
+          "two_theta_deg": 62.4,
+          "q_a_inv": 4.225436,
+          "d_a": 1.486991,
+          "relative_intensity": 0.42,
+          "reference_citation": "Water 2023, 15(23), 4070 / JCPDS No. 33-0664 hematite indexed peak list.",
+          "reference_url_or_doi": "https://www.mdpi.com/2073-4441/15/23/4070"
+        },
+        {
+          "peak_id": "hematite_63p9",
+          "hkl": "300",
+          "two_theta_deg": 63.9,
+          "q_a_inv": 4.316409,
+          "d_a": 1.455652,
+          "relative_intensity": 0.28,
+          "reference_citation": "Water 2023, 15(23), 4070 / JCPDS No. 33-0664 hematite indexed peak list.",
+          "reference_url_or_doi": "https://www.mdpi.com/2073-4441/15/23/4070"
+        }
+      ]
+    },
+    {
+      "material": "Magnetite",
+      "phase_name": "magnetite",
+      "chemical_formula": "Fe3O4",
+      "structure_note": "cubic inverse-spinel phase; peak positions indexed to JCPDS No. 19-0629",
+      "reference_citation": "Materials 2020, 13(9), 2162 reports magnetite peaks at 18.2, 30.1, 35.4, 37.1, 43.1, 53.5, 57.0, and 62.6 degrees for JCPDS No. 19-0629.",
+      "reference_url_or_doi": "https://www.mdpi.com/1996-1944/13/9/2162",
+      "peaks": [
+        {
+          "peak_id": "magnetite_18p2",
+          "hkl": "110",
+          "two_theta_deg": 18.2,
+          "q_a_inv": 1.290043,
+          "d_a": 4.870521,
+          "relative_intensity": 0.18,
+          "reference_citation": "Materials 2020, 13(9), 2162 / JCPDS No. 19-0629 magnetite indexed peak list.",
+          "reference_url_or_doi": "https://www.mdpi.com/1996-1944/13/9/2162"
+        },
+        {
+          "peak_id": "magnetite_30p1",
+          "hkl": "220",
+          "two_theta_deg": 30.1,
+          "q_a_inv": 2.118011,
+          "d_a": 2.96655,
+          "relative_intensity": 0.55,
+          "reference_citation": "Materials 2020, 13(9), 2162 / JCPDS No. 19-0629 magnetite indexed peak list.",
+          "reference_url_or_doi": "https://www.mdpi.com/1996-1944/13/9/2162"
+        },
+        {
+          "peak_id": "magnetite_35p4",
+          "hkl": "311",
+          "two_theta_deg": 35.4,
+          "q_a_inv": 2.479935,
+          "d_a": 2.533609,
+          "relative_intensity": 1.0,
+          "reference_citation": "Materials 2020, 13(9), 2162 / JCPDS No. 19-0629 magnetite indexed peak list.",
+          "reference_url_or_doi": "https://www.mdpi.com/1996-1944/13/9/2162"
+        },
+        {
+          "peak_id": "magnetite_37p1",
+          "hkl": "222",
+          "two_theta_deg": 37.1,
+          "q_a_inv": 2.59494,
+          "d_a": 2.421321,
+          "relative_intensity": 0.22,
+          "reference_citation": "Materials 2020, 13(9), 2162 / JCPDS No. 19-0629 magnetite indexed peak list.",
+          "reference_url_or_doi": "https://www.mdpi.com/1996-1944/13/9/2162"
+        },
+        {
+          "peak_id": "magnetite_43p1",
+          "hkl": "400",
+          "two_theta_deg": 43.1,
+          "q_a_inv": 2.9961,
+          "d_a": 2.097121,
+          "relative_intensity": 0.68,
+          "reference_citation": "Materials 2020, 13(9), 2162 / JCPDS No. 19-0629 magnetite indexed peak list.",
+          "reference_url_or_doi": "https://www.mdpi.com/1996-1944/13/9/2162"
+        },
+        {
+          "peak_id": "magnetite_53p5",
+          "hkl": "422",
+          "two_theta_deg": 53.5,
+          "q_a_inv": 3.671361,
+          "d_a": 1.711404,
+          "relative_intensity": 0.48,
+          "reference_citation": "Materials 2020, 13(9), 2162 / JCPDS No. 19-0629 magnetite indexed peak list.",
+          "reference_url_or_doi": "https://www.mdpi.com/1996-1944/13/9/2162"
+        },
+        {
+          "peak_id": "magnetite_57p0",
+          "hkl": "511",
+          "two_theta_deg": 57.0,
+          "q_a_inv": 3.89209,
+          "d_a": 1.614347,
+          "relative_intensity": 0.5,
+          "reference_citation": "Materials 2020, 13(9), 2162 / JCPDS No. 19-0629 magnetite indexed peak list.",
+          "reference_url_or_doi": "https://www.mdpi.com/1996-1944/13/9/2162"
+        },
+        {
+          "peak_id": "magnetite_62p6",
+          "hkl": "440",
+          "two_theta_deg": 62.6,
+          "q_a_inv": 4.237615,
+          "d_a": 1.482717,
+          "relative_intensity": 0.38,
+          "reference_citation": "Materials 2020, 13(9), 2162 / JCPDS No. 19-0629 magnetite indexed peak list.",
+          "reference_url_or_doi": "https://www.mdpi.com/1996-1944/13/9/2162"
+        }
+      ]
+    }
+  ]
+}

@@ -17,7 +17,7 @@ from typing import Any
 HC_KEV_A = 12.398419843320026
 DEFAULT_PROFILE = "v8a_custom_diffraction_g4_smoke"
 DEFAULT_SCHEMA_CONTRACT = "analysis/configs/v8a_diffraction_output_schema_contract.json"
-DEFAULT_PEAK_MANIFEST = "source_models/config/diffraction_peak_tables/hm_powder_peaks_project_scan_v8a_manifest.json"
+DEFAULT_PEAK_MANIFEST = "source_models/config/diffraction_peak_tables/hm_powder_peaks_cif_or_literature_v8a_manifest.json"
 DEFAULT_OUTPUT_DIR = "results/accuracy_v3/v8a_event_to_feature_smoke"
 DEFAULT_BIN_AXIS = "q_a_inv"
 DEFAULT_Q_BIN_WIDTH = 0.05
@@ -371,12 +371,13 @@ def build_sidecar_tables(
         source_energy_kev = safe_float(row.get("source_energy_kev"), safe_float(metadata.get("mono_energy_keV"), 0.0))
         source_wavelength_a = wavelength_from_energy(source_energy_kev)
         sample_id = stable_sample_id(row)
-        peak_table_id = row.get("peak_table_id", peak_manifest.get("peak_table_id", "unknown"))
+        analysis_peak_table_id = str(peak_manifest.get("peak_table_id", "unknown"))
+        source_peak_table_id = str(row.get("peak_table_id", analysis_peak_table_id))
         thickness_mm = safe_float(row.get("thickness_mm"), safe_float(metadata.get("ore_thickness_mm"), 0.0))
         random_seed = safe_int(row.get("random_seed"), safe_int(metadata.get("random_seed"), 0))
         detector_resolution_deg = 0.0
         angular_bin_width_deg = 0.0
-        pose_index = 0
+        pose_index = safe_int(row.get("pose_index"), safe_int(metadata.get("pose_index"), 0))
 
         bin_agg: dict[tuple[str, str, float], dict[str, Any]] = {}
         total_hit_count = 0
@@ -423,7 +424,8 @@ def build_sidecar_tables(
                     "source_mode": source_mode,
                     "source_energy_kev": source_energy_kev,
                     "source_wavelength_a": source_wavelength_a,
-                    "peak_table_id": peak_table_id,
+                    "peak_table_id": analysis_peak_table_id,
+                    "source_peak_table_id": source_peak_table_id,
                     "bin_axis": bin_axis,
                     "q_bin_center_a_inv": q_center,
                     "d_bin_center_a": d_center,
@@ -462,7 +464,8 @@ def build_sidecar_tables(
             "source_mode_raw": source_mode_raw,
             "source_energy_kev": source_energy_kev,
             "source_wavelength_a": round(source_wavelength_a, 10),
-            "peak_table_id": peak_table_id,
+            "peak_table_id": analysis_peak_table_id,
+            "source_peak_table_id": source_peak_table_id,
             "bin_axis": bin_axis,
             "stress_label": row.get("stress_label", ""),
             "development_only": boolish(row.get("development_only", True)),
@@ -533,7 +536,8 @@ def build_sidecar_tables(
                 "hit_schema_ok": not missing_hit,
                 "event_schema_ok": not missing_event,
                 "source_mode": source_mode,
-                "peak_table_id": peak_table_id,
+                "peak_table_id": analysis_peak_table_id,
+                "source_peak_table_id": source_peak_table_id,
             }
         )
 
@@ -762,6 +766,8 @@ def main() -> None:
     development_only = all(boolish(row.get("development_only", True)) for row in feature_rows)
     peak_table_id = str(peak_manifest.get("peak_table_id", "unknown"))
     peak_id_matches = all(row.get("peak_table_id") == peak_table_id for row in feature_rows)
+    source_peak_table_ids = sorted({str(row.get("source_peak_table_id", "")) for row in feature_rows})
+    source_peak_table_matches_analysis = source_peak_table_ids == [peak_table_id]
     long_schema_ok = set(required_long_fields).issubset(long_rows[0].keys()) if long_rows else False
     source_lineage_ok = control_summary["source_on_rows"] > 0 and control_summary["source_off_rows"] > 0
     schema_gate_passed = bool(
@@ -784,6 +790,8 @@ def main() -> None:
         stop_reasons.append("Source-off peak-window signal is not low enough for leakage control.")
     if shadow_or_final_used:
         stop_reasons.append("Shadow/final usage was detected.")
+    if not peak_id_matches:
+        stop_reasons.append("Analysis peak table id does not match the requested peak manifest.")
 
     decision = (
         "schema_control_gate_passed_ready_for_tiny_training_gate"
@@ -808,6 +816,12 @@ def main() -> None:
         "d_bin_width_a": args.d_bin_width,
         "peak_window_a_inv": args.peak_window_a_inv,
         "peak_table_id": peak_table_id,
+        "source_peak_table_ids": source_peak_table_ids,
+        "source_peak_table_matches_analysis": source_peak_table_matches_analysis,
+        "lineage_note": (
+            "source_peak_table_ids record the manifest used to generate the existing Geant4 phase-space/source rows; "
+            "peak_table_id records the manifest used for this event-to-feature re-windowing pass."
+        ),
         "peak_manifest_path": relpath(peak_manifest_path, project_root),
         "schema_contract_path": relpath(schema_path, project_root),
         "sample_count": len(feature_rows),
@@ -820,6 +834,7 @@ def main() -> None:
             "material",
             "source_id",
             "source_mode",
+            "source_peak_table_id",
             "random_seed",
             "thickness_mm",
             "pose_index",
@@ -843,6 +858,11 @@ def main() -> None:
         "runs_geant4": False,
         "bin_axis": args.bin_axis,
         "peak_table_id": peak_table_id,
+        "source_peak_table_ids": source_peak_table_ids,
+        "source_peak_table_matches_analysis": source_peak_table_matches_analysis,
+        "lineage_note": (
+            "Existing development hits may have been generated from an earlier peak table; medium matrix generation must use the successor manifest directly."
+        ),
         "schema_contract_ok": True,
         "long_schema_ok": long_schema_ok,
         "peak_table_id_matches": peak_id_matches,

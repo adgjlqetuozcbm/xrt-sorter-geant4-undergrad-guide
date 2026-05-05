@@ -1,0 +1,53 @@
+{
+  "config_id": "v8a_medium_development_matrix_config",
+  "version": "2026-05-05",
+  "status": "development_preregistration",
+  "claim_scope": "H/M development-only medium matrix preregistration; not shadow/final, product accuracy, hardware validation, full ten-material matrix, or manuscript-grade powder XRD",
+  "profile": "v8a_hm_medium_development_cif_literature",
+  "peak_manifest": "source_models/config/diffraction_peak_tables/hm_powder_peaks_cif_or_literature_v8a_manifest.json",
+  "required_peak_table_id": "hm_powder_peaks_cif_or_literature_v8a",
+  "source_energy_kev": 35.0,
+  "photons_per_row": 4000,
+  "splits": {
+    "train": {
+      "seeds": [7101, 7102, 7103, 7104, 7105, 7106]
+    },
+    "validation": {
+      "seeds": [7201, 7202, 7203]
+    },
+    "stress_holdout": {
+      "seeds": [7301, 7302, 7303]
+    }
+  },
+  "materials": ["Hematite", "Magnetite"],
+  "thickness_mm": [3.0, 10.0, 30.0, 60.0],
+  "pose_indices": [0, 1, 2],
+  "source_modes": [
+    {"source_mode": "on", "stress_label": "default"},
+    {"source_mode": "on", "stress_label": "stress"},
+    {"source_mode": "off", "stress_label": "leakage_off"}
+  ],
+  "expected_rows": {
+    "train": 432,
+    "validation": 216,
+    "stress_holdout": 216,
+    "total": 864
+  },
+  "hard_guards": {
+    "development_only": true,
+    "shadow_or_final_used": false,
+    "full_ten_material_matrix": false,
+    "requires_peak_provenance_gate_passed": true,
+    "requires_stress_gate_passed": true,
+    "requires_successor_source_peak_table": true,
+    "requires_no_lineage_leakage": true
+  },
+  "training_unlock_conditions": [
+    "medium matrix generation completed",
+    "all rows are development-only",
+    "source_peak_table_id equals hm_powder_peaks_cif_or_literature_v8a",
+    "event-to-feature schema gate passes on medium outputs",
+    "stress gate passes on medium outputs",
+    "no material/source_id/sample_id/seed/thickness/pose/split leakage in main features"
+  ]
+}

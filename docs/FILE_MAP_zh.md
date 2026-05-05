@@ -139,3 +139,20 @@ design review.
 The parallel peak-provenance review plan is:
 
 - `docs/ACCURACY_SPRINT_V8A_PEAK_PROVENANCE_UPGRADE_PLAN_zh.md`
+
+The stricter balanced development design review is:
+
+- `docs/ACCURACY_SPRINT_V8A_BALANCED_DEV_DESIGN_REVIEW_zh.md`
+
+Its source-controlled audit/gate files are:
+
+- `source_models/config/diffraction_peak_tables/hm_powder_peaks_cif_or_literature_v8a_manifest.json`
+- `analysis/audit_v8a_peak_provenance.py`
+- `analysis/configs/v8a_event_feature_stress_gate_config.json`
+- `analysis/v8a_event_feature_stress_gate.py`
+- `analysis/diagnose_v8a_overlap_control.py`
+- `analysis/configs/v8a_medium_development_matrix_config.json`
+- `analysis/generate_v8a_medium_development_matrix.py`
+- `analysis/audit_v8a_medium_development_prereg.py`
+
+The stress gate uses fixed baseline training with stressed validation features.

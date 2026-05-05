@@ -124,6 +124,7 @@
       "source_energy_kev",
       "source_wavelength_a",
       "peak_table_id",
+      "source_peak_table_id",
       "bin_axis",
       "q_bin_center_a_inv",
       "d_bin_center_a",
