@@ -208,3 +208,11 @@ source-off rows as leakage controls before any renewed stress/count gates run.
 If count-balance sensitivity identifies a supported strategy, the retest script
 runs the selected strict count-balanced development gate while keeping
 shadow/final sealed.
+
+The current count-overlap/count-balanced stage report is:
+
+- `docs/ACCURACY_SPRINT_V8A_COUNT_BALANCED_STAGE_REPORT_zh.md`
+
+It records the accepted development-only positive result, the ordinary Phase 4
+total-count blocker, the no-go boundary for shadow/final and full v8A matrix,
+and the next feature-rework plan.
