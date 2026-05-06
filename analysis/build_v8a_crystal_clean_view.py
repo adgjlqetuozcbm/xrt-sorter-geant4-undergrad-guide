@@ -36,6 +36,15 @@ MATCH_STRATEGIES = {
         "pose_index",
         "clean_count_bin",
     ],
+    "clean_design_cell": [
+        "split",
+        "clean_matrix_origin",
+        "source_family",
+        "thickness_mm",
+        "pose_index",
+        "count_target_bin",
+        "seed_block",
+    ],
     "origin_thickness_pose_count": [
         "split",
         "stress_label",
@@ -76,6 +85,22 @@ MATCH_STRATEGIES = {
         "clean_count_bin",
     ],
 }
+
+BASE_NUISANCE_CATEGORICAL_COLUMNS = [
+    "stress_label",
+    "combined_feature_origin",
+    "source_id",
+    "thickness_mm",
+    "pose_index",
+    "clean_count_bin",
+]
+
+OPTIONAL_CLEAN_NUISANCE_CATEGORICAL_COLUMNS = [
+    "clean_matrix_origin",
+    "source_family",
+    "seed_block",
+    "count_target_bin",
+]
 
 
 def stable_str(value: Any) -> str:
@@ -268,12 +293,9 @@ def main() -> None:
     if matched.empty:
         raise RuntimeError("Crystal-clean exact matching produced no H/M pairs.")
     nuisance_categorical = [
-        "stress_label",
-        "combined_feature_origin",
-        "source_id",
-        "thickness_mm",
-        "pose_index",
-        "clean_count_bin",
+        col
+        for col in BASE_NUISANCE_CATEGORICAL_COLUMNS + OPTIONAL_CLEAN_NUISANCE_CATEGORICAL_COLUMNS
+        if col in matched.columns
     ]
     nuisance_numeric = [args.total_count_column]
     clean_features, residualization = residualize_against_nuisance(

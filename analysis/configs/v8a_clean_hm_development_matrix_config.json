@@ -1,0 +1,100 @@
+{
+  "config_id": "v8a_clean_hm_development_matrix_config",
+  "version": "2026-05-06",
+  "status": "development_preregistration",
+  "claim_scope": "H/M development-only clean sampling preregistration; source-on default diffraction sidecar only; not training evidence, product accuracy, hardware validation, shadow/final validation, full ten-material matrix, or manuscript-grade powder XRD",
+  "profile": "v8a_hm_clean_default_development_cif_literature",
+  "peak_manifest": "source_models/config/diffraction_peak_tables/hm_powder_peaks_cif_or_literature_v8a_manifest.json",
+  "required_peak_table_id": "hm_powder_peaks_cif_or_literature_v8a",
+  "source_energy_kev": 35.0,
+  "clean_matrix_origin": "clean_hm_default_single_origin_v1",
+  "source_family": "custom_diffraction_on_default_phase_space_v1",
+  "source_id": "v8a_clean_default_35kev",
+  "materials": ["Hematite", "Magnetite"],
+  "thickness_mm": [3.0, 10.0, 30.0, 60.0],
+  "pose_indices": [0, 1, 2],
+  "count_target_bins": [
+    {"count_target_bin": "low", "photons_per_row": 3600},
+    {"count_target_bin": "nominal", "photons_per_row": 4000},
+    {"count_target_bin": "high", "photons_per_row": 4400}
+  ],
+  "source_modes": [
+    {"source_mode": "on", "stress_label": "default"}
+  ],
+  "splits": {
+    "train": {
+      "seed_blocks": [
+        {"seed_block": "train_clean_a", "seed": 8101},
+        {"seed_block": "train_clean_b", "seed": 8102},
+        {"seed_block": "train_clean_c", "seed": 8103}
+      ]
+    },
+    "validation": {
+      "seed_blocks": [
+        {"seed_block": "validation_clean_a", "seed": 8201},
+        {"seed_block": "validation_clean_b", "seed": 8202}
+      ]
+    },
+    "stress_holdout": {
+      "seed_blocks": [
+        {"seed_block": "holdout_clean_a", "seed": 8301},
+        {"seed_block": "holdout_clean_b", "seed": 8302}
+      ]
+    }
+  },
+  "strict_match_cell_keys": [
+    "split",
+    "clean_matrix_origin",
+    "source_family",
+    "thickness_mm",
+    "pose_index",
+    "count_target_bin",
+    "seed_block"
+  ],
+  "expected_strict_pairs": {
+    "train": 108,
+    "validation": 72,
+    "stress_holdout": 72,
+    "total": 252
+  },
+  "minimum_strict_pairs": {
+    "train": 100,
+    "validation": 50,
+    "stress_holdout": 50
+  },
+  "expected_rows": {
+    "train": 216,
+    "validation": 144,
+    "stress_holdout": 144,
+    "total": 504
+  },
+  "hard_guards": {
+    "development_only": true,
+    "shadow_or_final_used": false,
+    "full_ten_material_matrix": false,
+    "source_on_default_only": true,
+    "stress_variants_excluded": true,
+    "source_off_excluded": true,
+    "single_clean_origin_training_view": true,
+    "requires_peak_provenance_gate_passed": true,
+    "requires_no_existing_xrt_cube_reads": true,
+    "requires_seed_block_split_separation": true,
+    "requires_cell_level_hm_pairing": true
+  },
+  "development_run_unlock_conditions": [
+    "clean matrix generator completed without Geant4 execution",
+    "preflight audit passes all matrix integrity checks",
+    "H/M are paired inside every strict nuisance cell",
+    "train validation and stress_holdout seed blocks are disjoint",
+    "only source-on default rows are present",
+    "no shadow/final flags and no full ten-material matrix flags are present"
+  ],
+  "training_unlock_conditions": [
+    "development-only Geant4 clean matrix run completed after preflight",
+    "event-to-feature schema gate passes on clean outputs",
+    "non-material shortcut gate passes",
+    "row-level pair-aware and seed-block-aware null gates pass",
+    "crystal-clean admission gate sets training_unlocked true",
+    "no material/source_id/sample_id/seed/thickness/pose/split/origin/path/row_index/count_target_bin leakage in main features"
+  ]
+}

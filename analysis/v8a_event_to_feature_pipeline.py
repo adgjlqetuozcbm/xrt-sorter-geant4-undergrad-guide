@@ -25,6 +25,16 @@ DEFAULT_D_BIN_WIDTH = 0.05
 DEFAULT_PEAK_WINDOW_A_INV = 0.075
 OVERLAP_Q_TOLERANCE_A_INV = 0.08
 SOURCE_OFF_SIGNAL_MAX = 0.01
+OPTIONAL_CLEAN_LINEAGE_FIELDS = [
+    "clean_matrix_origin",
+    "source_family",
+    "seed_block",
+    "seed_block_seed",
+    "count_target_bin",
+    "count_target_photons",
+    "clean_pair_id",
+    "nuisance_cell_id",
+]
 
 
 def read_csv(path: Path) -> list[dict[str, str]]:
@@ -484,6 +494,9 @@ def build_sidecar_tables(
             "control_thickness_pose_pose_index": pose_index,
             "control_source_off_flag": 1 if source_mode == "custom_diffraction_off" else 0,
         }
+        for field in OPTIONAL_CLEAN_LINEAGE_FIELDS:
+            if field in row:
+                feature_row[field] = row.get(field, "")
         for peak in peaks:
             feature_row[f"diffraction_peak_{peak['safe_peak_id']}_norm"] = 0.0
 

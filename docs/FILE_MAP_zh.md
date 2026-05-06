@@ -280,3 +280,18 @@ Its source-controlled cleanup/admission scripts are:
 track effective shuffle fraction. The best current clean view passes visible
 shortcut auditing but still fails null behavior, so training remains locked
 until a new clean-data H/M development design is preregistered and generated.
+
+The follow-up clean H/M matrix preregistration report is:
+
+- `docs/ACCURACY_SPRINT_V8A_CLEAN_MATRIX_PREREG_REPORT_zh.md`
+
+Its source-controlled preregistration and preflight files are:
+
+- `analysis/configs/v8a_clean_hm_development_matrix_config.json`
+- `analysis/generate_v8a_clean_hm_development_matrix.py`
+- `analysis/audit_v8a_clean_hm_matrix_preflight.py`
+
+The first clean matrix is source-on/default only, keeps H/M paired inside
+split/origin/source-family/thickness/pose/count-bin/seed-block cells, and
+passes preflight with strict pair support `108/72/72`. This unlocks only
+development-run preparation; training remains locked.
