@@ -22,6 +22,7 @@ CLAIM_SCOPE = (
 THRESHOLDS = {
     "shuffle_seed_count_min": 30,
     "null_hm_min_recall_ceiling": 0.55,
+    "valid_shuffle_fraction_min": 0.25,
     "selected_threshold_inflation_min": 0.10,
     "fixed_threshold_near_chance_max": 0.55,
 }
@@ -116,11 +117,23 @@ def add_count_bin(frame: pd.DataFrame, width: float) -> pd.Series:
     return np.floor(frame["control_total_count_norm"].fillna(0.0).to_numpy(dtype=np.float64) / width).astype(int).astype(str)
 
 
-def shuffled_labels(train: pd.DataFrame, seed: int, mode: str, count_bin_width: float) -> np.ndarray:
+def shuffled_labels(train: pd.DataFrame, seed: int, mode: str, count_bin_width: float) -> tuple[np.ndarray, float]:
     labels = train["material"].astype(str).to_numpy()
     rng = np.random.default_rng(seed)
     if mode == "row_level":
-        return rng.permutation(labels)
+        shuffled = rng.permutation(labels)
+        return shuffled, float(np.mean(shuffled != labels)) if len(labels) else 0.0
+    if mode == "pair_swap" and "clean_match_pair_id" in train.columns:
+        result = pd.Series(labels, index=train.index, dtype=object)
+        for _, group_index in train.groupby("clean_match_pair_id", sort=True).groups.items():
+            group_index = list(group_index)
+            current = result.loc[group_index].astype(str).to_numpy()
+            if len(current) != 2 or len(set(current)) != 2:
+                result.loc[group_index] = rng.permutation(current)
+            elif bool(rng.integers(0, 2)):
+                result.loc[group_index] = current[::-1]
+        shuffled = result.loc[train.index].astype(str).to_numpy()
+        return shuffled, float(np.mean(shuffled != labels)) if len(labels) else 0.0
     if mode != "within_split_thickness_pose_count_bin":
         raise ValueError(f"Unknown shuffle mode: {mode}")
     result = pd.Series(labels, index=train.index, dtype=object)
@@ -129,7 +142,8 @@ def shuffled_labels(train: pd.DataFrame, seed: int, mode: str, count_bin_width: 
     for _, group_index in keyed.groupby(["thickness_mm", "pose_index", "count_bin"], sort=True).groups.items():
         group_index = list(group_index)
         result.loc[group_index] = rng.permutation(result.loc[group_index].astype(str).to_numpy())
-    return result.loc[train.index].astype(str).to_numpy()
+    shuffled = result.loc[train.index].astype(str).to_numpy()
+    return shuffled, float(np.mean(shuffled != labels)) if len(labels) else 0.0
 
 
 def magnetite_probability(estimator: Any, x_values: np.ndarray) -> np.ndarray:
@@ -150,9 +164,12 @@ def evaluate_null(frame: pd.DataFrame, main_cols: list[str], seeds: list[int], c
     rows: list[dict[str, Any]] = []
     x_train = train[main_cols].fillna(0.0).to_numpy(dtype=np.float64)
     eval_frames = {"validation": validation, "stress_holdout": holdout}
-    for shuffle_mode in ["row_level", "within_split_thickness_pose_count_bin"]:
+    shuffle_modes = ["row_level", "within_split_thickness_pose_count_bin"]
+    if "clean_match_pair_id" in train.columns:
+        shuffle_modes.append("pair_swap")
+    for shuffle_mode in shuffle_modes:
         for seed in seeds:
-            y_train = shuffled_labels(train, seed, shuffle_mode, count_bin_width)
+            y_train, effective_shuffle_fraction = shuffled_labels(train, seed, shuffle_mode, count_bin_width)
             for model_name, estimator in model_specs(sk, seed):
                 fitted = deepcopy(estimator)
                 fitted.fit(x_train, y_train)
@@ -174,6 +191,7 @@ def evaluate_null(frame: pd.DataFrame, main_cols: list[str], seeds: list[int], c
                                 "model": model_name,
                                 "eval_split": eval_split,
                                 "threshold_policy": policy,
+                                "effective_shuffle_fraction": effective_shuffle_fraction,
                                 **{key: value for key, value in metrics.items() if key != "threshold_distance_to_0p5"},
                             }
                         )
@@ -197,6 +215,8 @@ def summarize_null(summary: pd.DataFrame) -> pd.DataFrame:
                 "hm_min_recall_max": float(group["hm_min_recall"].max()),
                 "accuracy_mean": float(group["accuracy"].mean()),
                 "accuracy_max": float(group["accuracy"].max()),
+                "effective_shuffle_fraction_min": float(group["effective_shuffle_fraction"].min()),
+                "effective_shuffle_fraction_mean": float(group["effective_shuffle_fraction"].mean()),
             }
         )
     return pd.DataFrame(rows)
@@ -241,6 +261,7 @@ def write_report(output_dir: Path, gate: dict[str, Any], aggregate: pd.DataFrame
                 "eval_split",
                 "threshold_policy",
                 "seed_count",
+                "effective_shuffle_fraction_mean",
                 "hm_min_recall_mean",
                 "hm_min_recall_p95",
                 "hm_min_recall_max",
@@ -291,13 +312,23 @@ def main() -> None:
 
     fixed = aggregate[aggregate["threshold_policy"].eq("fixed_0p5")]
     selected = aggregate[aggregate["threshold_policy"].eq("validation_selected")]
-    fixed_max = float(fixed["hm_min_recall_max"].max()) if not fixed.empty else 1.0
-    selected_max = float(selected["hm_min_recall_max"].max()) if not selected.empty else 1.0
-    extra_fixed_max = float(fixed[fixed["model"].eq("ExtraTrees")]["hm_min_recall_max"].max()) if not fixed.empty else 1.0
-    logistic_fixed_max = float(fixed[fixed["model"].eq("Logistic")]["hm_min_recall_max"].max()) if not fixed.empty else 1.0
+    valid_fixed = fixed[fixed["effective_shuffle_fraction_min"] >= THRESHOLDS["valid_shuffle_fraction_min"]]
+    valid_selected = selected[selected["effective_shuffle_fraction_min"] >= THRESHOLDS["valid_shuffle_fraction_min"]]
+    fixed_max = float(valid_fixed["hm_min_recall_max"].max()) if not valid_fixed.empty else 1.0
+    selected_max = float(valid_selected["hm_min_recall_max"].max()) if not valid_selected.empty else 1.0
+    fixed_p95 = float(valid_fixed["hm_min_recall_p95"].max()) if not valid_fixed.empty else 1.0
+    selected_p95 = float(valid_selected["hm_min_recall_p95"].max()) if not valid_selected.empty else 1.0
+    extra_fixed_max = float(valid_fixed[valid_fixed["model"].eq("ExtraTrees")]["hm_min_recall_max"].max()) if not valid_fixed.empty else 1.0
+    logistic_fixed_max = float(valid_fixed[valid_fixed["model"].eq("Logistic")]["hm_min_recall_max"].max()) if not valid_fixed.empty else 1.0
     within_fixed_max = float(
-        fixed[fixed["shuffle_mode"].eq("within_split_thickness_pose_count_bin")]["hm_min_recall_max"].max()
-    ) if not fixed.empty else 1.0
+        valid_fixed[valid_fixed["shuffle_mode"].eq("within_split_thickness_pose_count_bin")]["hm_min_recall_max"].max()
+    ) if not valid_fixed.empty and not valid_fixed[valid_fixed["shuffle_mode"].eq("within_split_thickness_pose_count_bin")].empty else 0.0
+    invalid_shuffle_modes = sorted(
+        aggregate.loc[
+            aggregate["effective_shuffle_fraction_min"] < THRESHOLDS["valid_shuffle_fraction_min"],
+            "shuffle_mode",
+        ].astype(str).unique().tolist()
+    )
     selected_inflation = selected_max - fixed_max
     protocol_artifact = bool(
         selected_max >= THRESHOLDS["null_hm_min_recall_ceiling"]
@@ -311,9 +342,9 @@ def main() -> None:
     persistent_shortcut = bool(within_fixed_max >= THRESHOLDS["null_hm_min_recall_ceiling"])
     pass_items = {
         "shuffle_seed_count": len(seeds) >= THRESHOLDS["shuffle_seed_count_min"],
-        "fixed_threshold_null_below_ceiling": fixed_max < THRESHOLDS["null_hm_min_recall_ceiling"],
-        "selected_threshold_null_below_ceiling": selected_max < THRESHOLDS["null_hm_min_recall_ceiling"],
-        "within_strata_fixed_null_below_ceiling": within_fixed_max < THRESHOLDS["null_hm_min_recall_ceiling"],
+        "valid_shuffle_mode_available": not valid_fixed.empty,
+        "fixed_threshold_null_p95_below_ceiling": fixed_p95 < THRESHOLDS["null_hm_min_recall_ceiling"],
+        "selected_threshold_null_p95_below_ceiling": selected_p95 < THRESHOLDS["null_hm_min_recall_ceiling"],
     }
     stop_reasons = [name for name, passed in pass_items.items() if not passed]
     gate_passed = not stop_reasons
@@ -334,10 +365,14 @@ def main() -> None:
         "main_feature_count": int(len(main_cols)),
         "fixed_threshold_hm_min_recall_max": fixed_max,
         "selected_threshold_hm_min_recall_max": selected_max,
+        "fixed_threshold_hm_min_recall_p95": fixed_p95,
+        "selected_threshold_hm_min_recall_p95": selected_p95,
         "selected_minus_fixed_hm_min_recall_max": selected_inflation,
         "extratrees_fixed_threshold_hm_min_recall_max": extra_fixed_max,
         "logistic_fixed_threshold_hm_min_recall_max": logistic_fixed_max,
         "within_strata_fixed_threshold_hm_min_recall_max": within_fixed_max,
+        "invalid_shuffle_modes_due_to_low_effective_shuffle": invalid_shuffle_modes,
+        "valid_shuffle_fraction_min": THRESHOLDS["valid_shuffle_fraction_min"],
         "gate_protocol_artifact_suspected": protocol_artifact,
         "tree_null_overfit_suspected": tree_overfit,
         "persistent_null_shortcut_suspected": persistent_shortcut,

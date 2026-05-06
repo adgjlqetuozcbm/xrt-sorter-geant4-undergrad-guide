@@ -266,3 +266,17 @@ Its source-controlled diagnostic scripts are:
 The current root-cause decision is `sampling_or_origin_shortcut_found`: v2
 main features can predict non-material `stress_label` structure, so advanced
 model probes are blocked until null/stress/origin shortcuts are cleaned.
+
+The follow-up crystal-clean stop report is:
+
+- `docs/ACCURACY_SPRINT_V8A_CRYSTAL_CLEAN_STOP_REPORT_zh.md`
+
+Its source-controlled cleanup/admission scripts are:
+
+- `analysis/build_v8a_crystal_clean_view.py`
+- `analysis/audit_v8a_crystal_clean_admission.py`
+
+`analysis/diagnose_v8a_shuffled_label_null_behavior.py` was also upgraded to
+track effective shuffle fraction. The best current clean view passes visible
+shortcut auditing but still fails null behavior, so training remains locked
+until a new clean-data H/M development design is preregistered and generated.
