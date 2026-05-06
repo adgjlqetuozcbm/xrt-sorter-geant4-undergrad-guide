@@ -347,3 +347,18 @@ It reads paired-clean null rows and reports whether above-threshold null tails
 concentrate by seed, mode, model, split, or threshold policy. The first
 null-support tail anatomy found `44/960` rows above `0.55`, with no single seed,
 split, or mode concentration, but more Logistic than ExtraTrees tail rows.
+
+The follow-up null-tail feature-family anatomy report is:
+
+- `docs/ACCURACY_SPRINT_V8A_NULL_TAIL_FEATURE_FAMILY_REPORT_zh.md`
+
+Its source-controlled script is:
+
+- `analysis/audit_v8a_paired_null_tail_feature_family.py`
+
+It replays the paired-clean null labels for the above-threshold tail rows and
+summarizes Logistic coefficients / ExtraTrees importances by feature family. The
+first run found `feature_family_rebuild_prereg_needed`: Logistic `peak_hematite`
+contributed `0.4823` of absolute tail weight, while the top single feature was
+only `0.1151`, so the next step is a preregistered lower-freedom feature-family
+rebuild rather than training, threshold relaxation, or a large matrix run.
