@@ -250,3 +250,19 @@ The v2 result is a clean stop before Phase 4: count-stratified support and
 main H/M signal remain strong, but stress and multi-seed shuffled-label sanity
 fail. Therefore Phase 4, count-balanced retest, stability replication, and
 development matrix large-run preregistration remain locked.
+
+The follow-up v8A root-cause decision report is:
+
+- `docs/ACCURACY_SPRINT_V8A_ROOT_CAUSE_DECISION_REPORT_zh.md`
+
+Its source-controlled diagnostic scripts are:
+
+- `analysis/diagnose_v8a_shuffled_label_null_behavior.py`
+- `analysis/audit_v8a_feature_shortcut_structure.py`
+- `analysis/audit_v8a_stress_null_path.py`
+- `analysis/probe_v8a_feature_sufficiency_models.py`
+- `analysis/decide_v8a_root_cause.py`
+
+The current root-cause decision is `sampling_or_origin_shortcut_found`: v2
+main features can predict non-material `stress_label` structure, so advanced
+model probes are blocked until null/stress/origin shortcuts are cleaned.
