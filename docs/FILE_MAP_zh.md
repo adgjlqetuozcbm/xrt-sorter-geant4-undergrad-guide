@@ -316,3 +316,16 @@ Its source-controlled script is:
 This gate tests strict paired clean views by balancing pseudo-label orientation
 inside train seed blocks and nuisance dimensions before admission is allowed to
 consider renewed development-only training diagnostics.
+
+The clean null-support replication preregistration report is:
+
+- `docs/ACCURACY_SPRINT_V8A_NULL_SUPPORT_REPLICATION_PREREG_REPORT_zh.md`
+
+Its source-controlled config is:
+
+- `analysis/configs/v8a_clean_hm_null_support_replication_matrix_config.json`
+
+This profile is `v8a_hm_clean_nullrep_cif_lit` and doubles strict paired
+support to `216/144/144` for train/validation/stress-holdout. It is still
+source-on/default only, H/M-only, development-only, and unlocks only a
+preflight-approved development replication run, not training.
