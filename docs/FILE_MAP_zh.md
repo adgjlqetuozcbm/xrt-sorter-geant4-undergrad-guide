@@ -378,3 +378,14 @@ null-support replication outputs without running Geant4 or training. All kept
 visible shortcut scores clean, but all failed paired-clean null/admission; the
 best candidate (`leave_out_peak_hematite`) still had primary null p95 `0.5767`
 against a `0.55` ceiling. Training remains locked.
+
+The long-range null-protocol and representation review plan is:
+
+- `docs/ACCURACY_SPRINT_V8A_NULL_PROTOCOL_AND_REPRESENTATION_REVIEW_PLAN_zh.md`
+
+It records the current causal interpretation: obvious source/origin/stress/count
+shortcuts have been pushed down, but paired-clean null tails remain under the
+current representation/protocol. It plans the next route to training admission:
+threshold-free null review, residualization/pairing audit, physics-preserving
+representation v2 candidates, repeated gate loops, signal-preservation checks,
+and explicit stop-loss exits if clean admission remains unreachable.
