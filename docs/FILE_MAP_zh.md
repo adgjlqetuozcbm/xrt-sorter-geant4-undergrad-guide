@@ -232,3 +232,21 @@ Its source-controlled scripts/config are:
 The v1 result keeps the H/M sidecar signal visible but does not unlock large
 development matrix preregistration because the ordinary Phase 4 total-count
 control and count-balanced shuffled-label sanity checks still block promotion.
+
+The follow-up count-robust v2 stop report is:
+
+- `docs/ACCURACY_SPRINT_V8A_COUNT_ROBUST_V2_STOP_REPORT_zh.md`
+
+Its source-controlled scripts/config are:
+
+- `analysis/build_v8a_count_robust_v2_features.py`
+- `analysis/build_v8a_count_stratified_ordinary_view.py`
+- `analysis/audit_v8a_multiseed_shuffled_label.py`
+- `analysis/audit_v8a_count_robust_v2_candidates.py`
+- `analysis/configs/v8a_count_robust_v2_proportion_only_count_stratified_stress_gate_config.json`
+- `analysis/configs/v8a_count_robust_v2_residualized_no_absolute_windows_count_stratified_stress_gate_config.json`
+
+The v2 result is a clean stop before Phase 4: count-stratified support and
+main H/M signal remain strong, but stress and multi-seed shuffled-label sanity
+fail. Therefore Phase 4, count-balanced retest, stability replication, and
+development matrix large-run preregistration remain locked.
