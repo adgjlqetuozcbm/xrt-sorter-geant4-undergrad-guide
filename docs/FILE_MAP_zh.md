@@ -404,3 +404,18 @@ primary oriented AUC p95 `0.6236`; the best tail-rebuild candidate
 (`leave_out_peak_hematite`) fails worse at `0.6599`. This means the null issue is
 not only a threshold-selection artifact; training remains locked pending
 residualization/pairing protocol audit and physics-preserving representation v2.
+
+The Phase 2 residualization and pairing protocol stop report is:
+
+- `docs/ACCURACY_SPRINT_V8A_RESIDUALIZATION_PAIRING_PROTOCOL_STOP_REPORT_zh.md`
+
+Its source-controlled script is:
+
+- `analysis/audit_v8a_residualization_pairing_protocol.py`
+
+It compares pre-residual source-scaled features against the residualized
+crystal-clean view using the same paired-clean null protocol. The first run found
+`residualization_artifact_suspected`: residualized Logistic null AUC p95 rises by
+up to `0.0617` over source-scaled features, and higher-order orientation balance
+shows max abs sum `3.0`. Training remains locked pending residualization protocol
+rework and stricter high-order paired-null orientation.
