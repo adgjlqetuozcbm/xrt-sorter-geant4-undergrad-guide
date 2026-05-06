@@ -295,3 +295,12 @@ The first clean matrix is source-on/default only, keeps H/M paired inside
 split/origin/source-family/thickness/pose/count-bin/seed-block cells, and
 passes preflight with strict pair support `108/72/72`. This unlocks only
 development-run preparation; training remains locked.
+
+The follow-up clean development run stop report is:
+
+- `docs/ACCURACY_SPRINT_V8A_CLEAN_RUN_STOP_REPORT_zh.md`
+
+The clean Geant4 matrix completed `504/504` rows and passed event schema plus
+visible non-material shortcut auditing, but admission stopped before training
+because shuffled-label/null behavior remained too high. Training remains
+locked pending paired-clean null protocol rework.

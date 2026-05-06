@@ -150,7 +150,25 @@ def main() -> None:
         "selected_threshold_null_below_ceiling": selected_null <= THRESHOLDS["selected_threshold_null_hm_max"],
         "within_strata_null_below_ceiling": within_null <= THRESHOLDS["within_strata_fixed_threshold_null_hm_max"],
     }
-    stop_reasons = [name for name, passed in pass_items.items() if not passed]
+    failure_labels = {
+        "view_schema_gate_passed": "view_schema_gate_failed",
+        "view_training_not_preunlocked": "view_training_was_preunlocked",
+        "manifest_training_not_preunlocked": "manifest_training_was_preunlocked",
+        "development_only": "development_only_false",
+        "no_shadow_final": "shadow_or_final_detected",
+        "no_existing_xrt_cube_reads": "existing_xrt_cube_reads_detected",
+        "train_pair_support": "train_pair_support_below_minimum",
+        "validation_pair_support": "validation_pair_support_below_minimum",
+        "stress_holdout_pair_support": "stress_holdout_pair_support_below_minimum",
+        "no_lineage_like_main_features": "lineage_like_main_features_detected",
+        "shortcut_gate_passed": "shortcut_gate_failed",
+        "nonmaterial_predictability_below_ceiling": "nonmaterial_predictability_exceeded_ceiling",
+        "null_gate_passed": "null_gate_failed",
+        "fixed_threshold_null_below_ceiling": "fixed_threshold_null_exceeded_ceiling",
+        "selected_threshold_null_below_ceiling": "selected_threshold_null_exceeded_ceiling",
+        "within_strata_null_below_ceiling": "within_strata_null_exceeded_ceiling",
+    }
+    stop_reasons = [failure_labels[name] for name, passed in pass_items.items() if not passed]
     gate_passed = not stop_reasons
     generated_at = datetime.now(timezone.utc).isoformat(timespec="seconds")
     gate = {

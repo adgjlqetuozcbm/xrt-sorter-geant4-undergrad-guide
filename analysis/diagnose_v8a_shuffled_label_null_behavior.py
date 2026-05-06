@@ -343,10 +343,16 @@ def main() -> None:
     pass_items = {
         "shuffle_seed_count": len(seeds) >= THRESHOLDS["shuffle_seed_count_min"],
         "valid_shuffle_mode_available": not valid_fixed.empty,
-        "fixed_threshold_null_p95_below_ceiling": fixed_p95 < THRESHOLDS["null_hm_min_recall_ceiling"],
-        "selected_threshold_null_p95_below_ceiling": selected_p95 < THRESHOLDS["null_hm_min_recall_ceiling"],
+        "fixed_threshold_null_p95_under_ceiling": fixed_p95 < THRESHOLDS["null_hm_min_recall_ceiling"],
+        "selected_threshold_null_p95_under_ceiling": selected_p95 < THRESHOLDS["null_hm_min_recall_ceiling"],
     }
-    stop_reasons = [name for name, passed in pass_items.items() if not passed]
+    failure_labels = {
+        "shuffle_seed_count": "shuffle_seed_count_below_minimum",
+        "valid_shuffle_mode_available": "no_valid_shuffle_mode_available",
+        "fixed_threshold_null_p95_under_ceiling": "fixed_threshold_null_p95_exceeded_ceiling",
+        "selected_threshold_null_p95_under_ceiling": "selected_threshold_null_p95_exceeded_ceiling",
+    }
+    stop_reasons = [failure_labels[name] for name, passed in pass_items.items() if not passed]
     gate_passed = not stop_reasons
     generated_at = datetime.now(timezone.utc).isoformat(timespec="seconds")
     gate = {

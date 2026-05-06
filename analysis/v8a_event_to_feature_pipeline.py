@@ -782,7 +782,26 @@ def main() -> None:
     source_peak_table_ids = sorted({str(row.get("source_peak_table_id", "")) for row in feature_rows})
     source_peak_table_matches_analysis = source_peak_table_ids == [peak_table_id]
     long_schema_ok = set(required_long_fields).issubset(long_rows[0].keys()) if long_rows else False
-    source_lineage_ok = control_summary["source_on_rows"] > 0 and control_summary["source_off_rows"] > 0
+    clean_source_on_default_only = bool(
+        feature_rows
+        and all(str(row.get("clean_matrix_origin", "")).strip() for row in feature_rows)
+        and {str(row.get("source_mode", "")) for row in feature_rows} == {"custom_diffraction_on"}
+        and {str(row.get("stress_label", "")) for row in feature_rows} == {"default"}
+    )
+    source_lineage_ok = (
+        control_summary["source_on_rows"] > 0
+        and (
+            clean_source_on_default_only
+            or control_summary["source_off_rows"] > 0
+        )
+    )
+    source_control_ok = (
+        clean_source_on_default_only
+        or (
+            control_summary["source_on_signal_gt_source_off"]
+            and control_summary["source_off_low"]
+        )
+    )
     schema_gate_passed = bool(
         long_schema_ok
         and peak_id_matches
@@ -790,16 +809,23 @@ def main() -> None:
         and development_only
         and not shadow_or_final_used
         and source_lineage_ok
-        and control_summary["source_on_signal_gt_source_off"]
-        and control_summary["source_off_low"]
+        and source_control_ok
     )
-    tiny_training_gate_allowed = bool(schema_gate_passed and control_summary["balanced_training_support"])
+    tiny_training_gate_allowed = bool(
+        schema_gate_passed
+        and not clean_source_on_default_only
+        and control_summary["balanced_training_support"]
+    )
     stop_reasons: list[str] = []
-    if not control_summary["balanced_training_support"]:
+    if clean_source_on_default_only:
+        stop_reasons.append(
+            "Tiny training gate remains blocked by design: clean source-on/default matrix uses separate downstream shortcut/null/admission gates."
+        )
+    elif not control_summary["balanced_training_support"]:
         stop_reasons.append(
             "Tiny training gate is blocked: completed boundary smoke lacks a validation split and balanced H/M source-off/source-on support."
         )
-    if not control_summary["source_off_low"]:
+    if not clean_source_on_default_only and not control_summary["source_off_low"]:
         stop_reasons.append("Source-off peak-window signal is not low enough for leakage control.")
     if shadow_or_final_used:
         stop_reasons.append("Shadow/final usage was detected.")
@@ -880,6 +906,8 @@ def main() -> None:
         "long_schema_ok": long_schema_ok,
         "peak_table_id_matches": peak_id_matches,
         "source_lineage_ok": source_lineage_ok,
+        "clean_source_on_default_only": clean_source_on_default_only,
+        "source_control_ok": source_control_ok,
         "control_summary": control_summary,
         "stop_reasons": stop_reasons,
         "claim_boundary": "development-only event-to-feature schema/control gate; not H/M accuracy, hardware validation, final sorter performance, or publishable powder XRD evidence",
