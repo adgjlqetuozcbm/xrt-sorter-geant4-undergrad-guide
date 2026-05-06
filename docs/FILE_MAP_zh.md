@@ -329,3 +329,12 @@ This profile is `v8a_hm_clean_nullrep_cif_lit` and doubles strict paired
 support to `216/144/144` for train/validation/stress-holdout. It is still
 source-on/default only, H/M-only, development-only, and unlocks only a
 preflight-approved development replication run, not training.
+
+The completed null-support replication stop report is:
+
+- `docs/ACCURACY_SPRINT_V8A_NULL_SUPPORT_REPLICATION_STOP_REPORT_zh.md`
+
+Its Geant4 run completed `1008/1008` rows with `0` failed, shortcut auditing
+remained clean, and paired-clean null p95 improved but still stopped admission
+(`primary p95=0.5569`, `all-mode p95=0.5628`, ceiling `0.55`). Training remains
+locked pending a focused null-tail anatomy.
