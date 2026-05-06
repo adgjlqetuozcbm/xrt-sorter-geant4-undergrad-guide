@@ -362,3 +362,19 @@ first run found `feature_family_rebuild_prereg_needed`: Logistic `peak_hematite`
 contributed `0.4823` of absolute tail weight, while the top single feature was
 only `0.1151`, so the next step is a preregistered lower-freedom feature-family
 rebuild rather than training, threshold relaxation, or a large matrix run.
+
+The tail rebuild v1 stop report is:
+
+- `docs/ACCURACY_SPRINT_V8A_TAIL_REBUILD_V1_STOP_REPORT_zh.md`
+
+Its source-controlled config/scripts are:
+
+- `analysis/configs/v8a_tail_rebuild_v1_config.json`
+- `analysis/build_v8a_tail_rebuild_features.py`
+- `analysis/summarize_v8a_tail_rebuild_v1.py`
+
+Four lower-freedom candidate views were built from the existing clean
+null-support replication outputs without running Geant4 or training. All kept
+visible shortcut scores clean, but all failed paired-clean null/admission; the
+best candidate (`leave_out_peak_hematite`) still had primary null p95 `0.5767`
+against a `0.55` ceiling. Training remains locked.

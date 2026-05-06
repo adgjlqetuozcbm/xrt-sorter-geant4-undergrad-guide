@@ -1,0 +1,64 @@
+{
+  "config_id": "v8a_tail_rebuild_v1_config",
+  "version": "2026-05-07",
+  "status": "development_preregistration",
+  "claim_scope": "H/M development-only low-freedom feature rebuild candidates for paired-clean null-tail diagnosis; not training evidence, product accuracy, hardware validation, shadow/final validation, full ten-material matrix, or manuscript-grade powder XRD",
+  "input_feature_dir": "results/accuracy_v3/v8a_clean_hm_nullrep_crystal_clean_design_cell_event_to_feature",
+  "input_null_dir": "results/accuracy_v3/v8a_clean_hm_nullrep_crystal_clean_design_cell_paired_null",
+  "input_tail_feature_family_gate": "results/accuracy_v3/v8a_clean_hm_nullrep_crystal_clean_design_cell_null_tail_feature_family/v8a_paired_null_tail_feature_family_gate.json",
+  "output_prefix": "results/accuracy_v3/v8a_tail_rebuild_v1",
+  "hard_guards": {
+    "development_only": true,
+    "shadow_or_final_used": false,
+    "full_ten_material_matrix": false,
+    "runs_geant4": false,
+    "reads_existing_xrt_cubes": false,
+    "source_on_default_only": true,
+    "preserve_physical_crystal_signal": true,
+    "do_not_shuffle_real_training_view": true,
+    "shuffle_only_for_null_audit": true,
+    "training_unlocked_by_builder": false
+  },
+  "candidate_views": [
+    {
+      "view_id": "peak_family_balanced",
+      "description": "Compress individual peak columns into signed H/M family means and low-freedom aggregate contrasts while retaining physical peak-family information.",
+      "feature_policy": "family_aggregates_plus_windows"
+    },
+    {
+      "view_id": "window_ratio_only",
+      "description": "Use only unique-window, all-window, and ratio/balance features as the lowest-freedom sanity view.",
+      "feature_policy": "windows_and_ratio_only"
+    },
+    {
+      "view_id": "leave_out_peak_hematite",
+      "description": "Diagnostic view that removes individual hematite peak features but keeps magnetite peaks and aggregate windows.",
+      "feature_policy": "drop_peak_hematite"
+    },
+    {
+      "view_id": "leave_out_individual_peaks",
+      "description": "Conservative view that removes all individual peak features and keeps only family/window/ratio aggregates.",
+      "feature_policy": "drop_individual_peaks"
+    }
+  ],
+  "admission_order": [
+    "build_candidate_view",
+    "feature_shortcut_gate",
+    "paired_clean_null_gate",
+    "null_tail_feature_family_gate",
+    "crystal_clean_admission_gate"
+  ],
+  "candidate_success_conditions": {
+    "shortcut_gate_passed": true,
+    "paired_clean_null_gate_passed": true,
+    "null_tail_feature_family_gate_passed": true,
+    "admission_training_unlocked": true,
+    "real_signal_not_evaluated_here": true
+  },
+  "stop_rules": [
+    "If no candidate passes paired-clean null and admission, do not train.",
+    "If a reduced candidate passes null gates but later destroys real H/M signal, do not upgrade it.",
+    "Do not lower null thresholds to pass a candidate.",
+    "Do not treat leave-out diagnostic views as final evidence without a preregistered physical interpretation."
+  ]
+}
