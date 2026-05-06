@@ -389,3 +389,18 @@ current representation/protocol. It plans the next route to training admission:
 threshold-free null review, residualization/pairing audit, physics-preserving
 representation v2 candidates, repeated gate loops, signal-preservation checks,
 and explicit stop-loss exits if clean admission remains unreachable.
+
+The Phase 1 threshold-free null protocol stop report is:
+
+- `docs/ACCURACY_SPRINT_V8A_THRESHOLD_FREE_NULL_PROTOCOL_STOP_REPORT_zh.md`
+
+Its source-controlled script is:
+
+- `analysis/audit_v8a_threshold_free_null_protocol.py`
+
+It reruns the paired-clean null protocol but evaluates threshold-free AUC/rank
+metrics in addition to fixed/selected recall. The current clean view fails with
+primary oriented AUC p95 `0.6236`; the best tail-rebuild candidate
+(`leave_out_peak_hematite`) fails worse at `0.6599`. This means the null issue is
+not only a threshold-selection artifact; training remains locked pending
+residualization/pairing protocol audit and physics-preserving representation v2.
