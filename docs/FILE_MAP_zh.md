@@ -338,3 +338,12 @@ Its Geant4 run completed `1008/1008` rows with `0` failed, shortcut auditing
 remained clean, and paired-clean null p95 improved but still stopped admission
 (`primary p95=0.5569`, `all-mode p95=0.5628`, ceiling `0.55`). Training remains
 locked pending a focused null-tail anatomy.
+
+The null-tail anatomy script is:
+
+- `analysis/audit_v8a_paired_null_tail_anatomy.py`
+
+It reads paired-clean null rows and reports whether above-threshold null tails
+concentrate by seed, mode, model, split, or threshold policy. The first
+null-support tail anatomy found `44/960` rows above `0.55`, with no single seed,
+split, or mode concentration, but more Logistic than ExtraTrees tail rows.

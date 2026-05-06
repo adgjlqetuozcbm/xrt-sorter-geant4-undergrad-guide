@@ -76,15 +76,29 @@ admission：
 
 ## 下一步
 
-下一步不应该盲目扩大到开发矩阵大跑，也不应该为了过门调低阈值。更合理的是做一个小而精确的 null-tail anatomy：
+下一步不应该盲目扩大到开发矩阵大跑，也不应该为了过门调低阈值。已新增 null-tail anatomy，先定位尾部来自哪里。
 
-- 找出 60 个 pseudo-label seed 中哪些 seed、哪些 split、哪些模型、哪些 null mode 贡献了 p95 tail；
-- 检查 tail 是否集中在某个 thickness、pose、count-bin、seed-block；
-- 检查 primary 与 secondary null mode 的差异；
-- 检查 Logistic 与 ExtraTrees 的差异；
-- 如果 tail 是统计支撑问题，再做一轮更窄的 validation/stress replication；
-- 如果 tail 集中在某个 nuisance cell，则回到采样设计修那个 cell；
-- 如果 tail 来自特征 family，则回到 feature blacklist/rebuild。
+null-tail anatomy 初步结果：
+
+- tail rows above `0.55`：`44/960`
+- max tail H/M min recall：`0.6319`
+- top seed share：`0.0909`
+- top mode share：`0.5909`
+- top split share：`0.5000`
+- mode 分布：primary `26`，secondary `18`
+- split 分布：validation `22`，stress-holdout `22`
+- model 分布：Logistic `32`，ExtraTrees `12`
+
+解释：tail 不是集中在某一个 seed、某一个 split 或某一个 null mode 上，而是一个很弱但广泛存在的残余尾部；Logistic 占比更高，提示下一步要查线性方向上的特征族/低维组合，而不是继续盲目加大矩阵。
+
+下一步应该做：
+
+- 检查 tail seed 中 Logistic 权重最大的 feature family；
+- 检查这些 feature 是否集中在 ratio、window、unique、prop_peak 或某类峰窗口；
+- 检查 tail 是否与 thickness、pose、count-bin、seed-block 的交互有关；
+- 如果尾部来自少数 feature family，则做 preregistered blacklist/rebuild；
+- 如果尾部仍是广泛小幅随机波动，再做更窄的 validation/stress replication；
+- 如果 admission 真正写出 `training_unlocked=true`，才允许恢复 development-only baseline training。
 
 只有 paired-clean null p95 真正低于 `0.55`，admission 写出 `training_unlocked=true`，才允许恢复 development-only baseline training。
 
