@@ -443,3 +443,30 @@ threshold-free AUC p95 `0.5540`, and admission `training_unlocked=true`.
 This unlocks development-only model diagnostics only; shadow/final, full
 ten-material v8A, product accuracy, hardware validation, and manuscript-grade
 powder-XRD claims remain locked.
+
+The final full-cell training data audit is:
+
+- `results/accuracy_v3/v8a_fullcell_training_data_final_audit/v8a_fullcell_training_data_final_audit_report.md`
+
+Its source-controlled script is:
+
+- `analysis/audit_v8a_fullcell_training_data_final.py`
+
+It confirms the admitted full-cell view is still unlocked for development
+diagnostics, but the count risk is material: split-level standardized count gap
+is around `1.5`, and the top main feature-count correlation reaches `0.6634`.
+
+The full-cell ordinary/count-balanced baseline stop report is:
+
+- `docs/ACCURACY_SPRINT_V8A_FULLCELL_TRAINING_BASELINE_STOP_REPORT_zh.md`
+
+Its source-controlled script is:
+
+- `analysis/train_v8a_fullcell_clean_development_model.py`
+
+This gate runs the admitted full-cell view in two tracks: ordinary and
+count-balanced. The ordinary main signal is perfect, but total-count-only
+remains too strong and shuffled-label null is not clean enough. The strict
+count-balanced subset also lacks enough support to serve as main evidence.
+The right next move is a new count-matched full-cell H/M matrix preregistered
+from the source design side, not more model tuning on the current matrix.
