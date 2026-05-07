@@ -469,4 +469,9 @@ count-balanced. The ordinary main signal is perfect, but total-count-only
 remains too strong and shuffled-label null is not clean enough. The strict
 count-balanced subset also lacks enough support to serve as main evidence.
 The right next move is a new count-matched full-cell H/M matrix preregistered
-from the source design side, not more model tuning on the current matrix.
+from the source design side, not more model tuning on the current matrix. The
+current design diagnosis now shows `fixed_bin_width_0p040` as the first
+support-pass window; `0.050` is fallback support, but the ordinary and
+count-balanced gates still fail because total-count-only and null are not clean
+enough. The old `0.003/0.005` windows are too strict for the present full-cell
+support structure.

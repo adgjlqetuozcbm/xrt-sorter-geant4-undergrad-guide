@@ -55,9 +55,14 @@ THRESHOLDS = {
 COUNT_BALANCE_STRATEGIES = [
     {"strategy": "fixed_bin_width_0p003", "kind": "fixed_bin", "bin_width": 0.003},
     {"strategy": "fixed_bin_width_0p005", "kind": "fixed_bin", "bin_width": 0.005},
+    {"strategy": "fixed_bin_width_0p010", "kind": "fixed_bin", "bin_width": 0.010},
+    {"strategy": "fixed_bin_width_0p015", "kind": "fixed_bin", "bin_width": 0.015},
+    {"strategy": "fixed_bin_width_0p020", "kind": "fixed_bin", "bin_width": 0.020},
+    {"strategy": "fixed_bin_width_0p040", "kind": "fixed_bin", "bin_width": 0.040},
+    {"strategy": "fixed_bin_width_0p050", "kind": "fixed_bin", "bin_width": 0.050},
 ]
-DEFAULT_STRATEGY = "fixed_bin_width_0p003"
-WEAKER_FALLBACK_STRATEGY = "fixed_bin_width_0p005"
+DEFAULT_STRATEGY = "fixed_bin_width_0p040"
+WEAKER_FALLBACK_STRATEGY = "fixed_bin_width_0p050"
 SHUFFLE_SEEDS = list(range(41001, 41031))
 
 
