@@ -1,0 +1,140 @@
+{
+  "config_id": "v8a_fullcell_count_matched_training_prereg_config",
+  "version": "2026-05-08",
+  "status": "development_preregistration",
+  "claim_scope": "H/M development-only full-cell count-matched training preregistration; current admitted view is not training-submittable; not product accuracy, hardware validation, shadow/final validation, full ten-material matrix, or manuscript-grade powder XRD",
+  "canonical_input_view": "results/accuracy_v3/v8a_fullcell_residualization_protocol_rework_v1_source_scaled_no_residualization_event_to_feature",
+  "final_data_audit": "results/accuracy_v3/v8a_fullcell_training_data_final_audit",
+  "previous_baseline_gate": "results/accuracy_v3/v8a_fullcell_clean_development_model/v8a_fullcell_clean_development_model_gate.json",
+  "source_side_matrix_config": "analysis/configs/v8a_clean_hm_fullcell_countmatched_matrix_config.json",
+  "previous_admission_decision": "crystal_clean_view_training_diagnostics_unlocked",
+  "previous_final_audit_decision": "training_unlocked_with_count_controls_required",
+  "previous_baseline_decision": "stop_or_rework_fullcell_clean_development_baseline",
+  "current_data_status": "structurally_admitted_but_not_training_submittable_due_to_count_controls",
+  "training_start_allowed": false,
+  "matrix_large_run_allowed": false,
+  "shadow_or_final_used": false,
+  "full_ten_material_matrix": false,
+  "reads_existing_xrt_cubes": false,
+  "primary_count_balance_strategy": {
+    "strategy": "fixed_bin_width_0p020",
+    "kind": "fixed_bin",
+    "bin_width": 0.02,
+    "current_view_support_pairs": {
+      "train": 194,
+      "validation": 132,
+      "stress_holdout": 123
+    },
+    "current_view_support_pass": false,
+    "reason": "Preregistered main target for the next source-side matrix. The current admitted view does not have enough matched-pair support at this window."
+  },
+  "strict_sensitivity_strategy": {
+    "strategy": "fixed_bin_width_0p015",
+    "kind": "fixed_bin",
+    "bin_width": 0.015,
+    "current_view_support_pairs": {
+      "train": 146,
+      "validation": 98,
+      "stress_holdout": 105
+    },
+    "current_view_support_pass": false,
+    "reason": "Strict sensitivity window for the next source-side matrix. This is not a weaker fallback; it is a stricter preregistered sensitivity check."
+  },
+  "wide_window_diagnostic_reference": {
+    "first_support_pass_window_observed": "fixed_bin_width_0p040",
+    "support_pairs_at_0p040": {
+      "train": 326,
+      "validation": 224,
+      "stress_holdout": 224
+    },
+    "support_pairs_at_0p050": {
+      "train": 419,
+      "validation": 280,
+      "stress_holdout": 277
+    },
+    "ordinary_total_count_only_hm_min_recall": 0.7292,
+    "ordinary_shuffled_label_null_p95": 0.5804,
+    "count_balanced_total_count_only_hm_min_recall": 0.7946,
+    "count_balanced_shuffled_label_null_p95": 0.554,
+    "interpretation": "Wide windows can reach support on the current view, but they did not produce admissible training evidence because total-count-only and shuffled-label controls remained too strong."
+  },
+  "minimum_support": {
+    "train_pairs": 300,
+    "validation_pairs": 200,
+    "stress_holdout_pairs": 200
+  },
+  "source_side_matrix_preregistration": {
+    "profile": "v8a_hm_clean_fullcell_countmatched_prereg_cif_lit",
+    "base_profile": "v8a_hm_clean_fullcell_nullrep_cif_lit",
+    "pair_replicates_per_full_cell": 5,
+    "current_pair_replicates_per_full_cell": 2,
+    "expected_rows": {
+      "train": 2160,
+      "validation": 1440,
+      "stress_holdout": 1440,
+      "total": 5040
+    },
+    "expected_strict_pairs": {
+      "train": 1080,
+      "validation": 720,
+      "stress_holdout": 720,
+      "total": 2520
+    },
+    "linear_support_projection_from_current_view": {
+      "projection_only_not_evidence": true,
+      "primary_0p020_pairs": {
+        "train": 485.0,
+        "validation": 330.0,
+        "stress_holdout": 307.5
+      },
+      "strict_0p015_pairs": {
+        "train": 365.0,
+        "validation": 245.0,
+        "stress_holdout": 262.5
+      }
+    },
+    "intent": "Increase source-side pair replicates before any new training so the primary 0.020 and strict 0.015 count-matched windows can plausibly exceed the 300/200/200 matched-pair target without widening to the confounded 0.040/0.050 windows."
+  },
+  "acceptance_controls": {
+    "validation_hm_min_recall_min": 0.95,
+    "stress_holdout_hm_min_recall_min": 0.9,
+    "worst_thickness_hm_min_recall_min": 0.9,
+    "worst_pose_hm_min_recall_min": 0.9,
+    "worst_seed_block_hm_min_recall_min": 0.9,
+    "worst_count_bin_hm_min_recall_min": 0.9,
+    "validation_ece_max": 0.2,
+    "stress_holdout_ece_max": 0.25,
+    "total_count_only_hm_min_recall_max": 0.6,
+    "lineage_only_hm_min_recall_max": 0.6,
+    "shuffled_label_null_p95_max": 0.55,
+    "shuffled_label_single_seed_max": 0.65,
+    "real_minus_null_margin_min": 0.35
+  },
+  "hard_guards": {
+    "development_only": true,
+    "no_shadow_final": true,
+    "no_full_ten_material_matrix": true,
+    "no_product_accuracy_claim": true,
+    "no_hardware_validation_claim": true,
+    "no_manuscript_grade_powder_xrd_claim": true,
+    "no_training_from_current_view": true,
+    "no_training_if_count_only_control_exceeds_ceiling": true,
+    "no_training_if_shuffled_null_exceeds_ceiling": true,
+    "do_not_hide_total_count_as_main_feature": true,
+    "scaler_threshold_feature_selection_fit_train_only": true
+  },
+  "next_allowed_actions": [
+    "run this prereg audit to machine-confirm the current full-cell view is not training-submittable at 0.020 or 0.015",
+    "generate the source-side count-matched full-cell matrix from the preregistered 5-replicate config only after the prereg gate passes",
+    "run matrix preflight before any Geant4 execution",
+    "run development-only Geant4 and feature extraction only if the matrix preflight passes",
+    "rerun final data audit and the full-cell ordinary/count-balanced training gate only after new features exist"
+  ],
+  "stop_loss_actions": [
+    "if 0.020 support is still below 300/200/200 after the new matrix, increase source-side support or redesign count targets before training",
+    "if 0.015 strict support is below 300/200/200, report strict sensitivity as underpowered and do not use it for promotion",
+    "if total-count-only remains >= 0.60, return to source/count normalization design",
+    "if shuffled-label null p95 remains >= 0.55, return to null protocol and feature representation review",
+    "never promote by using advanced models to bypass failed controls"
+  ]
+}

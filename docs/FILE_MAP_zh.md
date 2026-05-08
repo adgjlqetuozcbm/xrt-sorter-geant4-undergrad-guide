@@ -475,3 +475,23 @@ support-pass window; `0.050` is fallback support, but the ordinary and
 count-balanced gates still fail because total-count-only and null are not clean
 enough. The old `0.003/0.005` windows are too strict for the present full-cell
 support structure.
+
+The follow-up count-matched training preregistration stop/prereg is:
+
+- `docs/ACCURACY_SPRINT_V8A_FULLCELL_COUNT_MATCHED_PREREG_STOP_zh.md`
+
+Its source-controlled files are:
+
+- `analysis/audit_v8a_fullcell_count_matched_prereg.py`
+- `analysis/configs/v8a_fullcell_count_matched_training_prereg_config.json`
+- `analysis/configs/v8a_clean_hm_fullcell_countmatched_matrix_config.json`
+
+This audit makes the current blocker machine-readable: the current admitted
+full-cell view is not training-submittable at the preregistered `0.020` primary
+or `0.015` strict count-matched windows (`194/132/123` and `146/98/105` pairs,
+respectively, below the `300/200/200` target). Wider `0.040/0.050` windows have
+support, but the previous baseline gate showed count-only and shuffled-label
+controls still fail. Therefore the next allowed stage is source-side generation
+and preflight of `v8a_hm_clean_fullcell_countmatched_prereg_cif_lit` with five
+H/M pairs per full nuisance cell; training remains locked until new outputs
+pass final audit plus ordinary and count-balanced training gates.

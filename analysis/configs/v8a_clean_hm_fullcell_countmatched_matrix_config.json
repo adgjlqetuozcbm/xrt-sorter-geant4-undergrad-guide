@@ -1,0 +1,164 @@
+{
+  "config_id": "v8a_clean_hm_fullcell_countmatched_matrix_config",
+  "version": "2026-05-08",
+  "status": "development_preregistration",
+  "claim_scope": "H/M development-only clean full-cell count-matched support preregistration; source-on default diffraction sidecar only; not training evidence, product accuracy, hardware validation, shadow/final validation, full ten-material matrix, or manuscript-grade powder XRD",
+  "profile": "v8a_hm_clean_fullcell_countmatched_prereg_cif_lit",
+  "peak_manifest": "source_models/config/diffraction_peak_tables/hm_powder_peaks_cif_or_literature_v8a_manifest.json",
+  "required_peak_table_id": "hm_powder_peaks_cif_or_literature_v8a",
+  "source_energy_kev": 35.0,
+  "clean_matrix_origin": "clean_hm_default_single_origin_fullcell_countmatched_v1",
+  "source_family": "custom_diffraction_on_default_phase_space_v1",
+  "source_id": "v8a_clean_fullcell_countmatched_default_35kev",
+  "materials": ["Hematite", "Magnetite"],
+  "thickness_mm": [3.0, 10.0, 30.0, 60.0],
+  "pose_indices": [0, 1, 2],
+  "count_target_bins": [
+    {"count_target_bin": "low", "photons_per_row": 3600},
+    {"count_target_bin": "nominal", "photons_per_row": 4000},
+    {"count_target_bin": "high", "photons_per_row": 4400}
+  ],
+  "pair_replicates_per_cell": 5,
+  "source_modes": [
+    {"source_mode": "on", "stress_label": "default"}
+  ],
+  "splits": {
+    "train": {
+      "seed_blocks": [
+        {"seed_block": "tr_cm_a", "seed": 9001},
+        {"seed_block": "tr_cm_b", "seed": 9002},
+        {"seed_block": "tr_cm_c", "seed": 9003},
+        {"seed_block": "tr_cm_d", "seed": 9004},
+        {"seed_block": "tr_cm_e", "seed": 9005},
+        {"seed_block": "tr_cm_f", "seed": 9006}
+      ]
+    },
+    "validation": {
+      "seed_blocks": [
+        {"seed_block": "va_cm_a", "seed": 9101},
+        {"seed_block": "va_cm_b", "seed": 9102},
+        {"seed_block": "va_cm_c", "seed": 9103},
+        {"seed_block": "va_cm_d", "seed": 9104}
+      ]
+    },
+    "stress_holdout": {
+      "seed_blocks": [
+        {"seed_block": "ho_cm_a", "seed": 9201},
+        {"seed_block": "ho_cm_b", "seed": 9202},
+        {"seed_block": "ho_cm_c", "seed": 9203},
+        {"seed_block": "ho_cm_d", "seed": 9204}
+      ]
+    }
+  },
+  "strict_match_cell_keys": [
+    "split",
+    "clean_matrix_origin",
+    "source_family",
+    "thickness_mm",
+    "pose_index",
+    "count_target_bin",
+    "seed_block"
+  ],
+  "expected_strict_pairs": {
+    "train": 1080,
+    "validation": 720,
+    "stress_holdout": 720,
+    "total": 2520
+  },
+  "minimum_strict_pairs": {
+    "train": 1000,
+    "validation": 650,
+    "stress_holdout": 650
+  },
+  "expected_rows": {
+    "train": 2160,
+    "validation": 1440,
+    "stress_holdout": 1440,
+    "total": 5040
+  },
+  "count_matched_training_targets": {
+    "primary_window": 0.02,
+    "strict_sensitivity_window": 0.015,
+    "minimum_matched_pairs": {
+      "train": 300,
+      "validation": 200,
+      "stress_holdout": 200
+    },
+    "current_view_primary_pairs": {
+      "train": 194,
+      "validation": 132,
+      "stress_holdout": 123
+    },
+    "current_view_strict_pairs": {
+      "train": 146,
+      "validation": 98,
+      "stress_holdout": 105
+    },
+    "linear_support_projection_from_current_view": {
+      "projection_only_not_evidence": true,
+      "primary_0p020_pairs": {
+        "train": 485.0,
+        "validation": 330.0,
+        "stress_holdout": 307.5
+      },
+      "strict_0p015_pairs": {
+        "train": 365.0,
+        "validation": 245.0,
+        "stress_holdout": 262.5
+      }
+    }
+  },
+  "replication_intent": {
+    "reason": "Increase source-side full-cell H/M pair replicates from 2 to 5 so 0.020 primary and 0.015 strict count-matched training windows can plausibly exceed the 300/200/200 support target before any model training is attempted.",
+    "previous_fullcell_pairs": {
+      "train": 432,
+      "validation": 288,
+      "stress_holdout": 288
+    },
+    "new_fullcell_pairs": {
+      "train": 1080,
+      "validation": 720,
+      "stress_holdout": 720
+    },
+    "not_a_large_development_matrix": true,
+    "no_model_training_unlocked": true,
+    "strict_full_cell_null_orientation_mode": "seed_block_thickness_pose_count_strict_balanced_orientation"
+  },
+  "hard_guards": {
+    "development_only": true,
+    "shadow_or_final_used": false,
+    "full_ten_material_matrix": false,
+    "source_on_default_only": true,
+    "stress_variants_excluded": true,
+    "source_off_excluded": true,
+    "single_clean_origin_training_view": true,
+    "requires_peak_provenance_gate_passed": true,
+    "requires_no_existing_xrt_cube_reads": true,
+    "requires_seed_block_split_separation": true,
+    "requires_cell_level_hm_pairing": true,
+    "requires_even_pair_replicates_per_full_nuisance_cell": false,
+    "preserve_physical_crystal_signal": true,
+    "shuffle_only_for_null_audit_not_for_real_training_view": true
+  },
+  "development_run_unlock_conditions": [
+    "count-matched full-cell matrix generator completed without Geant4 execution",
+    "preflight audit passes all matrix integrity checks",
+    "H/M are paired inside every strict nuisance cell",
+    "each split seed-block thickness pose count-bin cell has five H/M pairs",
+    "train validation and stress_holdout seed blocks are disjoint",
+    "only source-on default rows are present",
+    "no stress variants and no source-off rows are present",
+    "no shadow/final flags and no full ten-material matrix flags are present"
+  ],
+  "training_unlock_conditions": [
+    "development-only Geant4 count-matched full-cell run completed after preflight",
+    "event-to-feature schema gate passes on count-matched outputs",
+    "final data audit passes and keeps count controls required",
+    "primary 0.020 count-matched support reaches train>=300 validation>=200 stress_holdout>=200",
+    "strict 0.015 sensitivity support is reported before promotion",
+    "ordinary and count-balanced full-cell training gates pass",
+    "total-count-only control remains below 0.60",
+    "shuffled-label null p95 remains below 0.55",
+    "no material/source_id/sample_id/seed/thickness/pose/split/origin/path/row_index/count_target_bin leakage in main features"
+  ]
+}
