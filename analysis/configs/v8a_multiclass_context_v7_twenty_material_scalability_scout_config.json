@@ -1,0 +1,102 @@
+{
+  "config_id": "v8a_multiclass_context_v7_twenty_material_scalability_scout_config",
+  "version": "2026-05-11",
+  "status": "development_twenty_material_scalability_scout_preregistration",
+  "claim_scope": "development-only twenty-material perturbation-augmented scalability scout; not product accuracy, not hardware validation, not shadow/final validation, and not manuscript-grade powder XRD",
+  "profile": "v8a_multiclass_context_v7_twenty_material_scalability_scout",
+  "peak_manifest": "source_models/config/diffraction_peak_tables/twenty_material_powder_peaks_rruff_v8a_manifest.json",
+  "required_peak_table_id": "twenty_material_powder_peaks_rruff_v8a",
+  "source_family": "custom_diffraction_on_twenty_material_physical_perturbation_phase_space_v1",
+  "clean_matrix_origin": "twenty_material_scalability_scout_from_v6_v1",
+  "target_materials": [
+    "Quartz",
+    "Calcite",
+    "Orthoclase",
+    "Albite",
+    "Dolomite",
+    "Pyrite",
+    "Hematite",
+    "Magnetite",
+    "Chalcopyrite",
+    "Galena",
+    "Aragonite",
+    "Magnesite",
+    "Siderite",
+    "Goethite",
+    "Ilmenite",
+    "Rutile",
+    "Sphalerite",
+    "Fluorite",
+    "Gypsum",
+    "Baryte"
+  ],
+  "source_energy_kev": 50.0,
+  "thickness_mm": [60.0, 120.0],
+  "pose_indices": [0],
+  "count_target_bins": [
+    {"count_target_bin": "nominal", "photons_per_row": 4000}
+  ],
+  "perturbation_profiles": [
+    {"physical_perturbation_profile": "nominal", "perturbation_family": "none", "peak_q_shift_fraction": 0.0, "peak_theta_sigma_deg": 0.18, "continuum_fraction": 0.30, "peak_intensity_jitter_sigma": 0.0, "source_energy_scale": 1.0},
+    {"physical_perturbation_profile": "calibration_shift_train_pos", "perturbation_family": "peak_position", "peak_q_shift_fraction": 0.004, "peak_theta_sigma_deg": 0.21, "continuum_fraction": 0.31, "peak_intensity_jitter_sigma": 0.03, "source_energy_scale": 1.0},
+    {"physical_perturbation_profile": "calibration_shift_train_neg", "perturbation_family": "peak_position", "peak_q_shift_fraction": -0.004, "peak_theta_sigma_deg": 0.21, "continuum_fraction": 0.31, "peak_intensity_jitter_sigma": 0.03, "source_energy_scale": 1.0},
+    {"physical_perturbation_profile": "resolution_blur_train_moderate", "perturbation_family": "detector_resolution", "peak_q_shift_fraction": 0.0, "peak_theta_sigma_deg": 0.42, "continuum_fraction": 0.35, "peak_intensity_jitter_sigma": 0.06, "source_energy_scale": 1.0},
+    {"physical_perturbation_profile": "source_energy_scale_train_high", "perturbation_family": "source_calibration", "peak_q_shift_fraction": 0.0, "peak_theta_sigma_deg": 0.23, "continuum_fraction": 0.32, "peak_intensity_jitter_sigma": 0.04, "source_energy_scale": 1.008},
+    {"physical_perturbation_profile": "combined_train_moderate", "perturbation_family": "combined", "peak_q_shift_fraction": 0.006, "peak_theta_sigma_deg": 0.50, "continuum_fraction": 0.38, "peak_intensity_jitter_sigma": 0.09, "source_energy_scale": 0.992},
+    {"physical_perturbation_profile": "calibration_shift_validation_mid", "perturbation_family": "peak_position", "peak_q_shift_fraction": 0.0055, "peak_theta_sigma_deg": 0.22, "continuum_fraction": 0.32, "peak_intensity_jitter_sigma": 0.035, "source_energy_scale": 1.0},
+    {"physical_perturbation_profile": "resolution_blur_validation_mid", "perturbation_family": "detector_resolution", "peak_q_shift_fraction": 0.0, "peak_theta_sigma_deg": 0.47, "continuum_fraction": 0.36, "peak_intensity_jitter_sigma": 0.07, "source_energy_scale": 1.0},
+    {"physical_perturbation_profile": "source_energy_scale_validation_mid", "perturbation_family": "source_calibration", "peak_q_shift_fraction": 0.0, "peak_theta_sigma_deg": 0.24, "continuum_fraction": 0.33, "peak_intensity_jitter_sigma": 0.045, "source_energy_scale": 1.012},
+    {"physical_perturbation_profile": "combined_validation_mid", "perturbation_family": "combined", "peak_q_shift_fraction": 0.008, "peak_theta_sigma_deg": 0.55, "continuum_fraction": 0.40, "peak_intensity_jitter_sigma": 0.10, "source_energy_scale": 0.988},
+    {"physical_perturbation_profile": "calibration_shift_stress_neg", "perturbation_family": "peak_position", "peak_q_shift_fraction": -0.0065, "peak_theta_sigma_deg": 0.23, "continuum_fraction": 0.33, "peak_intensity_jitter_sigma": 0.04, "source_energy_scale": 1.0},
+    {"physical_perturbation_profile": "resolution_blur_stress_high", "perturbation_family": "detector_resolution", "peak_q_shift_fraction": 0.0, "peak_theta_sigma_deg": 0.60, "continuum_fraction": 0.42, "peak_intensity_jitter_sigma": 0.11, "source_energy_scale": 1.0},
+    {"physical_perturbation_profile": "source_energy_scale_stress_low", "perturbation_family": "source_calibration", "peak_q_shift_fraction": 0.0, "peak_theta_sigma_deg": 0.25, "continuum_fraction": 0.34, "peak_intensity_jitter_sigma": 0.05, "source_energy_scale": 0.985},
+    {"physical_perturbation_profile": "combined_stress_high", "perturbation_family": "combined", "peak_q_shift_fraction": -0.010, "peak_theta_sigma_deg": 0.65, "continuum_fraction": 0.45, "peak_intensity_jitter_sigma": 0.13, "source_energy_scale": 0.985}
+  ],
+  "split_design": {
+    "train": {
+      "seed_block_prefix": "tr_scale",
+      "seed_start": 120001,
+      "seed_block_count": 3,
+      "profiles": ["nominal", "calibration_shift_train_pos", "calibration_shift_train_neg", "resolution_blur_train_moderate", "source_energy_scale_train_high", "combined_train_moderate"]
+    },
+    "validation": {
+      "seed_block_prefix": "va_scale",
+      "seed_start": 121001,
+      "seed_block_count": 2,
+      "profiles": ["nominal", "calibration_shift_validation_mid", "resolution_blur_validation_mid", "source_energy_scale_validation_mid", "combined_validation_mid"]
+    },
+    "stress_holdout": {
+      "seed_block_prefix": "ho_scale",
+      "seed_start": 122001,
+      "seed_block_count": 2,
+      "profiles": ["nominal", "calibration_shift_stress_neg", "resolution_blur_stress_high", "source_energy_scale_stress_low", "combined_stress_high"]
+    }
+  },
+  "expected_context_cells": {
+    "train": 36,
+    "validation": 20,
+    "stress_holdout": 20,
+    "total": 76
+  },
+  "expected_rows": {
+    "train": 720,
+    "validation": 400,
+    "stress_holdout": 400,
+    "total": 1520
+  },
+  "training_protocol_hint": {
+    "primary_question": "Does the v6 perturbation-augmented protocol still work when the material space expands from 10 to 20 classes?",
+    "scout_not_final": true
+  },
+  "hard_guards": {
+    "development_only": true,
+    "training_unlocked_by_matrix_generation": false,
+    "training_requires_post_geant4_audits": true,
+    "shadow_or_final_used": false,
+    "requires_no_existing_xrt_cube_reads": true,
+    "requires_full_material_set_per_context_cell": true,
+    "requires_profile_in_context_cell_id": true,
+    "requires_seed_block_split_separation": true,
+    "requires_train_validation_stress_profile_parameter_separation": true
+  }
+}

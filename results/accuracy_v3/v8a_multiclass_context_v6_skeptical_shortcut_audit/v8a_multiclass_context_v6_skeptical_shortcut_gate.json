@@ -1,0 +1,30 @@
+{
+  "generated_by": "analysis/audit_v8a_multiclass_context_v6_skeptical_shortcut.py",
+  "generated_at_utc": "2026-05-10T18:20:19+00:00",
+  "development_only": true,
+  "claim_scope": "skeptical development audit for v6 physical robustness; not hardware validation or product accuracy",
+  "gate_passed": true,
+  "decision": "v6_skeptical_shortcut_audit_passed",
+  "sample_count": 1400,
+  "main_feature_count": 122,
+  "lineage_like_main_features": [],
+  "cross_split_exact_main_feature_hash_overlap_count": 0,
+  "cross_split_exact_main_feature_hash_conflicting_material_count": 0,
+  "off_diagonal_main_errors_count": 0,
+  "total_count_only_worst_profile_hm": 0.25,
+  "lineage_only_worst_profile_hm": 0.0,
+  "shuffled_label_worst_profile_hm_p95": 0.19374999999999987,
+  "thresholds": {
+    "cross_split_exact_main_feature_hash_overlap_max": 0,
+    "off_diagonal_main_errors_max": 0,
+    "total_count_only_worst_profile_hm_max": 0.65,
+    "lineage_only_worst_profile_hm_max": 0.65,
+    "shuffled_label_worst_profile_hm_p95_max": 0.55
+  },
+  "stop_reasons": [],
+  "software": {
+    "python": "3.10.12",
+    "pandas": "2.3.3",
+    "numpy": "2.2.6"
+  }
+}

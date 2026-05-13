@@ -33,8 +33,20 @@ OPTIONAL_CLEAN_LINEAGE_FIELDS = [
     "count_target_bin",
     "count_target_photons",
     "clean_pair_id",
+    "clean_match_pair_id",
+    "clean_context_cell_id",
     "nuisance_cell_id",
     "pair_replicate_index",
+    "context_replicate_index",
+    "context_material_count",
+    "physical_perturbation_profile",
+    "perturbation_family",
+    "peak_q_shift_fraction",
+    "peak_theta_sigma_deg",
+    "continuum_fraction",
+    "peak_intensity_jitter_sigma",
+    "source_energy_scale",
+    "phase_space_profile_version",
 ]
 
 
@@ -498,6 +510,10 @@ def build_sidecar_tables(
         for field in OPTIONAL_CLEAN_LINEAGE_FIELDS:
             if field in row:
                 feature_row[field] = row.get(field, "")
+        if feature_row.get("clean_pair_id", "") and not feature_row.get("clean_match_pair_id", ""):
+            feature_row["clean_match_pair_id"] = feature_row["clean_pair_id"]
+        if feature_row.get("clean_match_pair_id", "") and not feature_row.get("clean_pair_id", ""):
+            feature_row["clean_pair_id"] = feature_row["clean_match_pair_id"]
         for peak in peaks:
             feature_row[f"diffraction_peak_{peak['safe_peak_id']}_norm"] = 0.0
 

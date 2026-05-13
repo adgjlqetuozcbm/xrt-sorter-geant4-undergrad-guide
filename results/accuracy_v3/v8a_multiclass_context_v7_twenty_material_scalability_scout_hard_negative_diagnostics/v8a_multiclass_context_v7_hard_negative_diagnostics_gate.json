@@ -1,0 +1,45 @@
+{
+  "generated_by": "analysis/audit_v8a_multiclass_context_v7_hard_negative_diagnostics.py",
+  "generated_at_utc": "2026-05-12T14:38:52+00:00",
+  "development_only": true,
+  "diagnostic_completed": true,
+  "decision": "v7_hard_negative_diagnostic_completed_next_step_targeted_hm_ilmenite_robustness_design",
+  "main_finding": "combined_stress_high creates a Hematite-Ilmenite hard-negative failure in the 20-material scout",
+  "sample_count": 1520,
+  "main_feature_count": 233,
+  "model_gate_passed": false,
+  "model_gate_stop_reasons": [
+    "stress_worst_profile_hm_min_recall_below_threshold",
+    "stress_overall_hm_min_recall_below_threshold",
+    "real_minus_shuffled_worst_profile_hm_margin_too_small"
+  ],
+  "hematite_to_ilmenite_error_rows": 8,
+  "nearest_train_centroids_top3_for_hematite_combined_stress": [
+    {
+      "candidate_profile": "combined_train_moderate",
+      "candidate_material": "Ilmenite",
+      "euclidean_distance_zscore": 4.278744765464851
+    },
+    {
+      "candidate_profile": "combined_train_moderate",
+      "candidate_material": "Hematite",
+      "euclidean_distance_zscore": 5.246351639154637
+    },
+    {
+      "candidate_profile": "combined_train_moderate",
+      "candidate_material": "Siderite",
+      "euclidean_distance_zscore": 5.513871706658044
+    }
+  ],
+  "outputs": {
+    "peak_group_sums": "v8a_multiclass_context_v7_peak_group_sums_by_profile_material.csv",
+    "nearest_train_centroids": "v8a_multiclass_context_v7_hematite_combined_stress_nearest_train_centroids.csv",
+    "focus_pair_distances": "v8a_multiclass_context_v7_combined_stress_focus_pair_distances.csv",
+    "hm_ilmenite_error_rows": "v8a_multiclass_context_v7_hm_ilmenite_error_rows.csv"
+  },
+  "software": {
+    "python": "3.10.12",
+    "pandas": "2.3.3",
+    "numpy": "2.2.6"
+  }
+}

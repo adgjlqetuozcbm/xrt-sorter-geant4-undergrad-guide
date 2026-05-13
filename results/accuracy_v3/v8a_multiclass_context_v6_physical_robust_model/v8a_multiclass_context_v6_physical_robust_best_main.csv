@@ -1,0 +1,13 @@
+track,method,family,eval_split,samples,feature_count,top1_accuracy,balanced_accuracy,macro_f1,min_class_recall,hematite_recall,magnetite_recall,hm_min_recall,status,physical_perturbation_profile
+v6_physical_robust,ExtraTreesMulticlassMain,main,stress_holdout,400,122,1.0,1.0,1.0,1.0,1.0,1.0,1.0,evaluated,__overall__
+v6_physical_robust,LogisticMulticlassMain,main,stress_holdout,80,122,1.0,1.0,1.0,1.0,1.0,1.0,1.0,evaluated,calibration_shift_stress_neg
+v6_physical_robust,ExtraTreesMulticlassMain,main,stress_holdout,80,122,1.0,1.0,1.0,1.0,1.0,1.0,1.0,evaluated,combined_stress_high
+v6_physical_robust,LogisticMulticlassMain,main,stress_holdout,80,122,1.0,1.0,1.0,1.0,1.0,1.0,1.0,evaluated,nominal
+v6_physical_robust,LogisticMulticlassMain,main,stress_holdout,80,122,1.0,1.0,1.0,1.0,1.0,1.0,1.0,evaluated,resolution_blur_stress_high
+v6_physical_robust,LogisticMulticlassMain,main,stress_holdout,80,122,1.0,1.0,1.0,1.0,1.0,1.0,1.0,evaluated,source_energy_scale_stress_low
+v6_physical_robust,LogisticMulticlassMain,main,validation,400,122,1.0,1.0,1.0,1.0,1.0,1.0,1.0,evaluated,__overall__
+v6_physical_robust,LogisticMulticlassMain,main,validation,80,122,1.0,1.0,1.0,1.0,1.0,1.0,1.0,evaluated,calibration_shift_validation_mid
+v6_physical_robust,LogisticMulticlassMain,main,validation,80,122,1.0,1.0,1.0,1.0,1.0,1.0,1.0,evaluated,combined_validation_mid
+v6_physical_robust,LogisticMulticlassMain,main,validation,80,122,1.0,1.0,1.0,1.0,1.0,1.0,1.0,evaluated,nominal
+v6_physical_robust,LogisticMulticlassMain,main,validation,80,122,1.0,1.0,1.0,1.0,1.0,1.0,1.0,evaluated,resolution_blur_validation_mid
+v6_physical_robust,LogisticMulticlassMain,main,validation,80,122,1.0,1.0,1.0,1.0,1.0,1.0,1.0,evaluated,source_energy_scale_validation_mid

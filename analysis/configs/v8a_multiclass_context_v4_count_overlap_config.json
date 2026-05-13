@@ -1,0 +1,88 @@
+{
+  "config_id": "v8a_multiclass_context_v4_count_overlap_config",
+  "version": "2026-05-10",
+  "status": "development_training_preregistration",
+  "claim_scope": "development-only full-10 count-overlap training candidate; not product accuracy, not hardware validation, not shadow/final validation, and not manuscript-grade powder XRD",
+  "profile": "v8a_multiclass_context_v4_count_overlap_50kev_t60_t120",
+  "peak_manifest": "source_models/config/diffraction_peak_tables/ten_material_powder_peaks_cif_or_literature_v8a_manifest.json",
+  "required_peak_table_id": "ten_material_powder_peaks_cif_or_literature_v8a",
+  "source_family": "custom_diffraction_on_default_phase_space_v1",
+  "clean_matrix_origin": "full10_count_overlap_targeted_from_v3_scout_v1",
+  "target_materials": [
+    "Quartz",
+    "Calcite",
+    "Orthoclase",
+    "Albite",
+    "Dolomite",
+    "Pyrite",
+    "Hematite",
+    "Magnetite",
+    "Chalcopyrite",
+    "Galena"
+  ],
+  "source_energies_kev": [50.0],
+  "thickness_mm": [60.0, 120.0],
+  "pose_indices": [0],
+  "count_target_bins": [
+    {"count_target_bin": "nominal", "photons_per_row": 4000}
+  ],
+  "split_seed_plan": {
+    "train": {"seed_block_prefix": "tr_overlap", "seed_start": 104001, "seed_block_count": 70},
+    "validation": {"seed_block_prefix": "va_overlap", "seed_start": 105001, "seed_block_count": 45},
+    "stress_holdout": {"seed_block_prefix": "ho_overlap", "seed_start": 106001, "seed_block_count": 45}
+  },
+  "strict_match_cell_keys": [
+    "split",
+    "clean_context_cell_id"
+  ],
+  "expected_context_cells": {
+    "train": 140,
+    "validation": 90,
+    "stress_holdout": 90,
+    "total": 320
+  },
+  "expected_rows": {
+    "train": 1400,
+    "validation": 900,
+    "stress_holdout": 900,
+    "total": 3200
+  },
+  "count_control_target": {
+    "primary_strategy": "sliding_window_0p050",
+    "max_count_span": 0.05,
+    "minimum_supported_context_cells_after_geant4": {
+      "train": 100,
+      "validation": 60,
+      "stress_holdout": 60
+    },
+    "fallback_strategy_for_diagnostics_only": "sliding_window_0p075"
+  },
+  "scout_basis": {
+    "profile": "v8a_multiclass_context_v3_physics_scout",
+    "cleanliness_design_gate": "results/accuracy_v3/v8a_multiclass_context_v3_physics_scout_cleanliness_design/v8a_multiclass_context_cleanliness_design_gate.json",
+    "selected_regions": [
+      {"source_energy_kev": 50.0, "thickness_mm": 120.0, "reason": "All scout splits fit full-10 within count span <=0.04."},
+      {"source_energy_kev": 50.0, "thickness_mm": 60.0, "reason": "All scout splits fit full-10 within count span <=0.05."}
+    ]
+  },
+  "hard_guards": {
+    "development_only": true,
+    "training_unlocked_by_matrix_generation": false,
+    "training_requires_post_geant4_audits": true,
+    "source_on_default_only": true,
+    "source_off_excluded": true,
+    "shadow_or_final_used": false,
+    "requires_no_existing_xrt_cube_reads": true,
+    "requires_full10_per_context_cell": true,
+    "requires_energy_in_context_cell_id": true,
+    "requires_seed_block_split_separation": true,
+    "requires_count_balance_after_geant4": true
+  },
+  "next_if_ready": [
+    "generate matrix without running Geant4",
+    "run count-overlap matrix preflight",
+    "run development-only Geant4",
+    "extract event features",
+    "rerun shortcut/final/model diagnostics with sliding-window count-balanced gate"
+  ]
+}

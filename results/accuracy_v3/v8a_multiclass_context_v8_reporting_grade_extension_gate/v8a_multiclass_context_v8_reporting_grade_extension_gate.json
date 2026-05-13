@@ -1,0 +1,50 @@
+{
+  "generated_by": "analysis/audit_v8a_multiclass_context_v8_reporting_grade_extension_gate.py",
+  "generated_at_utc": "2026-05-12T19:02:11+00:00",
+  "development_only": true,
+  "claim_scope": "development-only 20-material reporting extension; not a strict hard-negative robustness claim, not hardware validation, and not product accuracy",
+  "gate_passed": true,
+  "decision": "v8_twenty_material_reporting_extension_passed_with_caveats",
+  "strict_hard_negative_gate_passed": false,
+  "validation_overall_top1": 0.9875,
+  "stress_overall_top1": 0.9916666666666668,
+  "validation_overall_macro_f1": 0.9873015873015872,
+  "stress_overall_macro_f1": 0.9914929608206918,
+  "validation_overall_hm_min_recall": 1.0,
+  "stress_overall_hm_min_recall": 0.8333333333333334,
+  "stress_nominal_hm_min_recall": 1.0,
+  "stress_nominal_macro_f1": 1.0,
+  "stress_worst_profile_macro_f1": 0.9733333333333334,
+  "strict_stress_worst_profile_hm_min_recall_report_only": 0.5,
+  "total_count_only_worst_profile_hm": 0.5,
+  "lineage_only_worst_profile_hm": 0.0,
+  "shuffled_label_worst_profile_hm_p95": 0.13749999999999973,
+  "cross_split_exact_main_feature_hash_overlap_count": 0,
+  "hematite_to_ilmenite_unique_samples_excluding_overall": 6,
+  "thresholds": {
+    "validation_overall_top1_min": 0.95,
+    "stress_overall_top1_min": 0.95,
+    "validation_overall_macro_f1_min": 0.95,
+    "stress_overall_macro_f1_min": 0.95,
+    "validation_overall_hm_min_recall_min": 0.95,
+    "stress_overall_hm_min_recall_min": 0.8,
+    "stress_nominal_hm_min_recall_min": 0.95,
+    "stress_nominal_macro_f1_min": 0.95,
+    "stress_worst_profile_macro_f1_min": 0.9,
+    "total_count_only_worst_profile_hm_max": 0.65,
+    "lineage_only_worst_profile_hm_max": 0.65,
+    "shuffled_label_worst_profile_hm_p95_max": 0.55,
+    "cross_split_exact_main_feature_hash_overlap_max": 0
+  },
+  "caveats": [
+    "strict hard-negative robustness gate still fails; this reporting gate must not be described as strong hard-negative success",
+    "worst stress-profile H/M recall is below the strict robustness threshold and should be reported as a limitation",
+    "Hematite-to-Ilmenite errors remain in held-out stress profiles: 6 unique samples"
+  ],
+  "stop_reasons": [],
+  "software": {
+    "python": "3.10.12",
+    "pandas": "2.3.3",
+    "numpy": "2.2.6"
+  }
+}

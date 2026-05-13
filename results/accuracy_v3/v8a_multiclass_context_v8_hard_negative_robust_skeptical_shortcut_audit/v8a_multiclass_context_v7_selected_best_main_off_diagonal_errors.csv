@@ -1,0 +1,5 @@
+method,eval_split,physical_perturbation_profile,actual,predicted,count,rate,eval_split_best,method_best
+ExtraTreesMulticlassMain,stress_holdout,resolution_blur_stress_high,Ilmenite,Hematite,1,0.25,stress_holdout,ExtraTreesMulticlassMain
+ExtraTreesMulticlassMain,validation,combined_validation_mid,Ilmenite,Hematite,2,0.5,validation,ExtraTreesMulticlassMain
+LogisticMulticlassMain,stress_holdout,combined_stress_high,Hematite,Ilmenite,1,0.25,stress_holdout,LogisticMulticlassMain
+LogisticMulticlassMain,stress_holdout,hard_negative_stress_alt,Hematite,Ilmenite,2,0.5,stress_holdout,LogisticMulticlassMain

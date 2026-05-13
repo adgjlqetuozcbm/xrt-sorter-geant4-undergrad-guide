@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import csv
 import os
+import re
 import subprocess
 import time
 from pathlib import Path
@@ -117,6 +118,7 @@ def main() -> None:
     parser.add_argument("--role", choices=["all", "calibration", "material"], default="all")
     parser.add_argument("--rerun-existing", action="store_true", help="Run rows even when status CSV already has returncode 0.")
     parser.add_argument("--status-only", action="store_true", help="Only summarize completed/pending/failed rows.")
+    parser.add_argument("--status-suffix", default="", help="Optional suffix for independent shard status CSVs.")
     parser.add_argument("--project-root", default=Path(__file__).resolve().parents[1])
     args = parser.parse_args()
 
@@ -145,7 +147,10 @@ def main() -> None:
 
     status_dir = project_root / "results" / "material_sorting"
     status_dir.mkdir(parents=True, exist_ok=True)
-    status_path = status_dir / f"run_status_{args.profile}.csv"
+    status_suffix = str(args.status_suffix).strip()
+    if status_suffix and not re.fullmatch(r"[_A-Za-z0-9.-]+", status_suffix):
+        raise ValueError(f"Unsafe status suffix: {status_suffix}")
+    status_path = status_dir / f"run_status_{args.profile}{status_suffix}.csv"
     existing_status_rows = load_status_rows(status_path)
     completed = set() if args.rerun_existing else load_completed_status(existing_status_rows)
     selected_keys = {

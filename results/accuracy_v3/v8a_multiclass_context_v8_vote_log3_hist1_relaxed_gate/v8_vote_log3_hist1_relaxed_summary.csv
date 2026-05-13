@@ -1,0 +1,15 @@
+track,method,eval_split,physical_perturbation_profile,samples,top1_accuracy,balanced_accuracy,macro_f1,min_class_recall,hematite_recall,magnetite_recall,hm_min_recall
+v8_vote_log3_hist1_relaxed,VoteLogistic3HistGB1Main,validation,__overall__,480,0.9854166666666667,0.9854166666666668,0.9852566915313734,0.75,0.9583333333333334,1.0,0.9583333333333334
+v8_vote_log3_hist1_relaxed,VoteLogistic3HistGB1Main,validation,calibration_shift_validation_mid,80,0.9875,0.9875,0.9873015873015873,0.75,1.0,1.0,1.0
+v8_vote_log3_hist1_relaxed,VoteLogistic3HistGB1Main,validation,combined_validation_mid,80,0.9625,0.9625,0.9563636363636363,0.25,1.0,1.0,1.0
+v8_vote_log3_hist1_relaxed,VoteLogistic3HistGB1Main,validation,hard_negative_validation_bridge,80,0.9875,0.9875,0.9873015873015873,0.75,0.75,1.0,0.75
+v8_vote_log3_hist1_relaxed,VoteLogistic3HistGB1Main,validation,nominal,80,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+v8_vote_log3_hist1_relaxed,VoteLogistic3HistGB1Main,validation,resolution_blur_validation_mid,80,0.975,0.975,0.9733333333333334,0.5,1.0,1.0,1.0
+v8_vote_log3_hist1_relaxed,VoteLogistic3HistGB1Main,validation,source_energy_scale_validation_mid,80,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+v8_vote_log3_hist1_relaxed,VoteLogistic3HistGB1Main,stress_holdout,__overall__,480,0.9958333333333333,0.9958333333333332,0.9958260869565217,0.9166666666666666,0.9166666666666666,1.0,0.9166666666666666
+v8_vote_log3_hist1_relaxed,VoteLogistic3HistGB1Main,stress_holdout,calibration_shift_stress_neg,80,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+v8_vote_log3_hist1_relaxed,VoteLogistic3HistGB1Main,stress_holdout,combined_stress_high,80,0.9875,0.9875,0.9873015873015873,0.75,0.75,1.0,0.75
+v8_vote_log3_hist1_relaxed,VoteLogistic3HistGB1Main,stress_holdout,hard_negative_stress_alt,80,0.9875,0.9875,0.9873015873015873,0.75,0.75,1.0,0.75
+v8_vote_log3_hist1_relaxed,VoteLogistic3HistGB1Main,stress_holdout,nominal,80,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+v8_vote_log3_hist1_relaxed,VoteLogistic3HistGB1Main,stress_holdout,resolution_blur_stress_high,80,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+v8_vote_log3_hist1_relaxed,VoteLogistic3HistGB1Main,stress_holdout,source_energy_scale_stress_low,80,1.0,1.0,1.0,1.0,1.0,1.0,1.0

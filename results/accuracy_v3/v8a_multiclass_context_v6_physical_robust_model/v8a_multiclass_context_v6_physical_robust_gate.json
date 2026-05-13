@@ -1,0 +1,64 @@
+{
+  "generated_by": "analysis/train_v8a_multiclass_context_v6_physical_robust.py",
+  "generated_at_utc": "2026-05-10T18:16:37+00:00",
+  "development_only": true,
+  "claim_scope": "development-only perturbation-augmented physical robustness diagnostic; not hardware validation or product accuracy",
+  "gate_passed": true,
+  "decision": "v6_physical_robust_gate_passed_ready_for_scalability_scout",
+  "input_dir": "results/accuracy_v3/v8a_multiclass_context_v6_physical_robust_event_to_feature",
+  "sample_count": 1400,
+  "train_samples": 600,
+  "train_profiles": [
+    "calibration_shift_train_neg",
+    "calibration_shift_train_pos",
+    "combined_train_moderate",
+    "nominal",
+    "resolution_blur_train_moderate",
+    "source_energy_scale_train_high"
+  ],
+  "materials": [
+    "Albite",
+    "Calcite",
+    "Chalcopyrite",
+    "Dolomite",
+    "Galena",
+    "Hematite",
+    "Magnetite",
+    "Orthoclase",
+    "Pyrite",
+    "Quartz"
+  ],
+  "hm_pair": [
+    "Hematite",
+    "Magnetite"
+  ],
+  "main_feature_count": 122,
+  "validation_worst_profile_hm_min_recall": 1.0,
+  "stress_worst_profile_hm_min_recall": 1.0,
+  "validation_worst_profile_macro_f1": 1.0,
+  "stress_worst_profile_macro_f1": 1.0,
+  "validation_overall_hm_min_recall": 1.0,
+  "stress_overall_hm_min_recall": 1.0,
+  "total_count_only_worst_profile_hm": 0.25,
+  "lineage_only_worst_profile_hm": 0.0,
+  "shuffled_label_worst_profile_hm_p95": 0.19374999999999987,
+  "real_minus_shuffled_worst_profile_hm_margin": 0.8062500000000001,
+  "thresholds": {
+    "validation_worst_profile_hm_min_recall_min": 0.85,
+    "stress_worst_profile_hm_min_recall_min": 0.75,
+    "validation_worst_profile_macro_f1_min": 0.6,
+    "stress_worst_profile_macro_f1_min": 0.55,
+    "validation_overall_hm_min_recall_min": 0.9,
+    "stress_overall_hm_min_recall_min": 0.85,
+    "total_count_only_worst_profile_hm_max": 0.65,
+    "lineage_only_worst_profile_hm_max": 0.65,
+    "shuffled_label_worst_profile_hm_p95_max": 0.55,
+    "real_minus_shuffled_worst_profile_hm_margin_min": 0.2
+  },
+  "stop_reasons": [],
+  "software": {
+    "python": "3.10.12",
+    "pandas": "2.3.3",
+    "numpy": "2.2.6"
+  }
+}

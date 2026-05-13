@@ -1,0 +1,13 @@
+track,method,family,eval_split,samples,feature_count,top1_accuracy,balanced_accuracy,macro_f1,min_class_recall,hematite_recall,magnetite_recall,hm_min_recall,status,physical_perturbation_profile
+v7_twenty_material_scalability_scout,ExtraTreesMulticlassMain,main,stress_holdout,400,233,0.975,0.975,0.9747743579026977,0.75,0.75,1.0,0.75,evaluated,__overall__
+v7_twenty_material_scalability_scout,LogisticMulticlassMain,main,stress_holdout,80,233,1.0,1.0,1.0,1.0,1.0,1.0,1.0,evaluated,calibration_shift_stress_neg
+v7_twenty_material_scalability_scout,ExtraTreesMulticlassMain,main,stress_holdout,80,233,0.8875,0.8875,0.8696969696969697,0.0,0.0,1.0,0.0,evaluated,combined_stress_high
+v7_twenty_material_scalability_scout,LogisticMulticlassMain,main,stress_holdout,80,233,1.0,1.0,1.0,1.0,1.0,1.0,1.0,evaluated,nominal
+v7_twenty_material_scalability_scout,ExtraTreesMulticlassMain,main,stress_holdout,80,233,0.9875,0.9875,0.9873015873015873,0.75,0.75,1.0,0.75,evaluated,resolution_blur_stress_high
+v7_twenty_material_scalability_scout,LogisticMulticlassMain,main,stress_holdout,80,233,1.0,1.0,1.0,1.0,1.0,1.0,1.0,evaluated,source_energy_scale_stress_low
+v7_twenty_material_scalability_scout,ExtraTreesMulticlassMain,main,validation,400,233,1.0,1.0,1.0,1.0,1.0,1.0,1.0,evaluated,__overall__
+v7_twenty_material_scalability_scout,LogisticMulticlassMain,main,validation,80,233,1.0,1.0,1.0,1.0,1.0,1.0,1.0,evaluated,calibration_shift_validation_mid
+v7_twenty_material_scalability_scout,ExtraTreesMulticlassMain,main,validation,80,233,1.0,1.0,1.0,1.0,1.0,1.0,1.0,evaluated,combined_validation_mid
+v7_twenty_material_scalability_scout,LogisticMulticlassMain,main,validation,80,233,1.0,1.0,1.0,1.0,1.0,1.0,1.0,evaluated,nominal
+v7_twenty_material_scalability_scout,ExtraTreesMulticlassMain,main,validation,80,233,1.0,1.0,1.0,1.0,1.0,1.0,1.0,evaluated,resolution_blur_validation_mid
+v7_twenty_material_scalability_scout,LogisticMulticlassMain,main,validation,80,233,1.0,1.0,1.0,1.0,1.0,1.0,1.0,evaluated,source_energy_scale_validation_mid

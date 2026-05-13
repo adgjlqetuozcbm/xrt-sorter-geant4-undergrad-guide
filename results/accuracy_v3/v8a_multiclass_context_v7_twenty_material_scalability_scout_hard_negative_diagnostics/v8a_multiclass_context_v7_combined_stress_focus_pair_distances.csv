@@ -1,0 +1,16 @@
+split,physical_perturbation_profile,left_material,right_material,left_n,right_n,euclidean_distance_zscore
+stress_holdout,combined_stress_high,Hematite,Ilmenite,4,4,2.0563585737530565
+stress_holdout,combined_stress_high,Ilmenite,Siderite,4,4,4.171357269341888
+stress_holdout,combined_stress_high,Hematite,Magnetite,4,4,4.303964775568698
+stress_holdout,combined_stress_high,Hematite,Siderite,4,4,5.168422100529535
+stress_holdout,combined_stress_high,Ilmenite,Rutile,4,4,5.2950988915080766
+stress_holdout,combined_stress_high,Hematite,Rutile,4,4,5.375050473072143
+stress_holdout,combined_stress_high,Rutile,Siderite,4,4,5.51441042368959
+stress_holdout,combined_stress_high,Ilmenite,Magnetite,4,4,5.705327407818541
+stress_holdout,combined_stress_high,Magnetite,Rutile,4,4,7.781799929461571
+stress_holdout,combined_stress_high,Goethite,Siderite,4,4,8.229776501214438
+stress_holdout,combined_stress_high,Magnetite,Siderite,4,4,8.405147535366488
+stress_holdout,combined_stress_high,Goethite,Ilmenite,4,4,9.407805125020545
+stress_holdout,combined_stress_high,Goethite,Hematite,4,4,9.726952188010314
+stress_holdout,combined_stress_high,Goethite,Rutile,4,4,10.477162086040362
+stress_holdout,combined_stress_high,Goethite,Magnetite,4,4,10.802095105808721

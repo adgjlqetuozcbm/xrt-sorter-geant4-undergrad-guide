@@ -1,0 +1,103 @@
+{
+  "generated_by": "analysis/audit_v8a_multiclass_context_v8_hard_negative_robust_diagnostics.py",
+  "generated_at_utc": "2026-05-12T18:34:11+00:00",
+  "development_only": true,
+  "diagnostic_completed": true,
+  "decision": "v8_hard_negative_diagnostic_completed_next_step_feature_or_sampling_rework",
+  "main_finding": "v8 targeted hard-negative training improves the v7 combined-stress collapse but still leaves Hematite close to Ilmenite under held-out hard stress profiles",
+  "sample_count": 2160,
+  "main_feature_count": 233,
+  "model_gate_passed": false,
+  "model_gate_stop_reasons": [
+    "stress_worst_profile_hm_min_recall_below_threshold",
+    "stress_overall_hm_min_recall_below_threshold",
+    "stress_hematite_to_ilmenite_main_errors_above_threshold"
+  ],
+  "hematite_to_ilmenite_error_rows_excluding_overall": 8,
+  "hematite_to_ilmenite_unique_samples_excluding_overall": 6,
+  "nearest_train_centroids_top3_for_hematite_stress_profiles": [
+    {
+      "query_profile": "combined_stress_high",
+      "candidate_profile": "resolution_blur_train_high",
+      "candidate_material": "Ilmenite",
+      "euclidean_distance_zscore": 2.3524673383667554
+    },
+    {
+      "query_profile": "combined_stress_high",
+      "candidate_profile": "combined_train_high_neg",
+      "candidate_material": "Hematite",
+      "euclidean_distance_zscore": 2.4085846883332467
+    },
+    {
+      "query_profile": "combined_stress_high",
+      "candidate_profile": "combined_train_high_neg",
+      "candidate_material": "Ilmenite",
+      "euclidean_distance_zscore": 2.456348867179441
+    },
+    {
+      "query_profile": "hard_negative_stress_alt",
+      "candidate_profile": "combined_train_high_neg",
+      "candidate_material": "Ilmenite",
+      "euclidean_distance_zscore": 2.870115158996486
+    },
+    {
+      "query_profile": "hard_negative_stress_alt",
+      "candidate_profile": "combined_train_high_pos",
+      "candidate_material": "Ilmenite",
+      "euclidean_distance_zscore": 3.1016093710388626
+    },
+    {
+      "query_profile": "hard_negative_stress_alt",
+      "candidate_profile": "combined_train_high_neg",
+      "candidate_material": "Hematite",
+      "euclidean_distance_zscore": 3.2806008696516664
+    },
+    {
+      "query_profile": "calibration_shift_stress_neg",
+      "candidate_profile": "calibration_shift_train_neg",
+      "candidate_material": "Hematite",
+      "euclidean_distance_zscore": 3.0218541539997066
+    },
+    {
+      "query_profile": "calibration_shift_stress_neg",
+      "candidate_profile": "calibration_shift_train_pos",
+      "candidate_material": "Ilmenite",
+      "euclidean_distance_zscore": 3.872801499746843
+    },
+    {
+      "query_profile": "calibration_shift_stress_neg",
+      "candidate_profile": "source_energy_scale_train_high",
+      "candidate_material": "Ilmenite",
+      "euclidean_distance_zscore": 4.372711202429253
+    },
+    {
+      "query_profile": "resolution_blur_stress_high",
+      "candidate_profile": "resolution_blur_train_high",
+      "candidate_material": "Hematite",
+      "euclidean_distance_zscore": 2.4915138296617405
+    },
+    {
+      "query_profile": "resolution_blur_stress_high",
+      "candidate_profile": "combined_train_high_pos",
+      "candidate_material": "Hematite",
+      "euclidean_distance_zscore": 2.5216328296702883
+    },
+    {
+      "query_profile": "resolution_blur_stress_high",
+      "candidate_profile": "combined_train_high_neg",
+      "candidate_material": "Hematite",
+      "euclidean_distance_zscore": 2.913965860287484
+    }
+  ],
+  "outputs": {
+    "peak_group_sums": "v8a_multiclass_context_v8_peak_group_sums_by_profile_material.csv",
+    "nearest_train_centroids": "v8a_multiclass_context_v8_hematite_stress_nearest_train_centroids.csv",
+    "focus_pair_distances": "v8a_multiclass_context_v8_stress_focus_pair_distances.csv",
+    "hm_ilmenite_error_rows": "v8a_multiclass_context_v8_hm_ilmenite_error_rows.csv"
+  },
+  "software": {
+    "python": "3.10.12",
+    "pandas": "2.3.3",
+    "numpy": "2.2.6"
+  }
+}

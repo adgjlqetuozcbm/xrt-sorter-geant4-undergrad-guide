@@ -1,0 +1,2600 @@
+{
+  "peak_table_id": "twenty_material_powder_peaks_rruff_v8a",
+  "version": "2026-05-11",
+  "status": "development_reference_candidate",
+  "reference_type": "rruff_powder_dif_computed_reference_pattern_candidate",
+  "reference_citation": "RRUFF Project powder diffraction DIF files computed with XPOW from structure/cell data; development-only candidate peak table for v8A twenty-material scalability scout.",
+  "reference_url_or_doi": [
+    "https://rruff.info/zipped_data_files/powder/DIF.zip",
+    "https://rruff.info/"
+  ],
+  "wavelength_a": 1.541838,
+  "intensity_normalization": "For each material, RRUFF DIF rows with identical 0.01 degree two-theta are collapsed by summed intensity; the strongest 12 collapsed peaks are retained and normalized to max 1.0.",
+  "source_selection_policy": "For each target material, choose the RRUFF powder DIF archive member with the largest parsed peak count and at least five peaks; ties are resolved by archive member name.",
+  "generated_at_utc": "2026-05-10T18:34:11+00:00",
+  "generated_by": "analysis/build_v8a_twenty_material_peak_manifest_from_rruff.py",
+  "known_limitations": [
+    "This is a development reference candidate built from RRUFF computed powder DIF files, not a project-specific measured reference scan.",
+    "Relative intensities are normalized development features and may vary with instrument response, texture, grain size, impurities, preferred orientation, and sample preparation.",
+    "Peak lists are truncated to the strongest 12 collapsed peaks per material for the v8A scalability scout.",
+    "The manifest does not encode mixture, fluorescence, detector-response, throughput, or industrial sorter calibration provenance.",
+    "It must not be used as manuscript-grade powder-XRD validation without independent CIF/Rietveld or measured-reference review."
+  ],
+  "upgrade_required_before": [
+    "shadow_validation",
+    "final_validation",
+    "manuscript_grade_powder_xrd_claim"
+  ],
+  "materials": [
+    {
+      "material": "Quartz",
+      "phase_name": "quartz",
+      "chemical_formula": "SiO2",
+      "structure_note": "alpha-quartz silicate reference phase from RRUFF powder DIF data",
+      "reference_citation": "RRUFF Quartz sample R060604-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R060604; Levien L, Prewitt C T, Weidner D J; American Mineralogist 65 (1980) 920-930; Structure and elastic properties of quartz at pressure; P = 1 atm.",
+      "reference_url_or_doi": "https://rruff.info/R060604-1",
+      "source_archive_member": "Quartz__R060604-1__Powder__DIF_File__8ee9d5dd1f9894e73a4430966080.txt",
+      "source_sample_id": "R060604-1",
+      "raw_peak_count": 26,
+      "selected_peak_count": 12,
+      "peaks": [
+        {
+          "peak_id": "quartz_20p92_01",
+          "hkl": "1 0 0",
+          "two_theta_deg": 20.92,
+          "q_a_inv": 1.479671,
+          "d_a": 4.24634,
+          "relative_intensity": 0.1993,
+          "reference_citation": "RRUFF Quartz sample R060604-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R060604; Levien L, Prewitt C T, Weidner D J; American Mineralogist 65 (1980) 920-930; Structure and elastic properties of quartz at pressure; P = 1 atm. Peaks parsed from RRUFF powder DIF file Quartz__R060604-1__Powder__DIF_File__8ee9d5dd1f9894e73a4430966080.txt.",
+          "reference_url_or_doi": "https://rruff.info/R060604-1"
+        },
+        {
+          "peak_id": "quartz_26p7_02",
+          "hkl": "0 1 1;1 0 1",
+          "two_theta_deg": 26.7,
+          "q_a_inv": 1.881885,
+          "d_a": 3.338773,
+          "relative_intensity": 1.0,
+          "reference_citation": "RRUFF Quartz sample R060604-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R060604; Levien L, Prewitt C T, Weidner D J; American Mineralogist 65 (1980) 920-930; Structure and elastic properties of quartz at pressure; P = 1 atm. Peaks parsed from RRUFF powder DIF file Quartz__R060604-1__Powder__DIF_File__8ee9d5dd1f9894e73a4430966080.txt.",
+          "reference_url_or_doi": "https://rruff.info/R060604-1"
+        },
+        {
+          "peak_id": "quartz_36p6_03",
+          "hkl": "1 1 0",
+          "two_theta_deg": 36.6,
+          "q_a_inv": 2.559118,
+          "d_a": 2.455215,
+          "relative_intensity": 0.0713,
+          "reference_citation": "RRUFF Quartz sample R060604-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R060604; Levien L, Prewitt C T, Weidner D J; American Mineralogist 65 (1980) 920-930; Structure and elastic properties of quartz at pressure; P = 1 atm. Peaks parsed from RRUFF powder DIF file Quartz__R060604-1__Powder__DIF_File__8ee9d5dd1f9894e73a4430966080.txt.",
+          "reference_url_or_doi": "https://rruff.info/R060604-1"
+        },
+        {
+          "peak_id": "quartz_39p52_04",
+          "hkl": "0 1 2;1 0 2",
+          "two_theta_deg": 39.52,
+          "q_a_inv": 2.755446,
+          "d_a": 2.280279,
+          "relative_intensity": 0.0719,
+          "reference_citation": "RRUFF Quartz sample R060604-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R060604; Levien L, Prewitt C T, Weidner D J; American Mineralogist 65 (1980) 920-930; Structure and elastic properties of quartz at pressure; P = 1 atm. Peaks parsed from RRUFF powder DIF file Quartz__R060604-1__Powder__DIF_File__8ee9d5dd1f9894e73a4430966080.txt.",
+          "reference_url_or_doi": "https://rruff.info/R060604-1"
+        },
+        {
+          "peak_id": "quartz_40p34_05",
+          "hkl": "1 1 1",
+          "two_theta_deg": 40.34,
+          "q_a_inv": 2.810262,
+          "d_a": 2.2358,
+          "relative_intensity": 0.0319,
+          "reference_citation": "RRUFF Quartz sample R060604-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R060604; Levien L, Prewitt C T, Weidner D J; American Mineralogist 65 (1980) 920-930; Structure and elastic properties of quartz at pressure; P = 1 atm. Peaks parsed from RRUFF powder DIF file Quartz__R060604-1__Powder__DIF_File__8ee9d5dd1f9894e73a4430966080.txt.",
+          "reference_url_or_doi": "https://rruff.info/R060604-1"
+        },
+        {
+          "peak_id": "quartz_42p5_06",
+          "hkl": "2 0 0",
+          "two_theta_deg": 42.5,
+          "q_a_inv": 2.953962,
+          "d_a": 2.127037,
+          "relative_intensity": 0.0525,
+          "reference_citation": "RRUFF Quartz sample R060604-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R060604; Levien L, Prewitt C T, Weidner D J; American Mineralogist 65 (1980) 920-930; Structure and elastic properties of quartz at pressure; P = 1 atm. Peaks parsed from RRUFF powder DIF file Quartz__R060604-1__Powder__DIF_File__8ee9d5dd1f9894e73a4430966080.txt.",
+          "reference_url_or_doi": "https://rruff.info/R060604-1"
+        },
+        {
+          "peak_id": "quartz_50p19_07",
+          "hkl": "1 1 2",
+          "two_theta_deg": 50.19,
+          "q_a_inv": 3.456689,
+          "d_a": 1.817689,
+          "relative_intensity": 0.1258,
+          "reference_citation": "RRUFF Quartz sample R060604-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R060604; Levien L, Prewitt C T, Weidner D J; American Mineralogist 65 (1980) 920-930; Structure and elastic properties of quartz at pressure; P = 1 atm. Peaks parsed from RRUFF powder DIF file Quartz__R060604-1__Powder__DIF_File__8ee9d5dd1f9894e73a4430966080.txt.",
+          "reference_url_or_doi": "https://rruff.info/R060604-1"
+        },
+        {
+          "peak_id": "quartz_60p01_08",
+          "hkl": "2 1 1;1 2 1",
+          "two_theta_deg": 60.01,
+          "q_a_inv": 4.075743,
+          "d_a": 1.541605,
+          "relative_intensity": 0.0905,
+          "reference_citation": "RRUFF Quartz sample R060604-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R060604; Levien L, Prewitt C T, Weidner D J; American Mineralogist 65 (1980) 920-930; Structure and elastic properties of quartz at pressure; P = 1 atm. Peaks parsed from RRUFF powder DIF file Quartz__R060604-1__Powder__DIF_File__8ee9d5dd1f9894e73a4430966080.txt.",
+          "reference_url_or_doi": "https://rruff.info/R060604-1"
+        },
+        {
+          "peak_id": "quartz_67p79_09",
+          "hkl": "2 1 2;1 2 2",
+          "two_theta_deg": 67.79,
+          "q_a_inv": 4.545174,
+          "d_a": 1.382386,
+          "relative_intensity": 0.0556,
+          "reference_citation": "RRUFF Quartz sample R060604-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R060604; Levien L, Prewitt C T, Weidner D J; American Mineralogist 65 (1980) 920-930; Structure and elastic properties of quartz at pressure; P = 1 atm. Peaks parsed from RRUFF powder DIF file Quartz__R060604-1__Powder__DIF_File__8ee9d5dd1f9894e73a4430966080.txt.",
+          "reference_url_or_doi": "https://rruff.info/R060604-1"
+        },
+        {
+          "peak_id": "quartz_68p19_10",
+          "hkl": "0 2 3;2 0 3",
+          "two_theta_deg": 68.19,
+          "q_a_inv": 4.568761,
+          "d_a": 1.375249,
+          "relative_intensity": 0.0667,
+          "reference_citation": "RRUFF Quartz sample R060604-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R060604; Levien L, Prewitt C T, Weidner D J; American Mineralogist 65 (1980) 920-930; Structure and elastic properties of quartz at pressure; P = 1 atm. Peaks parsed from RRUFF powder DIF file Quartz__R060604-1__Powder__DIF_File__8ee9d5dd1f9894e73a4430966080.txt.",
+          "reference_url_or_doi": "https://rruff.info/R060604-1"
+        },
+        {
+          "peak_id": "quartz_68p36_11",
+          "hkl": "0 3 1",
+          "two_theta_deg": 68.36,
+          "q_a_inv": 4.578769,
+          "d_a": 1.372243,
+          "relative_intensity": 0.0413,
+          "reference_citation": "RRUFF Quartz sample R060604-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R060604; Levien L, Prewitt C T, Weidner D J; American Mineralogist 65 (1980) 920-930; Structure and elastic properties of quartz at pressure; P = 1 atm. Peaks parsed from RRUFF powder DIF file Quartz__R060604-1__Powder__DIF_File__8ee9d5dd1f9894e73a4430966080.txt.",
+          "reference_url_or_doi": "https://rruff.info/R060604-1"
+        },
+        {
+          "peak_id": "quartz_81p21_12",
+          "hkl": "1 1 4",
+          "two_theta_deg": 81.21,
+          "q_a_inv": 5.304515,
+          "d_a": 1.184498,
+          "relative_intensity": 0.0482,
+          "reference_citation": "RRUFF Quartz sample R060604-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R060604; Levien L, Prewitt C T, Weidner D J; American Mineralogist 65 (1980) 920-930; Structure and elastic properties of quartz at pressure; P = 1 atm. Peaks parsed from RRUFF powder DIF file Quartz__R060604-1__Powder__DIF_File__8ee9d5dd1f9894e73a4430966080.txt.",
+          "reference_url_or_doi": "https://rruff.info/R060604-1"
+        }
+      ]
+    },
+    {
+      "material": "Calcite",
+      "phase_name": "calcite",
+      "chemical_formula": "CaCO3",
+      "structure_note": "calcite carbonate reference phase from RRUFF powder DIF data",
+      "reference_citation": "RRUFF Calcite sample R050307-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050307; Graf D L; American Mineralogist 46 (1961) 1283-1316; Crystallographic tables for the rhombohedral carbonates.",
+      "reference_url_or_doi": "https://rruff.info/R050307-1",
+      "source_archive_member": "Calcite__R050307-1__Powder__DIF_File__40e86facf59cfa00b4ba2d91f039.txt",
+      "source_sample_id": "R050307-1",
+      "raw_peak_count": 24,
+      "selected_peak_count": 12,
+      "peaks": [
+        {
+          "peak_id": "calcite_23p08_01",
+          "hkl": "0 1 2",
+          "two_theta_deg": 23.08,
+          "q_a_inv": 1.630475,
+          "d_a": 3.853593,
+          "relative_intensity": 0.081,
+          "reference_citation": "RRUFF Calcite sample R050307-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050307; Graf D L; American Mineralogist 46 (1961) 1283-1316; Crystallographic tables for the rhombohedral carbonates. Peaks parsed from RRUFF powder DIF file Calcite__R050307-1__Powder__DIF_File__40e86facf59cfa00b4ba2d91f039.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050307-1"
+        },
+        {
+          "peak_id": "calcite_29p43_02",
+          "hkl": "1 0 4",
+          "two_theta_deg": 29.43,
+          "q_a_inv": 2.070255,
+          "d_a": 3.034981,
+          "relative_intensity": 1.0,
+          "reference_citation": "RRUFF Calcite sample R050307-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050307; Graf D L; American Mineralogist 46 (1961) 1283-1316; Crystallographic tables for the rhombohedral carbonates. Peaks parsed from RRUFF powder DIF file Calcite__R050307-1__Powder__DIF_File__40e86facf59cfa00b4ba2d91f039.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050307-1"
+        },
+        {
+          "peak_id": "calcite_36p01_03",
+          "hkl": "1 1 0",
+          "two_theta_deg": 36.01,
+          "q_a_inv": 2.519243,
+          "d_a": 2.494076,
+          "relative_intensity": 0.1371,
+          "reference_citation": "RRUFF Calcite sample R050307-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050307; Graf D L; American Mineralogist 46 (1961) 1283-1316; Crystallographic tables for the rhombohedral carbonates. Peaks parsed from RRUFF powder DIF file Calcite__R050307-1__Powder__DIF_File__40e86facf59cfa00b4ba2d91f039.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050307-1"
+        },
+        {
+          "peak_id": "calcite_39p45_04",
+          "hkl": "1 1 3",
+          "two_theta_deg": 39.45,
+          "q_a_inv": 2.75076,
+          "d_a": 2.284164,
+          "relative_intensity": 0.2016,
+          "reference_citation": "RRUFF Calcite sample R050307-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050307; Graf D L; American Mineralogist 46 (1961) 1283-1316; Crystallographic tables for the rhombohedral carbonates. Peaks parsed from RRUFF powder DIF file Calcite__R050307-1__Powder__DIF_File__40e86facf59cfa00b4ba2d91f039.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050307-1"
+        },
+        {
+          "peak_id": "calcite_43p2_05",
+          "hkl": "2 0 2",
+          "two_theta_deg": 43.2,
+          "q_a_inv": 3.000308,
+          "d_a": 2.09418,
+          "relative_intensity": 0.1426,
+          "reference_citation": "RRUFF Calcite sample R050307-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050307; Graf D L; American Mineralogist 46 (1961) 1283-1316; Crystallographic tables for the rhombohedral carbonates. Peaks parsed from RRUFF powder DIF file Calcite__R050307-1__Powder__DIF_File__40e86facf59cfa00b4ba2d91f039.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050307-1"
+        },
+        {
+          "peak_id": "calcite_47p16_06",
+          "hkl": "0 2 4",
+          "two_theta_deg": 47.16,
+          "q_a_inv": 3.260339,
+          "d_a": 1.927157,
+          "relative_intensity": 0.0616,
+          "reference_citation": "RRUFF Calcite sample R050307-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050307; Graf D L; American Mineralogist 46 (1961) 1283-1316; Crystallographic tables for the rhombohedral carbonates. Peaks parsed from RRUFF powder DIF file Calcite__R050307-1__Powder__DIF_File__40e86facf59cfa00b4ba2d91f039.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050307-1"
+        },
+        {
+          "peak_id": "calcite_47p55_07",
+          "hkl": "0 1 8",
+          "two_theta_deg": 47.55,
+          "q_a_inv": 3.285742,
+          "d_a": 1.912257,
+          "relative_intensity": 0.1967,
+          "reference_citation": "RRUFF Calcite sample R050307-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050307; Graf D L; American Mineralogist 46 (1961) 1283-1316; Crystallographic tables for the rhombohedral carbonates. Peaks parsed from RRUFF powder DIF file Calcite__R050307-1__Powder__DIF_File__40e86facf59cfa00b4ba2d91f039.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050307-1"
+        },
+        {
+          "peak_id": "calcite_48p55_08",
+          "hkl": "1 1 6",
+          "two_theta_deg": 48.55,
+          "q_a_inv": 3.350705,
+          "d_a": 1.875183,
+          "relative_intensity": 0.2002,
+          "reference_citation": "RRUFF Calcite sample R050307-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050307; Graf D L; American Mineralogist 46 (1961) 1283-1316; Crystallographic tables for the rhombohedral carbonates. Peaks parsed from RRUFF powder DIF file Calcite__R050307-1__Powder__DIF_File__40e86facf59cfa00b4ba2d91f039.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050307-1"
+        },
+        {
+          "peak_id": "calcite_57p45_09",
+          "hkl": "1 2 2",
+          "two_theta_deg": 57.45,
+          "q_a_inv": 3.917062,
+          "d_a": 1.604056,
+          "relative_intensity": 0.0918,
+          "reference_citation": "RRUFF Calcite sample R050307-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050307; Graf D L; American Mineralogist 46 (1961) 1283-1316; Crystallographic tables for the rhombohedral carbonates. Peaks parsed from RRUFF powder DIF file Calcite__R050307-1__Powder__DIF_File__40e86facf59cfa00b4ba2d91f039.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050307-1"
+        },
+        {
+          "peak_id": "calcite_60p72_10",
+          "hkl": "2 1 4",
+          "two_theta_deg": 60.72,
+          "q_a_inv": 4.119395,
+          "d_a": 1.525269,
+          "relative_intensity": 0.0528,
+          "reference_citation": "RRUFF Calcite sample R050307-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050307; Graf D L; American Mineralogist 46 (1961) 1283-1316; Crystallographic tables for the rhombohedral carbonates. Peaks parsed from RRUFF powder DIF file Calcite__R050307-1__Powder__DIF_File__40e86facf59cfa00b4ba2d91f039.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050307-1"
+        },
+        {
+          "peak_id": "calcite_64p72_11",
+          "hkl": "3 0 0",
+          "two_theta_deg": 64.72,
+          "q_a_inv": 4.362319,
+          "d_a": 1.440331,
+          "relative_intensity": 0.0684,
+          "reference_citation": "RRUFF Calcite sample R050307-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050307; Graf D L; American Mineralogist 46 (1961) 1283-1316; Crystallographic tables for the rhombohedral carbonates. Peaks parsed from RRUFF powder DIF file Calcite__R050307-1__Powder__DIF_File__40e86facf59cfa00b4ba2d91f039.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050307-1"
+        },
+        {
+          "peak_id": "calcite_65p66_12",
+          "hkl": "0 0 12",
+          "two_theta_deg": 65.66,
+          "q_a_inv": 4.418646,
+          "d_a": 1.421971,
+          "relative_intensity": 0.0391,
+          "reference_citation": "RRUFF Calcite sample R050307-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050307; Graf D L; American Mineralogist 46 (1961) 1283-1316; Crystallographic tables for the rhombohedral carbonates. Peaks parsed from RRUFF powder DIF file Calcite__R050307-1__Powder__DIF_File__40e86facf59cfa00b4ba2d91f039.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050307-1"
+        }
+      ]
+    },
+    {
+      "material": "Orthoclase",
+      "phase_name": "orthoclase",
+      "chemical_formula": "KAlSi3O8",
+      "structure_note": "orthoclase potassium feldspar reference phase from RRUFF powder DIF data",
+      "reference_citation": "RRUFF Orthoclase sample R040055-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern of R040055; Tseng H-Y, Heaney P J, Onstott T C; Physics and Chemistry of Minerals 22 (1995) 399-405; Characterization of lattice strain induced by neutron irradiation; Sample: Unirradiated.",
+      "reference_url_or_doi": "https://rruff.info/R040055-1",
+      "source_archive_member": "Orthoclase__R040055-1__Powder__DIF_File__5a39f986c2aa53846935df6e929e.txt",
+      "source_sample_id": "R040055-1",
+      "raw_peak_count": 144,
+      "selected_peak_count": 12,
+      "peaks": [
+        {
+          "peak_id": "orthoclase_20p98_01",
+          "hkl": "-2 0 1",
+          "two_theta_deg": 20.98,
+          "q_a_inv": 1.483867,
+          "d_a": 4.234332,
+          "relative_intensity": 0.6088,
+          "reference_citation": "RRUFF Orthoclase sample R040055-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern of R040055; Tseng H-Y, Heaney P J, Onstott T C; Physics and Chemistry of Minerals 22 (1995) 399-405; Characterization of lattice strain induced by neutron irradiation; Sample: Unirradiated. Peaks parsed from RRUFF powder DIF file Orthoclase__R040055-1__Powder__DIF_File__5a39f986c2aa53846935df6e929e.txt.",
+          "reference_url_or_doi": "https://rruff.info/R040055-1"
+        },
+        {
+          "peak_id": "orthoclase_23p54_02",
+          "hkl": "1 3 0",
+          "two_theta_deg": 23.54,
+          "q_a_inv": 1.662517,
+          "d_a": 3.779321,
+          "relative_intensity": 0.7578,
+          "reference_citation": "RRUFF Orthoclase sample R040055-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern of R040055; Tseng H-Y, Heaney P J, Onstott T C; Physics and Chemistry of Minerals 22 (1995) 399-405; Characterization of lattice strain induced by neutron irradiation; Sample: Unirradiated. Peaks parsed from RRUFF powder DIF file Orthoclase__R040055-1__Powder__DIF_File__5a39f986c2aa53846935df6e929e.txt.",
+          "reference_url_or_doi": "https://rruff.info/R040055-1"
+        },
+        {
+          "peak_id": "orthoclase_25p68_03",
+          "hkl": "-1 1 2",
+          "two_theta_deg": 25.68,
+          "q_a_inv": 1.811225,
+          "d_a": 3.469026,
+          "relative_intensity": 0.4972,
+          "reference_citation": "RRUFF Orthoclase sample R040055-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern of R040055; Tseng H-Y, Heaney P J, Onstott T C; Physics and Chemistry of Minerals 22 (1995) 399-405; Characterization of lattice strain induced by neutron irradiation; Sample: Unirradiated. Peaks parsed from RRUFF powder DIF file Orthoclase__R040055-1__Powder__DIF_File__5a39f986c2aa53846935df6e929e.txt.",
+          "reference_url_or_doi": "https://rruff.info/R040055-1"
+        },
+        {
+          "peak_id": "orthoclase_26p85_04",
+          "hkl": "2 2 0",
+          "two_theta_deg": 26.85,
+          "q_a_inv": 1.892263,
+          "d_a": 3.32046,
+          "relative_intensity": 1.0,
+          "reference_citation": "RRUFF Orthoclase sample R040055-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern of R040055; Tseng H-Y, Heaney P J, Onstott T C; Physics and Chemistry of Minerals 22 (1995) 399-405; Characterization of lattice strain induced by neutron irradiation; Sample: Unirradiated. Peaks parsed from RRUFF powder DIF file Orthoclase__R040055-1__Powder__DIF_File__5a39f986c2aa53846935df6e929e.txt.",
+          "reference_url_or_doi": "https://rruff.info/R040055-1"
+        },
+        {
+          "peak_id": "orthoclase_27p09_05",
+          "hkl": "-2 0 2",
+          "two_theta_deg": 27.09,
+          "q_a_inv": 1.908863,
+          "d_a": 3.291586,
+          "relative_intensity": 0.5696,
+          "reference_citation": "RRUFF Orthoclase sample R040055-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern of R040055; Tseng H-Y, Heaney P J, Onstott T C; Physics and Chemistry of Minerals 22 (1995) 399-405; Characterization of lattice strain induced by neutron irradiation; Sample: Unirradiated. Peaks parsed from RRUFF powder DIF file Orthoclase__R040055-1__Powder__DIF_File__5a39f986c2aa53846935df6e929e.txt.",
+          "reference_url_or_doi": "https://rruff.info/R040055-1"
+        },
+        {
+          "peak_id": "orthoclase_27p45_06",
+          "hkl": "0 4 0",
+          "two_theta_deg": 27.45,
+          "q_a_inv": 1.933746,
+          "d_a": 3.24923,
+          "relative_intensity": 0.2979,
+          "reference_citation": "RRUFF Orthoclase sample R040055-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern of R040055; Tseng H-Y, Heaney P J, Onstott T C; Physics and Chemistry of Minerals 22 (1995) 399-405; Characterization of lattice strain induced by neutron irradiation; Sample: Unirradiated. Peaks parsed from RRUFF powder DIF file Orthoclase__R040055-1__Powder__DIF_File__5a39f986c2aa53846935df6e929e.txt.",
+          "reference_url_or_doi": "https://rruff.info/R040055-1"
+        },
+        {
+          "peak_id": "orthoclase_27p58_07",
+          "hkl": "0 0 2",
+          "two_theta_deg": 27.58,
+          "q_a_inv": 1.942727,
+          "d_a": 3.23421,
+          "relative_intensity": 0.8077,
+          "reference_citation": "RRUFF Orthoclase sample R040055-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern of R040055; Tseng H-Y, Heaney P J, Onstott T C; Physics and Chemistry of Minerals 22 (1995) 399-405; Characterization of lattice strain induced by neutron irradiation; Sample: Unirradiated. Peaks parsed from RRUFF powder DIF file Orthoclase__R040055-1__Powder__DIF_File__5a39f986c2aa53846935df6e929e.txt.",
+          "reference_url_or_doi": "https://rruff.info/R040055-1"
+        },
+        {
+          "peak_id": "orthoclase_29p83_08",
+          "hkl": "1 3 1",
+          "two_theta_deg": 29.83,
+          "q_a_inv": 2.097759,
+          "d_a": 2.995189,
+          "relative_intensity": 0.6331,
+          "reference_citation": "RRUFF Orthoclase sample R040055-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern of R040055; Tseng H-Y, Heaney P J, Onstott T C; Physics and Chemistry of Minerals 22 (1995) 399-405; Characterization of lattice strain induced by neutron irradiation; Sample: Unirradiated. Peaks parsed from RRUFF powder DIF file Orthoclase__R040055-1__Powder__DIF_File__5a39f986c2aa53846935df6e929e.txt.",
+          "reference_url_or_doi": "https://rruff.info/R040055-1"
+        },
+        {
+          "peak_id": "orthoclase_30p79_09",
+          "hkl": "0 4 1",
+          "two_theta_deg": 30.79,
+          "q_a_inv": 2.163664,
+          "d_a": 2.903956,
+          "relative_intensity": 0.252,
+          "reference_citation": "RRUFF Orthoclase sample R040055-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern of R040055; Tseng H-Y, Heaney P J, Onstott T C; Physics and Chemistry of Minerals 22 (1995) 399-405; Characterization of lattice strain induced by neutron irradiation; Sample: Unirradiated. Peaks parsed from RRUFF powder DIF file Orthoclase__R040055-1__Powder__DIF_File__5a39f986c2aa53846935df6e929e.txt.",
+          "reference_url_or_doi": "https://rruff.info/R040055-1"
+        },
+        {
+          "peak_id": "orthoclase_34p8_10",
+          "hkl": "-2 4 1",
+          "two_theta_deg": 34.8,
+          "q_a_inv": 2.437258,
+          "d_a": 2.577973,
+          "relative_intensity": 0.3793,
+          "reference_citation": "RRUFF Orthoclase sample R040055-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern of R040055; Tseng H-Y, Heaney P J, Onstott T C; Physics and Chemistry of Minerals 22 (1995) 399-405; Characterization of lattice strain induced by neutron irradiation; Sample: Unirradiated. Peaks parsed from RRUFF powder DIF file Orthoclase__R040055-1__Powder__DIF_File__5a39f986c2aa53846935df6e929e.txt.",
+          "reference_url_or_doi": "https://rruff.info/R040055-1"
+        },
+        {
+          "peak_id": "orthoclase_41p69_11",
+          "hkl": "0 6 0",
+          "two_theta_deg": 41.69,
+          "q_a_inv": 2.900195,
+          "d_a": 2.16647,
+          "relative_intensity": 0.2689,
+          "reference_citation": "RRUFF Orthoclase sample R040055-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern of R040055; Tseng H-Y, Heaney P J, Onstott T C; Physics and Chemistry of Minerals 22 (1995) 399-405; Characterization of lattice strain induced by neutron irradiation; Sample: Unirradiated. Peaks parsed from RRUFF powder DIF file Orthoclase__R040055-1__Powder__DIF_File__5a39f986c2aa53846935df6e929e.txt.",
+          "reference_url_or_doi": "https://rruff.info/R040055-1"
+        },
+        {
+          "peak_id": "orthoclase_61p96_12",
+          "hkl": "2 8 0",
+          "two_theta_deg": 61.96,
+          "q_a_inv": 4.195252,
+          "d_a": 1.49769,
+          "relative_intensity": 0.2442,
+          "reference_citation": "RRUFF Orthoclase sample R040055-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern of R040055; Tseng H-Y, Heaney P J, Onstott T C; Physics and Chemistry of Minerals 22 (1995) 399-405; Characterization of lattice strain induced by neutron irradiation; Sample: Unirradiated. Peaks parsed from RRUFF powder DIF file Orthoclase__R040055-1__Powder__DIF_File__5a39f986c2aa53846935df6e929e.txt.",
+          "reference_url_or_doi": "https://rruff.info/R040055-1"
+        }
+      ]
+    },
+    {
+      "material": "Albite",
+      "phase_name": "albite",
+      "chemical_formula": "NaAlSi3O8",
+      "structure_note": "albite sodium feldspar reference phase from RRUFF powder DIF data",
+      "reference_citation": "RRUFF Albite sample R040129-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern of R040129; Smith J V, Artioli G; American Mineralogist 71 (1986) 727-733; Low albite, NaAlSi3O8: Neutron diffraction study of crystal structure at 13 K; Note: this sample of feldspar is from Amelia, Virginia.",
+      "reference_url_or_doi": "https://rruff.info/R040129-1",
+      "source_archive_member": "Albite__R040129-1__Powder__DIF_File__c933160d1481da8f9c1f9ce6e1fa.txt",
+      "source_sample_id": "R040129-1",
+      "raw_peak_count": 195,
+      "selected_peak_count": 12,
+      "peaks": [
+        {
+          "peak_id": "albite_22p07_01",
+          "hkl": "-2 0 1",
+          "two_theta_deg": 22.07,
+          "q_a_inv": 1.560029,
+          "d_a": 4.027609,
+          "relative_intensity": 0.9726,
+          "reference_citation": "RRUFF Albite sample R040129-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern of R040129; Smith J V, Artioli G; American Mineralogist 71 (1986) 727-733; Low albite, NaAlSi3O8: Neutron diffraction study of crystal structure at 13 K; Note: this sample of feldspar is from Amelia, Virginia. Peaks parsed from RRUFF powder DIF file Albite__R040129-1__Powder__DIF_File__c933160d1481da8f9c1f9ce6e1fa.txt.",
+          "reference_url_or_doi": "https://rruff.info/R040129-1"
+        },
+        {
+          "peak_id": "albite_23p56_02",
+          "hkl": "1 1 1",
+          "two_theta_deg": 23.56,
+          "q_a_inv": 1.66391,
+          "d_a": 3.776158,
+          "relative_intensity": 0.4362,
+          "reference_citation": "RRUFF Albite sample R040129-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern of R040129; Smith J V, Artioli G; American Mineralogist 71 (1986) 727-733; Low albite, NaAlSi3O8: Neutron diffraction study of crystal structure at 13 K; Note: this sample of feldspar is from Amelia, Virginia. Peaks parsed from RRUFF powder DIF file Albite__R040129-1__Powder__DIF_File__c933160d1481da8f9c1f9ce6e1fa.txt.",
+          "reference_url_or_doi": "https://rruff.info/R040129-1"
+        },
+        {
+          "peak_id": "albite_24p16_03",
+          "hkl": "1 3 0",
+          "two_theta_deg": 24.16,
+          "q_a_inv": 1.705663,
+          "d_a": 3.683721,
+          "relative_intensity": 0.2206,
+          "reference_citation": "RRUFF Albite sample R040129-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern of R040129; Smith J V, Artioli G; American Mineralogist 71 (1986) 727-733; Low albite, NaAlSi3O8: Neutron diffraction study of crystal structure at 13 K; Note: this sample of feldspar is from Amelia, Virginia. Peaks parsed from RRUFF powder DIF file Albite__R040129-1__Powder__DIF_File__c933160d1481da8f9c1f9ce6e1fa.txt.",
+          "reference_url_or_doi": "https://rruff.info/R040129-1"
+        },
+        {
+          "peak_id": "albite_24p35_04",
+          "hkl": "-1 3 0",
+          "two_theta_deg": 24.35,
+          "q_a_inv": 1.718875,
+          "d_a": 3.655406,
+          "relative_intensity": 0.4195,
+          "reference_citation": "RRUFF Albite sample R040129-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern of R040129; Smith J V, Artioli G; American Mineralogist 71 (1986) 727-733; Low albite, NaAlSi3O8: Neutron diffraction study of crystal structure at 13 K; Note: this sample of feldspar is from Amelia, Virginia. Peaks parsed from RRUFF powder DIF file Albite__R040129-1__Powder__DIF_File__c933160d1481da8f9c1f9ce6e1fa.txt.",
+          "reference_url_or_doi": "https://rruff.info/R040129-1"
+        },
+        {
+          "peak_id": "albite_27p74_05",
+          "hkl": "-2 0 2",
+          "two_theta_deg": 27.74,
+          "q_a_inv": 1.953777,
+          "d_a": 3.215918,
+          "relative_intensity": 0.7154,
+          "reference_citation": "RRUFF Albite sample R040129-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern of R040129; Smith J V, Artioli G; American Mineralogist 71 (1986) 727-733; Low albite, NaAlSi3O8: Neutron diffraction study of crystal structure at 13 K; Note: this sample of feldspar is from Amelia, Virginia. Peaks parsed from RRUFF powder DIF file Albite__R040129-1__Powder__DIF_File__c933160d1481da8f9c1f9ce6e1fa.txt.",
+          "reference_url_or_doi": "https://rruff.info/R040129-1"
+        },
+        {
+          "peak_id": "albite_27p93_06",
+          "hkl": "0 0 2",
+          "two_theta_deg": 27.93,
+          "q_a_inv": 1.966894,
+          "d_a": 3.194471,
+          "relative_intensity": 1.0,
+          "reference_citation": "RRUFF Albite sample R040129-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern of R040129; Smith J V, Artioli G; American Mineralogist 71 (1986) 727-733; Low albite, NaAlSi3O8: Neutron diffraction study of crystal structure at 13 K; Note: this sample of feldspar is from Amelia, Virginia. Peaks parsed from RRUFF powder DIF file Albite__R040129-1__Powder__DIF_File__c933160d1481da8f9c1f9ce6e1fa.txt.",
+          "reference_url_or_doi": "https://rruff.info/R040129-1"
+        },
+        {
+          "peak_id": "albite_28p0_07",
+          "hkl": "0 4 0",
+          "two_theta_deg": 28.0,
+          "q_a_inv": 1.971725,
+          "d_a": 3.186644,
+          "relative_intensity": 0.6509,
+          "reference_citation": "RRUFF Albite sample R040129-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern of R040129; Smith J V, Artioli G; American Mineralogist 71 (1986) 727-733; Low albite, NaAlSi3O8: Neutron diffraction study of crystal structure at 13 K; Note: this sample of feldspar is from Amelia, Virginia. Peaks parsed from RRUFF powder DIF file Albite__R040129-1__Powder__DIF_File__c933160d1481da8f9c1f9ce6e1fa.txt.",
+          "reference_url_or_doi": "https://rruff.info/R040129-1"
+        },
+        {
+          "peak_id": "albite_28p13_08",
+          "hkl": "2 2 0",
+          "two_theta_deg": 28.13,
+          "q_a_inv": 1.980695,
+          "d_a": 3.172212,
+          "relative_intensity": 0.3585,
+          "reference_citation": "RRUFF Albite sample R040129-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern of R040129; Smith J V, Artioli G; American Mineralogist 71 (1986) 727-733; Low albite, NaAlSi3O8: Neutron diffraction study of crystal structure at 13 K; Note: this sample of feldspar is from Amelia, Virginia. Peaks parsed from RRUFF powder DIF file Albite__R040129-1__Powder__DIF_File__c933160d1481da8f9c1f9ce6e1fa.txt.",
+          "reference_url_or_doi": "https://rruff.info/R040129-1"
+        },
+        {
+          "peak_id": "albite_28p35_09",
+          "hkl": "-2 2 0",
+          "two_theta_deg": 28.35,
+          "q_a_inv": 1.99587,
+          "d_a": 3.148094,
+          "relative_intensity": 0.3889,
+          "reference_citation": "RRUFF Albite sample R040129-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern of R040129; Smith J V, Artioli G; American Mineralogist 71 (1986) 727-733; Low albite, NaAlSi3O8: Neutron diffraction study of crystal structure at 13 K; Note: this sample of feldspar is from Amelia, Virginia. Peaks parsed from RRUFF powder DIF file Albite__R040129-1__Powder__DIF_File__c933160d1481da8f9c1f9ce6e1fa.txt.",
+          "reference_url_or_doi": "https://rruff.info/R040129-1"
+        },
+        {
+          "peak_id": "albite_30p16_10",
+          "hkl": "1 -3 1",
+          "two_theta_deg": 30.16,
+          "q_a_inv": 2.120431,
+          "d_a": 2.963164,
+          "relative_intensity": 0.2638,
+          "reference_citation": "RRUFF Albite sample R040129-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern of R040129; Smith J V, Artioli G; American Mineralogist 71 (1986) 727-733; Low albite, NaAlSi3O8: Neutron diffraction study of crystal structure at 13 K; Note: this sample of feldspar is from Amelia, Virginia. Peaks parsed from RRUFF powder DIF file Albite__R040129-1__Powder__DIF_File__c933160d1481da8f9c1f9ce6e1fa.txt.",
+          "reference_url_or_doi": "https://rruff.info/R040129-1"
+        },
+        {
+          "peak_id": "albite_30p55_11",
+          "hkl": "0 -4 1",
+          "two_theta_deg": 30.55,
+          "q_a_inv": 2.147202,
+          "d_a": 2.92622,
+          "relative_intensity": 0.2105,
+          "reference_citation": "RRUFF Albite sample R040129-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern of R040129; Smith J V, Artioli G; American Mineralogist 71 (1986) 727-733; Low albite, NaAlSi3O8: Neutron diffraction study of crystal structure at 13 K; Note: this sample of feldspar is from Amelia, Virginia. Peaks parsed from RRUFF powder DIF file Albite__R040129-1__Powder__DIF_File__c933160d1481da8f9c1f9ce6e1fa.txt.",
+          "reference_url_or_doi": "https://rruff.info/R040129-1"
+        },
+        {
+          "peak_id": "albite_35p03_12",
+          "hkl": "-2 -4 1",
+          "two_theta_deg": 35.03,
+          "q_a_inv": 2.452863,
+          "d_a": 2.561572,
+          "relative_intensity": 0.2235,
+          "reference_citation": "RRUFF Albite sample R040129-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern of R040129; Smith J V, Artioli G; American Mineralogist 71 (1986) 727-733; Low albite, NaAlSi3O8: Neutron diffraction study of crystal structure at 13 K; Note: this sample of feldspar is from Amelia, Virginia. Peaks parsed from RRUFF powder DIF file Albite__R040129-1__Powder__DIF_File__c933160d1481da8f9c1f9ce6e1fa.txt.",
+          "reference_url_or_doi": "https://rruff.info/R040129-1"
+        }
+      ]
+    },
+    {
+      "material": "Dolomite",
+      "phase_name": "dolomite",
+      "chemical_formula": "CaMg(CO3)2",
+      "structure_note": "dolomite carbonate reference phase from RRUFF powder DIF data",
+      "reference_citation": "RRUFF Dolomite sample R040030-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern of R040030; Althoff P L; American Mineralogist 62 (1977) 772-783; Structural refinements of dolomite and a magnesian calcite and implications for; dolomite formation in the marine environment.",
+      "reference_url_or_doi": "https://rruff.info/R040030-1",
+      "source_archive_member": "Dolomite__R040030-1__Powder__DIF_File__651daf175eae51957208cf19d61d.txt",
+      "source_sample_id": "R040030-1",
+      "raw_peak_count": 34,
+      "selected_peak_count": 12,
+      "peaks": [
+        {
+          "peak_id": "dolomite_30p99_01",
+          "hkl": "1 0 4",
+          "two_theta_deg": 30.99,
+          "q_a_inv": 2.177375,
+          "d_a": 2.88567,
+          "relative_intensity": 1.0,
+          "reference_citation": "RRUFF Dolomite sample R040030-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern of R040030; Althoff P L; American Mineralogist 62 (1977) 772-783; Structural refinements of dolomite and a magnesian calcite and implications for; dolomite formation in the marine environment. Peaks parsed from RRUFF powder DIF file Dolomite__R040030-1__Powder__DIF_File__651daf175eae51957208cf19d61d.txt.",
+          "reference_url_or_doi": "https://rruff.info/R040030-1"
+        },
+        {
+          "peak_id": "dolomite_33p59_02",
+          "hkl": "0 0 6",
+          "two_theta_deg": 33.59,
+          "q_a_inv": 2.355002,
+          "d_a": 2.668018,
+          "relative_intensity": 0.0491,
+          "reference_citation": "RRUFF Dolomite sample R040030-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern of R040030; Althoff P L; American Mineralogist 62 (1977) 772-783; Structural refinements of dolomite and a magnesian calcite and implications for; dolomite formation in the marine environment. Peaks parsed from RRUFF powder DIF file Dolomite__R040030-1__Powder__DIF_File__651daf175eae51957208cf19d61d.txt.",
+          "reference_url_or_doi": "https://rruff.info/R040030-1"
+        },
+        {
+          "peak_id": "dolomite_35p36_03",
+          "hkl": "0 1 5",
+          "two_theta_deg": 35.36,
+          "q_a_inv": 2.475236,
+          "d_a": 2.538419,
+          "relative_intensity": 0.0579,
+          "reference_citation": "RRUFF Dolomite sample R040030-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern of R040030; Althoff P L; American Mineralogist 62 (1977) 772-783; Structural refinements of dolomite and a magnesian calcite and implications for; dolomite formation in the marine environment. Peaks parsed from RRUFF powder DIF file Dolomite__R040030-1__Powder__DIF_File__651daf175eae51957208cf19d61d.txt.",
+          "reference_url_or_doi": "https://rruff.info/R040030-1"
+        },
+        {
+          "peak_id": "dolomite_37p41_04",
+          "hkl": "1 1 0",
+          "two_theta_deg": 37.41,
+          "q_a_inv": 2.613751,
+          "d_a": 2.403896,
+          "relative_intensity": 0.109,
+          "reference_citation": "RRUFF Dolomite sample R040030-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern of R040030; Althoff P L; American Mineralogist 62 (1977) 772-783; Structural refinements of dolomite and a magnesian calcite and implications for; dolomite formation in the marine environment. Peaks parsed from RRUFF powder DIF file Dolomite__R040030-1__Powder__DIF_File__651daf175eae51957208cf19d61d.txt.",
+          "reference_url_or_doi": "https://rruff.info/R040030-1"
+        },
+        {
+          "peak_id": "dolomite_41p19_05",
+          "hkl": "2 -1 3;1 1 3",
+          "two_theta_deg": 41.19,
+          "q_a_inv": 2.866933,
+          "d_a": 2.191605,
+          "relative_intensity": 0.2867,
+          "reference_citation": "RRUFF Dolomite sample R040030-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern of R040030; Althoff P L; American Mineralogist 62 (1977) 772-783; Structural refinements of dolomite and a magnesian calcite and implications for; dolomite formation in the marine environment. Peaks parsed from RRUFF powder DIF file Dolomite__R040030-1__Powder__DIF_File__651daf175eae51957208cf19d61d.txt.",
+          "reference_url_or_doi": "https://rruff.info/R040030-1"
+        },
+        {
+          "peak_id": "dolomite_44p99_06",
+          "hkl": "2 0 2",
+          "two_theta_deg": 44.99,
+          "q_a_inv": 3.11831,
+          "d_a": 2.014933,
+          "relative_intensity": 0.1443,
+          "reference_citation": "RRUFF Dolomite sample R040030-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern of R040030; Althoff P L; American Mineralogist 62 (1977) 772-783; Structural refinements of dolomite and a magnesian calcite and implications for; dolomite formation in the marine environment. Peaks parsed from RRUFF powder DIF file Dolomite__R040030-1__Powder__DIF_File__651daf175eae51957208cf19d61d.txt.",
+          "reference_url_or_doi": "https://rruff.info/R040030-1"
+        },
+        {
+          "peak_id": "dolomite_49p34_07",
+          "hkl": "0 2 4",
+          "two_theta_deg": 49.34,
+          "q_a_inv": 3.401845,
+          "d_a": 1.846993,
+          "relative_intensity": 0.049,
+          "reference_citation": "RRUFF Dolomite sample R040030-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern of R040030; Althoff P L; American Mineralogist 62 (1977) 772-783; Structural refinements of dolomite and a magnesian calcite and implications for; dolomite formation in the marine environment. Peaks parsed from RRUFF powder DIF file Dolomite__R040030-1__Powder__DIF_File__651daf175eae51957208cf19d61d.txt.",
+          "reference_url_or_doi": "https://rruff.info/R040030-1"
+        },
+        {
+          "peak_id": "dolomite_50p61_08",
+          "hkl": "0 1 8",
+          "two_theta_deg": 50.61,
+          "q_a_inv": 3.483718,
+          "d_a": 1.803586,
+          "relative_intensity": 0.1784,
+          "reference_citation": "RRUFF Dolomite sample R040030-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern of R040030; Althoff P L; American Mineralogist 62 (1977) 772-783; Structural refinements of dolomite and a magnesian calcite and implications for; dolomite formation in the marine environment. Peaks parsed from RRUFF powder DIF file Dolomite__R040030-1__Powder__DIF_File__651daf175eae51957208cf19d61d.txt.",
+          "reference_url_or_doi": "https://rruff.info/R040030-1"
+        },
+        {
+          "peak_id": "dolomite_51p14_09",
+          "hkl": "1 1 6;2 -1 6",
+          "two_theta_deg": 51.14,
+          "q_a_inv": 3.517759,
+          "d_a": 1.786133,
+          "relative_intensity": 0.2248,
+          "reference_citation": "RRUFF Dolomite sample R040030-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern of R040030; Althoff P L; American Mineralogist 62 (1977) 772-783; Structural refinements of dolomite and a magnesian calcite and implications for; dolomite formation in the marine environment. Peaks parsed from RRUFF powder DIF file Dolomite__R040030-1__Powder__DIF_File__651daf175eae51957208cf19d61d.txt.",
+          "reference_url_or_doi": "https://rruff.info/R040030-1"
+        },
+        {
+          "peak_id": "dolomite_59p9_10",
+          "hkl": "-1 3 2;1 2 2",
+          "two_theta_deg": 59.9,
+          "q_a_inv": 4.068966,
+          "d_a": 1.544173,
+          "relative_intensity": 0.0944,
+          "reference_citation": "RRUFF Dolomite sample R040030-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern of R040030; Althoff P L; American Mineralogist 62 (1977) 772-783; Structural refinements of dolomite and a magnesian calcite and implications for; dolomite formation in the marine environment. Peaks parsed from RRUFF powder DIF file Dolomite__R040030-1__Powder__DIF_File__651daf175eae51957208cf19d61d.txt.",
+          "reference_url_or_doi": "https://rruff.info/R040030-1"
+        },
+        {
+          "peak_id": "dolomite_63p52_11",
+          "hkl": "3 -1 4;2 1 4",
+          "two_theta_deg": 63.52,
+          "q_a_inv": 4.289986,
+          "d_a": 1.464617,
+          "relative_intensity": 0.0691,
+          "reference_citation": "RRUFF Dolomite sample R040030-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern of R040030; Althoff P L; American Mineralogist 62 (1977) 772-783; Structural refinements of dolomite and a magnesian calcite and implications for; dolomite formation in the marine environment. Peaks parsed from RRUFF powder DIF file Dolomite__R040030-1__Powder__DIF_File__651daf175eae51957208cf19d61d.txt.",
+          "reference_url_or_doi": "https://rruff.info/R040030-1"
+        },
+        {
+          "peak_id": "dolomite_67p48_12",
+          "hkl": "3 0 0",
+          "two_theta_deg": 67.48,
+          "q_a_inv": 4.526855,
+          "d_a": 1.38798,
+          "relative_intensity": 0.0859,
+          "reference_citation": "RRUFF Dolomite sample R040030-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern of R040030; Althoff P L; American Mineralogist 62 (1977) 772-783; Structural refinements of dolomite and a magnesian calcite and implications for; dolomite formation in the marine environment. Peaks parsed from RRUFF powder DIF file Dolomite__R040030-1__Powder__DIF_File__651daf175eae51957208cf19d61d.txt.",
+          "reference_url_or_doi": "https://rruff.info/R040030-1"
+        }
+      ]
+    },
+    {
+      "material": "Pyrite",
+      "phase_name": "pyrite",
+      "chemical_formula": "FeS2",
+      "structure_note": "pyrite sulfide reference phase from RRUFF powder DIF data",
+      "reference_citation": "RRUFF Pyrite sample R050190-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern R050190; Bayliss P; American Mineralogist 62 (1977) 1168-1172; Crystal structure refinement of a weakly anisotropic pyrite; cubic model.",
+      "reference_url_or_doi": "https://rruff.info/R050190-1",
+      "source_archive_member": "Pyrite__R050190-1__Powder__DIF_File__cc214ad21fa41d747dc7f3a94c94.txt",
+      "source_sample_id": "R050190-1",
+      "raw_peak_count": 17,
+      "selected_peak_count": 12,
+      "peaks": [
+        {
+          "peak_id": "pyrite_28p57_01",
+          "hkl": "1 1 1",
+          "two_theta_deg": 28.57,
+          "q_a_inv": 2.011037,
+          "d_a": 3.124351,
+          "relative_intensity": 0.3918,
+          "reference_citation": "RRUFF Pyrite sample R050190-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern R050190; Bayliss P; American Mineralogist 62 (1977) 1168-1172; Crystal structure refinement of a weakly anisotropic pyrite; cubic model. Peaks parsed from RRUFF powder DIF file Pyrite__R050190-1__Powder__DIF_File__cc214ad21fa41d747dc7f3a94c94.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050190-1"
+        },
+        {
+          "peak_id": "pyrite_33p1_02",
+          "hkl": "2 0 0",
+          "two_theta_deg": 33.1,
+          "q_a_inv": 2.321616,
+          "d_a": 2.706385,
+          "relative_intensity": 0.9552,
+          "reference_citation": "RRUFF Pyrite sample R050190-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern R050190; Bayliss P; American Mineralogist 62 (1977) 1168-1172; Crystal structure refinement of a weakly anisotropic pyrite; cubic model. Peaks parsed from RRUFF powder DIF file Pyrite__R050190-1__Powder__DIF_File__cc214ad21fa41d747dc7f3a94c94.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050190-1"
+        },
+        {
+          "peak_id": "pyrite_37p13_03",
+          "hkl": "2 1 0",
+          "two_theta_deg": 37.13,
+          "q_a_inv": 2.59488,
+          "d_a": 2.421378,
+          "relative_intensity": 0.5486,
+          "reference_citation": "RRUFF Pyrite sample R050190-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern R050190; Bayliss P; American Mineralogist 62 (1977) 1168-1172; Crystal structure refinement of a weakly anisotropic pyrite; cubic model. Peaks parsed from RRUFF powder DIF file Pyrite__R050190-1__Powder__DIF_File__cc214ad21fa41d747dc7f3a94c94.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050190-1"
+        },
+        {
+          "peak_id": "pyrite_40p82_04",
+          "hkl": "2 1 1",
+          "two_theta_deg": 40.82,
+          "q_a_inv": 2.842284,
+          "d_a": 2.210612,
+          "relative_intensity": 0.4547,
+          "reference_citation": "RRUFF Pyrite sample R050190-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern R050190; Bayliss P; American Mineralogist 62 (1977) 1168-1172; Crystal structure refinement of a weakly anisotropic pyrite; cubic model. Peaks parsed from RRUFF powder DIF file Pyrite__R050190-1__Powder__DIF_File__cc214ad21fa41d747dc7f3a94c94.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050190-1"
+        },
+        {
+          "peak_id": "pyrite_47p48_05",
+          "hkl": "2 2 0",
+          "two_theta_deg": 47.48,
+          "q_a_inv": 3.281186,
+          "d_a": 1.914913,
+          "relative_intensity": 0.5101,
+          "reference_citation": "RRUFF Pyrite sample R050190-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern R050190; Bayliss P; American Mineralogist 62 (1977) 1168-1172; Crystal structure refinement of a weakly anisotropic pyrite; cubic model. Peaks parsed from RRUFF powder DIF file Pyrite__R050190-1__Powder__DIF_File__cc214ad21fa41d747dc7f3a94c94.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050190-1"
+        },
+        {
+          "peak_id": "pyrite_56p33_06",
+          "hkl": "3 1 1",
+          "two_theta_deg": 56.33,
+          "q_a_inv": 3.84702,
+          "d_a": 1.63326,
+          "relative_intensity": 1.0,
+          "reference_citation": "RRUFF Pyrite sample R050190-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern R050190; Bayliss P; American Mineralogist 62 (1977) 1168-1172; Crystal structure refinement of a weakly anisotropic pyrite; cubic model. Peaks parsed from RRUFF powder DIF file Pyrite__R050190-1__Powder__DIF_File__cc214ad21fa41d747dc7f3a94c94.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050190-1"
+        },
+        {
+          "peak_id": "pyrite_59p07_07",
+          "hkl": "2 2 2",
+          "two_theta_deg": 59.07,
+          "q_a_inv": 4.017709,
+          "d_a": 1.563873,
+          "relative_intensity": 0.1584,
+          "reference_citation": "RRUFF Pyrite sample R050190-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern R050190; Bayliss P; American Mineralogist 62 (1977) 1168-1172; Crystal structure refinement of a weakly anisotropic pyrite; cubic model. Peaks parsed from RRUFF powder DIF file Pyrite__R050190-1__Powder__DIF_File__cc214ad21fa41d747dc7f3a94c94.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050190-1"
+        },
+        {
+          "peak_id": "pyrite_61p74_08",
+          "hkl": "3 0 2",
+          "two_theta_deg": 61.74,
+          "q_a_inv": 4.181829,
+          "d_a": 1.502497,
+          "relative_intensity": 0.1611,
+          "reference_citation": "RRUFF Pyrite sample R050190-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern R050190; Bayliss P; American Mineralogist 62 (1977) 1168-1172; Crystal structure refinement of a weakly anisotropic pyrite; cubic model. Peaks parsed from RRUFF powder DIF file Pyrite__R050190-1__Powder__DIF_File__cc214ad21fa41d747dc7f3a94c94.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050190-1"
+        },
+        {
+          "peak_id": "pyrite_64p34_09",
+          "hkl": "3 2 1;3 1 2",
+          "two_theta_deg": 64.34,
+          "q_a_inv": 4.339465,
+          "d_a": 1.447917,
+          "relative_intensity": 0.2155,
+          "reference_citation": "RRUFF Pyrite sample R050190-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern R050190; Bayliss P; American Mineralogist 62 (1977) 1168-1172; Crystal structure refinement of a weakly anisotropic pyrite; cubic model. Peaks parsed from RRUFF powder DIF file Pyrite__R050190-1__Powder__DIF_File__cc214ad21fa41d747dc7f3a94c94.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050190-1"
+        },
+        {
+          "peak_id": "pyrite_76p66_10",
+          "hkl": "3 3 1",
+          "two_theta_deg": 76.66,
+          "q_a_inv": 5.054705,
+          "d_a": 1.243037,
+          "relative_intensity": 0.1049,
+          "reference_citation": "RRUFF Pyrite sample R050190-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern R050190; Bayliss P; American Mineralogist 62 (1977) 1168-1172; Crystal structure refinement of a weakly anisotropic pyrite; cubic model. Peaks parsed from RRUFF powder DIF file Pyrite__R050190-1__Powder__DIF_File__cc214ad21fa41d747dc7f3a94c94.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050190-1"
+        },
+        {
+          "peak_id": "pyrite_79p03_11",
+          "hkl": "4 2 0;4 0 2",
+          "two_theta_deg": 79.03,
+          "q_a_inv": 5.185845,
+          "d_a": 1.211603,
+          "relative_intensity": 0.1312,
+          "reference_citation": "RRUFF Pyrite sample R050190-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern R050190; Bayliss P; American Mineralogist 62 (1977) 1168-1172; Crystal structure refinement of a weakly anisotropic pyrite; cubic model. Peaks parsed from RRUFF powder DIF file Pyrite__R050190-1__Powder__DIF_File__cc214ad21fa41d747dc7f3a94c94.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050190-1"
+        },
+        {
+          "peak_id": "pyrite_88p36_12",
+          "hkl": "4 2 2",
+          "two_theta_deg": 88.36,
+          "q_a_inv": 5.680032,
+          "d_a": 1.106188,
+          "relative_intensity": 0.2502,
+          "reference_citation": "RRUFF Pyrite sample R050190-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern R050190; Bayliss P; American Mineralogist 62 (1977) 1168-1172; Crystal structure refinement of a weakly anisotropic pyrite; cubic model. Peaks parsed from RRUFF powder DIF file Pyrite__R050190-1__Powder__DIF_File__cc214ad21fa41d747dc7f3a94c94.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050190-1"
+        }
+      ]
+    },
+    {
+      "material": "Hematite",
+      "phase_name": "hematite",
+      "chemical_formula": "Fe2O3",
+      "structure_note": "alpha-Fe2O3 iron oxide reference phase from RRUFF powder DIF data",
+      "reference_citation": "RRUFF Hematite sample R050300-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050300; Blake R L, Hessevick R E, Zoltai T, Finger L W; American Mineralogist 51 (1966) 123-129; Refinement of the hematite structure.",
+      "reference_url_or_doi": "https://rruff.info/R050300-1",
+      "source_archive_member": "Hematite__R050300-1__Powder__DIF_File__15d97cbb306f5137700e99903529.txt",
+      "source_sample_id": "R050300-1",
+      "raw_peak_count": 24,
+      "selected_peak_count": 12,
+      "peaks": [
+        {
+          "peak_id": "hematite_24p2_01",
+          "hkl": "0 1 2",
+          "two_theta_deg": 24.2,
+          "q_a_inv": 1.708444,
+          "d_a": 3.677723,
+          "relative_intensity": 0.2873,
+          "reference_citation": "RRUFF Hematite sample R050300-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050300; Blake R L, Hessevick R E, Zoltai T, Finger L W; American Mineralogist 51 (1966) 123-129; Refinement of the hematite structure. Peaks parsed from RRUFF powder DIF file Hematite__R050300-1__Powder__DIF_File__15d97cbb306f5137700e99903529.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050300-1"
+        },
+        {
+          "peak_id": "hematite_33p21_02",
+          "hkl": "1 0 4",
+          "two_theta_deg": 33.21,
+          "q_a_inv": 2.329114,
+          "d_a": 2.697672,
+          "relative_intensity": 1.0,
+          "reference_citation": "RRUFF Hematite sample R050300-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050300; Blake R L, Hessevick R E, Zoltai T, Finger L W; American Mineralogist 51 (1966) 123-129; Refinement of the hematite structure. Peaks parsed from RRUFF powder DIF file Hematite__R050300-1__Powder__DIF_File__15d97cbb306f5137700e99903529.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050300-1"
+        },
+        {
+          "peak_id": "hematite_35p69_03",
+          "hkl": "1 1 0",
+          "two_theta_deg": 35.69,
+          "q_a_inv": 2.497588,
+          "d_a": 2.515701,
+          "relative_intensity": 0.7367,
+          "reference_citation": "RRUFF Hematite sample R050300-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050300; Blake R L, Hessevick R E, Zoltai T, Finger L W; American Mineralogist 51 (1966) 123-129; Refinement of the hematite structure. Peaks parsed from RRUFF powder DIF file Hematite__R050300-1__Powder__DIF_File__15d97cbb306f5137700e99903529.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050300-1"
+        },
+        {
+          "peak_id": "hematite_40p91_04",
+          "hkl": "1 1 3",
+          "two_theta_deg": 40.91,
+          "q_a_inv": 2.848282,
+          "d_a": 2.205956,
+          "relative_intensity": 0.1799,
+          "reference_citation": "RRUFF Hematite sample R050300-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050300; Blake R L, Hessevick R E, Zoltai T, Finger L W; American Mineralogist 51 (1966) 123-129; Refinement of the hematite structure. Peaks parsed from RRUFF powder DIF file Hematite__R050300-1__Powder__DIF_File__15d97cbb306f5137700e99903529.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050300-1"
+        },
+        {
+          "peak_id": "hematite_49p51_05",
+          "hkl": "0 2 4",
+          "two_theta_deg": 49.51,
+          "q_a_inv": 3.412829,
+          "d_a": 1.841049,
+          "relative_intensity": 0.3743,
+          "reference_citation": "RRUFF Hematite sample R050300-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050300; Blake R L, Hessevick R E, Zoltai T, Finger L W; American Mineralogist 51 (1966) 123-129; Refinement of the hematite structure. Peaks parsed from RRUFF powder DIF file Hematite__R050300-1__Powder__DIF_File__15d97cbb306f5137700e99903529.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050300-1"
+        },
+        {
+          "peak_id": "hematite_54p11_06",
+          "hkl": "1 1 6",
+          "two_theta_deg": 54.11,
+          "q_a_inv": 3.707107,
+          "d_a": 1.694903,
+          "relative_intensity": 0.4513,
+          "reference_citation": "RRUFF Hematite sample R050300-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050300; Blake R L, Hessevick R E, Zoltai T, Finger L W; American Mineralogist 51 (1966) 123-129; Refinement of the hematite structure. Peaks parsed from RRUFF powder DIF file Hematite__R050300-1__Powder__DIF_File__15d97cbb306f5137700e99903529.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050300-1"
+        },
+        {
+          "peak_id": "hematite_57p62_07",
+          "hkl": "0 1 8",
+          "two_theta_deg": 57.62,
+          "q_a_inv": 3.927661,
+          "d_a": 1.599727,
+          "relative_intensity": 0.0852,
+          "reference_citation": "RRUFF Hematite sample R050300-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050300; Blake R L, Hessevick R E, Zoltai T, Finger L W; American Mineralogist 51 (1966) 123-129; Refinement of the hematite structure. Peaks parsed from RRUFF powder DIF file Hematite__R050300-1__Powder__DIF_File__15d97cbb306f5137700e99903529.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050300-1"
+        },
+        {
+          "peak_id": "hematite_62p48_08",
+          "hkl": "2 1 4",
+          "two_theta_deg": 62.48,
+          "q_a_inv": 4.226917,
+          "d_a": 1.48647,
+          "relative_intensity": 0.3065,
+          "reference_citation": "RRUFF Hematite sample R050300-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050300; Blake R L, Hessevick R E, Zoltai T, Finger L W; American Mineralogist 51 (1966) 123-129; Refinement of the hematite structure. Peaks parsed from RRUFF powder DIF file Hematite__R050300-1__Powder__DIF_File__15d97cbb306f5137700e99903529.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050300-1"
+        },
+        {
+          "peak_id": "hematite_64p05_09",
+          "hkl": "3 0 0",
+          "two_theta_deg": 64.05,
+          "q_a_inv": 4.321992,
+          "d_a": 1.453771,
+          "relative_intensity": 0.2947,
+          "reference_citation": "RRUFF Hematite sample R050300-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050300; Blake R L, Hessevick R E, Zoltai T, Finger L W; American Mineralogist 51 (1966) 123-129; Refinement of the hematite structure. Peaks parsed from RRUFF powder DIF file Hematite__R050300-1__Powder__DIF_File__15d97cbb306f5137700e99903529.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050300-1"
+        },
+        {
+          "peak_id": "hematite_71p96_10",
+          "hkl": "1 0 10",
+          "two_theta_deg": 71.96,
+          "q_a_inv": 4.788297,
+          "d_a": 1.312196,
+          "relative_intensity": 0.1086,
+          "reference_citation": "RRUFF Hematite sample R050300-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050300; Blake R L, Hessevick R E, Zoltai T, Finger L W; American Mineralogist 51 (1966) 123-129; Refinement of the hematite structure. Peaks parsed from RRUFF powder DIF file Hematite__R050300-1__Powder__DIF_File__15d97cbb306f5137700e99903529.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050300-1"
+        },
+        {
+          "peak_id": "hematite_84p97_11",
+          "hkl": "1 3 4",
+          "two_theta_deg": 84.97,
+          "q_a_inv": 5.504658,
+          "d_a": 1.141431,
+          "relative_intensity": 0.0865,
+          "reference_citation": "RRUFF Hematite sample R050300-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050300; Blake R L, Hessevick R E, Zoltai T, Finger L W; American Mineralogist 51 (1966) 123-129; Refinement of the hematite structure. Peaks parsed from RRUFF powder DIF file Hematite__R050300-1__Powder__DIF_File__15d97cbb306f5137700e99903529.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050300-1"
+        },
+        {
+          "peak_id": "hematite_88p58_12",
+          "hkl": "2 2 6",
+          "two_theta_deg": 88.58,
+          "q_a_inv": 5.691244,
+          "d_a": 1.104009,
+          "relative_intensity": 0.1588,
+          "reference_citation": "RRUFF Hematite sample R050300-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050300; Blake R L, Hessevick R E, Zoltai T, Finger L W; American Mineralogist 51 (1966) 123-129; Refinement of the hematite structure. Peaks parsed from RRUFF powder DIF file Hematite__R050300-1__Powder__DIF_File__15d97cbb306f5137700e99903529.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050300-1"
+        }
+      ]
+    },
+    {
+      "material": "Magnetite",
+      "phase_name": "magnetite",
+      "chemical_formula": "Fe3O4",
+      "structure_note": "Fe3O4 inverse-spinel iron oxide reference phase from RRUFF powder DIF data",
+      "reference_citation": "RRUFF Magnetite sample R060191-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R060191; Wechsler B A, Lindsley D H, Prewitt C T; American Mineralogist 69 (1984) 754-770; Crystal structure and cation distribution in titanomagnetites (Fe3-xTixO4); MT100-1350.",
+      "reference_url_or_doi": "https://rruff.info/R060191-1",
+      "source_archive_member": "Magnetite__R060191-1__Powder__DIF_File__7728b3c2293a47e9b33f50e0d9de.txt",
+      "source_sample_id": "R060191-1",
+      "raw_peak_count": 17,
+      "selected_peak_count": 12,
+      "peaks": [
+        {
+          "peak_id": "magnetite_18p37_01",
+          "hkl": "1 1 1",
+          "two_theta_deg": 18.37,
+          "q_a_inv": 1.300966,
+          "d_a": 4.829631,
+          "relative_intensity": 0.0793,
+          "reference_citation": "RRUFF Magnetite sample R060191-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R060191; Wechsler B A, Lindsley D H, Prewitt C T; American Mineralogist 69 (1984) 754-770; Crystal structure and cation distribution in titanomagnetites (Fe3-xTixO4); MT100-1350. Peaks parsed from RRUFF powder DIF file Magnetite__R060191-1__Powder__DIF_File__7728b3c2293a47e9b33f50e0d9de.txt.",
+          "reference_url_or_doi": "https://rruff.info/R060191-1"
+        },
+        {
+          "peak_id": "magnetite_30p16_02",
+          "hkl": "2 2 0",
+          "two_theta_deg": 30.16,
+          "q_a_inv": 2.120431,
+          "d_a": 2.963164,
+          "relative_intensity": 0.281,
+          "reference_citation": "RRUFF Magnetite sample R060191-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R060191; Wechsler B A, Lindsley D H, Prewitt C T; American Mineralogist 69 (1984) 754-770; Crystal structure and cation distribution in titanomagnetites (Fe3-xTixO4); MT100-1350. Peaks parsed from RRUFF powder DIF file Magnetite__R060191-1__Powder__DIF_File__7728b3c2293a47e9b33f50e0d9de.txt.",
+          "reference_url_or_doi": "https://rruff.info/R060191-1"
+        },
+        {
+          "peak_id": "magnetite_35p51_03",
+          "hkl": "3 1 1",
+          "two_theta_deg": 35.51,
+          "q_a_inv": 2.485399,
+          "d_a": 2.528039,
+          "relative_intensity": 1.0,
+          "reference_citation": "RRUFF Magnetite sample R060191-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R060191; Wechsler B A, Lindsley D H, Prewitt C T; American Mineralogist 69 (1984) 754-770; Crystal structure and cation distribution in titanomagnetites (Fe3-xTixO4); MT100-1350. Peaks parsed from RRUFF powder DIF file Magnetite__R060191-1__Powder__DIF_File__7728b3c2293a47e9b33f50e0d9de.txt.",
+          "reference_url_or_doi": "https://rruff.info/R060191-1"
+        },
+        {
+          "peak_id": "magnetite_37p15_04",
+          "hkl": "2 2 2",
+          "two_theta_deg": 37.15,
+          "q_a_inv": 2.596229,
+          "d_a": 2.42012,
+          "relative_intensity": 0.0827,
+          "reference_citation": "RRUFF Magnetite sample R060191-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R060191; Wechsler B A, Lindsley D H, Prewitt C T; American Mineralogist 69 (1984) 754-770; Crystal structure and cation distribution in titanomagnetites (Fe3-xTixO4); MT100-1350. Peaks parsed from RRUFF powder DIF file Magnetite__R060191-1__Powder__DIF_File__7728b3c2293a47e9b33f50e0d9de.txt.",
+          "reference_url_or_doi": "https://rruff.info/R060191-1"
+        },
+        {
+          "peak_id": "magnetite_43p14_05",
+          "hkl": "4 0 0",
+          "two_theta_deg": 43.14,
+          "q_a_inv": 2.99634,
+          "d_a": 2.096953,
+          "relative_intensity": 0.2013,
+          "reference_citation": "RRUFF Magnetite sample R060191-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R060191; Wechsler B A, Lindsley D H, Prewitt C T; American Mineralogist 69 (1984) 754-770; Crystal structure and cation distribution in titanomagnetites (Fe3-xTixO4); MT100-1350. Peaks parsed from RRUFF powder DIF file Magnetite__R060191-1__Powder__DIF_File__7728b3c2293a47e9b33f50e0d9de.txt.",
+          "reference_url_or_doi": "https://rruff.info/R060191-1"
+        },
+        {
+          "peak_id": "magnetite_53p5_06",
+          "hkl": "4 2 2",
+          "two_theta_deg": 53.5,
+          "q_a_inv": 3.668416,
+          "d_a": 1.712779,
+          "relative_intensity": 0.0959,
+          "reference_citation": "RRUFF Magnetite sample R060191-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R060191; Wechsler B A, Lindsley D H, Prewitt C T; American Mineralogist 69 (1984) 754-770; Crystal structure and cation distribution in titanomagnetites (Fe3-xTixO4); MT100-1350. Peaks parsed from RRUFF powder DIF file Magnetite__R060191-1__Powder__DIF_File__7728b3c2293a47e9b33f50e0d9de.txt.",
+          "reference_url_or_doi": "https://rruff.info/R060191-1"
+        },
+        {
+          "peak_id": "magnetite_57p03_07",
+          "hkl": "5 1 1;3 3 3",
+          "two_theta_deg": 57.03,
+          "q_a_inv": 3.89084,
+          "d_a": 1.614866,
+          "relative_intensity": 0.3134,
+          "reference_citation": "RRUFF Magnetite sample R060191-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R060191; Wechsler B A, Lindsley D H, Prewitt C T; American Mineralogist 69 (1984) 754-770; Crystal structure and cation distribution in titanomagnetites (Fe3-xTixO4); MT100-1350. Peaks parsed from RRUFF powder DIF file Magnetite__R060191-1__Powder__DIF_File__7728b3c2293a47e9b33f50e0d9de.txt.",
+          "reference_url_or_doi": "https://rruff.info/R060191-1"
+        },
+        {
+          "peak_id": "magnetite_62p61_08",
+          "hkl": "4 4 0",
+          "two_theta_deg": 62.61,
+          "q_a_inv": 4.23482,
+          "d_a": 1.483696,
+          "relative_intensity": 0.418,
+          "reference_citation": "RRUFF Magnetite sample R060191-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R060191; Wechsler B A, Lindsley D H, Prewitt C T; American Mineralogist 69 (1984) 754-770; Crystal structure and cation distribution in titanomagnetites (Fe3-xTixO4); MT100-1350. Peaks parsed from RRUFF powder DIF file Magnetite__R060191-1__Powder__DIF_File__7728b3c2293a47e9b33f50e0d9de.txt.",
+          "reference_url_or_doi": "https://rruff.info/R060191-1"
+        },
+        {
+          "peak_id": "magnetite_74p05_09",
+          "hkl": "5 3 3",
+          "two_theta_deg": 74.05,
+          "q_a_inv": 4.907785,
+          "d_a": 1.280249,
+          "relative_intensity": 0.0882,
+          "reference_citation": "RRUFF Magnetite sample R060191-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R060191; Wechsler B A, Lindsley D H, Prewitt C T; American Mineralogist 69 (1984) 754-770; Crystal structure and cation distribution in titanomagnetites (Fe3-xTixO4); MT100-1350. Peaks parsed from RRUFF powder DIF file Magnetite__R060191-1__Powder__DIF_File__7728b3c2293a47e9b33f50e0d9de.txt.",
+          "reference_url_or_doi": "https://rruff.info/R060191-1"
+        },
+        {
+          "peak_id": "magnetite_75p06_10",
+          "hkl": "6 2 2",
+          "two_theta_deg": 75.06,
+          "q_a_inv": 4.964945,
+          "d_a": 1.26551,
+          "relative_intensity": 0.0394,
+          "reference_citation": "RRUFF Magnetite sample R060191-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R060191; Wechsler B A, Lindsley D H, Prewitt C T; American Mineralogist 69 (1984) 754-770; Crystal structure and cation distribution in titanomagnetites (Fe3-xTixO4); MT100-1350. Peaks parsed from RRUFF powder DIF file Magnetite__R060191-1__Powder__DIF_File__7728b3c2293a47e9b33f50e0d9de.txt.",
+          "reference_url_or_doi": "https://rruff.info/R060191-1"
+        },
+        {
+          "peak_id": "magnetite_86p8_11",
+          "hkl": "6 4 2",
+          "two_theta_deg": 86.8,
+          "q_a_inv": 5.599937,
+          "d_a": 1.12201,
+          "relative_intensity": 0.0392,
+          "reference_citation": "RRUFF Magnetite sample R060191-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R060191; Wechsler B A, Lindsley D H, Prewitt C T; American Mineralogist 69 (1984) 754-770; Crystal structure and cation distribution in titanomagnetites (Fe3-xTixO4); MT100-1350. Peaks parsed from RRUFF powder DIF file Magnetite__R060191-1__Powder__DIF_File__7728b3c2293a47e9b33f50e0d9de.txt.",
+          "reference_url_or_doi": "https://rruff.info/R060191-1"
+        },
+        {
+          "peak_id": "magnetite_89p69_12",
+          "hkl": "7 3 1;5 5 3",
+          "two_theta_deg": 89.69,
+          "q_a_inv": 5.747488,
+          "d_a": 1.093206,
+          "relative_intensity": 0.2,
+          "reference_citation": "RRUFF Magnetite sample R060191-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R060191; Wechsler B A, Lindsley D H, Prewitt C T; American Mineralogist 69 (1984) 754-770; Crystal structure and cation distribution in titanomagnetites (Fe3-xTixO4); MT100-1350. Peaks parsed from RRUFF powder DIF file Magnetite__R060191-1__Powder__DIF_File__7728b3c2293a47e9b33f50e0d9de.txt.",
+          "reference_url_or_doi": "https://rruff.info/R060191-1"
+        }
+      ]
+    },
+    {
+      "material": "Chalcopyrite",
+      "phase_name": "chalcopyrite",
+      "chemical_formula": "CuFeS2",
+      "structure_note": "chalcopyrite copper iron sulfide reference phase from RRUFF powder DIF data",
+      "reference_citation": "RRUFF Chalcopyrite sample R050208-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern R050208; Hall S R, Stewart J M; Acta Crystallographica B29 (1973) 579-585; The crystal structure refinement of chalcopyrite, CuFeS2.",
+      "reference_url_or_doi": "https://rruff.info/R050208-1",
+      "source_archive_member": "Chalcopyrite__R050208-1__Powder__DIF_File__29c63c8e5cfb130b2e6d61c72816.txt",
+      "source_sample_id": "R050208-1",
+      "raw_peak_count": 13,
+      "selected_peak_count": 12,
+      "peaks": [
+        {
+          "peak_id": "chalcopyrite_29p4_01",
+          "hkl": "1 1 2",
+          "two_theta_deg": 29.4,
+          "q_a_inv": 2.068192,
+          "d_a": 3.038009,
+          "relative_intensity": 1.0,
+          "reference_citation": "RRUFF Chalcopyrite sample R050208-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern R050208; Hall S R, Stewart J M; Acta Crystallographica B29 (1973) 579-585; The crystal structure refinement of chalcopyrite, CuFeS2. Peaks parsed from RRUFF powder DIF file Chalcopyrite__R050208-1__Powder__DIF_File__29c63c8e5cfb130b2e6d61c72816.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050208-1"
+        },
+        {
+          "peak_id": "chalcopyrite_33p89_02",
+          "hkl": "2 0 0",
+          "two_theta_deg": 33.89,
+          "q_a_inv": 2.375421,
+          "d_a": 2.645083,
+          "relative_intensity": 0.0606,
+          "reference_citation": "RRUFF Chalcopyrite sample R050208-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern R050208; Hall S R, Stewart J M; Acta Crystallographica B29 (1973) 579-585; The crystal structure refinement of chalcopyrite, CuFeS2. Peaks parsed from RRUFF powder DIF file Chalcopyrite__R050208-1__Powder__DIF_File__29c63c8e5cfb130b2e6d61c72816.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050208-1"
+        },
+        {
+          "peak_id": "chalcopyrite_34p42_03",
+          "hkl": "0 0 4",
+          "two_theta_deg": 34.42,
+          "q_a_inv": 2.411454,
+          "d_a": 2.605558,
+          "relative_intensity": 0.029,
+          "reference_citation": "RRUFF Chalcopyrite sample R050208-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern R050208; Hall S R, Stewart J M; Acta Crystallographica B29 (1973) 579-585; The crystal structure refinement of chalcopyrite, CuFeS2. Peaks parsed from RRUFF powder DIF file Chalcopyrite__R050208-1__Powder__DIF_File__29c63c8e5cfb130b2e6d61c72816.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050208-1"
+        },
+        {
+          "peak_id": "chalcopyrite_48p68_04",
+          "hkl": "2 2 0",
+          "two_theta_deg": 48.68,
+          "q_a_inv": 3.359131,
+          "d_a": 1.870479,
+          "relative_intensity": 0.1835,
+          "reference_citation": "RRUFF Chalcopyrite sample R050208-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern R050208; Hall S R, Stewart J M; Acta Crystallographica B29 (1973) 579-585; The crystal structure refinement of chalcopyrite, CuFeS2. Peaks parsed from RRUFF powder DIF file Chalcopyrite__R050208-1__Powder__DIF_File__29c63c8e5cfb130b2e6d61c72816.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050208-1"
+        },
+        {
+          "peak_id": "chalcopyrite_49p07_05",
+          "hkl": "2 0 4",
+          "two_theta_deg": 49.07,
+          "q_a_inv": 3.384385,
+          "d_a": 1.856522,
+          "relative_intensity": 0.3574,
+          "reference_citation": "RRUFF Chalcopyrite sample R050208-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern R050208; Hall S R, Stewart J M; Acta Crystallographica B29 (1973) 579-585; The crystal structure refinement of chalcopyrite, CuFeS2. Peaks parsed from RRUFF powder DIF file Chalcopyrite__R050208-1__Powder__DIF_File__29c63c8e5cfb130b2e6d61c72816.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050208-1"
+        },
+        {
+          "peak_id": "chalcopyrite_57p88_06",
+          "hkl": "3 1 2",
+          "two_theta_deg": 57.88,
+          "q_a_inv": 3.943854,
+          "d_a": 1.593159,
+          "relative_intensity": 0.218,
+          "reference_citation": "RRUFF Chalcopyrite sample R050208-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern R050208; Hall S R, Stewart J M; Acta Crystallographica B29 (1973) 579-585; The crystal structure refinement of chalcopyrite, CuFeS2. Peaks parsed from RRUFF powder DIF file Chalcopyrite__R050208-1__Powder__DIF_File__29c63c8e5cfb130b2e6d61c72816.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050208-1"
+        },
+        {
+          "peak_id": "chalcopyrite_58p58_07",
+          "hkl": "1 1 6",
+          "two_theta_deg": 58.58,
+          "q_a_inv": 3.98735,
+          "d_a": 1.57578,
+          "relative_intensity": 0.1045,
+          "reference_citation": "RRUFF Chalcopyrite sample R050208-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern R050208; Hall S R, Stewart J M; Acta Crystallographica B29 (1973) 579-585; The crystal structure refinement of chalcopyrite, CuFeS2. Peaks parsed from RRUFF powder DIF file Chalcopyrite__R050208-1__Powder__DIF_File__29c63c8e5cfb130b2e6d61c72816.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050208-1"
+        },
+        {
+          "peak_id": "chalcopyrite_60p96_08",
+          "hkl": "2 2 4",
+          "two_theta_deg": 60.96,
+          "q_a_inv": 4.134115,
+          "d_a": 1.519838,
+          "relative_intensity": 0.0173,
+          "reference_citation": "RRUFF Chalcopyrite sample R050208-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern R050208; Hall S R, Stewart J M; Acta Crystallographica B29 (1973) 579-585; The crystal structure refinement of chalcopyrite, CuFeS2. Peaks parsed from RRUFF powder DIF file Chalcopyrite__R050208-1__Powder__DIF_File__29c63c8e5cfb130b2e6d61c72816.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050208-1"
+        },
+        {
+          "peak_id": "chalcopyrite_71p28_09",
+          "hkl": "4 0 0",
+          "two_theta_deg": 71.28,
+          "q_a_inv": 4.749075,
+          "d_a": 1.323033,
+          "relative_intensity": 0.0453,
+          "reference_citation": "RRUFF Chalcopyrite sample R050208-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern R050208; Hall S R, Stewart J M; Acta Crystallographica B29 (1973) 579-585; The crystal structure refinement of chalcopyrite, CuFeS2. Peaks parsed from RRUFF powder DIF file Chalcopyrite__R050208-1__Powder__DIF_File__29c63c8e5cfb130b2e6d61c72816.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050208-1"
+        },
+        {
+          "peak_id": "chalcopyrite_72p54_10",
+          "hkl": "0 0 8",
+          "two_theta_deg": 72.54,
+          "q_a_inv": 4.821618,
+          "d_a": 1.303128,
+          "relative_intensity": 0.0214,
+          "reference_citation": "RRUFF Chalcopyrite sample R050208-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern R050208; Hall S R, Stewart J M; Acta Crystallographica B29 (1973) 579-585; The crystal structure refinement of chalcopyrite, CuFeS2. Peaks parsed from RRUFF powder DIF file Chalcopyrite__R050208-1__Powder__DIF_File__29c63c8e5cfb130b2e6d61c72816.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050208-1"
+        },
+        {
+          "peak_id": "chalcopyrite_78p91_11",
+          "hkl": "3 3 2",
+          "two_theta_deg": 78.91,
+          "q_a_inv": 5.179258,
+          "d_a": 1.213144,
+          "relative_intensity": 0.0345,
+          "reference_citation": "RRUFF Chalcopyrite sample R050208-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern R050208; Hall S R, Stewart J M; Acta Crystallographica B29 (1973) 579-585; The crystal structure refinement of chalcopyrite, CuFeS2. Peaks parsed from RRUFF powder DIF file Chalcopyrite__R050208-1__Powder__DIF_File__29c63c8e5cfb130b2e6d61c72816.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050208-1"
+        },
+        {
+          "peak_id": "chalcopyrite_79p52_12",
+          "hkl": "3 1 6",
+          "two_theta_deg": 79.52,
+          "q_a_inv": 5.212684,
+          "d_a": 1.205365,
+          "relative_intensity": 0.1346,
+          "reference_citation": "RRUFF Chalcopyrite sample R050208-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern R050208; Hall S R, Stewart J M; Acta Crystallographica B29 (1973) 579-585; The crystal structure refinement of chalcopyrite, CuFeS2. Peaks parsed from RRUFF powder DIF file Chalcopyrite__R050208-1__Powder__DIF_File__29c63c8e5cfb130b2e6d61c72816.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050208-1"
+        }
+      ]
+    },
+    {
+      "material": "Galena",
+      "phase_name": "galena",
+      "chemical_formula": "PbS",
+      "structure_note": "galena lead sulfide reference phase from RRUFF powder DIF data",
+      "reference_citation": "RRUFF Galena sample R070325-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R070325; Ramsdell L S; American Mineralogist 10 (1925) 281-304; The crystal structures of some metallic sulfides.",
+      "reference_url_or_doi": "https://rruff.info/R070325-1",
+      "source_archive_member": "Galena__R070325-1__Powder__DIF_File__90a34073a0bc327a93b98f953599.txt",
+      "source_sample_id": "R070325-1",
+      "raw_peak_count": 12,
+      "selected_peak_count": 10,
+      "peaks": [
+        {
+          "peak_id": "galena_26p04_01",
+          "hkl": "1 1 1",
+          "two_theta_deg": 26.04,
+          "q_a_inv": 1.83618,
+          "d_a": 3.421879,
+          "relative_intensity": 0.9796,
+          "reference_citation": "RRUFF Galena sample R070325-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R070325; Ramsdell L S; American Mineralogist 10 (1925) 281-304; The crystal structures of some metallic sulfides. Peaks parsed from RRUFF powder DIF file Galena__R070325-1__Powder__DIF_File__90a34073a0bc327a93b98f953599.txt.",
+          "reference_url_or_doi": "https://rruff.info/R070325-1"
+        },
+        {
+          "peak_id": "galena_30p15_02",
+          "hkl": "2 0 0",
+          "two_theta_deg": 30.15,
+          "q_a_inv": 2.119744,
+          "d_a": 2.964124,
+          "relative_intensity": 1.0,
+          "reference_citation": "RRUFF Galena sample R070325-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R070325; Ramsdell L S; American Mineralogist 10 (1925) 281-304; The crystal structures of some metallic sulfides. Peaks parsed from RRUFF powder DIF file Galena__R070325-1__Powder__DIF_File__90a34073a0bc327a93b98f953599.txt.",
+          "reference_url_or_doi": "https://rruff.info/R070325-1"
+        },
+        {
+          "peak_id": "galena_43p12_03",
+          "hkl": "2 2 0",
+          "two_theta_deg": 43.12,
+          "q_a_inv": 2.995017,
+          "d_a": 2.097879,
+          "relative_intensity": 0.6958,
+          "reference_citation": "RRUFF Galena sample R070325-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R070325; Ramsdell L S; American Mineralogist 10 (1925) 281-304; The crystal structures of some metallic sulfides. Peaks parsed from RRUFF powder DIF file Galena__R070325-1__Powder__DIF_File__90a34073a0bc327a93b98f953599.txt.",
+          "reference_url_or_doi": "https://rruff.info/R070325-1"
+        },
+        {
+          "peak_id": "galena_51p04_04",
+          "hkl": "3 1 1",
+          "two_theta_deg": 51.04,
+          "q_a_inv": 3.511342,
+          "d_a": 1.789397,
+          "relative_intensity": 0.4315,
+          "reference_citation": "RRUFF Galena sample R070325-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R070325; Ramsdell L S; American Mineralogist 10 (1925) 281-304; The crystal structures of some metallic sulfides. Peaks parsed from RRUFF powder DIF file Galena__R070325-1__Powder__DIF_File__90a34073a0bc327a93b98f953599.txt.",
+          "reference_url_or_doi": "https://rruff.info/R070325-1"
+        },
+        {
+          "peak_id": "galena_53p48_05",
+          "hkl": "2 2 2",
+          "two_theta_deg": 53.48,
+          "q_a_inv": 3.667146,
+          "d_a": 1.713372,
+          "relative_intensity": 0.2284,
+          "reference_citation": "RRUFF Galena sample R070325-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R070325; Ramsdell L S; American Mineralogist 10 (1925) 281-304; The crystal structures of some metallic sulfides. Peaks parsed from RRUFF powder DIF file Galena__R070325-1__Powder__DIF_File__90a34073a0bc327a93b98f953599.txt.",
+          "reference_url_or_doi": "https://rruff.info/R070325-1"
+        },
+        {
+          "peak_id": "galena_62p59_06",
+          "hkl": "4 0 0",
+          "two_theta_deg": 62.59,
+          "q_a_inv": 4.233605,
+          "d_a": 1.484122,
+          "relative_intensity": 0.099,
+          "reference_citation": "RRUFF Galena sample R070325-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R070325; Ramsdell L S; American Mineralogist 10 (1925) 281-304; The crystal structures of some metallic sulfides. Peaks parsed from RRUFF powder DIF file Galena__R070325-1__Powder__DIF_File__90a34073a0bc327a93b98f953599.txt.",
+          "reference_url_or_doi": "https://rruff.info/R070325-1"
+        },
+        {
+          "peak_id": "galena_68p94_07",
+          "hkl": "3 3 1",
+          "two_theta_deg": 68.94,
+          "q_a_inv": 4.612837,
+          "d_a": 1.362109,
+          "relative_intensity": 0.1515,
+          "reference_citation": "RRUFF Galena sample R070325-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R070325; Ramsdell L S; American Mineralogist 10 (1925) 281-304; The crystal structures of some metallic sulfides. Peaks parsed from RRUFF powder DIF file Galena__R070325-1__Powder__DIF_File__90a34073a0bc327a93b98f953599.txt.",
+          "reference_url_or_doi": "https://rruff.info/R070325-1"
+        },
+        {
+          "peak_id": "galena_71p0_08",
+          "hkl": "4 2 0",
+          "two_theta_deg": 71.0,
+          "q_a_inv": 4.732876,
+          "d_a": 1.327562,
+          "relative_intensity": 0.254,
+          "reference_citation": "RRUFF Galena sample R070325-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R070325; Ramsdell L S; American Mineralogist 10 (1925) 281-304; The crystal structures of some metallic sulfides. Peaks parsed from RRUFF powder DIF file Galena__R070325-1__Powder__DIF_File__90a34073a0bc327a93b98f953599.txt.",
+          "reference_url_or_doi": "https://rruff.info/R070325-1"
+        },
+        {
+          "peak_id": "galena_78p99_09",
+          "hkl": "4 2 2",
+          "two_theta_deg": 78.99,
+          "q_a_inv": 5.18365,
+          "d_a": 1.212116,
+          "relative_intensity": 0.1773,
+          "reference_citation": "RRUFF Galena sample R070325-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R070325; Ramsdell L S; American Mineralogist 10 (1925) 281-304; The crystal structures of some metallic sulfides. Peaks parsed from RRUFF powder DIF file Galena__R070325-1__Powder__DIF_File__90a34073a0bc327a93b98f953599.txt.",
+          "reference_url_or_doi": "https://rruff.info/R070325-1"
+        },
+        {
+          "peak_id": "galena_84p84_10",
+          "hkl": "5 1 1;3 3 3",
+          "two_theta_deg": 84.84,
+          "q_a_inv": 5.497836,
+          "d_a": 1.142847,
+          "relative_intensity": 0.1255,
+          "reference_citation": "RRUFF Galena sample R070325-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R070325; Ramsdell L S; American Mineralogist 10 (1925) 281-304; The crystal structures of some metallic sulfides. Peaks parsed from RRUFF powder DIF file Galena__R070325-1__Powder__DIF_File__90a34073a0bc327a93b98f953599.txt.",
+          "reference_url_or_doi": "https://rruff.info/R070325-1"
+        }
+      ]
+    },
+    {
+      "material": "Aragonite",
+      "phase_name": "aragonite",
+      "chemical_formula": "CaCO3",
+      "structure_note": "aragonite carbonate polymorph included as a calcite hard-negative",
+      "reference_citation": "RRUFF Aragonite sample R060195-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R060195; de Villiers J P R; American Mineralogist 56 (1971) 758-767; Crystal structures of aragonite, strontianite, and witherite.",
+      "reference_url_or_doi": "https://rruff.info/R060195-1",
+      "source_archive_member": "Aragonite__R060195-1__Powder__DIF_File__89c5a89ee0ef375b9aae2a4aab58.txt",
+      "source_sample_id": "R060195-1",
+      "raw_peak_count": 59,
+      "selected_peak_count": 12,
+      "peaks": [
+        {
+          "peak_id": "aragonite_26p26_01",
+          "hkl": "1 1 1",
+          "two_theta_deg": 26.26,
+          "q_a_inv": 1.851422,
+          "d_a": 3.393708,
+          "relative_intensity": 1.0,
+          "reference_citation": "RRUFF Aragonite sample R060195-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R060195; de Villiers J P R; American Mineralogist 56 (1971) 758-767; Crystal structures of aragonite, strontianite, and witherite. Peaks parsed from RRUFF powder DIF file Aragonite__R060195-1__Powder__DIF_File__89c5a89ee0ef375b9aae2a4aab58.txt.",
+          "reference_url_or_doi": "https://rruff.info/R060195-1"
+        },
+        {
+          "peak_id": "aragonite_27p26_02",
+          "hkl": "0 2 1",
+          "two_theta_deg": 27.26,
+          "q_a_inv": 1.920615,
+          "d_a": 3.271444,
+          "relative_intensity": 0.5862,
+          "reference_citation": "RRUFF Aragonite sample R060195-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R060195; de Villiers J P R; American Mineralogist 56 (1971) 758-767; Crystal structures of aragonite, strontianite, and witherite. Peaks parsed from RRUFF powder DIF file Aragonite__R060195-1__Powder__DIF_File__89c5a89ee0ef375b9aae2a4aab58.txt.",
+          "reference_url_or_doi": "https://rruff.info/R060195-1"
+        },
+        {
+          "peak_id": "aragonite_33p18_03",
+          "hkl": "0 1 2",
+          "two_theta_deg": 33.18,
+          "q_a_inv": 2.327069,
+          "d_a": 2.700042,
+          "relative_intensity": 0.5417,
+          "reference_citation": "RRUFF Aragonite sample R060195-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R060195; de Villiers J P R; American Mineralogist 56 (1971) 758-767; Crystal structures of aragonite, strontianite, and witherite. Peaks parsed from RRUFF powder DIF file Aragonite__R060195-1__Powder__DIF_File__89c5a89ee0ef375b9aae2a4aab58.txt.",
+          "reference_url_or_doi": "https://rruff.info/R060195-1"
+        },
+        {
+          "peak_id": "aragonite_36p16_04",
+          "hkl": "1 0 2",
+          "two_theta_deg": 36.16,
+          "q_a_inv": 2.529387,
+          "d_a": 2.484074,
+          "relative_intensity": 0.2952,
+          "reference_citation": "RRUFF Aragonite sample R060195-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R060195; de Villiers J P R; American Mineralogist 56 (1971) 758-767; Crystal structures of aragonite, strontianite, and witherite. Peaks parsed from RRUFF powder DIF file Aragonite__R060195-1__Powder__DIF_File__89c5a89ee0ef375b9aae2a4aab58.txt.",
+          "reference_url_or_doi": "https://rruff.info/R060195-1"
+        },
+        {
+          "peak_id": "aragonite_37p94_05",
+          "hkl": "1 1 2",
+          "two_theta_deg": 37.94,
+          "q_a_inv": 2.649428,
+          "d_a": 2.371526,
+          "relative_intensity": 0.4141,
+          "reference_citation": "RRUFF Aragonite sample R060195-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R060195; de Villiers J P R; American Mineralogist 56 (1971) 758-767; Crystal structures of aragonite, strontianite, and witherite. Peaks parsed from RRUFF powder DIF file Aragonite__R060195-1__Powder__DIF_File__89c5a89ee0ef375b9aae2a4aab58.txt.",
+          "reference_url_or_doi": "https://rruff.info/R060195-1"
+        },
+        {
+          "peak_id": "aragonite_38p45_06",
+          "hkl": "1 3 0",
+          "two_theta_deg": 38.45,
+          "q_a_inv": 2.683705,
+          "d_a": 2.341236,
+          "relative_intensity": 0.2908,
+          "reference_citation": "RRUFF Aragonite sample R060195-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R060195; de Villiers J P R; American Mineralogist 56 (1971) 758-767; Crystal structures of aragonite, strontianite, and witherite. Peaks parsed from RRUFF powder DIF file Aragonite__R060195-1__Powder__DIF_File__89c5a89ee0ef375b9aae2a4aab58.txt.",
+          "reference_url_or_doi": "https://rruff.info/R060195-1"
+        },
+        {
+          "peak_id": "aragonite_38p66_07",
+          "hkl": "0 2 2",
+          "two_theta_deg": 38.66,
+          "q_a_inv": 2.697803,
+          "d_a": 2.329,
+          "relative_intensity": 0.2007,
+          "reference_citation": "RRUFF Aragonite sample R060195-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R060195; de Villiers J P R; American Mineralogist 56 (1971) 758-767; Crystal structures of aragonite, strontianite, and witherite. Peaks parsed from RRUFF powder DIF file Aragonite__R060195-1__Powder__DIF_File__89c5a89ee0ef375b9aae2a4aab58.txt.",
+          "reference_url_or_doi": "https://rruff.info/R060195-1"
+        },
+        {
+          "peak_id": "aragonite_42p95_08",
+          "hkl": "2 2 0",
+          "two_theta_deg": 42.95,
+          "q_a_inv": 2.983769,
+          "d_a": 2.105788,
+          "relative_intensity": 0.2142,
+          "reference_citation": "RRUFF Aragonite sample R060195-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R060195; de Villiers J P R; American Mineralogist 56 (1971) 758-767; Crystal structures of aragonite, strontianite, and witherite. Peaks parsed from RRUFF powder DIF file Aragonite__R060195-1__Powder__DIF_File__89c5a89ee0ef375b9aae2a4aab58.txt.",
+          "reference_url_or_doi": "https://rruff.info/R060195-1"
+        },
+        {
+          "peak_id": "aragonite_45p9_09",
+          "hkl": "2 2 1",
+          "two_theta_deg": 45.9,
+          "q_a_inv": 3.17801,
+          "d_a": 1.977082,
+          "relative_intensity": 0.7306,
+          "reference_citation": "RRUFF Aragonite sample R060195-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R060195; de Villiers J P R; American Mineralogist 56 (1971) 758-767; Crystal structures of aragonite, strontianite, and witherite. Peaks parsed from RRUFF powder DIF file Aragonite__R060195-1__Powder__DIF_File__89c5a89ee0ef375b9aae2a4aab58.txt.",
+          "reference_url_or_doi": "https://rruff.info/R060195-1"
+        },
+        {
+          "peak_id": "aragonite_48p35_10",
+          "hkl": "0 4 1",
+          "two_theta_deg": 48.35,
+          "q_a_inv": 3.337733,
+          "d_a": 1.882471,
+          "relative_intensity": 0.3178,
+          "reference_citation": "RRUFF Aragonite sample R060195-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R060195; de Villiers J P R; American Mineralogist 56 (1971) 758-767; Crystal structures of aragonite, strontianite, and witherite. Peaks parsed from RRUFF powder DIF file Aragonite__R060195-1__Powder__DIF_File__89c5a89ee0ef375b9aae2a4aab58.txt.",
+          "reference_url_or_doi": "https://rruff.info/R060195-1"
+        },
+        {
+          "peak_id": "aragonite_50p28_11",
+          "hkl": "1 3 2",
+          "two_theta_deg": 50.28,
+          "q_a_inv": 3.462485,
+          "d_a": 1.814646,
+          "relative_intensity": 0.2994,
+          "reference_citation": "RRUFF Aragonite sample R060195-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R060195; de Villiers J P R; American Mineralogist 56 (1971) 758-767; Crystal structures of aragonite, strontianite, and witherite. Peaks parsed from RRUFF powder DIF file Aragonite__R060195-1__Powder__DIF_File__89c5a89ee0ef375b9aae2a4aab58.txt.",
+          "reference_url_or_doi": "https://rruff.info/R060195-1"
+        },
+        {
+          "peak_id": "aragonite_52p51_12",
+          "hkl": "1 1 3",
+          "two_theta_deg": 52.51,
+          "q_a_inv": 3.605403,
+          "d_a": 1.742714,
+          "relative_intensity": 0.3163,
+          "reference_citation": "RRUFF Aragonite sample R060195-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R060195; de Villiers J P R; American Mineralogist 56 (1971) 758-767; Crystal structures of aragonite, strontianite, and witherite. Peaks parsed from RRUFF powder DIF file Aragonite__R060195-1__Powder__DIF_File__89c5a89ee0ef375b9aae2a4aab58.txt.",
+          "reference_url_or_doi": "https://rruff.info/R060195-1"
+        }
+      ]
+    },
+    {
+      "material": "Magnesite",
+      "phase_name": "magnesite",
+      "chemical_formula": "MgCO3",
+      "structure_note": "magnesium carbonate reference phase included for carbonate scalability",
+      "reference_citation": "RRUFF Magnesite sample R050443-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050443; Graf D L; American Mineralogist 46 (1961) 1283-1316; Crystallographic tables for the rhombohedral carbonates.",
+      "reference_url_or_doi": "https://rruff.info/R050443-1",
+      "source_archive_member": "Magnesite__R050443-1__Powder__DIF_File__52fdaf41a7ab656d37efdaaeac36.txt",
+      "source_sample_id": "R050443-1",
+      "raw_peak_count": 21,
+      "selected_peak_count": 12,
+      "peaks": [
+        {
+          "peak_id": "magnesite_32p67_01",
+          "hkl": "1 0 4",
+          "two_theta_deg": 32.67,
+          "q_a_inv": 2.292283,
+          "d_a": 2.741016,
+          "relative_intensity": 1.0,
+          "reference_citation": "RRUFF Magnesite sample R050443-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050443; Graf D L; American Mineralogist 46 (1961) 1283-1316; Crystallographic tables for the rhombohedral carbonates. Peaks parsed from RRUFF powder DIF file Magnesite__R050443-1__Powder__DIF_File__52fdaf41a7ab656d37efdaaeac36.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050443-1"
+        },
+        {
+          "peak_id": "magnesite_35p88_02",
+          "hkl": "0 0 6",
+          "two_theta_deg": 35.88,
+          "q_a_inv": 2.510448,
+          "d_a": 2.502814,
+          "relative_intensity": 0.1307,
+          "reference_citation": "RRUFF Magnesite sample R050443-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050443; Graf D L; American Mineralogist 46 (1961) 1283-1316; Crystallographic tables for the rhombohedral carbonates. Peaks parsed from RRUFF powder DIF file Magnesite__R050443-1__Powder__DIF_File__52fdaf41a7ab656d37efdaaeac36.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050443-1"
+        },
+        {
+          "peak_id": "magnesite_38p87_03",
+          "hkl": "1 1 0",
+          "two_theta_deg": 38.87,
+          "q_a_inv": 2.711893,
+          "d_a": 2.3169,
+          "relative_intensity": 0.063,
+          "reference_citation": "RRUFF Magnesite sample R050443-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050443; Graf D L; American Mineralogist 46 (1961) 1283-1316; Crystallographic tables for the rhombohedral carbonates. Peaks parsed from RRUFF powder DIF file Magnesite__R050443-1__Powder__DIF_File__52fdaf41a7ab656d37efdaaeac36.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050443-1"
+        },
+        {
+          "peak_id": "magnesite_43p01_04",
+          "hkl": "1 1 3",
+          "two_theta_deg": 43.01,
+          "q_a_inv": 2.98774,
+          "d_a": 2.10299,
+          "relative_intensity": 0.4905,
+          "reference_citation": "RRUFF Magnesite sample R050443-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050443; Graf D L; American Mineralogist 46 (1961) 1283-1316; Crystallographic tables for the rhombohedral carbonates. Peaks parsed from RRUFF powder DIF file Magnesite__R050443-1__Powder__DIF_File__52fdaf41a7ab656d37efdaaeac36.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050443-1"
+        },
+        {
+          "peak_id": "magnesite_46p86_05",
+          "hkl": "2 0 2",
+          "two_theta_deg": 46.86,
+          "q_a_inv": 3.240772,
+          "d_a": 1.938793,
+          "relative_intensity": 0.1262,
+          "reference_citation": "RRUFF Magnesite sample R050443-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050443; Graf D L; American Mineralogist 46 (1961) 1283-1316; Crystallographic tables for the rhombohedral carbonates. Peaks parsed from RRUFF powder DIF file Magnesite__R050443-1__Powder__DIF_File__52fdaf41a7ab656d37efdaaeac36.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050443-1"
+        },
+        {
+          "peak_id": "magnesite_51p64_06",
+          "hkl": "0 2 4",
+          "two_theta_deg": 51.64,
+          "q_a_inv": 3.549805,
+          "d_a": 1.770009,
+          "relative_intensity": 0.0533,
+          "reference_citation": "RRUFF Magnesite sample R050443-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050443; Graf D L; American Mineralogist 46 (1961) 1283-1316; Crystallographic tables for the rhombohedral carbonates. Peaks parsed from RRUFF powder DIF file Magnesite__R050443-1__Powder__DIF_File__52fdaf41a7ab656d37efdaaeac36.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050443-1"
+        },
+        {
+          "peak_id": "magnesite_53p91_07",
+          "hkl": "0 1 8;1 1 6",
+          "two_theta_deg": 53.91,
+          "q_a_inv": 3.694433,
+          "d_a": 1.700717,
+          "relative_intensity": 0.399,
+          "reference_citation": "RRUFF Magnesite sample R050443-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050443; Graf D L; American Mineralogist 46 (1961) 1283-1316; Crystallographic tables for the rhombohedral carbonates. Peaks parsed from RRUFF powder DIF file Magnesite__R050443-1__Powder__DIF_File__52fdaf41a7ab656d37efdaaeac36.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050443-1"
+        },
+        {
+          "peak_id": "magnesite_61p41_08",
+          "hkl": "2 1 1",
+          "two_theta_deg": 61.41,
+          "q_a_inv": 4.161666,
+          "d_a": 1.509777,
+          "relative_intensity": 0.0462,
+          "reference_citation": "RRUFF Magnesite sample R050443-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050443; Graf D L; American Mineralogist 46 (1961) 1283-1316; Crystallographic tables for the rhombohedral carbonates. Peaks parsed from RRUFF powder DIF file Magnesite__R050443-1__Powder__DIF_File__52fdaf41a7ab656d37efdaaeac36.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050443-1"
+        },
+        {
+          "peak_id": "magnesite_62p44_09",
+          "hkl": "1 2 2",
+          "two_theta_deg": 62.44,
+          "q_a_inv": 4.224485,
+          "d_a": 1.487326,
+          "relative_intensity": 0.0685,
+          "reference_citation": "RRUFF Magnesite sample R050443-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050443; Graf D L; American Mineralogist 46 (1961) 1283-1316; Crystallographic tables for the rhombohedral carbonates. Peaks parsed from RRUFF powder DIF file Magnesite__R050443-1__Powder__DIF_File__52fdaf41a7ab656d37efdaaeac36.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050443-1"
+        },
+        {
+          "peak_id": "magnesite_66p45_10",
+          "hkl": "2 1 4",
+          "two_theta_deg": 66.45,
+          "q_a_inv": 4.465754,
+          "d_a": 1.406971,
+          "relative_intensity": 0.0614,
+          "reference_citation": "RRUFF Magnesite sample R050443-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050443; Graf D L; American Mineralogist 46 (1961) 1283-1316; Crystallographic tables for the rhombohedral carbonates. Peaks parsed from RRUFF powder DIF file Magnesite__R050443-1__Powder__DIF_File__52fdaf41a7ab656d37efdaaeac36.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050443-1"
+        },
+        {
+          "peak_id": "magnesite_69p38_11",
+          "hkl": "1 1 9;1 2 5",
+          "two_theta_deg": 69.38,
+          "q_a_inv": 4.638603,
+          "d_a": 1.354543,
+          "relative_intensity": 0.0889,
+          "reference_citation": "RRUFF Magnesite sample R050443-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050443; Graf D L; American Mineralogist 46 (1961) 1283-1316; Crystallographic tables for the rhombohedral carbonates. Peaks parsed from RRUFF powder DIF file Magnesite__R050443-1__Powder__DIF_File__52fdaf41a7ab656d37efdaaeac36.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050443-1"
+        },
+        {
+          "peak_id": "magnesite_70p34_12",
+          "hkl": "3 0 0",
+          "two_theta_deg": 70.34,
+          "q_a_inv": 4.694582,
+          "d_a": 1.338391,
+          "relative_intensity": 0.124,
+          "reference_citation": "RRUFF Magnesite sample R050443-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050443; Graf D L; American Mineralogist 46 (1961) 1283-1316; Crystallographic tables for the rhombohedral carbonates. Peaks parsed from RRUFF powder DIF file Magnesite__R050443-1__Powder__DIF_File__52fdaf41a7ab656d37efdaaeac36.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050443-1"
+        }
+      ]
+    },
+    {
+      "material": "Siderite",
+      "phase_name": "siderite",
+      "chemical_formula": "FeCO3",
+      "structure_note": "iron carbonate reference phase included for carbonate/iron-bearing hard negatives",
+      "reference_citation": "RRUFF Siderite sample R050262-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050262; Graf D L; American Mineralogist 46 (1961) 1283-1316; Crystallographic tables for the rhombohedral carbonates.",
+      "reference_url_or_doi": "https://rruff.info/R050262-1",
+      "source_archive_member": "Siderite__R050262-1__Powder__DIF_File__91da1ce9bd939ace8fe515aa1a59.txt",
+      "source_sample_id": "R050262-1",
+      "raw_peak_count": 21,
+      "selected_peak_count": 12,
+      "peaks": [
+        {
+          "peak_id": "siderite_24p89_01",
+          "hkl": "0 1 2",
+          "two_theta_deg": 24.89,
+          "q_a_inv": 1.756399,
+          "d_a": 3.577312,
+          "relative_intensity": 0.3639,
+          "reference_citation": "RRUFF Siderite sample R050262-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050262; Graf D L; American Mineralogist 46 (1961) 1283-1316; Crystallographic tables for the rhombohedral carbonates. Peaks parsed from RRUFF powder DIF file Siderite__R050262-1__Powder__DIF_File__91da1ce9bd939ace8fe515aa1a59.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050262-1"
+        },
+        {
+          "peak_id": "siderite_32p2_02",
+          "hkl": "1 0 4",
+          "two_theta_deg": 32.2,
+          "q_a_inv": 2.260185,
+          "d_a": 2.779943,
+          "relative_intensity": 1.0,
+          "reference_citation": "RRUFF Siderite sample R050262-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050262; Graf D L; American Mineralogist 46 (1961) 1283-1316; Crystallographic tables for the rhombohedral carbonates. Peaks parsed from RRUFF powder DIF file Siderite__R050262-1__Powder__DIF_File__91da1ce9bd939ace8fe515aa1a59.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050262-1"
+        },
+        {
+          "peak_id": "siderite_38p5_03",
+          "hkl": "1 1 0",
+          "two_theta_deg": 38.5,
+          "q_a_inv": 2.687062,
+          "d_a": 2.33831,
+          "relative_intensity": 0.213,
+          "reference_citation": "RRUFF Siderite sample R050262-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050262; Graf D L; American Mineralogist 46 (1961) 1283-1316; Crystallographic tables for the rhombohedral carbonates. Peaks parsed from RRUFF powder DIF file Siderite__R050262-1__Powder__DIF_File__91da1ce9bd939ace8fe515aa1a59.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050262-1"
+        },
+        {
+          "peak_id": "siderite_42p53_04",
+          "hkl": "1 1 3",
+          "two_theta_deg": 42.53,
+          "q_a_inv": 2.95595,
+          "d_a": 2.125606,
+          "relative_intensity": 0.1617,
+          "reference_citation": "RRUFF Siderite sample R050262-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050262; Graf D L; American Mineralogist 46 (1961) 1283-1316; Crystallographic tables for the rhombohedral carbonates. Peaks parsed from RRUFF powder DIF file Siderite__R050262-1__Powder__DIF_File__91da1ce9bd939ace8fe515aa1a59.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050262-1"
+        },
+        {
+          "peak_id": "siderite_46p38_05",
+          "hkl": "2 0 2",
+          "two_theta_deg": 46.38,
+          "q_a_inv": 3.209419,
+          "d_a": 1.957733,
+          "relative_intensity": 0.1936,
+          "reference_citation": "RRUFF Siderite sample R050262-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050262; Graf D L; American Mineralogist 46 (1961) 1283-1316; Crystallographic tables for the rhombohedral carbonates. Peaks parsed from RRUFF powder DIF file Siderite__R050262-1__Powder__DIF_File__91da1ce9bd939ace8fe515aa1a59.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050262-1"
+        },
+        {
+          "peak_id": "siderite_51p02_06",
+          "hkl": "0 2 4",
+          "two_theta_deg": 51.02,
+          "q_a_inv": 3.510058,
+          "d_a": 1.790051,
+          "relative_intensity": 0.1077,
+          "reference_citation": "RRUFF Siderite sample R050262-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050262; Graf D L; American Mineralogist 46 (1961) 1283-1316; Crystallographic tables for the rhombohedral carbonates. Peaks parsed from RRUFF powder DIF file Siderite__R050262-1__Powder__DIF_File__91da1ce9bd939ace8fe515aa1a59.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050262-1"
+        },
+        {
+          "peak_id": "siderite_52p94_07",
+          "hkl": "0 1 8",
+          "two_theta_deg": 52.94,
+          "q_a_inv": 3.632806,
+          "d_a": 1.729568,
+          "relative_intensity": 0.1912,
+          "reference_citation": "RRUFF Siderite sample R050262-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050262; Graf D L; American Mineralogist 46 (1961) 1283-1316; Crystallographic tables for the rhombohedral carbonates. Peaks parsed from RRUFF powder DIF file Siderite__R050262-1__Powder__DIF_File__91da1ce9bd939ace8fe515aa1a59.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050262-1"
+        },
+        {
+          "peak_id": "siderite_53p13_08",
+          "hkl": "1 1 6",
+          "two_theta_deg": 53.13,
+          "q_a_inv": 3.644898,
+          "d_a": 1.72383,
+          "relative_intensity": 0.2825,
+          "reference_citation": "RRUFF Siderite sample R050262-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050262; Graf D L; American Mineralogist 46 (1961) 1283-1316; Crystallographic tables for the rhombohedral carbonates. Peaks parsed from RRUFF powder DIF file Siderite__R050262-1__Powder__DIF_File__91da1ce9bd939ace8fe515aa1a59.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050262-1"
+        },
+        {
+          "peak_id": "siderite_61p78_09",
+          "hkl": "1 2 2",
+          "two_theta_deg": 61.78,
+          "q_a_inv": 4.184271,
+          "d_a": 1.50162,
+          "relative_intensity": 0.1244,
+          "reference_citation": "RRUFF Siderite sample R050262-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050262; Graf D L; American Mineralogist 46 (1961) 1283-1316; Crystallographic tables for the rhombohedral carbonates. Peaks parsed from RRUFF powder DIF file Siderite__R050262-1__Powder__DIF_File__91da1ce9bd939ace8fe515aa1a59.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050262-1"
+        },
+        {
+          "peak_id": "siderite_65p67_10",
+          "hkl": "2 1 4",
+          "two_theta_deg": 65.67,
+          "q_a_inv": 4.419243,
+          "d_a": 1.421779,
+          "relative_intensity": 0.1004,
+          "reference_citation": "RRUFF Siderite sample R050262-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050262; Graf D L; American Mineralogist 46 (1961) 1283-1316; Crystallographic tables for the rhombohedral carbonates. Peaks parsed from RRUFF powder DIF file Siderite__R050262-1__Powder__DIF_File__91da1ce9bd939ace8fe515aa1a59.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050262-1"
+        },
+        {
+          "peak_id": "siderite_69p61_11",
+          "hkl": "3 0 0",
+          "two_theta_deg": 69.61,
+          "q_a_inv": 4.652044,
+          "d_a": 1.350629,
+          "relative_intensity": 0.0974,
+          "reference_citation": "RRUFF Siderite sample R050262-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050262; Graf D L; American Mineralogist 46 (1961) 1283-1316; Crystallographic tables for the rhombohedral carbonates. Peaks parsed from RRUFF powder DIF file Siderite__R050262-1__Powder__DIF_File__91da1ce9bd939ace8fe515aa1a59.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050262-1"
+        },
+        {
+          "peak_id": "siderite_87p0_12",
+          "hkl": "1 1 12",
+          "two_theta_deg": 87.0,
+          "q_a_inv": 5.610264,
+          "d_a": 1.119945,
+          "relative_intensity": 0.0634,
+          "reference_citation": "RRUFF Siderite sample R050262-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050262; Graf D L; American Mineralogist 46 (1961) 1283-1316; Crystallographic tables for the rhombohedral carbonates. Peaks parsed from RRUFF powder DIF file Siderite__R050262-1__Powder__DIF_File__91da1ce9bd939ace8fe515aa1a59.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050262-1"
+        }
+      ]
+    },
+    {
+      "material": "Goethite",
+      "phase_name": "goethite",
+      "chemical_formula": "FeO(OH)",
+      "structure_note": "iron oxyhydroxide reference phase included as an iron-oxide family hard-negative",
+      "reference_citation": "RRUFF Goethite sample R120086-9 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from single crystal data of R120086; Alvarez M, Sileo E E, Rueda E H; American Mineralogist 93 (2008) 584-590; Structure and reactivity of synthetic Co-substituted goethites; Locality: synthetic; Sample: G3, 3 mol% Co; _database_code_amcsd 0004539.",
+      "reference_url_or_doi": "https://rruff.info/R120086-9",
+      "source_archive_member": "Goethite__R120086-9__Powder__DIF_File__932b3b97d79977fc21bc2d217124.txt",
+      "source_sample_id": "R120086-9",
+      "raw_peak_count": 47,
+      "selected_peak_count": 12,
+      "peaks": [
+        {
+          "peak_id": "goethite_17p81_01",
+          "hkl": "0 2 0",
+          "two_theta_deg": 17.81,
+          "q_a_inv": 1.261632,
+          "d_a": 4.980206,
+          "relative_intensity": 0.1181,
+          "reference_citation": "RRUFF Goethite sample R120086-9 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from single crystal data of R120086; Alvarez M, Sileo E E, Rueda E H; American Mineralogist 93 (2008) 584-590; Structure and reactivity of synthetic Co-substituted goethites; Locality: synthetic; Sample: G3, 3 mol% Co; _database_code_amcsd 0004539. Peaks parsed from RRUFF powder DIF file Goethite__R120086-9__Powder__DIF_File__932b3b97d79977fc21bc2d217124.txt.",
+          "reference_url_or_doi": "https://rruff.info/R120086-9"
+        },
+        {
+          "peak_id": "goethite_21p27_02",
+          "hkl": "1 1 0",
+          "two_theta_deg": 21.27,
+          "q_a_inv": 1.504144,
+          "d_a": 4.177251,
+          "relative_intensity": 1.0,
+          "reference_citation": "RRUFF Goethite sample R120086-9 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from single crystal data of R120086; Alvarez M, Sileo E E, Rueda E H; American Mineralogist 93 (2008) 584-590; Structure and reactivity of synthetic Co-substituted goethites; Locality: synthetic; Sample: G3, 3 mol% Co; _database_code_amcsd 0004539. Peaks parsed from RRUFF powder DIF file Goethite__R120086-9__Powder__DIF_File__932b3b97d79977fc21bc2d217124.txt.",
+          "reference_url_or_doi": "https://rruff.info/R120086-9"
+        },
+        {
+          "peak_id": "goethite_26p37_03",
+          "hkl": "1 2 0",
+          "two_theta_deg": 26.37,
+          "q_a_inv": 1.85904,
+          "d_a": 3.379801,
+          "relative_intensity": 0.109,
+          "reference_citation": "RRUFF Goethite sample R120086-9 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from single crystal data of R120086; Alvarez M, Sileo E E, Rueda E H; American Mineralogist 93 (2008) 584-590; Structure and reactivity of synthetic Co-substituted goethites; Locality: synthetic; Sample: G3, 3 mol% Co; _database_code_amcsd 0004539. Peaks parsed from RRUFF powder DIF file Goethite__R120086-9__Powder__DIF_File__932b3b97d79977fc21bc2d217124.txt.",
+          "reference_url_or_doi": "https://rruff.info/R120086-9"
+        },
+        {
+          "peak_id": "goethite_33p28_04",
+          "hkl": "1 3 0",
+          "two_theta_deg": 33.28,
+          "q_a_inv": 2.333885,
+          "d_a": 2.692157,
+          "relative_intensity": 0.4069,
+          "reference_citation": "RRUFF Goethite sample R120086-9 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from single crystal data of R120086; Alvarez M, Sileo E E, Rueda E H; American Mineralogist 93 (2008) 584-590; Structure and reactivity of synthetic Co-substituted goethites; Locality: synthetic; Sample: G3, 3 mol% Co; _database_code_amcsd 0004539. Peaks parsed from RRUFF powder DIF file Goethite__R120086-9__Powder__DIF_File__932b3b97d79977fc21bc2d217124.txt.",
+          "reference_url_or_doi": "https://rruff.info/R120086-9"
+        },
+        {
+          "peak_id": "goethite_34p72_05",
+          "hkl": "0 2 1",
+          "two_theta_deg": 34.72,
+          "q_a_inv": 2.431828,
+          "d_a": 2.583729,
+          "relative_intensity": 0.2319,
+          "reference_citation": "RRUFF Goethite sample R120086-9 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from single crystal data of R120086; Alvarez M, Sileo E E, Rueda E H; American Mineralogist 93 (2008) 584-590; Structure and reactivity of synthetic Co-substituted goethites; Locality: synthetic; Sample: G3, 3 mol% Co; _database_code_amcsd 0004539. Peaks parsed from RRUFF powder DIF file Goethite__R120086-9__Powder__DIF_File__932b3b97d79977fc21bc2d217124.txt.",
+          "reference_url_or_doi": "https://rruff.info/R120086-9"
+        },
+        {
+          "peak_id": "goethite_36p07_06",
+          "hkl": "0 4 0",
+          "two_theta_deg": 36.07,
+          "q_a_inv": 2.523301,
+          "d_a": 2.490065,
+          "relative_intensity": 0.1444,
+          "reference_citation": "RRUFF Goethite sample R120086-9 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from single crystal data of R120086; Alvarez M, Sileo E E, Rueda E H; American Mineralogist 93 (2008) 584-590; Structure and reactivity of synthetic Co-substituted goethites; Locality: synthetic; Sample: G3, 3 mol% Co; _database_code_amcsd 0004539. Peaks parsed from RRUFF powder DIF file Goethite__R120086-9__Powder__DIF_File__932b3b97d79977fc21bc2d217124.txt.",
+          "reference_url_or_doi": "https://rruff.info/R120086-9"
+        },
+        {
+          "peak_id": "goethite_36p71_07",
+          "hkl": "1 1 1",
+          "two_theta_deg": 36.71,
+          "q_a_inv": 2.566545,
+          "d_a": 2.44811,
+          "relative_intensity": 0.6265,
+          "reference_citation": "RRUFF Goethite sample R120086-9 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from single crystal data of R120086; Alvarez M, Sileo E E, Rueda E H; American Mineralogist 93 (2008) 584-590; Structure and reactivity of synthetic Co-substituted goethites; Locality: synthetic; Sample: G3, 3 mol% Co; _database_code_amcsd 0004539. Peaks parsed from RRUFF powder DIF file Goethite__R120086-9__Powder__DIF_File__932b3b97d79977fc21bc2d217124.txt.",
+          "reference_url_or_doi": "https://rruff.info/R120086-9"
+        },
+        {
+          "peak_id": "goethite_41p22_08",
+          "hkl": "1 4 0",
+          "two_theta_deg": 41.22,
+          "q_a_inv": 2.86893,
+          "d_a": 2.19008,
+          "relative_intensity": 0.145,
+          "reference_citation": "RRUFF Goethite sample R120086-9 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from single crystal data of R120086; Alvarez M, Sileo E E, Rueda E H; American Mineralogist 93 (2008) 584-590; Structure and reactivity of synthetic Co-substituted goethites; Locality: synthetic; Sample: G3, 3 mol% Co; _database_code_amcsd 0004539. Peaks parsed from RRUFF powder DIF file Goethite__R120086-9__Powder__DIF_File__932b3b97d79977fc21bc2d217124.txt.",
+          "reference_url_or_doi": "https://rruff.info/R120086-9"
+        },
+        {
+          "peak_id": "goethite_50p71_09",
+          "hkl": "2 1 1",
+          "two_theta_deg": 50.71,
+          "q_a_inv": 3.490147,
+          "d_a": 1.800264,
+          "relative_intensity": 0.1043,
+          "reference_citation": "RRUFF Goethite sample R120086-9 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from single crystal data of R120086; Alvarez M, Sileo E E, Rueda E H; American Mineralogist 93 (2008) 584-590; Structure and reactivity of synthetic Co-substituted goethites; Locality: synthetic; Sample: G3, 3 mol% Co; _database_code_amcsd 0004539. Peaks parsed from RRUFF powder DIF file Goethite__R120086-9__Powder__DIF_File__932b3b97d79977fc21bc2d217124.txt.",
+          "reference_url_or_doi": "https://rruff.info/R120086-9"
+        },
+        {
+          "peak_id": "goethite_53p32_10",
+          "hkl": "2 2 1",
+          "two_theta_deg": 53.32,
+          "q_a_inv": 3.65698,
+          "d_a": 1.718135,
+          "relative_intensity": 0.3288,
+          "reference_citation": "RRUFF Goethite sample R120086-9 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from single crystal data of R120086; Alvarez M, Sileo E E, Rueda E H; American Mineralogist 93 (2008) 584-590; Structure and reactivity of synthetic Co-substituted goethites; Locality: synthetic; Sample: G3, 3 mol% Co; _database_code_amcsd 0004539. Peaks parsed from RRUFF powder DIF file Goethite__R120086-9__Powder__DIF_File__932b3b97d79977fc21bc2d217124.txt.",
+          "reference_url_or_doi": "https://rruff.info/R120086-9"
+        },
+        {
+          "peak_id": "goethite_59p06_11",
+          "hkl": "1 5 1",
+          "two_theta_deg": 59.06,
+          "q_a_inv": 4.017091,
+          "d_a": 1.564113,
+          "relative_intensity": 0.2278,
+          "reference_citation": "RRUFF Goethite sample R120086-9 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from single crystal data of R120086; Alvarez M, Sileo E E, Rueda E H; American Mineralogist 93 (2008) 584-590; Structure and reactivity of synthetic Co-substituted goethites; Locality: synthetic; Sample: G3, 3 mol% Co; _database_code_amcsd 0004539. Peaks parsed from RRUFF powder DIF file Goethite__R120086-9__Powder__DIF_File__932b3b97d79977fc21bc2d217124.txt.",
+          "reference_url_or_doi": "https://rruff.info/R120086-9"
+        },
+        {
+          "peak_id": "goethite_63p99_12",
+          "hkl": "0 6 1",
+          "two_theta_deg": 63.99,
+          "q_a_inv": 4.318373,
+          "d_a": 1.454989,
+          "relative_intensity": 0.0974,
+          "reference_citation": "RRUFF Goethite sample R120086-9 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from single crystal data of R120086; Alvarez M, Sileo E E, Rueda E H; American Mineralogist 93 (2008) 584-590; Structure and reactivity of synthetic Co-substituted goethites; Locality: synthetic; Sample: G3, 3 mol% Co; _database_code_amcsd 0004539. Peaks parsed from RRUFF powder DIF file Goethite__R120086-9__Powder__DIF_File__932b3b97d79977fc21bc2d217124.txt.",
+          "reference_url_or_doi": "https://rruff.info/R120086-9"
+        }
+      ]
+    },
+    {
+      "material": "Ilmenite",
+      "phase_name": "ilmenite",
+      "chemical_formula": "FeTiO3",
+      "structure_note": "iron titanium oxide reference phase included as an oxide hard-negative",
+      "reference_citation": "RRUFF Ilmenite sample R060149-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R060149; Wechsler B A, Prewitt C T; American Mineralogist 69 (1984) 176-185; Crystal structure of ilmenite (FeTiO3) at high temperature and high pressure; 24 deg C.",
+      "reference_url_or_doi": "https://rruff.info/R060149-1",
+      "source_archive_member": "Ilmenite__R060149-1__Powder__DIF_File__6ca5de5c38d85bdf7b50821f4622.txt",
+      "source_sample_id": "R060149-1",
+      "raw_peak_count": 32,
+      "selected_peak_count": 12,
+      "peaks": [
+        {
+          "peak_id": "ilmenite_23p85_01",
+          "hkl": "0 1 2",
+          "two_theta_deg": 23.85,
+          "q_a_inv": 1.684096,
+          "d_a": 3.730895,
+          "relative_intensity": 0.321,
+          "reference_citation": "RRUFF Ilmenite sample R060149-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R060149; Wechsler B A, Prewitt C T; American Mineralogist 69 (1984) 176-185; Crystal structure of ilmenite (FeTiO3) at high temperature and high pressure; 24 deg C. Peaks parsed from RRUFF powder DIF file Ilmenite__R060149-1__Powder__DIF_File__6ca5de5c38d85bdf7b50821f4622.txt.",
+          "reference_url_or_doi": "https://rruff.info/R060149-1"
+        },
+        {
+          "peak_id": "ilmenite_32p58_02",
+          "hkl": "1 0 4",
+          "two_theta_deg": 32.58,
+          "q_a_inv": 2.286139,
+          "d_a": 2.748382,
+          "relative_intensity": 1.0,
+          "reference_citation": "RRUFF Ilmenite sample R060149-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R060149; Wechsler B A, Prewitt C T; American Mineralogist 69 (1984) 176-185; Crystal structure of ilmenite (FeTiO3) at high temperature and high pressure; 24 deg C. Peaks parsed from RRUFF powder DIF file Ilmenite__R060149-1__Powder__DIF_File__6ca5de5c38d85bdf7b50821f4622.txt.",
+          "reference_url_or_doi": "https://rruff.info/R060149-1"
+        },
+        {
+          "peak_id": "ilmenite_35p29_03",
+          "hkl": "1 1 0",
+          "two_theta_deg": 35.29,
+          "q_a_inv": 2.470492,
+          "d_a": 2.543293,
+          "relative_intensity": 0.6973,
+          "reference_citation": "RRUFF Ilmenite sample R060149-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R060149; Wechsler B A, Prewitt C T; American Mineralogist 69 (1984) 176-185; Crystal structure of ilmenite (FeTiO3) at high temperature and high pressure; 24 deg C. Peaks parsed from RRUFF powder DIF file Ilmenite__R060149-1__Powder__DIF_File__6ca5de5c38d85bdf7b50821f4622.txt.",
+          "reference_url_or_doi": "https://rruff.info/R060149-1"
+        },
+        {
+          "peak_id": "ilmenite_40p33_04",
+          "hkl": "2 -1 3;1 1 3",
+          "two_theta_deg": 40.33,
+          "q_a_inv": 2.809595,
+          "d_a": 2.236331,
+          "relative_intensity": 0.2343,
+          "reference_citation": "RRUFF Ilmenite sample R060149-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R060149; Wechsler B A, Prewitt C T; American Mineralogist 69 (1984) 176-185; Crystal structure of ilmenite (FeTiO3) at high temperature and high pressure; 24 deg C. Peaks parsed from RRUFF powder DIF file Ilmenite__R060149-1__Powder__DIF_File__6ca5de5c38d85bdf7b50821f4622.txt.",
+          "reference_url_or_doi": "https://rruff.info/R060149-1"
+        },
+        {
+          "peak_id": "ilmenite_48p75_05",
+          "hkl": "0 2 4",
+          "two_theta_deg": 48.75,
+          "q_a_inv": 3.363667,
+          "d_a": 1.867957,
+          "relative_intensity": 0.3691,
+          "reference_citation": "RRUFF Ilmenite sample R060149-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R060149; Wechsler B A, Prewitt C T; American Mineralogist 69 (1984) 176-185; Crystal structure of ilmenite (FeTiO3) at high temperature and high pressure; 24 deg C. Peaks parsed from RRUFF powder DIF file Ilmenite__R060149-1__Powder__DIF_File__6ca5de5c38d85bdf7b50821f4622.txt.",
+          "reference_url_or_doi": "https://rruff.info/R060149-1"
+        },
+        {
+          "peak_id": "ilmenite_53p08_06",
+          "hkl": "2 -1 6;1 1 6",
+          "two_theta_deg": 53.08,
+          "q_a_inv": 3.641717,
+          "d_a": 1.725336,
+          "relative_intensity": 0.4967,
+          "reference_citation": "RRUFF Ilmenite sample R060149-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R060149; Wechsler B A, Prewitt C T; American Mineralogist 69 (1984) 176-185; Crystal structure of ilmenite (FeTiO3) at high temperature and high pressure; 24 deg C. Peaks parsed from RRUFF powder DIF file Ilmenite__R060149-1__Powder__DIF_File__6ca5de5c38d85bdf7b50821f4622.txt.",
+          "reference_url_or_doi": "https://rruff.info/R060149-1"
+        },
+        {
+          "peak_id": "ilmenite_56p27_07",
+          "hkl": "0 1 8",
+          "two_theta_deg": 56.27,
+          "q_a_inv": 3.843257,
+          "d_a": 1.634859,
+          "relative_intensity": 0.0809,
+          "reference_citation": "RRUFF Ilmenite sample R060149-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R060149; Wechsler B A, Prewitt C T; American Mineralogist 69 (1984) 176-185; Crystal structure of ilmenite (FeTiO3) at high temperature and high pressure; 24 deg C. Peaks parsed from RRUFF powder DIF file Ilmenite__R060149-1__Powder__DIF_File__6ca5de5c38d85bdf7b50821f4622.txt.",
+          "reference_url_or_doi": "https://rruff.info/R060149-1"
+        },
+        {
+          "peak_id": "ilmenite_61p57_08",
+          "hkl": "2 1 4;3 -1 4",
+          "two_theta_deg": 61.57,
+          "q_a_inv": 4.171446,
+          "d_a": 1.506237,
+          "relative_intensity": 0.2978,
+          "reference_citation": "RRUFF Ilmenite sample R060149-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R060149; Wechsler B A, Prewitt C T; American Mineralogist 69 (1984) 176-185; Crystal structure of ilmenite (FeTiO3) at high temperature and high pressure; 24 deg C. Peaks parsed from RRUFF powder DIF file Ilmenite__R060149-1__Powder__DIF_File__6ca5de5c38d85bdf7b50821f4622.txt.",
+          "reference_url_or_doi": "https://rruff.info/R060149-1"
+        },
+        {
+          "peak_id": "ilmenite_63p28_09",
+          "hkl": "3 0 0",
+          "two_theta_deg": 63.28,
+          "q_a_inv": 4.275463,
+          "d_a": 1.469592,
+          "relative_intensity": 0.2977,
+          "reference_citation": "RRUFF Ilmenite sample R060149-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R060149; Wechsler B A, Prewitt C T; American Mineralogist 69 (1984) 176-185; Crystal structure of ilmenite (FeTiO3) at high temperature and high pressure; 24 deg C. Peaks parsed from RRUFF powder DIF file Ilmenite__R060149-1__Powder__DIF_File__6ca5de5c38d85bdf7b50821f4622.txt.",
+          "reference_url_or_doi": "https://rruff.info/R060149-1"
+        },
+        {
+          "peak_id": "ilmenite_70p12_10",
+          "hkl": "1 0 10",
+          "two_theta_deg": 70.12,
+          "q_a_inv": 4.681782,
+          "d_a": 1.34205,
+          "relative_intensity": 0.1126,
+          "reference_citation": "RRUFF Ilmenite sample R060149-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R060149; Wechsler B A, Prewitt C T; American Mineralogist 69 (1984) 176-185; Crystal structure of ilmenite (FeTiO3) at high temperature and high pressure; 24 deg C. Peaks parsed from RRUFF powder DIF file Ilmenite__R060149-1__Powder__DIF_File__6ca5de5c38d85bdf7b50821f4622.txt.",
+          "reference_url_or_doi": "https://rruff.info/R060149-1"
+        },
+        {
+          "peak_id": "ilmenite_83p69_11",
+          "hkl": "-1 4 4;1 3 4",
+          "two_theta_deg": 83.69,
+          "q_a_inv": 5.437179,
+          "d_a": 1.155597,
+          "relative_intensity": 0.0841,
+          "reference_citation": "RRUFF Ilmenite sample R060149-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R060149; Wechsler B A, Prewitt C T; American Mineralogist 69 (1984) 176-185; Crystal structure of ilmenite (FeTiO3) at high temperature and high pressure; 24 deg C. Peaks parsed from RRUFF powder DIF file Ilmenite__R060149-1__Powder__DIF_File__6ca5de5c38d85bdf7b50821f4622.txt.",
+          "reference_url_or_doi": "https://rruff.info/R060149-1"
+        },
+        {
+          "peak_id": "ilmenite_87p06_12",
+          "hkl": "4 -2 6;2 2 6",
+          "two_theta_deg": 87.06,
+          "q_a_inv": 5.613359,
+          "d_a": 1.119327,
+          "relative_intensity": 0.1258,
+          "reference_citation": "RRUFF Ilmenite sample R060149-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R060149; Wechsler B A, Prewitt C T; American Mineralogist 69 (1984) 176-185; Crystal structure of ilmenite (FeTiO3) at high temperature and high pressure; 24 deg C. Peaks parsed from RRUFF powder DIF file Ilmenite__R060149-1__Powder__DIF_File__6ca5de5c38d85bdf7b50821f4622.txt.",
+          "reference_url_or_doi": "https://rruff.info/R060149-1"
+        }
+      ]
+    },
+    {
+      "material": "Rutile",
+      "phase_name": "rutile",
+      "chemical_formula": "TiO2",
+      "structure_note": "titanium oxide reference phase included for oxide-family scalability",
+      "reference_citation": "RRUFF Rutile sample R050417-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050417; Swope R J, Smyth J R, Larson A C; American Mineralogist 80 (1995) 448-453; H in rutile-type compounds: I. Single-crystal neutron and X-ray diffraction; study of H in rutile; Sample: neutron; natural, T = 24 K.",
+      "reference_url_or_doi": "https://rruff.info/R050417-1",
+      "source_archive_member": "Rutile__R050417-1__Powder__DIF_File__da282688e9c43ad280c5ccfdaec9.txt",
+      "source_sample_id": "R050417-1",
+      "raw_peak_count": 19,
+      "selected_peak_count": 12,
+      "peaks": [
+        {
+          "peak_id": "rutile_27p5_01",
+          "hkl": "1 1 0",
+          "two_theta_deg": 27.5,
+          "q_a_inv": 1.9372,
+          "d_a": 3.243436,
+          "relative_intensity": 1.0,
+          "reference_citation": "RRUFF Rutile sample R050417-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050417; Swope R J, Smyth J R, Larson A C; American Mineralogist 80 (1995) 448-453; H in rutile-type compounds: I. Single-crystal neutron and X-ray diffraction; study of H in rutile; Sample: neutron; natural, T = 24 K. Peaks parsed from RRUFF powder DIF file Rutile__R050417-1__Powder__DIF_File__da282688e9c43ad280c5ccfdaec9.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050417-1"
+        },
+        {
+          "peak_id": "rutile_36p14_02",
+          "hkl": "1 0 1",
+          "two_theta_deg": 36.14,
+          "q_a_inv": 2.528035,
+          "d_a": 2.485403,
+          "relative_intensity": 0.4672,
+          "reference_citation": "RRUFF Rutile sample R050417-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050417; Swope R J, Smyth J R, Larson A C; American Mineralogist 80 (1995) 448-453; H in rutile-type compounds: I. Single-crystal neutron and X-ray diffraction; study of H in rutile; Sample: neutron; natural, T = 24 K. Peaks parsed from RRUFF powder DIF file Rutile__R050417-1__Powder__DIF_File__da282688e9c43ad280c5ccfdaec9.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050417-1"
+        },
+        {
+          "peak_id": "rutile_39p25_03",
+          "hkl": "2 0 0",
+          "two_theta_deg": 39.25,
+          "q_a_inv": 2.737365,
+          "d_a": 2.29534,
+          "relative_intensity": 0.0711,
+          "reference_citation": "RRUFF Rutile sample R050417-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050417; Swope R J, Smyth J R, Larson A C; American Mineralogist 80 (1995) 448-453; H in rutile-type compounds: I. Single-crystal neutron and X-ray diffraction; study of H in rutile; Sample: neutron; natural, T = 24 K. Peaks parsed from RRUFF powder DIF file Rutile__R050417-1__Powder__DIF_File__da282688e9c43ad280c5ccfdaec9.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050417-1"
+        },
+        {
+          "peak_id": "rutile_41p3_04",
+          "hkl": "1 1 1",
+          "two_theta_deg": 41.3,
+          "q_a_inv": 2.874255,
+          "d_a": 2.186022,
+          "relative_intensity": 0.1828,
+          "reference_citation": "RRUFF Rutile sample R050417-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050417; Swope R J, Smyth J R, Larson A C; American Mineralogist 80 (1995) 448-453; H in rutile-type compounds: I. Single-crystal neutron and X-ray diffraction; study of H in rutile; Sample: neutron; natural, T = 24 K. Peaks parsed from RRUFF powder DIF file Rutile__R050417-1__Powder__DIF_File__da282688e9c43ad280c5ccfdaec9.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050417-1"
+        },
+        {
+          "peak_id": "rutile_44p1_05",
+          "hkl": "2 1 0",
+          "two_theta_deg": 44.1,
+          "q_a_inv": 3.059732,
+          "d_a": 2.053508,
+          "relative_intensity": 0.0645,
+          "reference_citation": "RRUFF Rutile sample R050417-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050417; Swope R J, Smyth J R, Larson A C; American Mineralogist 80 (1995) 448-453; H in rutile-type compounds: I. Single-crystal neutron and X-ray diffraction; study of H in rutile; Sample: neutron; natural, T = 24 K. Peaks parsed from RRUFF powder DIF file Rutile__R050417-1__Powder__DIF_File__da282688e9c43ad280c5ccfdaec9.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050417-1"
+        },
+        {
+          "peak_id": "rutile_54p37_06",
+          "hkl": "2 1 1",
+          "two_theta_deg": 54.37,
+          "q_a_inv": 3.723566,
+          "d_a": 1.687411,
+          "relative_intensity": 0.5799,
+          "reference_citation": "RRUFF Rutile sample R050417-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050417; Swope R J, Smyth J R, Larson A C; American Mineralogist 80 (1995) 448-453; H in rutile-type compounds: I. Single-crystal neutron and X-ray diffraction; study of H in rutile; Sample: neutron; natural, T = 24 K. Peaks parsed from RRUFF powder DIF file Rutile__R050417-1__Powder__DIF_File__da282688e9c43ad280c5ccfdaec9.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050417-1"
+        },
+        {
+          "peak_id": "rutile_56p67_07",
+          "hkl": "2 2 0",
+          "two_theta_deg": 56.67,
+          "q_a_inv": 3.868322,
+          "d_a": 1.624266,
+          "relative_intensity": 0.1732,
+          "reference_citation": "RRUFF Rutile sample R050417-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050417; Swope R J, Smyth J R, Larson A C; American Mineralogist 80 (1995) 448-453; H in rutile-type compounds: I. Single-crystal neutron and X-ray diffraction; study of H in rutile; Sample: neutron; natural, T = 24 K. Peaks parsed from RRUFF powder DIF file Rutile__R050417-1__Powder__DIF_File__da282688e9c43ad280c5ccfdaec9.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050417-1"
+        },
+        {
+          "peak_id": "rutile_62p81_08",
+          "hkl": "0 0 2",
+          "two_theta_deg": 62.81,
+          "q_a_inv": 4.246968,
+          "d_a": 1.479452,
+          "relative_intensity": 0.0818,
+          "reference_citation": "RRUFF Rutile sample R050417-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050417; Swope R J, Smyth J R, Larson A C; American Mineralogist 80 (1995) 448-453; H in rutile-type compounds: I. Single-crystal neutron and X-ray diffraction; study of H in rutile; Sample: neutron; natural, T = 24 K. Peaks parsed from RRUFF powder DIF file Rutile__R050417-1__Powder__DIF_File__da282688e9c43ad280c5ccfdaec9.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050417-1"
+        },
+        {
+          "peak_id": "rutile_64p09_09",
+          "hkl": "3 1 0",
+          "two_theta_deg": 64.09,
+          "q_a_inv": 4.324404,
+          "d_a": 1.45296,
+          "relative_intensity": 0.0866,
+          "reference_citation": "RRUFF Rutile sample R050417-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050417; Swope R J, Smyth J R, Larson A C; American Mineralogist 80 (1995) 448-453; H in rutile-type compounds: I. Single-crystal neutron and X-ray diffraction; study of H in rutile; Sample: neutron; natural, T = 24 K. Peaks parsed from RRUFF powder DIF file Rutile__R050417-1__Powder__DIF_File__da282688e9c43ad280c5ccfdaec9.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050417-1"
+        },
+        {
+          "peak_id": "rutile_69p05_10",
+          "hkl": "3 0 1",
+          "two_theta_deg": 69.05,
+          "q_a_inv": 4.619285,
+          "d_a": 1.360207,
+          "relative_intensity": 0.2083,
+          "reference_citation": "RRUFF Rutile sample R050417-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050417; Swope R J, Smyth J R, Larson A C; American Mineralogist 80 (1995) 448-453; H in rutile-type compounds: I. Single-crystal neutron and X-ray diffraction; study of H in rutile; Sample: neutron; natural, T = 24 K. Peaks parsed from RRUFF powder DIF file Rutile__R050417-1__Powder__DIF_File__da282688e9c43ad280c5ccfdaec9.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050417-1"
+        },
+        {
+          "peak_id": "rutile_69p85_11",
+          "hkl": "1 1 2",
+          "two_theta_deg": 69.85,
+          "q_a_inv": 4.66605,
+          "d_a": 1.346575,
+          "relative_intensity": 0.1044,
+          "reference_citation": "RRUFF Rutile sample R050417-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050417; Swope R J, Smyth J R, Larson A C; American Mineralogist 80 (1995) 448-453; H in rutile-type compounds: I. Single-crystal neutron and X-ray diffraction; study of H in rutile; Sample: neutron; natural, T = 24 K. Peaks parsed from RRUFF powder DIF file Rutile__R050417-1__Powder__DIF_File__da282688e9c43ad280c5ccfdaec9.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050417-1"
+        },
+        {
+          "peak_id": "rutile_89p58_12",
+          "hkl": "2 2 2",
+          "two_theta_deg": 89.58,
+          "q_a_inv": 5.741938,
+          "d_a": 1.094262,
+          "relative_intensity": 0.1556,
+          "reference_citation": "RRUFF Rutile sample R050417-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050417; Swope R J, Smyth J R, Larson A C; American Mineralogist 80 (1995) 448-453; H in rutile-type compounds: I. Single-crystal neutron and X-ray diffraction; study of H in rutile; Sample: neutron; natural, T = 24 K. Peaks parsed from RRUFF powder DIF file Rutile__R050417-1__Powder__DIF_File__da282688e9c43ad280c5ccfdaec9.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050417-1"
+        }
+      ]
+    },
+    {
+      "material": "Sphalerite",
+      "phase_name": "sphalerite",
+      "chemical_formula": "ZnS",
+      "structure_note": "zinc sulfide reference phase included for sulfide-family scalability",
+      "reference_citation": "RRUFF Sphalerite sample R050237-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050237; Skinner B J; American Mineralogist 46 (1961) 1399-1411; Unit-cell edges of natural and synthetic sphalerites.",
+      "reference_url_or_doi": "https://rruff.info/R050237-1",
+      "source_archive_member": "Sphalerite__R050237-1__Powder__DIF_File__6cddf479d07fee40b288db7dbf70.txt",
+      "source_sample_id": "R050237-1",
+      "raw_peak_count": 10,
+      "selected_peak_count": 9,
+      "peaks": [
+        {
+          "peak_id": "sphalerite_28p59_01",
+          "hkl": "1 1 1",
+          "two_theta_deg": 28.59,
+          "q_a_inv": 2.012415,
+          "d_a": 3.122211,
+          "relative_intensity": 1.0,
+          "reference_citation": "RRUFF Sphalerite sample R050237-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050237; Skinner B J; American Mineralogist 46 (1961) 1399-1411; Unit-cell edges of natural and synthetic sphalerites. Peaks parsed from RRUFF powder DIF file Sphalerite__R050237-1__Powder__DIF_File__6cddf479d07fee40b288db7dbf70.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050237-1"
+        },
+        {
+          "peak_id": "sphalerite_33p12_02",
+          "hkl": "2 0 0",
+          "two_theta_deg": 33.12,
+          "q_a_inv": 2.322979,
+          "d_a": 2.704796,
+          "relative_intensity": 0.1198,
+          "reference_citation": "RRUFF Sphalerite sample R050237-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050237; Skinner B J; American Mineralogist 46 (1961) 1399-1411; Unit-cell edges of natural and synthetic sphalerites. Peaks parsed from RRUFF powder DIF file Sphalerite__R050237-1__Powder__DIF_File__6cddf479d07fee40b288db7dbf70.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050237-1"
+        },
+        {
+          "peak_id": "sphalerite_47p53_03",
+          "hkl": "2 2 0",
+          "two_theta_deg": 47.53,
+          "q_a_inv": 3.284441,
+          "d_a": 1.913015,
+          "relative_intensity": 0.5674,
+          "reference_citation": "RRUFF Sphalerite sample R050237-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050237; Skinner B J; American Mineralogist 46 (1961) 1399-1411; Unit-cell edges of natural and synthetic sphalerites. Peaks parsed from RRUFF powder DIF file Sphalerite__R050237-1__Powder__DIF_File__6cddf479d07fee40b288db7dbf70.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050237-1"
+        },
+        {
+          "peak_id": "sphalerite_56p39_04",
+          "hkl": "3 1 1",
+          "two_theta_deg": 56.39,
+          "q_a_inv": 3.850782,
+          "d_a": 1.631665,
+          "relative_intensity": 0.3689,
+          "reference_citation": "RRUFF Sphalerite sample R050237-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050237; Skinner B J; American Mineralogist 46 (1961) 1399-1411; Unit-cell edges of natural and synthetic sphalerites. Peaks parsed from RRUFF powder DIF file Sphalerite__R050237-1__Powder__DIF_File__6cddf479d07fee40b288db7dbf70.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050237-1"
+        },
+        {
+          "peak_id": "sphalerite_59p14_05",
+          "hkl": "2 2 2",
+          "two_theta_deg": 59.14,
+          "q_a_inv": 4.02204,
+          "d_a": 1.562189,
+          "relative_intensity": 0.0294,
+          "reference_citation": "RRUFF Sphalerite sample R050237-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050237; Skinner B J; American Mineralogist 46 (1961) 1399-1411; Unit-cell edges of natural and synthetic sphalerites. Peaks parsed from RRUFF powder DIF file Sphalerite__R050237-1__Powder__DIF_File__6cddf479d07fee40b288db7dbf70.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050237-1"
+        },
+        {
+          "peak_id": "sphalerite_69p47_06",
+          "hkl": "4 0 0",
+          "two_theta_deg": 69.47,
+          "q_a_inv": 4.643865,
+          "d_a": 1.353008,
+          "relative_intensity": 0.0763,
+          "reference_citation": "RRUFF Sphalerite sample R050237-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050237; Skinner B J; American Mineralogist 46 (1961) 1399-1411; Unit-cell edges of natural and synthetic sphalerites. Peaks parsed from RRUFF powder DIF file Sphalerite__R050237-1__Powder__DIF_File__6cddf479d07fee40b288db7dbf70.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050237-1"
+        },
+        {
+          "peak_id": "sphalerite_76p76_07",
+          "hkl": "3 3 1",
+          "two_theta_deg": 76.76,
+          "q_a_inv": 5.060282,
+          "d_a": 1.241667,
+          "relative_intensity": 0.1261,
+          "reference_citation": "RRUFF Sphalerite sample R050237-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050237; Skinner B J; American Mineralogist 46 (1961) 1399-1411; Unit-cell edges of natural and synthetic sphalerites. Peaks parsed from RRUFF powder DIF file Sphalerite__R050237-1__Powder__DIF_File__6cddf479d07fee40b288db7dbf70.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050237-1"
+        },
+        {
+          "peak_id": "sphalerite_79p14_08",
+          "hkl": "4 2 0",
+          "two_theta_deg": 79.14,
+          "q_a_inv": 5.191878,
+          "d_a": 1.210195,
+          "relative_intensity": 0.031,
+          "reference_citation": "RRUFF Sphalerite sample R050237-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050237; Skinner B J; American Mineralogist 46 (1961) 1399-1411; Unit-cell edges of natural and synthetic sphalerites. Peaks parsed from RRUFF powder DIF file Sphalerite__R050237-1__Powder__DIF_File__6cddf479d07fee40b288db7dbf70.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050237-1"
+        },
+        {
+          "peak_id": "sphalerite_88p49_09",
+          "hkl": "4 2 2",
+          "two_theta_deg": 88.49,
+          "q_a_inv": 5.68666,
+          "d_a": 1.104899,
+          "relative_intensity": 0.2858,
+          "reference_citation": "RRUFF Sphalerite sample R050237-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050237; Skinner B J; American Mineralogist 46 (1961) 1399-1411; Unit-cell edges of natural and synthetic sphalerites. Peaks parsed from RRUFF powder DIF file Sphalerite__R050237-1__Powder__DIF_File__6cddf479d07fee40b288db7dbf70.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050237-1"
+        }
+      ]
+    },
+    {
+      "material": "Fluorite",
+      "phase_name": "fluorite",
+      "chemical_formula": "CaF2",
+      "structure_note": "calcium fluoride reference phase included as a halide control mineral",
+      "reference_citation": "RRUFF Fluorite sample R040099-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern of R040099; Speziale S, Duffy T S; Physics and Chemistry of Minerals 29 (2002) 465-472; Single-crystal elastic constants of fluorite (CaF2) to 9.3 GPa; Sample: P = 0 GPa.",
+      "reference_url_or_doi": "https://rruff.info/R040099-1",
+      "source_archive_member": "Fluorite__R040099-1__Powder__DIF_File__0753e33c449eb5efd29852799920.txt",
+      "source_sample_id": "R040099-1",
+      "raw_peak_count": 6,
+      "selected_peak_count": 6,
+      "peaks": [
+        {
+          "peak_id": "fluorite_28p29_01",
+          "hkl": "1 1 1",
+          "two_theta_deg": 28.29,
+          "q_a_inv": 1.991732,
+          "d_a": 3.154634,
+          "relative_intensity": 0.9158,
+          "reference_citation": "RRUFF Fluorite sample R040099-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern of R040099; Speziale S, Duffy T S; Physics and Chemistry of Minerals 29 (2002) 465-472; Single-crystal elastic constants of fluorite (CaF2) to 9.3 GPa; Sample: P = 0 GPa. Peaks parsed from RRUFF powder DIF file Fluorite__R040099-1__Powder__DIF_File__0753e33c449eb5efd29852799920.txt.",
+          "reference_url_or_doi": "https://rruff.info/R040099-1"
+        },
+        {
+          "peak_id": "fluorite_47p04_02",
+          "hkl": "2 2 0",
+          "two_theta_deg": 47.04,
+          "q_a_inv": 3.252515,
+          "d_a": 1.931793,
+          "relative_intensity": 1.0,
+          "reference_citation": "RRUFF Fluorite sample R040099-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern of R040099; Speziale S, Duffy T S; Physics and Chemistry of Minerals 29 (2002) 465-472; Single-crystal elastic constants of fluorite (CaF2) to 9.3 GPa; Sample: P = 0 GPa. Peaks parsed from RRUFF powder DIF file Fluorite__R040099-1__Powder__DIF_File__0753e33c449eb5efd29852799920.txt.",
+          "reference_url_or_doi": "https://rruff.info/R040099-1"
+        },
+        {
+          "peak_id": "fluorite_55p8_03",
+          "hkl": "3 1 1",
+          "two_theta_deg": 55.8,
+          "q_a_inv": 3.813747,
+          "d_a": 1.64751,
+          "relative_intensity": 0.2889,
+          "reference_citation": "RRUFF Fluorite sample R040099-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern of R040099; Speziale S, Duffy T S; Physics and Chemistry of Minerals 29 (2002) 465-472; Single-crystal elastic constants of fluorite (CaF2) to 9.3 GPa; Sample: P = 0 GPa. Peaks parsed from RRUFF powder DIF file Fluorite__R040099-1__Powder__DIF_File__0753e33c449eb5efd29852799920.txt.",
+          "reference_url_or_doi": "https://rruff.info/R040099-1"
+        },
+        {
+          "peak_id": "fluorite_68p72_04",
+          "hkl": "4 0 0",
+          "two_theta_deg": 68.72,
+          "q_a_inv": 4.599928,
+          "d_a": 1.365931,
+          "relative_intensity": 0.1085,
+          "reference_citation": "RRUFF Fluorite sample R040099-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern of R040099; Speziale S, Duffy T S; Physics and Chemistry of Minerals 29 (2002) 465-472; Single-crystal elastic constants of fluorite (CaF2) to 9.3 GPa; Sample: P = 0 GPa. Peaks parsed from RRUFF powder DIF file Fluorite__R040099-1__Powder__DIF_File__0753e33c449eb5efd29852799920.txt.",
+          "reference_url_or_doi": "https://rruff.info/R040099-1"
+        },
+        {
+          "peak_id": "fluorite_75p9_05",
+          "hkl": "3 3 1",
+          "two_theta_deg": 75.9,
+          "q_a_inv": 5.012191,
+          "d_a": 1.253581,
+          "relative_intensity": 0.0876,
+          "reference_citation": "RRUFF Fluorite sample R040099-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern of R040099; Speziale S, Duffy T S; Physics and Chemistry of Minerals 29 (2002) 465-472; Single-crystal elastic constants of fluorite (CaF2) to 9.3 GPa; Sample: P = 0 GPa. Peaks parsed from RRUFF powder DIF file Fluorite__R040099-1__Powder__DIF_File__0753e33c449eb5efd29852799920.txt.",
+          "reference_url_or_doi": "https://rruff.info/R040099-1"
+        },
+        {
+          "peak_id": "fluorite_87p45_06",
+          "hkl": "4 2 2",
+          "two_theta_deg": 87.45,
+          "q_a_inv": 5.633437,
+          "d_a": 1.115338,
+          "relative_intensity": 0.1734,
+          "reference_citation": "RRUFF Fluorite sample R040099-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern of R040099; Speziale S, Duffy T S; Physics and Chemistry of Minerals 29 (2002) 465-472; Single-crystal elastic constants of fluorite (CaF2) to 9.3 GPa; Sample: P = 0 GPa. Peaks parsed from RRUFF powder DIF file Fluorite__R040099-1__Powder__DIF_File__0753e33c449eb5efd29852799920.txt.",
+          "reference_url_or_doi": "https://rruff.info/R040099-1"
+        }
+      ]
+    },
+    {
+      "material": "Gypsum",
+      "phase_name": "gypsum",
+      "chemical_formula": "CaSO4·2H2O",
+      "structure_note": "hydrated calcium sulfate reference phase included for sulfate/hydrate contrast",
+      "reference_citation": "RRUFF Gypsum sample R040029-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R040029; Schofield P F, Knight K S, Stretton I C; American Mineralogist 81 (1996) 847-851; Thermal expansion of gypsum investigated by neutron powder diffraction; T = 4.2 K.",
+      "reference_url_or_doi": "https://rruff.info/R040029-1",
+      "source_archive_member": "Gypsum__R040029-1__Powder__DIF_File__bc7a410e34338723309d25286cc3.txt",
+      "source_sample_id": "R040029-1",
+      "raw_peak_count": 78,
+      "selected_peak_count": 12,
+      "peaks": [
+        {
+          "peak_id": "gypsum_11p66_01",
+          "hkl": "0 2 0",
+          "two_theta_deg": 11.66,
+          "q_a_inv": 0.82788,
+          "d_a": 7.589488,
+          "relative_intensity": 0.8821,
+          "reference_citation": "RRUFF Gypsum sample R040029-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R040029; Schofield P F, Knight K S, Stretton I C; American Mineralogist 81 (1996) 847-851; Thermal expansion of gypsum investigated by neutron powder diffraction; T = 4.2 K. Peaks parsed from RRUFF powder DIF file Gypsum__R040029-1__Powder__DIF_File__bc7a410e34338723309d25286cc3.txt.",
+          "reference_url_or_doi": "https://rruff.info/R040029-1"
+        },
+        {
+          "peak_id": "gypsum_16p53_02",
+          "hkl": "0 1 1",
+          "two_theta_deg": 16.53,
+          "q_a_inv": 1.171613,
+          "d_a": 5.362851,
+          "relative_intensity": 0.2611,
+          "reference_citation": "RRUFF Gypsum sample R040029-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R040029; Schofield P F, Knight K S, Stretton I C; American Mineralogist 81 (1996) 847-851; Thermal expansion of gypsum investigated by neutron powder diffraction; T = 4.2 K. Peaks parsed from RRUFF powder DIF file Gypsum__R040029-1__Powder__DIF_File__bc7a410e34338723309d25286cc3.txt.",
+          "reference_url_or_doi": "https://rruff.info/R040029-1"
+        },
+        {
+          "peak_id": "gypsum_20p76_03",
+          "hkl": "-1 2 1",
+          "two_theta_deg": 20.76,
+          "q_a_inv": 1.468478,
+          "d_a": 4.278704,
+          "relative_intensity": 1.0,
+          "reference_citation": "RRUFF Gypsum sample R040029-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R040029; Schofield P F, Knight K S, Stretton I C; American Mineralogist 81 (1996) 847-851; Thermal expansion of gypsum investigated by neutron powder diffraction; T = 4.2 K. Peaks parsed from RRUFF powder DIF file Gypsum__R040029-1__Powder__DIF_File__bc7a410e34338723309d25286cc3.txt.",
+          "reference_url_or_doi": "https://rruff.info/R040029-1"
+        },
+        {
+          "peak_id": "gypsum_23p41_04",
+          "hkl": "0 4 0",
+          "two_theta_deg": 23.41,
+          "q_a_inv": 1.653464,
+          "d_a": 3.800013,
+          "relative_intensity": 0.1537,
+          "reference_citation": "RRUFF Gypsum sample R040029-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R040029; Schofield P F, Knight K S, Stretton I C; American Mineralogist 81 (1996) 847-851; Thermal expansion of gypsum investigated by neutron powder diffraction; T = 4.2 K. Peaks parsed from RRUFF powder DIF file Gypsum__R040029-1__Powder__DIF_File__bc7a410e34338723309d25286cc3.txt.",
+          "reference_url_or_doi": "https://rruff.info/R040029-1"
+        },
+        {
+          "peak_id": "gypsum_29p14_05",
+          "hkl": "-1 4 1",
+          "two_theta_deg": 29.14,
+          "q_a_inv": 2.050299,
+          "d_a": 3.064521,
+          "relative_intensity": 0.733,
+          "reference_citation": "RRUFF Gypsum sample R040029-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R040029; Schofield P F, Knight K S, Stretton I C; American Mineralogist 81 (1996) 847-851; Thermal expansion of gypsum investigated by neutron powder diffraction; T = 4.2 K. Peaks parsed from RRUFF powder DIF file Gypsum__R040029-1__Powder__DIF_File__bc7a410e34338723309d25286cc3.txt.",
+          "reference_url_or_doi": "https://rruff.info/R040029-1"
+        },
+        {
+          "peak_id": "gypsum_31p13_06",
+          "hkl": "1 2 1",
+          "two_theta_deg": 31.13,
+          "q_a_inv": 2.186969,
+          "d_a": 2.873011,
+          "relative_intensity": 0.5299,
+          "reference_citation": "RRUFF Gypsum sample R040029-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R040029; Schofield P F, Knight K S, Stretton I C; American Mineralogist 81 (1996) 847-851; Thermal expansion of gypsum investigated by neutron powder diffraction; T = 4.2 K. Peaks parsed from RRUFF powder DIF file Gypsum__R040029-1__Powder__DIF_File__bc7a410e34338723309d25286cc3.txt.",
+          "reference_url_or_doi": "https://rruff.info/R040029-1"
+        },
+        {
+          "peak_id": "gypsum_33p39_07",
+          "hkl": "0 2 2",
+          "two_theta_deg": 33.39,
+          "q_a_inv": 2.34138,
+          "d_a": 2.68354,
+          "relative_intensity": 0.3627,
+          "reference_citation": "RRUFF Gypsum sample R040029-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R040029; Schofield P F, Knight K S, Stretton I C; American Mineralogist 81 (1996) 847-851; Thermal expansion of gypsum investigated by neutron powder diffraction; T = 4.2 K. Peaks parsed from RRUFF powder DIF file Gypsum__R040029-1__Powder__DIF_File__bc7a410e34338723309d25286cc3.txt.",
+          "reference_url_or_doi": "https://rruff.info/R040029-1"
+        },
+        {
+          "peak_id": "gypsum_36p31_08",
+          "hkl": "-2 3 1",
+          "two_theta_deg": 36.31,
+          "q_a_inv": 2.539527,
+          "d_a": 2.474156,
+          "relative_intensity": 0.2316,
+          "reference_citation": "RRUFF Gypsum sample R040029-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R040029; Schofield P F, Knight K S, Stretton I C; American Mineralogist 81 (1996) 847-851; Thermal expansion of gypsum investigated by neutron powder diffraction; T = 4.2 K. Peaks parsed from RRUFF powder DIF file Gypsum__R040029-1__Powder__DIF_File__bc7a410e34338723309d25286cc3.txt.",
+          "reference_url_or_doi": "https://rruff.info/R040029-1"
+        },
+        {
+          "peak_id": "gypsum_43p37_09",
+          "hkl": "2 4 0",
+          "two_theta_deg": 43.37,
+          "q_a_inv": 3.011547,
+          "d_a": 2.086365,
+          "relative_intensity": 0.1765,
+          "reference_citation": "RRUFF Gypsum sample R040029-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R040029; Schofield P F, Knight K S, Stretton I C; American Mineralogist 81 (1996) 847-851; Thermal expansion of gypsum investigated by neutron powder diffraction; T = 4.2 K. Peaks parsed from RRUFF powder DIF file Gypsum__R040029-1__Powder__DIF_File__bc7a410e34338723309d25286cc3.txt.",
+          "reference_url_or_doi": "https://rruff.info/R040029-1"
+        },
+        {
+          "peak_id": "gypsum_47p88_10",
+          "hkl": "0 6 2",
+          "two_theta_deg": 47.88,
+          "q_a_inv": 3.307208,
+          "d_a": 1.899846,
+          "relative_intensity": 0.1729,
+          "reference_citation": "RRUFF Gypsum sample R040029-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R040029; Schofield P F, Knight K S, Stretton I C; American Mineralogist 81 (1996) 847-851; Thermal expansion of gypsum investigated by neutron powder diffraction; T = 4.2 K. Peaks parsed from RRUFF powder DIF file Gypsum__R040029-1__Powder__DIF_File__bc7a410e34338723309d25286cc3.txt.",
+          "reference_url_or_doi": "https://rruff.info/R040029-1"
+        },
+        {
+          "peak_id": "gypsum_48p4_11",
+          "hkl": "-1 4 3",
+          "two_theta_deg": 48.4,
+          "q_a_inv": 3.340977,
+          "d_a": 1.880643,
+          "relative_intensity": 0.1369,
+          "reference_citation": "RRUFF Gypsum sample R040029-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R040029; Schofield P F, Knight K S, Stretton I C; American Mineralogist 81 (1996) 847-851; Thermal expansion of gypsum investigated by neutron powder diffraction; T = 4.2 K. Peaks parsed from RRUFF powder DIF file Gypsum__R040029-1__Powder__DIF_File__bc7a410e34338723309d25286cc3.txt.",
+          "reference_url_or_doi": "https://rruff.info/R040029-1"
+        },
+        {
+          "peak_id": "gypsum_50p35_12",
+          "hkl": "-2 6 2",
+          "two_theta_deg": 50.35,
+          "q_a_inv": 3.466991,
+          "d_a": 1.812288,
+          "relative_intensity": 0.1527,
+          "reference_citation": "RRUFF Gypsum sample R040029-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R040029; Schofield P F, Knight K S, Stretton I C; American Mineralogist 81 (1996) 847-851; Thermal expansion of gypsum investigated by neutron powder diffraction; T = 4.2 K. Peaks parsed from RRUFF powder DIF file Gypsum__R040029-1__Powder__DIF_File__bc7a410e34338723309d25286cc3.txt.",
+          "reference_url_or_doi": "https://rruff.info/R040029-1"
+        }
+      ]
+    },
+    {
+      "material": "Baryte",
+      "phase_name": "baryte",
+      "chemical_formula": "BaSO4",
+      "structure_note": "barium sulfate reference phase included as a high-density sulfate mineral",
+      "reference_citation": "RRUFF Baryte sample R050335-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050335; Colville A A, Staudhammer K; American Mineralogist 52 (1967) 1877-1880; A refinement of the structure of barite; from Cow Green mine.",
+      "reference_url_or_doi": "https://rruff.info/R050335-1",
+      "source_archive_member": "Baryte__R050335-1__Powder__DIF_File__d9c8602725fb5c7faef586ac40c5.txt",
+      "source_sample_id": "R050335-1",
+      "raw_peak_count": 100,
+      "selected_peak_count": 12,
+      "peaks": [
+        {
+          "peak_id": "baryte_20p55_01",
+          "hkl": "0 1 1",
+          "two_theta_deg": 20.55,
+          "q_a_inv": 1.453784,
+          "d_a": 4.321951,
+          "relative_intensity": 0.3202,
+          "reference_citation": "RRUFF Baryte sample R050335-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050335; Colville A A, Staudhammer K; American Mineralogist 52 (1967) 1877-1880; A refinement of the structure of barite; from Cow Green mine. Peaks parsed from RRUFF powder DIF file Baryte__R050335-1__Powder__DIF_File__d9c8602725fb5c7faef586ac40c5.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050335-1"
+        },
+        {
+          "peak_id": "baryte_22p91_02",
+          "hkl": "1 1 1",
+          "two_theta_deg": 22.91,
+          "q_a_inv": 1.618626,
+          "d_a": 3.881802,
+          "relative_intensity": 0.5107,
+          "reference_citation": "RRUFF Baryte sample R050335-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050335; Colville A A, Staudhammer K; American Mineralogist 52 (1967) 1877-1880; A refinement of the structure of barite; from Cow Green mine. Peaks parsed from RRUFF powder DIF file Baryte__R050335-1__Powder__DIF_File__d9c8602725fb5c7faef586ac40c5.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050335-1"
+        },
+        {
+          "peak_id": "baryte_26p0_03",
+          "hkl": "2 1 0",
+          "two_theta_deg": 26.0,
+          "q_a_inv": 1.833408,
+          "d_a": 3.427052,
+          "relative_intensity": 0.9844,
+          "reference_citation": "RRUFF Baryte sample R050335-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050335; Colville A A, Staudhammer K; American Mineralogist 52 (1967) 1877-1880; A refinement of the structure of barite; from Cow Green mine. Peaks parsed from RRUFF powder DIF file Baryte__R050335-1__Powder__DIF_File__d9c8602725fb5c7faef586ac40c5.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050335-1"
+        },
+        {
+          "peak_id": "baryte_27p0_04",
+          "hkl": "1 0 2",
+          "two_theta_deg": 27.0,
+          "q_a_inv": 1.902639,
+          "d_a": 3.302353,
+          "relative_intensity": 0.6542,
+          "reference_citation": "RRUFF Baryte sample R050335-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050335; Colville A A, Staudhammer K; American Mineralogist 52 (1967) 1877-1880; A refinement of the structure of barite; from Cow Green mine. Peaks parsed from RRUFF powder DIF file Baryte__R050335-1__Powder__DIF_File__d9c8602725fb5c7faef586ac40c5.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050335-1"
+        },
+        {
+          "peak_id": "baryte_28p9_05",
+          "hkl": "2 1 1",
+          "two_theta_deg": 28.9,
+          "q_a_inv": 2.033774,
+          "d_a": 3.089422,
+          "relative_intensity": 1.0,
+          "reference_citation": "RRUFF Baryte sample R050335-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050335; Colville A A, Staudhammer K; American Mineralogist 52 (1967) 1877-1880; A refinement of the structure of barite; from Cow Green mine. Peaks parsed from RRUFF powder DIF file Baryte__R050335-1__Powder__DIF_File__d9c8602725fb5c7faef586ac40c5.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050335-1"
+        },
+        {
+          "peak_id": "baryte_31p68_06",
+          "hkl": "1 1 2",
+          "two_theta_deg": 31.68,
+          "q_a_inv": 2.224627,
+          "d_a": 2.824376,
+          "relative_intensity": 0.5159,
+          "reference_citation": "RRUFF Baryte sample R050335-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050335; Colville A A, Staudhammer K; American Mineralogist 52 (1967) 1877-1880; A refinement of the structure of barite; from Cow Green mine. Peaks parsed from RRUFF powder DIF file Baryte__R050335-1__Powder__DIF_File__d9c8602725fb5c7faef586ac40c5.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050335-1"
+        },
+        {
+          "peak_id": "baryte_32p9_07",
+          "hkl": "0 2 0",
+          "two_theta_deg": 32.9,
+          "q_a_inv": 2.307977,
+          "d_a": 2.722378,
+          "relative_intensity": 0.4683,
+          "reference_citation": "RRUFF Baryte sample R050335-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050335; Colville A A, Staudhammer K; American Mineralogist 52 (1967) 1877-1880; A refinement of the structure of barite; from Cow Green mine. Peaks parsed from RRUFF powder DIF file Baryte__R050335-1__Powder__DIF_File__d9c8602725fb5c7faef586ac40c5.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050335-1"
+        },
+        {
+          "peak_id": "baryte_40p94_08",
+          "hkl": "2 2 1",
+          "two_theta_deg": 40.94,
+          "q_a_inv": 2.850281,
+          "d_a": 2.204409,
+          "relative_intensity": 0.2697,
+          "reference_citation": "RRUFF Baryte sample R050335-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050335; Colville A A, Staudhammer K; American Mineralogist 52 (1967) 1877-1880; A refinement of the structure of barite; from Cow Green mine. Peaks parsed from RRUFF powder DIF file Baryte__R050335-1__Powder__DIF_File__d9c8602725fb5c7faef586ac40c5.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050335-1"
+        },
+        {
+          "peak_id": "baryte_42p77_09",
+          "hkl": "1 1 3",
+          "two_theta_deg": 42.77,
+          "q_a_inv": 2.971852,
+          "d_a": 2.114233,
+          "relative_intensity": 0.4659,
+          "reference_citation": "RRUFF Baryte sample R050335-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050335; Colville A A, Staudhammer K; American Mineralogist 52 (1967) 1877-1880; A refinement of the structure of barite; from Cow Green mine. Peaks parsed from RRUFF powder DIF file Baryte__R050335-1__Powder__DIF_File__d9c8602725fb5c7faef586ac40c5.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050335-1"
+        },
+        {
+          "peak_id": "baryte_42p89_10",
+          "hkl": "4 0 1",
+          "two_theta_deg": 42.89,
+          "q_a_inv": 2.979797,
+          "d_a": 2.108595,
+          "relative_intensity": 0.3695,
+          "reference_citation": "RRUFF Baryte sample R050335-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050335; Colville A A, Staudhammer K; American Mineralogist 52 (1967) 1877-1880; A refinement of the structure of barite; from Cow Green mine. Peaks parsed from RRUFF powder DIF file Baryte__R050335-1__Powder__DIF_File__d9c8602725fb5c7faef586ac40c5.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050335-1"
+        },
+        {
+          "peak_id": "baryte_43p04_11",
+          "hkl": "1 2 2",
+          "two_theta_deg": 43.04,
+          "q_a_inv": 2.989725,
+          "d_a": 2.101593,
+          "relative_intensity": 0.5219,
+          "reference_citation": "RRUFF Baryte sample R050335-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050335; Colville A A, Staudhammer K; American Mineralogist 52 (1967) 1877-1880; A refinement of the structure of barite; from Cow Green mine. Peaks parsed from RRUFF powder DIF file Baryte__R050335-1__Powder__DIF_File__d9c8602725fb5c7faef586ac40c5.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050335-1"
+        },
+        {
+          "peak_id": "baryte_43p18_12",
+          "hkl": "3 1 2",
+          "two_theta_deg": 43.18,
+          "q_a_inv": 2.998986,
+          "d_a": 2.095103,
+          "relative_intensity": 0.4095,
+          "reference_citation": "RRUFF Baryte sample R050335-1 powder DIF computed pattern; source paper metadata: along with the cell parameters refined from the powder pattern for R050335; Colville A A, Staudhammer K; American Mineralogist 52 (1967) 1877-1880; A refinement of the structure of barite; from Cow Green mine. Peaks parsed from RRUFF powder DIF file Baryte__R050335-1__Powder__DIF_File__d9c8602725fb5c7faef586ac40c5.txt.",
+          "reference_url_or_doi": "https://rruff.info/R050335-1"
+        }
+      ]
+    }
+  ]
+}

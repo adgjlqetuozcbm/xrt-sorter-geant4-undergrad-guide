@@ -1,0 +1,111 @@
+{
+  "config_id": "v8a_multiclass_context_v8_hard_negative_robust_config",
+  "version": "2026-05-12",
+  "status": "development_twenty_material_hard_negative_preregistration",
+  "claim_scope": "development-only twenty-material hard-negative robustness follow-up after v7 Hematite-Ilmenite failure; not product accuracy, not hardware validation, not shadow/final validation, and not manuscript-grade powder XRD",
+  "profile": "v8a_multiclass_context_v8_hard_negative_robust",
+  "peak_manifest": "source_models/config/diffraction_peak_tables/twenty_material_powder_peaks_rruff_v8a_manifest.json",
+  "required_peak_table_id": "twenty_material_powder_peaks_rruff_v8a",
+  "source_family": "custom_diffraction_on_twenty_material_hard_negative_phase_space_v1",
+  "clean_matrix_origin": "twenty_material_hard_negative_from_v7_v1",
+  "target_materials": [
+    "Quartz",
+    "Calcite",
+    "Orthoclase",
+    "Albite",
+    "Dolomite",
+    "Pyrite",
+    "Hematite",
+    "Magnetite",
+    "Chalcopyrite",
+    "Galena",
+    "Aragonite",
+    "Magnesite",
+    "Siderite",
+    "Goethite",
+    "Ilmenite",
+    "Rutile",
+    "Sphalerite",
+    "Fluorite",
+    "Gypsum",
+    "Baryte"
+  ],
+  "hard_negative_materials": ["Hematite", "Magnetite", "Ilmenite", "Goethite", "Siderite", "Rutile"],
+  "source_energy_kev": 50.0,
+  "thickness_mm": [60.0, 120.0],
+  "pose_indices": [0],
+  "count_target_bins": [
+    {"count_target_bin": "nominal", "photons_per_row": 4000}
+  ],
+  "perturbation_profiles": [
+    {"physical_perturbation_profile": "nominal", "perturbation_family": "none", "peak_q_shift_fraction": 0.0, "peak_theta_sigma_deg": 0.18, "continuum_fraction": 0.30, "peak_intensity_jitter_sigma": 0.0, "source_energy_scale": 1.0},
+    {"physical_perturbation_profile": "calibration_shift_train_pos", "perturbation_family": "peak_position", "peak_q_shift_fraction": 0.004, "peak_theta_sigma_deg": 0.21, "continuum_fraction": 0.31, "peak_intensity_jitter_sigma": 0.03, "source_energy_scale": 1.0},
+    {"physical_perturbation_profile": "calibration_shift_train_neg", "perturbation_family": "peak_position", "peak_q_shift_fraction": -0.004, "peak_theta_sigma_deg": 0.21, "continuum_fraction": 0.31, "peak_intensity_jitter_sigma": 0.03, "source_energy_scale": 1.0},
+    {"physical_perturbation_profile": "resolution_blur_train_moderate", "perturbation_family": "detector_resolution", "peak_q_shift_fraction": 0.0, "peak_theta_sigma_deg": 0.42, "continuum_fraction": 0.35, "peak_intensity_jitter_sigma": 0.06, "source_energy_scale": 1.0},
+    {"physical_perturbation_profile": "source_energy_scale_train_high", "perturbation_family": "source_calibration", "peak_q_shift_fraction": 0.0, "peak_theta_sigma_deg": 0.23, "continuum_fraction": 0.32, "peak_intensity_jitter_sigma": 0.04, "source_energy_scale": 1.008},
+    {"physical_perturbation_profile": "combined_train_moderate", "perturbation_family": "combined", "peak_q_shift_fraction": 0.006, "peak_theta_sigma_deg": 0.50, "continuum_fraction": 0.38, "peak_intensity_jitter_sigma": 0.09, "source_energy_scale": 0.992},
+    {"physical_perturbation_profile": "combined_train_high_neg", "perturbation_family": "combined_hard_negative", "peak_q_shift_fraction": -0.0085, "peak_theta_sigma_deg": 0.61, "continuum_fraction": 0.43, "peak_intensity_jitter_sigma": 0.115, "source_energy_scale": 0.987},
+    {"physical_perturbation_profile": "combined_train_high_pos", "perturbation_family": "combined_hard_negative", "peak_q_shift_fraction": 0.0095, "peak_theta_sigma_deg": 0.62, "continuum_fraction": 0.43, "peak_intensity_jitter_sigma": 0.115, "source_energy_scale": 0.987},
+    {"physical_perturbation_profile": "resolution_blur_train_high", "perturbation_family": "detector_resolution_hard_negative", "peak_q_shift_fraction": 0.0, "peak_theta_sigma_deg": 0.58, "continuum_fraction": 0.41, "peak_intensity_jitter_sigma": 0.10, "source_energy_scale": 1.0},
+    {"physical_perturbation_profile": "hard_negative_peak_shift_train", "perturbation_family": "peak_position_hard_negative", "peak_q_shift_fraction": -0.0090, "peak_theta_sigma_deg": 0.52, "continuum_fraction": 0.39, "peak_intensity_jitter_sigma": 0.095, "source_energy_scale": 0.990},
+    {"physical_perturbation_profile": "calibration_shift_validation_mid", "perturbation_family": "peak_position", "peak_q_shift_fraction": 0.0055, "peak_theta_sigma_deg": 0.22, "continuum_fraction": 0.32, "peak_intensity_jitter_sigma": 0.035, "source_energy_scale": 1.0},
+    {"physical_perturbation_profile": "resolution_blur_validation_mid", "perturbation_family": "detector_resolution", "peak_q_shift_fraction": 0.0, "peak_theta_sigma_deg": 0.47, "continuum_fraction": 0.36, "peak_intensity_jitter_sigma": 0.07, "source_energy_scale": 1.0},
+    {"physical_perturbation_profile": "source_energy_scale_validation_mid", "perturbation_family": "source_calibration", "peak_q_shift_fraction": 0.0, "peak_theta_sigma_deg": 0.24, "continuum_fraction": 0.33, "peak_intensity_jitter_sigma": 0.045, "source_energy_scale": 1.012},
+    {"physical_perturbation_profile": "combined_validation_mid", "perturbation_family": "combined", "peak_q_shift_fraction": 0.008, "peak_theta_sigma_deg": 0.55, "continuum_fraction": 0.40, "peak_intensity_jitter_sigma": 0.10, "source_energy_scale": 0.988},
+    {"physical_perturbation_profile": "hard_negative_validation_bridge", "perturbation_family": "combined_hard_negative", "peak_q_shift_fraction": -0.0092, "peak_theta_sigma_deg": 0.63, "continuum_fraction": 0.44, "peak_intensity_jitter_sigma": 0.12, "source_energy_scale": 0.986},
+    {"physical_perturbation_profile": "calibration_shift_stress_neg", "perturbation_family": "peak_position", "peak_q_shift_fraction": -0.0065, "peak_theta_sigma_deg": 0.23, "continuum_fraction": 0.33, "peak_intensity_jitter_sigma": 0.04, "source_energy_scale": 1.0},
+    {"physical_perturbation_profile": "resolution_blur_stress_high", "perturbation_family": "detector_resolution", "peak_q_shift_fraction": 0.0, "peak_theta_sigma_deg": 0.60, "continuum_fraction": 0.42, "peak_intensity_jitter_sigma": 0.11, "source_energy_scale": 1.0},
+    {"physical_perturbation_profile": "source_energy_scale_stress_low", "perturbation_family": "source_calibration", "peak_q_shift_fraction": 0.0, "peak_theta_sigma_deg": 0.25, "continuum_fraction": 0.34, "peak_intensity_jitter_sigma": 0.05, "source_energy_scale": 0.985},
+    {"physical_perturbation_profile": "combined_stress_high", "perturbation_family": "combined", "peak_q_shift_fraction": -0.010, "peak_theta_sigma_deg": 0.65, "continuum_fraction": 0.45, "peak_intensity_jitter_sigma": 0.13, "source_energy_scale": 0.985},
+    {"physical_perturbation_profile": "hard_negative_stress_alt", "perturbation_family": "combined_hard_negative", "peak_q_shift_fraction": -0.0110, "peak_theta_sigma_deg": 0.68, "continuum_fraction": 0.47, "peak_intensity_jitter_sigma": 0.14, "source_energy_scale": 0.982}
+  ],
+  "split_design": {
+    "train": {
+      "seed_block_prefix": "tr_hn",
+      "seed_start": 130001,
+      "seed_block_count": 3,
+      "profiles": ["nominal", "calibration_shift_train_pos", "calibration_shift_train_neg", "resolution_blur_train_moderate", "source_energy_scale_train_high", "combined_train_moderate", "combined_train_high_neg", "combined_train_high_pos", "resolution_blur_train_high", "hard_negative_peak_shift_train"]
+    },
+    "validation": {
+      "seed_block_prefix": "va_hn",
+      "seed_start": 131001,
+      "seed_block_count": 2,
+      "profiles": ["nominal", "calibration_shift_validation_mid", "resolution_blur_validation_mid", "source_energy_scale_validation_mid", "combined_validation_mid", "hard_negative_validation_bridge"]
+    },
+    "stress_holdout": {
+      "seed_block_prefix": "ho_hn",
+      "seed_start": 132001,
+      "seed_block_count": 2,
+      "profiles": ["nominal", "calibration_shift_stress_neg", "resolution_blur_stress_high", "source_energy_scale_stress_low", "combined_stress_high", "hard_negative_stress_alt"]
+    }
+  },
+  "expected_context_cells": {
+    "train": 60,
+    "validation": 24,
+    "stress_holdout": 24,
+    "total": 108
+  },
+  "expected_rows": {
+    "train": 1200,
+    "validation": 480,
+    "stress_holdout": 480,
+    "total": 2160
+  },
+  "training_protocol_hint": {
+    "primary_question": "Can targeted hard-negative perturbation coverage repair the v7 Hematite-to-Ilmenite combined-stress failure without reintroducing shortcut variables?",
+    "scout_not_final": true,
+    "v7_failure_reference": "combined_stress_high Hematite nearest train centroid was Ilmenite, and Hematite 4/4 was predicted as Ilmenite by main models"
+  },
+  "hard_guards": {
+    "development_only": true,
+    "training_unlocked_by_matrix_generation": false,
+    "training_requires_post_geant4_audits": true,
+    "shadow_or_final_used": false,
+    "requires_no_existing_xrt_cube_reads": true,
+    "requires_full_material_set_per_context_cell": true,
+    "requires_profile_in_context_cell_id": true,
+    "requires_seed_block_split_separation": true,
+    "requires_train_validation_stress_profile_parameter_separation": true,
+    "requires_hard_negative_metrics": true
+  }
+}

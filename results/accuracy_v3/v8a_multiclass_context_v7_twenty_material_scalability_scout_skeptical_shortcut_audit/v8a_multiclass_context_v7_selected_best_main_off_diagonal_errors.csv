@@ -1,0 +1,6 @@
+method,eval_split,physical_perturbation_profile,actual,predicted,count,rate,eval_split_best,method_best
+ExtraTreesMulticlassMain,stress_holdout,combined_stress_high,Hematite,Ilmenite,4,1.0,stress_holdout,ExtraTreesMulticlassMain
+ExtraTreesMulticlassMain,stress_holdout,combined_stress_high,Ilmenite,Siderite,3,0.75,stress_holdout,ExtraTreesMulticlassMain
+ExtraTreesMulticlassMain,stress_holdout,combined_stress_high,Sphalerite,Fluorite,1,0.25,stress_holdout,ExtraTreesMulticlassMain
+ExtraTreesMulticlassMain,stress_holdout,combined_stress_high,Sphalerite,Galena,1,0.25,stress_holdout,ExtraTreesMulticlassMain
+ExtraTreesMulticlassMain,stress_holdout,resolution_blur_stress_high,Hematite,Ilmenite,1,0.25,stress_holdout,ExtraTreesMulticlassMain

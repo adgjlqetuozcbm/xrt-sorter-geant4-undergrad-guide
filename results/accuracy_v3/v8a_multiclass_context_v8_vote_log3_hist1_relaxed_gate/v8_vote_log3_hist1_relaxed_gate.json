@@ -1,0 +1,37 @@
+{
+  "generated_by": "analysis/train_v8a_multiclass_context_v8_vote_log3_hist1_relaxed_gate.py",
+  "generated_at_utc": "2026-05-12T19:36:30+00:00",
+  "development_only": true,
+  "claim_scope": "development-only relaxed 20-material extension plus moderate hard-negative check; not strict robustness, not hardware validation, not product accuracy",
+  "gate_passed": true,
+  "decision": "v8_vote_log3_hist1_relaxed_extension_passed",
+  "validation_overall_top1": 0.9854166666666667,
+  "stress_overall_top1": 0.9958333333333333,
+  "validation_overall_macro_f1": 0.9852566915313734,
+  "stress_overall_macro_f1": 0.9958260869565217,
+  "validation_overall_hm_min_recall": 0.9583333333333334,
+  "stress_overall_hm_min_recall": 0.9166666666666666,
+  "stress_worst_profile_hm_min_recall": 0.75,
+  "stress_worst_profile_macro_f1": 0.9873015873015873,
+  "hematite_to_ilmenite_unique_samples_excluding_overall": 2,
+  "thresholds": {
+    "validation_overall_top1_min": 0.95,
+    "stress_overall_top1_min": 0.95,
+    "validation_overall_macro_f1_min": 0.95,
+    "stress_overall_macro_f1_min": 0.95,
+    "validation_overall_hm_min_recall_min": 0.95,
+    "stress_overall_hm_min_recall_min": 0.9,
+    "stress_worst_profile_hm_min_recall_min": 0.7,
+    "stress_worst_profile_macro_f1_min": 0.9,
+    "hematite_to_ilmenite_unique_samples_excluding_overall_max": 2
+  },
+  "stop_reasons": [],
+  "caveats": [
+    "This is a relaxed/reporting-grade extension gate; original strict hard-negative gate remains a stronger criterion and was not passed."
+  ],
+  "software": {
+    "python": "3.10.12",
+    "pandas": "2.3.3",
+    "numpy": "2.2.6"
+  }
+}

@@ -1,0 +1,134 @@
+{
+  "config_id": "v8a_multiclass_context_v1_config",
+  "version": "2026-05-10",
+  "status": "development_readiness_review",
+  "claim_scope": "development-only v8A ten-material context readiness review for H/M; not a Geant4 run, not training evidence, not product accuracy, not hardware validation, not shadow/final validation, and not manuscript-grade powder XRD",
+  "profile": "v8a_multiclass_context_v1_cif_literature",
+  "required_peak_manifest": "source_models/config/diffraction_peak_tables/ten_material_powder_peaks_cif_or_literature_v8a_manifest.json",
+  "required_peak_table_id": "ten_material_powder_peaks_cif_or_literature_v8a",
+  "fallback_hm_peak_manifest": "source_models/config/diffraction_peak_tables/hm_powder_peaks_cif_or_literature_v8a_manifest.json",
+  "source_id": "v8a_multiclass_context_default_35kev",
+  "clean_matrix_origin": "clean_ten_material_default_single_origin_context_v1",
+  "source_family": "custom_diffraction_on_default_phase_space_v1",
+  "target_materials": [
+    "Quartz",
+    "Calcite",
+    "Orthoclase",
+    "Albite",
+    "Dolomite",
+    "Pyrite",
+    "Hematite",
+    "Magnetite",
+    "Chalcopyrite",
+    "Galena"
+  ],
+  "hm_pair": ["Hematite", "Magnetite"],
+  "planned_source_energy_kev": 35.0,
+  "planned_thickness_mm": [3.0, 10.0, 30.0, 60.0],
+  "planned_pose_indices": [0, 1, 2],
+  "planned_count_target_bins": [
+    {"count_target_bin": "low", "photons_per_row": 3600},
+    {"count_target_bin": "nominal", "photons_per_row": 4000},
+    {"count_target_bin": "high", "photons_per_row": 4400}
+  ],
+  "planned_splits": {
+    "train": {"seed_block_count": 6},
+    "validation": {"seed_block_count": 4},
+    "stress_holdout": {"seed_block_count": 4}
+  },
+  "context_replicates_per_cell": 1,
+  "source_modes": [
+    {"source_mode": "on", "stress_label": "default"}
+  ],
+  "splits": {
+    "train": {
+      "seed_blocks": [
+        {"seed_block": "tr_ctx_a", "seed": 9301},
+        {"seed_block": "tr_ctx_b", "seed": 9302},
+        {"seed_block": "tr_ctx_c", "seed": 9303},
+        {"seed_block": "tr_ctx_d", "seed": 9304},
+        {"seed_block": "tr_ctx_e", "seed": 9305},
+        {"seed_block": "tr_ctx_f", "seed": 9306}
+      ]
+    },
+    "validation": {
+      "seed_blocks": [
+        {"seed_block": "va_ctx_a", "seed": 9401},
+        {"seed_block": "va_ctx_b", "seed": 9402},
+        {"seed_block": "va_ctx_c", "seed": 9403},
+        {"seed_block": "va_ctx_d", "seed": 9404}
+      ]
+    },
+    "stress_holdout": {
+      "seed_blocks": [
+        {"seed_block": "ho_ctx_a", "seed": 9501},
+        {"seed_block": "ho_ctx_b", "seed": 9502},
+        {"seed_block": "ho_ctx_c", "seed": 9503},
+        {"seed_block": "ho_ctx_d", "seed": 9504}
+      ]
+    }
+  },
+  "strict_match_cell_keys": [
+    "split",
+    "clean_matrix_origin",
+    "source_family",
+    "thickness_mm",
+    "pose_index",
+    "count_target_bin",
+    "seed_block",
+    "context_replicate_index"
+  ],
+  "expected_context_cells": {
+    "train": 216,
+    "validation": 144,
+    "stress_holdout": 144,
+    "total": 504
+  },
+  "expected_hm_pairs": {
+    "train": 216,
+    "validation": 144,
+    "stress_holdout": 144,
+    "total": 504
+  },
+  "expected_rows": {
+    "train": 2160,
+    "validation": 1440,
+    "stress_holdout": 1440,
+    "total": 5040
+  },
+  "context_training_intent": {
+    "primary_question": "Does a ten-material context force the model away from H/M-specific shortcut variables and improve H/M validation/stress minimum recall?",
+    "do_not_promote_if": [
+      "total-count-only H/M control remains above 0.60",
+      "shuffled-label/null p95 remains above 0.55",
+      "H/M minimum recall does not improve over the H/M-only count-matched benchmark",
+      "non-H/M context materials lack peak provenance"
+    ]
+  },
+  "required_inputs": {
+    "hm_countmatched_feature_dir": "results/accuracy_v3/v8a_clean_hm_fullcell_countmatched_event_to_feature",
+    "hm_countmatched_training_gate": "results/accuracy_v3/v8a_clean_hm_fullcell_countmatched_clean_development_model/v8a_fullcell_clean_development_model_gate.json",
+    "hm_countmatched_final_audit_gate": "results/accuracy_v3/v8a_clean_hm_fullcell_countmatched_training_data_final_audit/v8a_fullcell_training_data_final_audit_gate.json",
+    "ten_material_peak_provenance_gate": "results/accuracy_v3/v8a_ten_material_peak_provenance_audit/v8a_peak_provenance_gate.json",
+    "existing_context_probe_dir": "results/material_sorting_strict_generalization_sr2_hm_differential"
+  },
+  "hard_guards": {
+    "development_only": true,
+    "shadow_or_final_used": false,
+    "runs_geant4": false,
+    "training_unlocked_by_readiness": false,
+    "requires_ten_material_peak_manifest": true,
+    "requires_all_target_materials_in_peak_manifest": true,
+    "requires_peak_provenance_audit_before_matrix_generation": true,
+    "requires_no_existing_xrt_cube_reads": true
+  },
+  "next_if_ready": [
+    "generate v8A ten-material context matrix without Geant4 execution",
+    "run matrix preflight",
+    "only then consider development-only Geant4"
+  ],
+  "next_if_blocked": [
+    "create and audit ten-material peak manifest with peak-level citations",
+    "keep current H/M count-matched results as diagnostic benchmark"
+  ]
+}

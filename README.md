@@ -32,6 +32,7 @@
 | 想继续推进十材料 v2 物化指纹/字典路线 | `docs/MATERIAL_SORTING_V2_PROTOCOL_zh.md` |
 | 想看最新严格泛化复核 | `docs/STRICT_GENERALIZATION_REVIEW_zh.md` |
 | 想看最终边界复核 | `docs/FINAL_ELEMENTARY_REVIEW_zh.md` |
+| 想看最新材料级分选成果、v6/v8 结果和共享说明 | `docs/G4_XRT_MATERIAL_SORTING_RESULTS_INDEX_zh.md`, `docs/MATERIAL_SORTING_SHARE_GUIDE_zh.md` |
 
 ## 数据链路
 

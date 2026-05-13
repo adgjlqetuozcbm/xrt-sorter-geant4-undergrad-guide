@@ -1,0 +1,198 @@
+{
+  "generated_at_utc": "2026-05-13T06:44:42+00:00",
+  "repo": "/home/dyd/geant4-projects/xrt_sorter/release/xrt_sorter_public_undergrad_repo_20260426",
+  "items": [
+    {
+      "id": "v6_main_10_material_robust",
+      "tier": "report_main_result",
+      "stage": "v6",
+      "title": "10-material perturbation-augmented robust H/M sorting",
+      "claim": "Main positive result: robust 10-material H/M separation under held-out perturbations.",
+      "status": "passed",
+      "primary_metric": "validation/stress H/M min recall = 1.0; macro-F1 = 1.0",
+      "path": "results/accuracy_v3/v8a_multiclass_context_v6_physical_robust_model",
+      "key_files": [
+        "v8a_multiclass_context_v6_physical_robust_gate.json",
+        "v8a_multiclass_context_v6_physical_robust_summary.csv",
+        "v8a_multiclass_context_v6_physical_robust_best_main.csv",
+        "v8a_multiclass_context_v6_physical_robust_report.md"
+      ],
+      "reuse_for": [
+        "report tables",
+        "main accuracy claim",
+        "baseline for later extension"
+      ]
+    },
+    {
+      "id": "v6_shortcut_audit",
+      "tier": "report_supporting_evidence",
+      "stage": "v6",
+      "title": "v6 skeptical shortcut audit",
+      "claim": "No simple count/lineage/hash shortcut explains the v6 positive result.",
+      "status": "passed",
+      "primary_metric": "controls weak; exact cross-split feature hash overlap absent",
+      "path": "results/accuracy_v3/v8a_multiclass_context_v6_skeptical_shortcut_audit",
+      "key_files": [
+        "v8a_multiclass_context_v6_skeptical_shortcut_gate.json",
+        "v8a_multiclass_context_v6_skeptical_shortcut_report.md"
+      ],
+      "reuse_for": [
+        "method credibility",
+        "shortcut control section"
+      ]
+    },
+    {
+      "id": "v8_relaxed_20_material_extension",
+      "tier": "report_extension_result",
+      "stage": "v8",
+      "title": "20-material relaxed ensemble extension",
+      "claim": "Extension result: 20-material sorting remains strong with explicit hard-negative caveat.",
+      "status": "passed_with_caveat",
+      "primary_metric": "stress top-1 = 0.9958; stress macro-F1 = 0.9958; stress H/M min recall = 0.9167; worst-profile H/M = 0.75",
+      "path": "results/accuracy_v3/v8a_multiclass_context_v8_vote_log3_hist1_relaxed_gate",
+      "key_files": [
+        "v8_vote_log3_hist1_relaxed_gate.json",
+        "v8_vote_log3_hist1_relaxed_summary.csv",
+        "v8_vote_log3_hist1_relaxed_decisions.csv",
+        "v8_vote_log3_hist1_relaxed_report.md"
+      ],
+      "reuse_for": [
+        "extension table",
+        "scalability claim with caveat",
+        "future model comparison"
+      ]
+    },
+    {
+      "id": "v8_reporting_grade_gate",
+      "tier": "report_extension_supporting_evidence",
+      "stage": "v8",
+      "title": "20-material reporting-grade gate",
+      "claim": "A reporting-grade gate passes when strict hard-negative robustness is treated as a limitation, not a veto.",
+      "status": "passed_with_caveat",
+      "primary_metric": "reporting gate passed; strict hard-negative gate not passed",
+      "path": "results/accuracy_v3/v8a_multiclass_context_v8_reporting_grade_extension_gate",
+      "key_files": [
+        "v8a_multiclass_context_v8_reporting_grade_extension_gate.json",
+        "v8a_multiclass_context_v8_reporting_grade_extension_report.md",
+        "v8a_multiclass_context_v8_reporting_grade_best_main.csv"
+      ],
+      "reuse_for": [
+        "claim boundary",
+        "report caveat wording"
+      ]
+    },
+    {
+      "id": "v8_strict_hard_negative",
+      "tier": "limitation_and_future_work",
+      "stage": "v8",
+      "title": "Strict Hematite-Ilmenite hard-negative robustness",
+      "claim": "Strict hard-negative robustness remains unresolved under held-out stress.",
+      "status": "failed_strict_gate",
+      "primary_metric": "strict stress worst-profile H/M = 0.5 in original v8 main gate; relaxed ensemble improves to 0.75",
+      "path": "results/accuracy_v3/v8a_multiclass_context_v8_hard_negative_robust_model",
+      "key_files": [
+        "v8a_multiclass_context_v8_hard_negative_robust_gate.json",
+        "v8a_multiclass_context_v8_hard_negative_robust_summary.csv",
+        "v8a_multiclass_context_v8_hard_negative_robust_confusions.csv",
+        "v8a_multiclass_context_v8_hard_negative_robust_decisions.csv"
+      ],
+      "reuse_for": [
+        "limitations",
+        "future work motivation",
+        "hard-negative benchmark"
+      ]
+    },
+    {
+      "id": "v8_hard_negative_diagnostics",
+      "tier": "diagnostic_evidence",
+      "stage": "v8",
+      "title": "Hematite-Ilmenite hard-negative diagnostics",
+      "claim": "The failure is material-space/feature robustness, not simple count/lineage/hash leakage.",
+      "status": "completed",
+      "primary_metric": "Hematite->Ilmenite errors and nearest-centroid collapse under stress profiles",
+      "path": "results/accuracy_v3/v8a_multiclass_context_v8_hard_negative_robust_hard_negative_diagnostics",
+      "key_files": [
+        "v8a_multiclass_context_v8_hard_negative_robust_diagnostics_gate.json",
+        "v8a_multiclass_context_v8_hard_negative_robust_diagnostics_report.md",
+        "v8a_multiclass_context_v8_hematite_stress_nearest_train_centroids.csv",
+        "v8a_multiclass_context_v8_stress_focus_pair_distances.csv"
+      ],
+      "reuse_for": [
+        "v9 feature design",
+        "discussion section",
+        "ablation target selection"
+      ]
+    },
+    {
+      "id": "v8_event_features",
+      "tier": "reusable_dataset",
+      "stage": "v8",
+      "title": "v8 20-material event-to-feature table",
+      "claim": "Primary reusable feature dataset for 20-material derivative research.",
+      "status": "available",
+      "primary_metric": "2160 samples; 651557 sidecar rows",
+      "path": "results/accuracy_v3/v8a_multiclass_context_v8_hard_negative_robust_event_to_feature",
+      "key_files": [
+        "v8a_event_sidecar_features.csv"
+      ],
+      "reuse_for": [
+        "v9 features",
+        "model comparison",
+        "diagnostic plots"
+      ]
+    },
+    {
+      "id": "v6_event_features",
+      "tier": "reusable_dataset",
+      "stage": "v6",
+      "title": "v6 10-material event-to-feature table",
+      "claim": "Primary reusable feature dataset for the 10-material main result.",
+      "status": "available",
+      "primary_metric": "1400 samples; 409983 sidecar rows",
+      "path": "results/accuracy_v3/v8a_multiclass_context_v6_physical_robust_event_to_feature",
+      "key_files": [
+        "v8a_event_sidecar_features.csv"
+      ],
+      "reuse_for": [
+        "main result reproduction",
+        "baseline model comparison"
+      ]
+    },
+    {
+      "id": "input_matrices",
+      "tier": "reproducibility",
+      "stage": "v4-v8",
+      "title": "Geant4 input matrix directories",
+      "claim": "Experiment design and Geant4 replay entry points.",
+      "status": "available",
+      "primary_metric": "v4-v8 matrix profiles preserved",
+      "path": "source_models/config/material_sorting_matrix",
+      "key_files": [
+        "v8a_multiclass_context_v6_physical_robust/",
+        "v8a_multiclass_context_v8_hard_negative_robust/"
+      ],
+      "reuse_for": [
+        "Geant4 reruns",
+        "experimental design audit"
+      ]
+    },
+    {
+      "id": "peak_manifests",
+      "tier": "reproducibility",
+      "stage": "v8a",
+      "title": "Diffraction peak manifests",
+      "claim": "Peak-table inputs used by feature extraction and material contexts.",
+      "status": "available",
+      "primary_metric": "10-material and 20-material manifests available",
+      "path": "source_models/config/diffraction_peak_tables",
+      "key_files": [
+        "ten_material_powder_peaks_cif_or_literature_v8a_manifest.json",
+        "twenty_material_powder_peaks_rruff_v8a_manifest.json"
+      ],
+      "reuse_for": [
+        "feature provenance",
+        "v9 peak feature design"
+      ]
+    }
+  ]
+}

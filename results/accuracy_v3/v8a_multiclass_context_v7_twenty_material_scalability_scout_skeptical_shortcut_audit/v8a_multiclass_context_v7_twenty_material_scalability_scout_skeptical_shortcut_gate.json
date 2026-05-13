@@ -1,0 +1,34 @@
+{
+  "generated_by": "analysis/audit_v8a_multiclass_context_v7_twenty_material_scalability_scout_skeptical_shortcut.py",
+  "generated_at_utc": "2026-05-11T16:42:11+00:00",
+  "development_only": true,
+  "claim_scope": "skeptical development audit for v7 twenty-material scalability scout; not hardware validation or product accuracy",
+  "gate_passed": false,
+  "decision": "stop_v7_twenty_material_scalability_scout_skeptical_shortcut_audit",
+  "sample_count": 1520,
+  "main_feature_count": 233,
+  "lineage_like_main_features": [],
+  "cross_split_exact_main_feature_hash_overlap_count": 0,
+  "cross_split_exact_main_feature_hash_conflicting_material_count": 0,
+  "off_diagonal_main_errors_count": 10,
+  "hm_off_diagonal_main_errors_count": 5,
+  "total_count_only_worst_profile_hm": 0.0,
+  "lineage_only_worst_profile_hm": 0.0,
+  "shuffled_label_worst_profile_hm_p95": 0.25,
+  "thresholds": {
+    "cross_split_exact_main_feature_hash_overlap_max": 0,
+    "hm_off_diagonal_main_errors_max": 0,
+    "total_count_only_worst_profile_hm_max": 0.65,
+    "lineage_only_worst_profile_hm_max": 0.65,
+    "shuffled_label_worst_profile_hm_p95_max": 0.55
+  },
+  "stop_reasons": [
+    "model_gate_not_passed",
+    "hm_off_diagonal_main_model_errors_detected"
+  ],
+  "software": {
+    "python": "3.10.12",
+    "pandas": "2.3.3",
+    "numpy": "2.2.6"
+  }
+}

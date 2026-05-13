@@ -1,0 +1,94 @@
+{
+  "config_id": "v8a_multiclass_context_v3_physics_scout_config",
+  "version": "2026-05-10",
+  "status": "development_scout_preregistration",
+  "claim_scope": "development-only full-10 physics scout for output-count overlap and count-invariant feature design; not training evidence, not product accuracy, not hardware validation, not shadow/final validation, and not manuscript-grade powder XRD",
+  "profile": "v8a_multiclass_context_v3_physics_scout",
+  "peak_manifest": "source_models/config/diffraction_peak_tables/ten_material_powder_peaks_cif_or_literature_v8a_manifest.json",
+  "required_peak_table_id": "ten_material_powder_peaks_cif_or_literature_v8a",
+  "source_family": "custom_diffraction_on_default_phase_space_v1",
+  "clean_matrix_origin": "full10_output_count_overlap_physics_scout_v1",
+  "target_materials": [
+    "Quartz",
+    "Calcite",
+    "Orthoclase",
+    "Albite",
+    "Dolomite",
+    "Pyrite",
+    "Hematite",
+    "Magnetite",
+    "Chalcopyrite",
+    "Galena"
+  ],
+  "source_energies_kev": [35.0, 50.0, 70.0, 90.0],
+  "thickness_mm": [3.0, 10.0, 30.0, 60.0, 120.0],
+  "pose_indices": [0],
+  "count_target_bins": [
+    {"count_target_bin": "nominal", "photons_per_row": 4000}
+  ],
+  "context_replicates_per_cell": 1,
+  "splits": {
+    "train": {
+      "seed_blocks": [
+        {"seed_block": "tr_scout_a", "seed": 9601},
+        {"seed_block": "tr_scout_b", "seed": 9602}
+      ]
+    },
+    "validation": {
+      "seed_blocks": [
+        {"seed_block": "va_scout_a", "seed": 9701}
+      ]
+    },
+    "stress_holdout": {
+      "seed_blocks": [
+        {"seed_block": "ho_scout_a", "seed": 9801}
+      ]
+    }
+  },
+  "strict_match_cell_keys": [
+    "split",
+    "clean_matrix_origin",
+    "source_family",
+    "source_energy_kev",
+    "thickness_mm",
+    "pose_index",
+    "count_target_bin",
+    "seed_block",
+    "context_replicate_index"
+  ],
+  "expected_context_cells": {
+    "train": 40,
+    "validation": 20,
+    "stress_holdout": 20,
+    "total": 80
+  },
+  "expected_rows": {
+    "train": 400,
+    "validation": 200,
+    "stress_holdout": 200,
+    "total": 800
+  },
+  "scout_questions": [
+    "Do any full-10 energy/thickness regions produce real output-count overlap at useful bin widths?",
+    "Can H/M-centered material groups be count-balanced without hiding material behind thickness or source lineage?",
+    "Do count-invariant compositional features remain stable across source energy and thickness?",
+    "Which material groups should enter the next clean training matrix?"
+  ],
+  "hard_guards": {
+    "development_only": true,
+    "training_unlocked_by_scout": false,
+    "source_on_default_only": true,
+    "source_off_excluded": true,
+    "shadow_or_final_used": false,
+    "requires_no_existing_xrt_cube_reads": true,
+    "requires_full10_per_context_cell": true,
+    "requires_energy_in_strict_cell_keys": true,
+    "requires_seed_block_split_separation": true
+  },
+  "next_if_ready": [
+    "run development-only Geant4 scout",
+    "extract event features with the ten-material peak manifest",
+    "rerun cleanliness design audit on scout features",
+    "select either full10 count-overlap training matrix, H/M-centered overlap context, or count-invariant feature-only report"
+  ]
+}

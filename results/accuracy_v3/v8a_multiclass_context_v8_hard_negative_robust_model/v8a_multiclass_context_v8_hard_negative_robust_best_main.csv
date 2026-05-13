@@ -1,0 +1,15 @@
+track,method,family,eval_split,samples,feature_count,top1_accuracy,balanced_accuracy,macro_f1,min_class_recall,hematite_recall,magnetite_recall,hm_min_recall,status,physical_perturbation_profile
+v8_hard_negative_robust,LogisticMulticlassMain,main,stress_holdout,480,233,0.9916666666666667,0.9916666666666668,0.9914929608206918,0.8333333333333334,0.8333333333333334,1.0,0.8333333333333334,evaluated,__overall__
+v8_hard_negative_robust,LogisticMulticlassMain,main,stress_holdout,80,233,1.0,1.0,1.0,1.0,1.0,1.0,1.0,evaluated,calibration_shift_stress_neg
+v8_hard_negative_robust,LogisticMulticlassMain,main,stress_holdout,80,233,0.9875,0.9875,0.9873015873015873,0.75,0.75,1.0,0.75,evaluated,combined_stress_high
+v8_hard_negative_robust,LogisticMulticlassMain,main,stress_holdout,80,233,0.975,0.975,0.9733333333333334,0.5,0.5,1.0,0.5,evaluated,hard_negative_stress_alt
+v8_hard_negative_robust,LogisticMulticlassMain,main,stress_holdout,80,233,1.0,1.0,1.0,1.0,1.0,1.0,1.0,evaluated,nominal
+v8_hard_negative_robust,ExtraTreesMulticlassMain,main,stress_holdout,80,233,0.9875,0.9875,0.9873015873015873,0.75,1.0,1.0,1.0,evaluated,resolution_blur_stress_high
+v8_hard_negative_robust,LogisticMulticlassMain,main,stress_holdout,80,233,1.0,1.0,1.0,1.0,1.0,1.0,1.0,evaluated,source_energy_scale_stress_low
+v8_hard_negative_robust,LogisticMulticlassMain,main,validation,480,233,0.9875,0.9875,0.9873015873015873,0.75,1.0,1.0,1.0,evaluated,__overall__
+v8_hard_negative_robust,ExtraTreesMulticlassMain,main,validation,80,233,1.0,1.0,1.0,1.0,1.0,1.0,1.0,evaluated,calibration_shift_validation_mid
+v8_hard_negative_robust,ExtraTreesMulticlassMain,main,validation,80,233,0.975,0.975,0.9733333333333334,0.5,1.0,1.0,1.0,evaluated,combined_validation_mid
+v8_hard_negative_robust,LogisticMulticlassMain,main,validation,80,233,1.0,1.0,1.0,1.0,1.0,1.0,1.0,evaluated,hard_negative_validation_bridge
+v8_hard_negative_robust,LogisticMulticlassMain,main,validation,80,233,1.0,1.0,1.0,1.0,1.0,1.0,1.0,evaluated,nominal
+v8_hard_negative_robust,ExtraTreesMulticlassMain,main,validation,80,233,1.0,1.0,1.0,1.0,1.0,1.0,1.0,evaluated,resolution_blur_validation_mid
+v8_hard_negative_robust,LogisticMulticlassMain,main,validation,80,233,1.0,1.0,1.0,1.0,1.0,1.0,1.0,evaluated,source_energy_scale_validation_mid

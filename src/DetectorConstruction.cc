@@ -26,15 +26,20 @@ G4Material* BuildNamedOreMaterial(const std::string& name, G4NistManager* nist)
   }
 
   auto* elC = nist->FindOrBuildElement("C");
+  auto* elH = nist->FindOrBuildElement("H");
   auto* elO = nist->FindOrBuildElement("O");
+  auto* elF = nist->FindOrBuildElement("F");
   auto* elAl = nist->FindOrBuildElement("Al");
   auto* elSi = nist->FindOrBuildElement("Si");
   auto* elNa = nist->FindOrBuildElement("Na");
   auto* elMg = nist->FindOrBuildElement("Mg");
   auto* elCa = nist->FindOrBuildElement("Ca");
   auto* elK = nist->FindOrBuildElement("K");
+  auto* elTi = nist->FindOrBuildElement("Ti");
   auto* elFe = nist->FindOrBuildElement("Fe");
   auto* elCu = nist->FindOrBuildElement("Cu");
+  auto* elZn = nist->FindOrBuildElement("Zn");
+  auto* elBa = nist->FindOrBuildElement("Ba");
   auto* elPb = nist->FindOrBuildElement("Pb");
   auto* elS = nist->FindOrBuildElement("S");
 
@@ -104,6 +109,74 @@ G4Material* BuildNamedOreMaterial(const std::string& name, G4NistManager* nist)
     auto* material = new G4Material("Galena", 7.50 * g / cm3, 2);
     material->AddElement(elPb, 1);
     material->AddElement(elS, 1);
+    return material;
+  }
+  if (name == "Aragonite") {
+    auto* material = new G4Material("Aragonite", 2.95 * g / cm3, 3);
+    material->AddElement(elCa, 1);
+    material->AddElement(elC, 1);
+    material->AddElement(elO, 3);
+    return material;
+  }
+  if (name == "Magnesite") {
+    auto* material = new G4Material("Magnesite", 3.00 * g / cm3, 3);
+    material->AddElement(elMg, 1);
+    material->AddElement(elC, 1);
+    material->AddElement(elO, 3);
+    return material;
+  }
+  if (name == "Siderite") {
+    auto* material = new G4Material("Siderite", 3.96 * g / cm3, 3);
+    material->AddElement(elFe, 1);
+    material->AddElement(elC, 1);
+    material->AddElement(elO, 3);
+    return material;
+  }
+  if (name == "Goethite") {
+    auto* material = new G4Material("Goethite", 4.28 * g / cm3, 3);
+    material->AddElement(elFe, 1);
+    material->AddElement(elO, 2);
+    material->AddElement(elH, 1);
+    return material;
+  }
+  if (name == "Ilmenite") {
+    auto* material = new G4Material("Ilmenite", 4.72 * g / cm3, 3);
+    material->AddElement(elFe, 1);
+    material->AddElement(elTi, 1);
+    material->AddElement(elO, 3);
+    return material;
+  }
+  if (name == "Rutile") {
+    auto* material = new G4Material("Rutile", 4.23 * g / cm3, 2);
+    material->AddElement(elTi, 1);
+    material->AddElement(elO, 2);
+    return material;
+  }
+  if (name == "Sphalerite") {
+    auto* material = new G4Material("Sphalerite", 4.09 * g / cm3, 2);
+    material->AddElement(elZn, 1);
+    material->AddElement(elS, 1);
+    return material;
+  }
+  if (name == "Fluorite") {
+    auto* material = new G4Material("Fluorite", 3.18 * g / cm3, 2);
+    material->AddElement(elCa, 1);
+    material->AddElement(elF, 2);
+    return material;
+  }
+  if (name == "Gypsum") {
+    auto* material = new G4Material("Gypsum", 2.31 * g / cm3, 4);
+    material->AddElement(elCa, 1);
+    material->AddElement(elS, 1);
+    material->AddElement(elO, 6);
+    material->AddElement(elH, 4);
+    return material;
+  }
+  if (name == "Baryte") {
+    auto* material = new G4Material("Baryte", 4.48 * g / cm3, 3);
+    material->AddElement(elBa, 1);
+    material->AddElement(elS, 1);
+    material->AddElement(elO, 4);
     return material;
   }
 
