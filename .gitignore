@@ -36,8 +36,13 @@ results/accuracy_v3/*/decisions.csv
 results/accuracy_v3/*/*decisions.csv
 results/accuracy_v3/*/*predictions.csv
 results/accuracy_v3/*/*long.csv
+results/accuracy_v3/*.log
+results/accuracy_v3/*.wrapper.log
+results/accuracy_v3/*_config.json
 results/material_sorting/*.log
+results/material_sorting/run_status_v7*.csv
 results/material_sorting/run_status_v8a_*.csv
+results/material_sorting_strict_generalization_sr2_hm_differential/
 source_models/config/material_sorting_matrix/v8a_*/*
 source_models/config/material_sorting_matrix/v8a_multiclass_context_*/*
 share_packages/
